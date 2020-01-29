@@ -25,7 +25,7 @@ class WelcomeScreen extends StatelessWidget {
               ),
             ),
           ),
-          RoundedButton(
+          ContinueButton(
             onPressed: () {
               Navigator.push(
                 context,

@@ -36,7 +36,7 @@ class DataScreen extends StatelessWidget {
               ],
             ),
           ),
-          RoundedButton(
+          ContinueButton(
             text: 'Continuar',
             width: 150.0,
             height: 50.0,
@@ -62,73 +62,72 @@ class StateScreen extends StatelessWidget {
         children: <Widget>[
           Expanded(
             flex: 1,
+            child: Center(
+              child: Text(
+                'Estado e Cidade em que vai estudar',
+                style: kFormStyle,
+                textAlign: TextAlign.center,
+              ),
+            ),
+          ),
+          Expanded(
+            flex: 1,
             child: Column(
-              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
               children: <Widget>[
-                Text(
-                  'Estado e Cidade',
-                  style: kFormStyle,
-                ),
-              ],
-            ),
-          ),
-          Expanded(
-            flex: 2,
-            child: Row(
-              mainAxisAlignment: MainAxisAlignment.end,
-              children: <Widget>[
-                DropdownButton<String>(
-                  value: 'Goias',
-                  iconEnabledColor: kWhite,
-                  underline: Container(
-                    height: 2,
-                    width: double.infinity,
-                    color: kWhite,
-                  ),
-                  style: kFormStyle,
-                  items: <String>['Goias', 'Sao Paulo', 'BH', 'RJ']
-                      .map((String value) {
-                    return DropdownMenuItem<String>(
-                      value: value,
-                      child: Text(
-                        value,
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.end,
+                  children: <Widget>[
+                    DropdownButton<String>(
+                      value: 'Goias',
+                      iconEnabledColor: kWhite,
+                      underline: Container(
+                        height: 2,
+                        width: double.infinity,
+                        color: kWhite,
                       ),
-                    );
-                  }).toList(),
-                  onChanged: (_) {},
+                      style: kFormStyle,
+                      items: <String>['Goias', 'Sao Paulo', 'BH', 'RJ']
+                          .map((String value) {
+                        return DropdownMenuItem<String>(
+                          value: value,
+                          child: Text(
+                            value,
+                          ),
+                        );
+                      }).toList(),
+                      onChanged: (_) {},
+                    ),
+                  ],
                 ),
-              ],
-            ),
-          ),
-          Expanded(
-            flex: 2,
-            child: Row(
-              mainAxisAlignment: MainAxisAlignment.end,
-              children: <Widget>[
-                DropdownButton<String>(
-                  value: 'Rio',
-                  iconEnabledColor: kWhite,
-                  underline: Container(
-                    height: 2,
-                    width: double.infinity,
-                    color: kWhite,
-                  ),
-                  style: kFormStyle,
-                  items: <String>['Goiania', 'Sampa', 'Belo Hori', 'Rio']
-                      .map((String value) {
-                    return DropdownMenuItem<String>(
-                      value: value,
-                      child: Text(
-                        value,
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.end,
+                  children: <Widget>[
+                    DropdownButton<String>(
+                      value: 'Rio',
+                      iconEnabledColor: kWhite,
+                      underline: Container(
+                        height: 2,
+                        width: double.infinity,
+                        color: kWhite,
                       ),
-                    );
-                  }).toList(),
-                  onChanged: (_) {},
+                      style: kFormStyle,
+                      items: <String>['Goiania', 'Sampa', 'Belo Hori', 'Rio']
+                          .map((String value) {
+                        return DropdownMenuItem<String>(
+                          value: value,
+                          child: Text(
+                            value,
+                          ),
+                        );
+                      }).toList(),
+                      onChanged: (_) {},
+                    ),
+                  ],
                 ),
               ],
             ),
           ),
-          RoundedButton(
+          ContinueButton(
             text: 'Continuar',
             width: 150.0,
             height: 50.0,
