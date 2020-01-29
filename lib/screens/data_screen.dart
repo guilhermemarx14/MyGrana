@@ -54,9 +54,6 @@ class DataScreen extends StatelessWidget {
 }
 
 class StateScreen extends StatelessWidget {
-  String estado = 'GO';
-  String cidade = 'Goiania';
-
   @override
   Widget build(BuildContext context) {
     return Scaffold(
