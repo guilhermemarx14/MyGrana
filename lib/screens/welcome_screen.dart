@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_app/util/constants.dart';
-import 'package:flutter_app/components/rounded_button.dart';
+import 'package:flutter_app/components/continue_button.dart';
+import 'package:flutter_app/components/back_button.dart' as back;
 import 'data_screen.dart';
 
 class WelcomeScreen extends StatelessWidget {
