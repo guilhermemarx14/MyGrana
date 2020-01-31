@@ -1,9 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_app/util/constants.dart';
-import 'package:flutter_app/components/continue_button.dart';
-import 'package:flutter_app/components/back_button.dart' as back;
-import 'data_screen.dart';
 import 'package:flutter_app/components/my_card.dart';
+import 'package:flutter_app/components/home_card.dart';
 
 class HomeScreen extends StatelessWidget {
   @override
@@ -19,355 +17,75 @@ class HomeScreen extends StatelessWidget {
         body: SingleChildScrollView(
           child: Column(
             children: <Widget>[
-              MyCard(
+              HomeCard(
+                title: 'Total',
+                text: 'R\$700/1400',
+                maxValue: 1400.0,
+                value: 700,
                 color: Colors.blue.shade100,
-                cardChild: Column(
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  children: <Widget>[
-                    Text(
-                      'Total',
-                      style: TextStyle(
-                        color: kBlack,
-                        fontSize: 25.0,
-                        fontWeight: FontWeight.bold,
-                      ),
-                    ),
-                    Text(
-                      'R\$700/1.400',
-                      style: TextStyle(fontSize: 25.0),
-                    ),
-                    SliderTheme(
-                      data: SliderTheme.of(context).copyWith(
-                        inactiveTrackColor: Colors.green,
-                        activeTrackColor: Colors.red,
-                        trackHeight: 30.0,
-                        thumbShape: RoundSliderThumbShape(
-                          enabledThumbRadius: 0.0,
-                        ),
-                      ),
-                      child: Slider(
-                        value: 300,
-                        min: 0,
-                        max: 1500,
-                      ),
-                    ),
-                  ],
-                ),
               ),
-              MyCard(
+              HomeCard(
+                title: 'Salário',
+                text: 'R\$100/200',
+                maxValue: 200.0,
+                value: 100,
                 color: Colors.green.shade100,
-                cardChild: Column(
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  children: <Widget>[
-                    Text(
-                      'Salário',
-                      style: TextStyle(
-                        color: kBlack,
-                        fontSize: 25.0,
-                        fontWeight: FontWeight.bold,
-                      ),
-                    ),
-                    Text(
-                      'R\$100/200',
-                      style: TextStyle(fontSize: 25.0),
-                    ),
-                    SliderTheme(
-                      data: SliderTheme.of(context).copyWith(
-                        inactiveTrackColor: Colors.green,
-                        activeTrackColor: Colors.red,
-                        trackHeight: 30.0,
-                        thumbShape: RoundSliderThumbShape(
-                          enabledThumbRadius: 0.0,
-                        ),
-                      ),
-                      child: Slider(
-                        value: 100,
-                        min: 0,
-                        max: 200,
-                      ),
-                    ),
-                  ],
-                ),
               ),
-              MyCard(
+              HomeCard(
+                title: 'Pensão',
+                text: 'R\$100/200',
+                maxValue: 200.0,
+                value: 100,
                 color: Colors.green.shade100,
-                cardChild: Column(
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  children: <Widget>[
-                    Text(
-                      'Pensão',
-                      style: TextStyle(
-                        color: kBlack,
-                        fontSize: 25.0,
-                        fontWeight: FontWeight.bold,
-                      ),
-                    ),
-                    Text(
-                      'R\$100/200',
-                      style: TextStyle(fontSize: 25.0),
-                    ),
-                    SliderTheme(
-                      data: SliderTheme.of(context).copyWith(
-                        inactiveTrackColor: Colors.green,
-                        activeTrackColor: Colors.red,
-                        trackHeight: 30.0,
-                        thumbShape: RoundSliderThumbShape(
-                          enabledThumbRadius: 0.0,
-                        ),
-                      ),
-                      child: Slider(
-                        value: 100,
-                        min: 0,
-                        max: 200,
-                      ),
-                    ),
-                  ],
-                ),
               ),
-              MyCard(
+              HomeCard(
+                title: 'Moradia',
+                text: 'R\$200/200',
+                maxValue: 200.0,
+                value: 200,
                 color: Colors.red.shade100,
-                cardChild: Column(
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  children: <Widget>[
-                    Text(
-                      'Moradia',
-                      style: TextStyle(
-                        color: kBlack,
-                        fontSize: 25.0,
-                        fontWeight: FontWeight.bold,
-                      ),
-                    ),
-                    Text(
-                      'R\$200/200',
-                      style: TextStyle(fontSize: 25.0),
-                    ),
-                    SliderTheme(
-                      data: SliderTheme.of(context).copyWith(
-                        inactiveTrackColor: Colors.green,
-                        activeTrackColor: Colors.red,
-                        trackHeight: 30.0,
-                        thumbShape: RoundSliderThumbShape(
-                          enabledThumbRadius: 0.0,
-                        ),
-                      ),
-                      child: Slider(
-                        value: 200,
-                        min: 0,
-                        max: 200,
-                      ),
-                    ),
-                  ],
-                ),
               ),
-              MyCard(
+              HomeCard(
+                title: 'Alimentação',
+                text: 'R\$100/200',
+                maxValue: 200.0,
+                value: 100,
                 color: Colors.blue.shade100,
-                cardChild: Column(
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  children: <Widget>[
-                    Text(
-                      'Alimentação',
-                      style: TextStyle(
-                        color: kBlack,
-                        fontSize: 25.0,
-                        fontWeight: FontWeight.bold,
-                      ),
-                    ),
-                    Text(
-                      'R\$100/200',
-                      style: TextStyle(fontSize: 25.0),
-                    ),
-                    SliderTheme(
-                      data: SliderTheme.of(context).copyWith(
-                        inactiveTrackColor: Colors.green,
-                        activeTrackColor: Colors.red,
-                        trackHeight: 30.0,
-                        thumbShape: RoundSliderThumbShape(
-                          enabledThumbRadius: 0.0,
-                        ),
-                      ),
-                      child: Slider(
-                        value: 100,
-                        min: 0,
-                        max: 200,
-                      ),
-                    ),
-                  ],
-                ),
               ),
-              MyCard(
+              HomeCard(
+                title: 'Saúde',
+                text: 'R\$100/200',
+                maxValue: 200.0,
+                value: 100,
                 color: Colors.blue.shade100,
-                cardChild: Column(
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  children: <Widget>[
-                    Text(
-                      'Saúde',
-                      style: TextStyle(
-                        color: kBlack,
-                        fontSize: 25.0,
-                        fontWeight: FontWeight.bold,
-                      ),
-                    ),
-                    Text(
-                      'R\$100/200',
-                      style: TextStyle(fontSize: 25.0),
-                    ),
-                    SliderTheme(
-                      data: SliderTheme.of(context).copyWith(
-                        inactiveTrackColor: Colors.green,
-                        activeTrackColor: Colors.red,
-                        trackHeight: 30.0,
-                        thumbShape: RoundSliderThumbShape(
-                          enabledThumbRadius: 0.0,
-                        ),
-                      ),
-                      child: Slider(
-                        value: 100,
-                        min: 0,
-                        max: 200,
-                      ),
-                    ),
-                  ],
-                ),
               ),
-              MyCard(
+              HomeCard(
+                title: 'Lazer',
+                text: 'R\$100/200',
+                maxValue: 200.0,
+                value: 100,
                 color: Colors.blue.shade100,
-                cardChild: Column(
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  children: <Widget>[
-                    Text(
-                      'Lazer',
-                      style: TextStyle(
-                        color: kBlack,
-                        fontSize: 25.0,
-                        fontWeight: FontWeight.bold,
-                      ),
-                    ),
-                    Text(
-                      'R\$100/200',
-                      style: TextStyle(fontSize: 25.0),
-                    ),
-                    SliderTheme(
-                      data: SliderTheme.of(context).copyWith(
-                        inactiveTrackColor: Colors.green,
-                        activeTrackColor: Colors.red,
-                        trackHeight: 30.0,
-                        thumbShape: RoundSliderThumbShape(
-                          enabledThumbRadius: 0.0,
-                        ),
-                      ),
-                      child: Slider(
-                        value: 100,
-                        min: 0,
-                        max: 200,
-                      ),
-                    ),
-                  ],
-                ),
               ),
-              MyCard(
+              HomeCard(
+                title: 'Vestimenta',
+                text: 'R\$100/200',
+                maxValue: 200.0,
+                value: 100,
                 color: Colors.blue.shade100,
-                cardChild: Column(
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  children: <Widget>[
-                    Text(
-                      'Vestimenta',
-                      style: TextStyle(
-                        color: kBlack,
-                        fontSize: 25.0,
-                        fontWeight: FontWeight.bold,
-                      ),
-                    ),
-                    Text(
-                      'R\$100/200',
-                      style: TextStyle(fontSize: 25.0),
-                    ),
-                    SliderTheme(
-                      data: SliderTheme.of(context).copyWith(
-                        inactiveTrackColor: Colors.green,
-                        activeTrackColor: Colors.red,
-                        trackHeight: 30.0,
-                        thumbShape: RoundSliderThumbShape(
-                          enabledThumbRadius: 0.0,
-                        ),
-                      ),
-                      child: Slider(
-                        value: 100,
-                        min: 0,
-                        max: 200,
-                      ),
-                    ),
-                  ],
-                ),
               ),
-              MyCard(
+              HomeCard(
+                title: 'Transporte',
+                text: 'R\$100/200',
+                maxValue: 200.0,
+                value: 100,
                 color: Colors.blue.shade100,
-                cardChild: Column(
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  children: <Widget>[
-                    Text(
-                      'Transporte',
-                      style: TextStyle(
-                        color: kBlack,
-                        fontSize: 25.0,
-                        fontWeight: FontWeight.bold,
-                      ),
-                    ),
-                    Text(
-                      'R\$100/200',
-                      style: TextStyle(fontSize: 25.0),
-                    ),
-                    SliderTheme(
-                      data: SliderTheme.of(context).copyWith(
-                        inactiveTrackColor: Colors.green,
-                        activeTrackColor: Colors.red,
-                        trackHeight: 30.0,
-                        thumbShape: RoundSliderThumbShape(
-                          enabledThumbRadius: 0.0,
-                        ),
-                      ),
-                      child: Slider(
-                        value: 100,
-                        min: 0,
-                        max: 200,
-                      ),
-                    ),
-                  ],
-                ),
               ),
-              MyCard(
+              HomeCard(
+                title: 'Investimentos',
+                text: 'R\$100/200',
+                maxValue: 200.0,
+                value: 100,
                 color: Colors.blue.shade100,
-                cardChild: Column(
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  children: <Widget>[
-                    Text(
-                      'Investimentos',
-                      style: TextStyle(
-                        color: kBlack,
-                        fontSize: 25.0,
-                        fontWeight: FontWeight.bold,
-                      ),
-                    ),
-                    Text(
-                      'R\$100/200',
-                      style: TextStyle(fontSize: 25.0),
-                    ),
-                    SliderTheme(
-                      data: SliderTheme.of(context).copyWith(
-                        inactiveTrackColor: Colors.green,
-                        activeTrackColor: Colors.red,
-                        trackHeight: 30.0,
-                        thumbShape: RoundSliderThumbShape(
-                          enabledThumbRadius: 0.0,
-                        ),
-                      ),
-                      child: Slider(
-                        value: 100,
-                        min: 0,
-                        max: 200,
-                      ),
-                    ),
-                  ],
-                ),
               ),
             ],
           ),
