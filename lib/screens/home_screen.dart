@@ -101,22 +101,103 @@ class HomeScreen extends StatelessWidget {
                 // return object of type Dialog
                 return AlertDialog(
                   backgroundColor: Colors.blue.shade100,
-                  title: Text("Alert Dialog title"),
-                  content: Text("Alert Dialog body"),
+                  title: Center(
+                    child: Text(
+                      "Nova transação",
+                      style: TextStyle(
+                        fontWeight: FontWeight.bold,
+                        fontSize: 25,
+                        color: kBlack,
+                      ),
+                    ),
+                  ),
+                  content: Column(
+                    mainAxisSize: MainAxisSize.min,
+                    children: <Widget>[
+                      Row(
+                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                        children: <Widget>[
+                          Text(
+                            'Categoria:',
+                            style: TextStyle(
+                              color: kBlack,
+                              fontSize: 20,
+                              fontWeight: FontWeight.bold,
+                            ),
+                          ),
+                          DropdownButton<String>(
+                            value: 'Salário',
+                            iconEnabledColor: kBlack,
+                            underline: Container(
+                              height: 2,
+                              width: double.infinity,
+                              color: kBlack,
+                            ),
+                            style: kFormStyle.copyWith(
+                                fontSize: 18, color: kBlack),
+                            items: <String>['Salário', 'Moradia', 'Alimentação']
+                                .map((String value) {
+                              return DropdownMenuItem<String>(
+                                value: value,
+                                child: Text(
+                                  value,
+                                ),
+                              );
+                            }).toList(),
+                            onChanged: (_) {},
+                          ),
+                        ],
+                      ),
+                      SizedBox(
+                        height: 25,
+                      ),
+                      Text(
+                        'Valor:',
+                        style: TextStyle(
+                          color: kBlack,
+                          fontSize: 20,
+                          fontWeight: FontWeight.bold,
+                        ),
+                      ),
+                      Container(
+                        margin: EdgeInsets.fromLTRB(25, 0, 25, 0),
+                        decoration: BoxDecoration(
+                          border: Border(
+                            bottom: BorderSide(width: 3.0, color: kBlack),
+                          ),
+                        ),
+                        child: TextField(
+                          cursorWidth: 2.0,
+                          cursorColor: kWhite,
+                          maxLines: 1,
+                          decoration: InputDecoration(border: InputBorder.none),
+                          style: kFormStyle,
+                        ),
+                      ),
+                      Row(
+                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                        children: <Widget>[
+                          FlatButton(
+                            child: Text('Cancelar',
+                                style: TextStyle(color: Colors.blue)),
+                            onPressed: () {},
+                          ),
+                          FlatButton(
+                            child: Text(
+                              'Confirmar',
+                              style: TextStyle(color: Colors.blue),
+                            ),
+                            onPressed: () {},
+                          )
+                        ],
+                      ),
+                    ],
+                  ),
                   shape: RoundedRectangleBorder(
                     borderRadius: BorderRadius.all(
                       Radius.circular(10.0),
                     ),
                   ),
-                  actions: <Widget>[
-                    // usually buttons at the bottom of the dialog
-                    new FlatButton(
-                      child: new Text("Close"),
-                      onPressed: () {
-                        Navigator.of(context).pop();
-                      },
-                    ),
-                  ],
                 );
               },
             );
