@@ -1,13 +1,103 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_app/util/constants.dart';
-import 'package:flutter_app/components/my_card.dart';
 import 'package:flutter_app/components/home_card.dart';
+import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 
 class HomeScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
         backgroundColor: kWhite,
+        drawer: Drawer(
+          child: ListView(
+            children: <Widget>[
+              UserAccountsDrawerHeader(
+                margin: EdgeInsets.fromLTRB(0, 0, 0, 0),
+                accountName: Text(
+                  'UserName',
+                  style: TextStyle(
+                    fontSize: 30.0,
+                    fontWeight: FontWeight.bold,
+                  ),
+                ),
+                accountEmail: Padding(
+                  padding: const EdgeInsets.all(8.0),
+                  child: Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    children: <Widget>[
+                      Text(
+                        'Meu dinheiro',
+                        style: TextStyle(
+                          fontSize: 25.0,
+                        ),
+                      ),
+                      Text(
+                        'R\$ 350',
+                        style: TextStyle(
+                          color: Colors.green,
+                          fontWeight: FontWeight.bold,
+                          fontSize: 25.0,
+                        ),
+                      )
+                    ],
+                  ),
+                ),
+              ),
+              Container(
+                color: Colors.blue.shade100,
+                child: Column(
+                  children: <Widget>[
+                    FlatButton(
+                      onPressed: () {},
+                      child: Row(
+                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                        children: <Widget>[
+                          Text('Extratos'),
+                          Icon(Icons.arrow_right),
+                        ],
+                      ),
+                    ),
+                    FlatButton(
+                      onPressed: () {},
+                      child: Row(
+                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                        children: <Widget>[
+                          Text('Orçamentos'),
+                          Icon(Icons.arrow_right),
+                        ],
+                      ),
+                    ),
+                    FlatButton(
+                      onPressed: () {},
+                      child: Row(
+                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                        children: <Widget>[
+                          Text('Média da sua localidade'),
+                          Icon(Icons.arrow_right),
+                        ],
+                      ),
+                    ),
+                    FlatButton(
+                      onPressed: () {},
+                      child: Row(
+                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                        children: <Widget>[
+                          Text('Sobre o App'),
+                          Icon(Icons.arrow_right),
+                        ],
+                      ),
+                    ),
+                  ],
+                ),
+              ),
+            ],
+          ),
+        ),
+        floatingActionButton: FloatingActionButton(
+          onPressed: () {},
+          child: Icon(FontAwesomeIcons.plus),
+          backgroundColor: Colors.red,
+        ),
         appBar: AppBar(
           title: Text(
             'MyGrana',
