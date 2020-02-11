@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_app/util/constants.dart';
 import 'package:flutter_app/components/home_card.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
+import 'statements_screen.dart';
 
 class HomeScreen extends StatelessWidget {
   @override
@@ -48,7 +49,13 @@ class HomeScreen extends StatelessWidget {
                 child: Column(
                   children: <Widget>[
                     FlatButton(
-                      onPressed: () {},
+                      onPressed: () {
+                        Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                              builder: (context) => StatementsScreen(type: 1)),
+                        );
+                      },
                       child: Row(
                         mainAxisAlignment: MainAxisAlignment.spaceBetween,
                         children: <Widget>[
@@ -107,7 +114,7 @@ class HomeScreen extends StatelessWidget {
                       style: TextStyle(
                         fontWeight: FontWeight.bold,
                         fontSize: 25,
-                        color: kBlack,
+                        color: Colors.blue,
                       ),
                     ),
                   ),
@@ -180,14 +187,18 @@ class HomeScreen extends StatelessWidget {
                           FlatButton(
                             child: Text('Cancelar',
                                 style: TextStyle(color: Colors.blue)),
-                            onPressed: () {},
+                            onPressed: () {
+                              Navigator.pop(context);
+                            },
                           ),
                           FlatButton(
                             child: Text(
                               'Confirmar',
                               style: TextStyle(color: Colors.blue),
                             ),
-                            onPressed: () {},
+                            onPressed: () {
+                              Navigator.pop(context);
+                            },
                           )
                         ],
                       ),
@@ -209,6 +220,16 @@ class HomeScreen extends StatelessWidget {
           title: Text(
             'MyGrana',
             style: TextStyle(fontWeight: FontWeight.bold),
+          ),
+          bottom: PreferredSize(
+            child: Text(
+              'Fev/2020',
+              style: TextStyle(
+                color: Colors.white,
+                fontSize: 18.0,
+              ),
+            ),
+            preferredSize: null,
           ),
         ),
         body: SingleChildScrollView(

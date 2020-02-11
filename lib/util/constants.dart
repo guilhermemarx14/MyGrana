@@ -7,5 +7,7 @@ const Color kBlack = Color(0xFF444444);
 
 const TextStyle kFormStyle =
     TextStyle(fontSize: 30.0, color: kWhite, fontWeight: FontWeight.bold);
+const TextStyle kFormStyle2 =
+    TextStyle(fontSize: 25.0, color: kWhite, fontWeight: FontWeight.bold);
 const TextStyle kTitleStyle =
     TextStyle(fontSize: 35.0, color: kWhite, fontWeight: FontWeight.bold);
