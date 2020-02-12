@@ -173,23 +173,32 @@ class StatementsScreen extends StatelessWidget {
             return Container(
               height: 50,
               child: Center(
-                //Text('Entry ${entries[index]}')
                 child: Padding(
                   padding: const EdgeInsets.all(8.0),
                   child: Row(
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children: <Widget>[
-                      Text(date[index]),
-                      Text(category[index]),
-                      Text(values[index])
+                      Text(
+                        date[index],
+                        style: kStatementsStyle,
+                      ),
+                      Text(
+                        category[index],
+                        style: kStatementsStyle,
+                      ),
+                      Text(
+                        values[index],
+                        style: kStatementsStyle,
+                      )
                     ],
                   ),
                 ),
               ),
             );
           },
-          separatorBuilder: (BuildContext context, int index) =>
-              const Divider(),
+          separatorBuilder: (BuildContext context, int index) => const Divider(
+            color: kWhite,
+          ),
         ),
         appBar: AppBar(
           title: Text(

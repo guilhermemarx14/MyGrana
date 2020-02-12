@@ -11,3 +11,5 @@ const TextStyle kFormStyle2 =
     TextStyle(fontSize: 25.0, color: kWhite, fontWeight: FontWeight.bold);
 const TextStyle kTitleStyle =
     TextStyle(fontSize: 35.0, color: kWhite, fontWeight: FontWeight.bold);
+const TextStyle kStatementsStyle =
+    TextStyle(fontSize: 18.0, color: kWhite, fontWeight: FontWeight.bold);
