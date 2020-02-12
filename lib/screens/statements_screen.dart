@@ -8,6 +8,10 @@ class StatementsScreen extends StatelessWidget {
   final int type;
   static const int kChoose = 1;
   static const int kShow = 2;
+  final List<String> date = <String>['12/02', '15/02', '20/02'];
+  final List<String> category = <String>['Alimentação', 'Moradia', 'Pensão'];
+  final List<String> values = <String>['R\$ 17.50', 'R\$ 18.30', 'R\$ 250.00'];
+
   @override
   Widget build(BuildContext context) {
     if (type == kChoose)
@@ -162,7 +166,31 @@ class StatementsScreen extends StatelessWidget {
     else
       return Scaffold(
         backgroundColor: kBlue,
-        body: Column(),
+        body: ListView.separated(
+          padding: const EdgeInsets.all(8),
+          itemCount: category.length,
+          itemBuilder: (BuildContext context, int index) {
+            return Container(
+              height: 50,
+              child: Center(
+                //Text('Entry ${entries[index]}')
+                child: Padding(
+                  padding: const EdgeInsets.all(8.0),
+                  child: Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    children: <Widget>[
+                      Text(date[index]),
+                      Text(category[index]),
+                      Text(values[index])
+                    ],
+                  ),
+                ),
+              ),
+            );
+          },
+          separatorBuilder: (BuildContext context, int index) =>
+              const Divider(),
+        ),
         appBar: AppBar(
           title: Text(
             'Extrato',
