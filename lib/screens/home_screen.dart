@@ -3,6 +3,7 @@ import 'package:flutter_app/util/constants.dart';
 import 'package:flutter_app/components/home_card.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'statements_screen.dart';
+import 'package:flutter_app/components/my_dialog.dart';
 
 class HomeScreen extends StatelessWidget {
   @override
@@ -106,109 +107,11 @@ class HomeScreen extends StatelessWidget {
               context: context,
               builder: (BuildContext context) {
                 // return object of type Dialog
-                return AlertDialog(
-                  backgroundColor: Colors.blue.shade100,
-                  title: Center(
-                    child: Text(
-                      "Nova transação",
-                      style: TextStyle(
-                        fontWeight: FontWeight.bold,
-                        fontSize: 25,
-                        color: Colors.blue,
-                      ),
-                    ),
-                  ),
-                  content: Column(
-                    mainAxisSize: MainAxisSize.min,
-                    children: <Widget>[
-                      Row(
-                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                        children: <Widget>[
-                          Text(
-                            'Categoria:',
-                            style: TextStyle(
-                              color: kBlack,
-                              fontSize: 20,
-                              fontWeight: FontWeight.bold,
-                            ),
-                          ),
-                          DropdownButton<String>(
-                            value: 'Salário',
-                            iconEnabledColor: kBlack,
-                            underline: Container(
-                              height: 2,
-                              width: double.infinity,
-                              color: kBlack,
-                            ),
-                            style: kFormStyle.copyWith(
-                                fontSize: 18, color: kBlack),
-                            items: <String>['Salário', 'Moradia', 'Alimentação']
-                                .map((String value) {
-                              return DropdownMenuItem<String>(
-                                value: value,
-                                child: Text(
-                                  value,
-                                ),
-                              );
-                            }).toList(),
-                            onChanged: (_) {},
-                          ),
-                        ],
-                      ),
-                      SizedBox(
-                        height: 25,
-                      ),
-                      Text(
-                        'Valor:',
-                        style: TextStyle(
-                          color: kBlack,
-                          fontSize: 20,
-                          fontWeight: FontWeight.bold,
-                        ),
-                      ),
-                      Container(
-                        margin: EdgeInsets.fromLTRB(25, 0, 25, 0),
-                        decoration: BoxDecoration(
-                          border: Border(
-                            bottom: BorderSide(width: 3.0, color: kBlack),
-                          ),
-                        ),
-                        child: TextField(
-                          cursorWidth: 2.0,
-                          cursorColor: kWhite,
-                          maxLines: 1,
-                          decoration: InputDecoration(border: InputBorder.none),
-                          style: kFormStyle,
-                        ),
-                      ),
-                      Row(
-                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                        children: <Widget>[
-                          FlatButton(
-                            child: Text('Cancelar',
-                                style: TextStyle(color: Colors.blue)),
-                            onPressed: () {
-                              Navigator.pop(context);
-                            },
-                          ),
-                          FlatButton(
-                            child: Text(
-                              'Confirmar',
-                              style: TextStyle(color: Colors.blue),
-                            ),
-                            onPressed: () {
-                              Navigator.pop(context);
-                            },
-                          )
-                        ],
-                      ),
-                    ],
-                  ),
-                  shape: RoundedRectangleBorder(
-                    borderRadius: BorderRadius.all(
-                      Radius.circular(10.0),
-                    ),
-                  ),
+                return MyDialog(
+                  context: context,
+                  category: 'Salário',
+                  value: '23.40',
+                  title: 'Nova Transação',
                 );
               },
             );
