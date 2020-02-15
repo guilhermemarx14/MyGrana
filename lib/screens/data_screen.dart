@@ -40,14 +40,6 @@ class DataScreen extends StatelessWidget {
           ),
           Row(
             children: <Widget>[
-              back.BackButton(
-                text: 'Voltar',
-                width: 150.0,
-                height: 50.0,
-                onPressed: () {
-                  Navigator.pop(context);
-                },
-              ),
               ContinueButton(
                 text: 'Continuar',
                 width: 150.0,

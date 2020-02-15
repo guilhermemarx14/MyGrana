@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_app/util/constants.dart';
 import 'package:flutter_app/components/continue_button.dart';
+import 'package:flutter_app/components/list_item.dart';
 
 class StatementsScreen extends StatelessWidget {
   StatementsScreen({@required this.type});
@@ -170,30 +171,10 @@ class StatementsScreen extends StatelessWidget {
           padding: const EdgeInsets.all(8),
           itemCount: category.length,
           itemBuilder: (BuildContext context, int index) {
-            return Container(
-              height: 50,
-              child: Center(
-                child: Padding(
-                  padding: const EdgeInsets.all(8.0),
-                  child: Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                    children: <Widget>[
-                      Text(
-                        date[index],
-                        style: kStatementsStyle,
-                      ),
-                      Text(
-                        category[index],
-                        style: kStatementsStyle,
-                      ),
-                      Text(
-                        values[index],
-                        style: kStatementsStyle,
-                      )
-                    ],
-                  ),
-                ),
-              ),
+            return ListItem(
+              category: category[index],
+              value: values[index],
+              date: date[index],
             );
           },
           separatorBuilder: (BuildContext context, int index) => const Divider(
