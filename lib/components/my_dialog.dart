@@ -12,6 +12,7 @@ class MyDialog extends StatelessWidget {
   final String category;
   final String value;
   final BuildContext context;
+
   @override
   Widget build(BuildContext context) {
     return AlertDialog(
@@ -75,7 +76,9 @@ class MyDialog extends StatelessWidget {
               ),
               GestureDetector(
                 child: Icon(Icons.calendar_today),
-                onTap: () {},
+                onTap: () {
+                  //todo: abrir calendário
+                },
               ),
             ],
           ),

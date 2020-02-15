@@ -110,7 +110,7 @@ class HomeScreen extends StatelessWidget {
                 return MyDialog(
                   context: context,
                   category: 'Salário',
-                  value: '23.40',
+                  value: '',
                   title: 'Nova Transação',
                 );
               },

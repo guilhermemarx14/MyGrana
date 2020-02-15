@@ -10,7 +10,7 @@ class StatementsScreen extends StatelessWidget {
   static const int kChoose = 1;
   static const int kShow = 2;
   final List<String> date = <String>['12/02', '15/02', '20/02'];
-  final List<String> category = <String>['Alimentação', 'Moradia', 'Pensão'];
+  final List<String> category = <String>['Alimentação', 'Moradia', 'Salário'];
   final List<String> values = <String>['R\$ 17.50', 'R\$ 18.30', 'R\$ 250.00'];
 
   @override
@@ -143,7 +143,7 @@ class StatementsScreen extends StatelessWidget {
             ),
             ContinueButton(
               text: 'Continuar',
-              width: 150.0,
+              width: 160.0,
               height: 50.0,
               onPressed: () {
                 Navigator.push(
@@ -174,7 +174,7 @@ class StatementsScreen extends StatelessWidget {
             return ListItem(
               category: category[index],
               value: values[index],
-              date: date[index],
+              title: 'Editar Transação',
             );
           },
           separatorBuilder: (BuildContext context, int index) => const Divider(
