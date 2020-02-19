@@ -1,11 +1,17 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_app/model/orcamento.dart';
 import 'package:flutter_app/util/constants.dart';
 import 'package:flutter_app/components/home_card.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'statements_screen.dart';
 import 'package:flutter_app/components/my_dialog.dart';
+import 'package:flutter_app/screens/orcamentoScreen.dart';
 
 class HomeScreen extends StatelessWidget {
+  Orcamento teste = Orcamento(
+    orcamentoAtual: null,
+    orcamentoServidor: [1, 2, 3, 4, 5, 6, 7, 8, 9],
+  );
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -66,7 +72,13 @@ class HomeScreen extends StatelessWidget {
                       ),
                     ),
                     FlatButton(
-                      onPressed: () {},
+                      onPressed: () {
+                        Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                              builder: (context) => OrcamentoScreen()),
+                        );
+                      },
                       child: Row(
                         mainAxisAlignment: MainAxisAlignment.spaceBetween,
                         children: <Widget>[
