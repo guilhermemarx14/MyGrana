@@ -22,17 +22,36 @@ class DBProvider {
 
   initDB() async {
     Directory documentsDirectory = await getApplicationDocumentsDirectory();
+
     String path = join(documentsDirectory.path, "MyGranaDB.db");
+
     return await openDatabase(path, version: 1, onOpen: (db) {},
         onCreate: (Database db, int version) async {
       await db.execute(kCreateTableEstados);
+      await db.execute(kCreateTableCidades);
       await db.execute(kInsertEstados);
+      for (int i = 1; i < kInsertCidades.length; i++)
+        await db.execute(kInsertCidades[0] + " " + kInsertCidades[i]);
     });
   }
 
   getEstado(int id) async {
     final db = await database;
     var res = await db.query("estado", where: "id = ?", whereArgs: [id]);
+    print(res);
+    return res.isNotEmpty ? Estado.fromMap(res.first) : Null;
+  }
+
+  getCidade(int id) async {
+    final db = await database;
+    var res = await db.query("cidade", where: "id = ?", whereArgs: [id]);
+    print(res);
+    return res.isNotEmpty ? Estado.fromMap(res.first) : Null;
+  }
+
+  getCidadeCount() async {
+    final db = await database;
+    var res = await db.rawQuery("SELECT COUNT (id) FROM cidade;");
     print(res);
     return res.isNotEmpty ? Estado.fromMap(res.first) : Null;
   }
