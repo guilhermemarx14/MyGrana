@@ -32,7 +32,7 @@ class DBProvider {
 
   getEstado(int id) async {
     final db = await database;
-    var res = await db.query("estado", where: "id = $id", whereArgs: [id]);
+    var res = await db.query("estado", where: "id = ?", whereArgs: [id]);
     print(res);
     return res.isNotEmpty ? Estado.fromMap(res.first) : Null;
   }
