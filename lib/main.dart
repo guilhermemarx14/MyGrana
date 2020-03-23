@@ -3,6 +3,7 @@ import 'package:flutter_app/screens/home_screen.dart';
 import 'package:flutter_app/screens/welcome_screen.dart';
 import 'package:flutter_app/util/constants.dart';
 import 'package:flutter_app/screens/data_screen.dart';
+import 'package:flutter_app/util/constants.dart';
 
 void main() => runApp(MyApp());
 
