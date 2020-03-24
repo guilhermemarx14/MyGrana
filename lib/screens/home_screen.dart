@@ -16,7 +16,7 @@ class HomeScreen extends StatelessWidget {
   );
   @override
   Widget build(BuildContext context) {
-    DBProvider.db.getCidade(5565);
+    DBProvider.db.getUniversidade(1000);
     return Scaffold(
         backgroundColor: kWhite,
         drawer: Drawer(

@@ -2,7 +2,7 @@ import 'dart:io';
 
 import 'package:flutter_app/model/estados.dart';
 import 'package:sqflite/sqflite.dart';
-import 'package:flutter_app/util/consultas.dart';
+import 'package:flutter_app/util/bd1_scripts.dart';
 import 'package:path_provider/path_provider.dart';
 import 'package:path/path.dart';
 
@@ -27,11 +27,14 @@ class DBProvider {
 
     return await openDatabase(path, version: 1, onOpen: (db) {},
         onCreate: (Database db, int version) async {
-      await db.execute(kCreateTableEstados);
-      await db.execute(kCreateTableCidades);
-      await db.execute(kInsertEstados);
-      for (int i = 1; i < kInsertCidades.length; i++)
-        await db.execute(kInsertCidades[0] + " " + kInsertCidades[i]);
+      await db.execute(createTableEstado);
+      await db.execute(createTableCidade);
+      await db.execute(createTableUniversidade);
+      await db.execute(insertEstados);
+      for (int i = 1; i < insertCidades.length; i++)
+        await db.execute(insertCidades[0] + " " + insertCidades[i]);
+      for (int i = 1; i < insertUniversidades.length; i++)
+        await db.execute(insertUniversidades[0] + " " + insertUniversidades[i]);
     });
   }
 
@@ -45,6 +48,13 @@ class DBProvider {
   getCidade(int id) async {
     final db = await database;
     var res = await db.query("cidade", where: "id = ?", whereArgs: [id]);
+    print(res);
+    return res.isNotEmpty ? Estado.fromMap(res.first) : Null;
+  }
+
+  getUniversidade(int id) async {
+    final db = await database;
+    var res = await db.query("universidade", where: "id = ?", whereArgs: [id]);
     print(res);
     return res.isNotEmpty ? Estado.fromMap(res.first) : Null;
   }
