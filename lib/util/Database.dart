@@ -30,12 +30,24 @@ class DBProvider {
       await db.execute(createTableEstado);
       await db.execute(createTableCidade);
       await db.execute(createTableUniversidade);
-      await db.execute(insertEstados);
+
+      for (int i = 1; i < insertEstados.length; i++) {
+        String sql = insertEstados[0] + " " + insertEstados[i];
+        await db.execute(sql);
+      }
       for (int i = 1; i < insertCidades.length; i++)
         await db.execute(insertCidades[0] + " " + insertCidades[i]);
       for (int i = 1; i < insertUniversidades.length; i++)
         await db.execute(insertUniversidades[0] + " " + insertUniversidades[i]);
     });
+  }
+
+  getEstadoList() async {
+    final db = await database;
+    List<Map<String, dynamic>> res = await db.query('estado');
+
+    res.forEach((f) => print(f));
+    return res;
   }
 
   getEstado(int id) async {

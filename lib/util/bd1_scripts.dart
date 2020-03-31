@@ -7,47 +7,49 @@ String createTableCidade =
 String createTableUniversidade =
     "CREATE TABLE IF NOT EXISTS `universidade` (`id` int(11) NOT NULL,`nome` varchar(120),`estado` int(5),PRIMARY KEY (`id`));";
 
-String insertEstados = "INSERT INTO `estado` (`id`, `nome`, `uf`) VALUES "
-    "(1, 'Acre', 'AC');"
-    "(2, 'Alagoas', 'AL');"
-    "(3, 'Amazonas', 'AM');"
-    "(4, 'Amapá', 'AP');"
-    "(5, 'Bahia', 'BA');"
-    "(6, 'Ceará', 'CE');"
-    "(7, 'Distrito Federal', 'DF');"
-    "(8, 'Espírito Santo', 'ES');"
-    "(9, 'Goiás', 'GO');"
-    "(10, 'Maranhão', 'MA');"
-    "(11, 'Minas Gerais', 'MG');"
-    "(12, 'Mato Grosso do Sul', 'MS');"
-    "(13, 'Mato Grosso', 'MT');"
-    "(14, 'Pará', 'PA');"
-    "(15, 'Paraíba', 'PB');"
-    "(16, 'Pernambuco', 'PE');"
-    "(17, 'Piauí', 'PI');"
-    "(18, 'Paraná', 'PR');"
-    "(19, 'Rio de Janeiro', 'RJ');"
-    "(20, 'Rio Grande do Norte', 'RN');"
-    "(21, 'Rondônia', 'RO');"
-    "(22, 'Roraima', 'RR');"
-    "(23, 'Rio Grande do Sul', 'RS');"
-    "(24, 'Santa Catarina', 'SC');"
-    "(25, 'Sergipe', 'SE');"
-    "(26, 'São Paulo', 'SP');"
-    "(27, 'Tocantins', 'TO');";
+var insertEstados = [
+  "INSERT INTO `estado` (`id`, `nome`, `uf`) VALUES",
+  "(1, 'Acre', 'AC');",
+  "(2, 'Alagoas', 'AL');",
+  "(3, 'Amazonas', 'AM');",
+  "(4, 'Amapá', 'AP');",
+  "(5, 'Bahia', 'BA');",
+  "(6, 'Ceará', 'CE');",
+  "(7, 'Distrito Federal', 'DF');",
+  "(8, 'Espírito Santo', 'ES');",
+  "(9, 'Goiás', 'GO');",
+  "(10, 'Maranhão', 'MA');",
+  "(11, 'Minas Gerais', 'MG');",
+  "(12, 'Mato Grosso do Sul', 'MS');",
+  "(13, 'Mato Grosso', 'MT');",
+  "(14, 'Pará', 'PA');",
+  "(15, 'Paraíba', 'PB');",
+  "(16, 'Pernambuco', 'PE');",
+  "(17, 'Piauí', 'PI');",
+  "(18, 'Paraná', 'PR');",
+  "(19, 'Rio de Janeiro', 'RJ');",
+  "(20, 'Rio Grande do Norte', 'RN');",
+  "(21, 'Rondônia', 'RO');",
+  "(22, 'Roraima', 'RR');",
+  "(23, 'Rio Grande do Sul', 'RS');",
+  "(24, 'Santa Catarina', 'SC');",
+  "(25, 'Sergipe', 'SE');",
+  "(26, 'São Paulo', 'SP');",
+  "(27, 'Tocantins', 'TO');"
+];
 
 var insertUniversidades = [
   "INSERT INTO `universidade` (`id`, `nome`, `estado`) VALUES",
-  "(1, 'Faculdade Diocesana São José (FADISI)', 1)",
-  "(2, 'Faculdade Meta (FAMETA)', 1)",
-  "(3, 'Faculdade da Amazônia Ocidental (FAAO)', 1)",
-  "(4, 'Faculdade de Educ. Superior Acriano Euclides da Cunha (INEC)', 1)",
-  "(5, 'Faculdade de Teologia e Filosofia (SINAL)', 1)",
-  "(6, 'Instituto de Educ. Ciência e Tecnologia do Vale do Juruá (IEVAL)', 1)",
-  "(7, 'Instituto Federal do Acre (IFAC)', 1)",
-  "(8, 'Instituto de Ensino Superior do Acre (IESACRE)', 1)",
-  "(9, 'Universidade Federal do Acre (UFAC)', 1)",
-  "(10, 'União Educacional do Norte (UNINORTE)', 1)",
+  "(1, 'Faculdade Diocesana São José (FADISI)', 1);",
+  "(2, 'Faculdade Meta (FAMETA)', 1);",
+  "(3, 'Faculdade da Amazônia Ocidental (FAAO)', 1);",
+  "(4, 'Faculdade de Educ. Superior Acriano Euclides da Cunha (INEC)', 1);",
+  "(5, 'Faculdade de Teologia e Filosofia (SINAL)', 1);",
+  "(6, 'Instituto de Educ. Ciência e Tecnologia do Vale do Juruá (IEVAL)', 1);",
+  "(7, 'Instituto Federal do Acre (IFAC)', 1);",
+  "(8, 'Instituto de Ensino Superior do Acre (IESACRE)', 1);",
+  "(9, 'Universidade Federal do Acre (UFAC)', 1);",
+  "(10, 'União Educacional do Norte (UNINORTE)', 1);",
   "(11, 'Centro de Ensino Sup. Arcanjo Mikael de Arapiraca (CESAMA)', 2);",
   "(12, 'Centro de Estudos Superiores de Maceió (CESMAC)', 2);",
   "(13, 'Faculdade Algoana de Administração (FAA)', 2);",
