@@ -14,18 +14,31 @@ String EstadoToJson(Estado data) {
 }
 
 class Estado {
-  String name;
+  static List<Estado> listaEstados = [];
+
+  String nome;
   int id;
 
-  Estado({this.id, this.name});
+  Estado({this.id, this.nome});
 
   factory Estado.fromMap(Map<String, dynamic> json) => new Estado(
         id: json["id"],
-        name: json["name"],
+        nome: json["nome"],
       );
+
+  static getEstadosList() {
+    print(listaEstados);
+/*
+    return estadosList(DBProvider.db.getEstadosList());*/
+  }
 
   Map<String, dynamic> toMap() => {
         "id": id,
-        "name": name,
+        "nome": nome,
       };
+
+  @override
+  String toString() {
+    return "Id: $id Nome: $nome";
+  }
 }

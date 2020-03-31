@@ -1,6 +1,7 @@
 import 'dart:io';
 
 import 'package:flutter_app/model/estados.dart';
+import 'package:flutter_app/screens/data_screen.dart';
 import 'package:sqflite/sqflite.dart';
 import 'package:flutter_app/util/bd1_scripts.dart';
 import 'package:path_provider/path_provider.dart';
@@ -43,11 +44,13 @@ class DBProvider {
     });
   }
 
-  getEstadoList() async {
+  getEstadosList() async {
     final db = await database;
-    List<Map<String, dynamic>> res =
-        await db.query('estado', columns: ['nome'], orderBy: 'nome');
 
+    List<Map<String, dynamic>> res =
+        await db.rawQuery("Select id,nome from estado");
+    sleep(const Duration(seconds: 1));
+    res.forEach((value) => Estado.listaEstados.add(Estado.fromMap(value)));
     return res;
   }
 

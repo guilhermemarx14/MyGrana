@@ -177,6 +177,7 @@ class StateScreen extends StatelessWidget {
 }
 
 class UniversityScreen extends StatelessWidget {
+  static var listaUniversidades;
   @override
   Widget build(BuildContext context) {
     return Scaffold(
