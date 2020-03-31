@@ -16,9 +16,7 @@ class HomeScreen extends StatelessWidget {
   );
   @override
   Widget build(BuildContext context) {
-    print(DBProvider.db.getEstado(20));
-
-    //res.forEach((row) => estados.add(Estado.fromMap(row).name));
+    DBProvider.db.getEstadoList();
 
     return Scaffold(
         backgroundColor: kWhite,

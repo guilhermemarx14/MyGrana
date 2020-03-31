@@ -27,6 +27,7 @@ class DBProvider {
 
     return await openDatabase(path, version: 1, onOpen: (db) {},
         onCreate: (Database db, int version) async {
+      //todo: use transactions
       await db.execute(createTableEstado);
       await db.execute(createTableCidade);
       await db.execute(createTableUniversidade);
@@ -44,37 +45,42 @@ class DBProvider {
 
   getEstadoList() async {
     final db = await database;
-    List<Map<String, dynamic>> res = await db.query('estado');
+    List<Map<String, dynamic>> res =
+        await db.query('estado', columns: ['nome'], orderBy: 'nome');
 
-    res.forEach((f) => print(f));
     return res;
   }
 
   getEstado(int id) async {
     final db = await database;
     var res = await db.query("estado", where: "id = ?", whereArgs: [id]);
-    print(res);
     return res.isNotEmpty ? Estado.fromMap(res.first) : Null;
   }
 
   getCidade(int id) async {
     final db = await database;
     var res = await db.query("cidade", where: "id = ?", whereArgs: [id]);
-    print(res);
+
     return res.isNotEmpty ? Estado.fromMap(res.first) : Null;
   }
 
   getUniversidade(int id) async {
     final db = await database;
     var res = await db.query("universidade", where: "id = ?", whereArgs: [id]);
-    print(res);
+
     return res.isNotEmpty ? Estado.fromMap(res.first) : Null;
   }
 
   getCidadeCount() async {
     final db = await database;
     var res = await db.rawQuery("SELECT COUNT (id) FROM cidade;");
-    print(res);
+
     return res.isNotEmpty ? Estado.fromMap(res.first) : Null;
+  }
+
+  getEstadoCount() async {
+    final db = await database;
+    var res = await db.rawQuery("SELECT COUNT (id) FROM estado;");
+    return res;
   }
 }
