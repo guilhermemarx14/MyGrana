@@ -42,7 +42,7 @@ class Estado implements Comparable {
 
   @override
   String toString() {
-    return "Id: $id Nome: $nome";
+    return "$nome";
   }
 
   @override

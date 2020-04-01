@@ -16,6 +16,10 @@ class MyApp extends StatelessWidget {
         canvasColor: Colors.blueGrey,
       ),
       home: WelcomeScreen(),
+      routes: <String, WidgetBuilder>{
+        "/statescreen": (BuildContext context) => StateScreen(),
+        //add more routes here
+      },
     );
   }
 }

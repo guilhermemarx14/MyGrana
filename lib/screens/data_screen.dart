@@ -3,6 +3,7 @@ import 'package:flutter_app/components/back_button.dart' as back;
 import 'package:flutter_app/util/constants.dart';
 import 'package:flutter_app/components/continue_button.dart';
 import 'package:flutter_app/screens/home_screen.dart';
+import 'package:flutter_app/model/estado.dart';
 
 class DataScreen extends StatelessWidget {
   @override
@@ -48,12 +49,8 @@ class DataScreen extends StatelessWidget {
                 width: 150.0,
                 height: 50.0,
                 onPressed: () {
-                  nome = myController.text;
-                  print(nome);
-                  Navigator.push(
-                    context,
-                    MaterialPageRoute(builder: (context) => StateScreen()),
-                  );
+                  nome = myController.text; //todo: verificações do nome
+                  Navigator.of(context).pushNamed("/statescreen");
                 },
               ),
             ],
@@ -64,9 +61,27 @@ class DataScreen extends StatelessWidget {
   }
 }
 
-class StateScreen extends StatelessWidget {
+class StateScreen extends StatefulWidget {
+  const StateScreen({Key key}) : super(key: key);
+
+  @override
+  _StateScreen createState() => _StateScreen();
+}
+
+class _StateScreen extends State<StateScreen> {
+  List<String> nomesEstados = ['Estado :'];
+  String selected = 'Estado :';
   @override
   Widget build(BuildContext context) {
+    Estado.getEstadosList().then((list) {
+      nomesEstados = ['Estado :'];
+      list.forEach((value) {
+        setState(() {
+          nomesEstados.add(value.toString());
+        });
+      });
+    });
+
     return Scaffold(
       backgroundColor: kBlue,
       body: Column(
@@ -91,7 +106,7 @@ class StateScreen extends StatelessWidget {
                     mainAxisAlignment: MainAxisAlignment.end,
                     children: <Widget>[
                       DropdownButton<String>(
-                        value: 'Goiás',
+                        value: selected,
                         iconEnabledColor: kWhite,
                         underline: Container(
                           height: 2,
@@ -99,12 +114,7 @@ class StateScreen extends StatelessWidget {
                           color: kWhite,
                         ),
                         style: kFormStyle,
-                        items: <String>[
-                          'Goiás',
-                          'São Paulo',
-                          'Minas Gerais',
-                          'Rio de Janeiro'
-                        ].map((String value) {
+                        items: nomesEstados.map((String value) {
                           return DropdownMenuItem<String>(
                             value: value,
                             child: Text(
@@ -112,7 +122,11 @@ class StateScreen extends StatelessWidget {
                             ),
                           );
                         }).toList(),
-                        onChanged: (_) {},
+                        onChanged: (String newValue) {
+                          setState(() {
+                            selected = newValue;
+                          });
+                        },
                       ),
                     ],
                   ),
@@ -123,7 +137,7 @@ class StateScreen extends StatelessWidget {
                     mainAxisAlignment: MainAxisAlignment.end,
                     children: <Widget>[
                       DropdownButton<String>(
-                        value: 'Rio de Janeiro',
+                        value: 'Goiânia',
                         iconEnabledColor: kWhite,
                         underline: Container(
                           height: 2,
