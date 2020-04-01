@@ -8,6 +8,7 @@ import 'package:path_provider/path_provider.dart';
 import 'package:path/path.dart';
 
 class DBProvider {
+  //SINGLETON DO BANCO DE DADOS
   DBProvider._();
   static final DBProvider db = DBProvider._();
 
@@ -21,6 +22,7 @@ class DBProvider {
     return _database;
   }
 
+//INIT DO BANCO DE DADOS
   initDB() async {
     Directory documentsDirectory = await getApplicationDocumentsDirectory();
 
@@ -28,6 +30,7 @@ class DBProvider {
 
     return await openDatabase(path, version: 1, onOpen: (db) {},
         onCreate: (Database db, int version) async {
+      //USO DO TRANSACTION PRA EVITAR DEADLOCK
       await db.transaction((txn) async {
         await db.execute(createTableEstado);
         await db.execute(createTableCidade);
@@ -46,6 +49,7 @@ class DBProvider {
     });
   }
 
+  //CONSULTAS DE ESTADOS
   Future<List<Estado>> getEstadosList() async {
     final db = await database;
     List<Estado> estados = [];
@@ -60,17 +64,12 @@ class DBProvider {
     return Estado.fromMap(res.first);
   }
 
+  //CONSULTAS DE CIDADES
+
   Future<CidadeUniversidade> getCidade(int id) async {
     final db = await database;
     List<Map> res =
         await db.rawQuery('SELECT id,nome,estado FROM cidade WHERE id=$id;');
-    return res.isNotEmpty ? CidadeUniversidade.fromMap(res.first) : Null;
-  }
-
-  Future<CidadeUniversidade> getUniversidade(int id) async {
-    final db = await database;
-    List<Map> res = await db
-        .rawQuery('SELECT id,nome,estado FROM universidade WHERE id=$id;');
     return res.isNotEmpty ? CidadeUniversidade.fromMap(res.first) : Null;
   }
 
@@ -80,9 +79,32 @@ class DBProvider {
         await db.rawQuery('SELECT COUNT(id) FROM cidade'));
   }
 
-  getEstadoCount() async {
+  Future<List<CidadeUniversidade>> getCidadesList(int estadoId) async {
     final db = await database;
-    var res = await db.rawQuery("SELECT COUNT (id) FROM estado;");
-    return res;
+    List<CidadeUniversidade> cidades = [];
+    List<Map> res =
+        await db.rawQuery('SELECT * FROM cidade WHERE estado=$estadoId');
+    for (int i = 0; i < res.length; i++)
+      cidades.add(CidadeUniversidade.fromMap(res[i]));
+    return cidades;
+  }
+
+  //CONSULTAS DE UNIVERSIDADE
+
+  Future<CidadeUniversidade> getUniversidade(int id) async {
+    final db = await database;
+    List<Map> res = await db
+        .rawQuery('SELECT id,nome,estado FROM universidade WHERE id=$id;');
+    return res.isNotEmpty ? CidadeUniversidade.fromMap(res.first) : Null;
+  }
+
+  Future<List<CidadeUniversidade>> getUniversidadesList(int estadoId) async {
+    final db = await database;
+    List<CidadeUniversidade> universidades = [];
+    List<Map> res =
+        await db.rawQuery('SELECT * FROM universidade WHERE estado=$estadoId');
+    for (int i = 0; i < res.length; i++)
+      universidades.add(CidadeUniversidade.fromMap(res[i]));
+    return universidades;
   }
 }
