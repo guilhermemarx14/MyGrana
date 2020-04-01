@@ -1,9 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_app/components/back_button.dart' as back;
-import 'package:flutter_app/util/constants.dart';
 import 'package:flutter_app/components/continue_button.dart';
-import 'package:flutter_app/screens/home_screen.dart';
+import 'package:flutter_app/model/cidadeUniversidade.dart';
 import 'package:flutter_app/model/estado.dart';
+import 'package:flutter_app/screens/home_screen.dart';
+import 'package:flutter_app/util/constants.dart';
 
 class DataScreen extends StatelessWidget {
   @override
@@ -70,13 +71,25 @@ class StateScreen extends StatefulWidget {
 
 class _StateScreen extends State<StateScreen> {
   List<String> nomesEstados = ['Estado :'];
-  String selected = 'Estado :';
+  List<Estado> estados = [];
+  String selectedEstado = 'Estado :';
+  List<String> nomesCidades = ['Cidade: '];
+  List<CidadeUniversidade> cidades = [];
+  String selectedCidade = 'Cidade: ';
+
+  int idSelectedEstado(String selected) {
+    for (int i = 0; i < estados.length; i++)
+      if (estados[i].nome.compareTo(selectedEstado) == 0) return estados[i].id;
+  }
+
   @override
   Widget build(BuildContext context) {
     Estado.getEstadosList().then((list) {
       nomesEstados = ['Estado :'];
+      estados = [];
       list.forEach((value) {
         setState(() {
+          estados.add(value);
           nomesEstados.add(value.toString());
         });
       });
@@ -106,7 +119,8 @@ class _StateScreen extends State<StateScreen> {
                     mainAxisAlignment: MainAxisAlignment.end,
                     children: <Widget>[
                       DropdownButton<String>(
-                        value: selected,
+                        isExpanded: false,
+                        value: selectedEstado,
                         iconEnabledColor: kWhite,
                         underline: Container(
                           height: 2,
@@ -124,7 +138,18 @@ class _StateScreen extends State<StateScreen> {
                         }).toList(),
                         onChanged: (String newValue) {
                           setState(() {
-                            selected = newValue;
+                            selectedEstado = newValue;
+                            nomesCidades = ['Cidade: '];
+                            selectedCidade = 'Cidade: ';
+                            cidades = [];
+                            int estadoId = idSelectedEstado(selectedEstado);
+                            CidadeUniversidade.getCidadesList(estadoId)
+                                .then((list) {
+                              list.forEach((value) {
+                                cidades.add(value);
+                                nomesCidades.add(value.nome);
+                              });
+                            });
                           });
                         },
                       ),
@@ -137,20 +162,19 @@ class _StateScreen extends State<StateScreen> {
                     mainAxisAlignment: MainAxisAlignment.end,
                     children: <Widget>[
                       DropdownButton<String>(
-                        value: 'Goiânia',
+                        value: selectedCidade,
+                        isExpanded: false,
                         iconEnabledColor: kWhite,
                         underline: Container(
                           height: 2,
                           width: double.infinity,
                           color: kWhite,
                         ),
-                        style: kFormStyle,
-                        items: <String>[
-                          'Goiânia',
-                          'São Paulo',
-                          'Belo Horizonte',
-                          'Rio de Janeiro'
-                        ].map((String value) {
+                        style: TextStyle(
+                            fontSize: 20.0,
+                            color: kWhite,
+                            fontWeight: FontWeight.bold),
+                        items: nomesCidades.map((String value) {
                           return DropdownMenuItem<String>(
                             value: value,
                             child: Text(
@@ -158,7 +182,11 @@ class _StateScreen extends State<StateScreen> {
                             ),
                           );
                         }).toList(),
-                        onChanged: (_) {},
+                        onChanged: (String newValue) {
+                          setState(() {
+                            selectedCidade = newValue;
+                          });
+                        },
                       ),
                     ],
                   ),
@@ -225,7 +253,7 @@ class UniversityScreen extends StatelessWidget {
                           width: double.infinity,
                           color: kWhite,
                         ),
-                        style: kFormStyle.copyWith(fontSize: 18),
+                        style: kFormStyle.copyWith(fontSize: 15),
                         items: <String>[
                           'Universidade Federal de Ouro Preto',
                           'Universidade Federal de Minas Gerais',
