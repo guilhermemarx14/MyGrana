@@ -40,8 +40,12 @@ class CidadeUniversidade implements Comparable {
     return DBProvider.db.getCidade(id);
   }
 
-  static getUniversidadeById(int estadoId) {
-    return DBProvider.db.getEstado(estadoId);
+  static getUniversidadeById(int id) {
+    return DBProvider.db.getUniversidade(id);
+  }
+
+  static getCidadeCount() {
+    return DBProvider.db.getCidadeCount();
   }
 
   Map<String, dynamic> toMap() => {

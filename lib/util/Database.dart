@@ -64,22 +64,20 @@ class DBProvider {
     final db = await database;
     List<Map> res =
         await db.rawQuery('SELECT id,nome,estado FROM cidade WHERE id=$id;');
-    print(res);
     return res.isNotEmpty ? CidadeUniversidade.fromMap(res.first) : Null;
   }
 
-  getUniversidade(int id) async {
+  Future<CidadeUniversidade> getUniversidade(int id) async {
     final db = await database;
-    var res = await db.query("universidade", where: "id = ?", whereArgs: [id]);
-
-    return res.isNotEmpty ? Estado.fromMap(res.first) : Null;
+    List<Map> res = await db
+        .rawQuery('SELECT id,nome,estado FROM universidade WHERE id=$id;');
+    return res.isNotEmpty ? CidadeUniversidade.fromMap(res.first) : Null;
   }
 
-  getCidadeCount() async {
+  Future<int> getCidadeCount() async {
     final db = await database;
-    var res = await db.rawQuery("SELECT COUNT (id) FROM cidade;");
-
-    return res.isNotEmpty ? Estado.fromMap(res.first) : Null;
+    return Sqflite.firstIntValue(
+        await db.rawQuery('SELECT COUNT(id) FROM cidade'));
   }
 
   getEstadoCount() async {

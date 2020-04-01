@@ -18,7 +18,7 @@ class HomeScreen extends StatelessWidget {
   );
   @override
   Widget build(BuildContext context) {
-    CidadeUniversidade.getCidadeById(4).then((value) {
+    CidadeUniversidade.getCidadeCount().then((value) {
       print(value);
     });
 
