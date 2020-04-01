@@ -7,6 +7,8 @@ import 'package:flutter_app/screens/home_screen.dart';
 class DataScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
+    String nome;
+    final myController = TextEditingController();
     return Scaffold(
       backgroundColor: kBlue,
       body: Column(
@@ -28,6 +30,7 @@ class DataScreen extends StatelessWidget {
                     ),
                   ),
                   child: TextField(
+                    controller: myController,
                     cursorWidth: 2.0,
                     cursorColor: kWhite,
                     maxLines: 1,
@@ -45,6 +48,8 @@ class DataScreen extends StatelessWidget {
                 width: 150.0,
                 height: 50.0,
                 onPressed: () {
+                  nome = myController.text;
+                  print(nome);
                   Navigator.push(
                     context,
                     MaterialPageRoute(builder: (context) => StateScreen()),

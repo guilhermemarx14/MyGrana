@@ -14,6 +14,8 @@ String cidadeUniversidadeToJson(CidadeUniversidade data) {
   return json.encode(dyn);
 }
 
+//CIDADE E UNIVERSIDADE FORAM ABSTRAÍDOS COMO
+//A MESMA CLASSE POR POSSUÍREM EXATAMENTE OS MESMOS ATRIBUTOS
 class CidadeUniversidade implements Comparable {
   String nome;
   int id;

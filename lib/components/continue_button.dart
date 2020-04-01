@@ -40,7 +40,7 @@ class ContinueButton extends StatelessWidget {
                         fontWeight: FontWeight.bold,
                       ),
                     ),
-                    SizedBox(width: 10.0),
+                    SizedBox(width: 1),
                     Icon(
                       FontAwesomeIcons.arrowRight,
                       size: 20.0,

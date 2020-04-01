@@ -15,7 +15,7 @@ class MyApp extends StatelessWidget {
         secondaryHeaderColor: kYellow,
         canvasColor: Colors.blueGrey,
       ),
-      home: HomeScreen(),
+      home: WelcomeScreen(),
     );
   }
 }
