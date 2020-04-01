@@ -8,6 +8,7 @@ import 'statements_screen.dart';
 import 'package:flutter_app/components/my_dialog.dart';
 import 'package:flutter_app/screens/orcamentoScreen.dart';
 import 'package:flutter_app/model/estado.dart';
+import 'package:flutter_app/model/cidadeUniversidade.dart';
 import 'dart:io';
 
 class HomeScreen extends StatelessWidget {
@@ -17,7 +18,7 @@ class HomeScreen extends StatelessWidget {
   );
   @override
   Widget build(BuildContext context) {
-    Estado.getEstadoById(4).then((value) {
+    CidadeUniversidade.getCidadeById(4).then((value) {
       print(value);
     });
 

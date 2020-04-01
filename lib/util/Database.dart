@@ -1,4 +1,5 @@
 import 'dart:io';
+import 'package:flutter_app/model/cidadeUniversidade.dart';
 import 'package:flutter_app/model/estado.dart';
 import 'package:flutter_app/screens/data_screen.dart';
 import 'package:sqflite/sqflite.dart';
@@ -59,11 +60,12 @@ class DBProvider {
     return Estado.fromMap(res.first);
   }
 
-  getCidade(int id) async {
+  Future<CidadeUniversidade> getCidade(int id) async {
     final db = await database;
-    var res = await db.query("cidade", where: "id = ?", whereArgs: [id]);
-
-    return res.isNotEmpty ? Estado.fromMap(res.first) : Null;
+    List<Map> res =
+        await db.rawQuery('SELECT id,nome,estado FROM cidade WHERE id=$id;');
+    print(res);
+    return res.isNotEmpty ? CidadeUniversidade.fromMap(res.first) : Null;
   }
 
   getUniversidade(int id) async {
