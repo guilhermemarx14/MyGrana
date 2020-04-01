@@ -1,4 +1,5 @@
 import 'dart:convert';
+import 'dart:io';
 
 import 'package:flutter_app/util/Database.dart';
 import 'package:sqflite/sqflite.dart';
@@ -13,9 +14,9 @@ String EstadoToJson(Estado data) {
   return json.encode(dyn);
 }
 
-class Estado {
+class Estado implements Comparable {
   static List<Estado> listaEstados = [];
-
+  static Estado estadoById;
   String nome;
   int id;
 
@@ -27,9 +28,11 @@ class Estado {
       );
 
   static getEstadosList() {
-    print(listaEstados);
-/*
-    return estadosList(DBProvider.db.getEstadosList());*/
+    return DBProvider.db.getEstadosList();
+  }
+
+  static getEstadoById(int estadoId) {
+    return DBProvider.db.getEstado(estadoId);
   }
 
   Map<String, dynamic> toMap() => {
@@ -40,5 +43,10 @@ class Estado {
   @override
   String toString() {
     return "Id: $id Nome: $nome";
+  }
+
+  @override
+  int compareTo(other) {
+    return this.nome.compareTo(other.nome);
   }
 }

@@ -7,7 +7,8 @@ import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'statements_screen.dart';
 import 'package:flutter_app/components/my_dialog.dart';
 import 'package:flutter_app/screens/orcamentoScreen.dart';
-import 'package:flutter_app/model/estados.dart';
+import 'package:flutter_app/model/estado.dart';
+import 'dart:io';
 
 class HomeScreen extends StatelessWidget {
   Orcamento teste = Orcamento(
@@ -16,8 +17,9 @@ class HomeScreen extends StatelessWidget {
   );
   @override
   Widget build(BuildContext context) {
-    DBProvider.db.getEstadosList();
-    Estado.getEstadosList();
+    Estado.getEstadoById(4).then((value) {
+      print(value);
+    });
 
     return Scaffold(
         backgroundColor: kWhite,
