@@ -1,11 +1,11 @@
 import 'dart:io';
+
 import 'package:flutter_app/model/cidadeUniversidade.dart';
 import 'package:flutter_app/model/estado.dart';
-import 'package:flutter_app/screens/data_screen.dart';
-import 'package:sqflite/sqflite.dart';
 import 'package:flutter_app/util/bd1_scripts.dart';
-import 'package:path_provider/path_provider.dart';
 import 'package:path/path.dart';
+import 'package:path_provider/path_provider.dart';
+import 'package:sqflite/sqflite.dart';
 
 class DBProvider {
   //SINGLETON DO BANCO DE DADOS

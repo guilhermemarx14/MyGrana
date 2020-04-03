@@ -239,6 +239,14 @@ class _UniversityScreen extends State<UniversityScreen> {
   List<String> nomesUniversidades = ['Universidade:'];
   List<CidadeUniversidade> universidades = [];
   String selectedUniversidade = 'Universidade:';
+  String showUniversity(String name) {
+    double sizeScreen = MediaQuery.of(context).size.width;
+    int stringSize = (sizeScreen / 10.35).toInt();
+    return name.length > stringSize - 1
+        ? name.substring(0, stringSize - 4) + "..."
+        : name;
+  }
+
   @override
   Widget build(BuildContext context) {
     estadoId = widget.estadoId;
@@ -248,7 +256,7 @@ class _UniversityScreen extends State<UniversityScreen> {
       list.forEach((value) {
         setState(() {
           universidades.add(value);
-          nomesUniversidades.add(value.nome);
+          nomesUniversidades.add(showUniversity(value.nome));
         });
       });
     });
