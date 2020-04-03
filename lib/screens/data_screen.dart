@@ -209,9 +209,12 @@ class _StateScreen extends State<StateScreen> {
                 width: 150.0,
                 height: 50.0,
                 onPressed: () {
-                  Navigator.push(
-                    context,
-                    MaterialPageRoute(builder: (context) => UniversityScreen()),
+                  Navigator.of(context).push(
+                    MaterialPageRoute(
+                      builder: (BuildContext context) => UniversityScreen(
+                        estadoId: idSelectedEstado(selectedEstado),
+                      ),
+                    ),
                   );
                 },
               ),
@@ -223,10 +226,33 @@ class _StateScreen extends State<StateScreen> {
   }
 }
 
-class UniversityScreen extends StatelessWidget {
-  static var listaUniversidades;
+class UniversityScreen extends StatefulWidget {
+  final int estadoId;
+  const UniversityScreen({Key key, this.estadoId}) : super(key: key);
+
+  @override
+  _UniversityScreen createState() => _UniversityScreen();
+}
+
+class _UniversityScreen extends State<UniversityScreen> {
+  int estadoId;
+  List<String> nomesUniversidades = ['Universidade:'];
+  List<CidadeUniversidade> universidades = [];
+  String selectedUniversidade = 'Universidade:';
   @override
   Widget build(BuildContext context) {
+    estadoId = widget.estadoId;
+    CidadeUniversidade.getUniversidadesList(estadoId).then((list) {
+      nomesUniversidades = ['Universidade:'];
+      universidades = [];
+      list.forEach((value) {
+        setState(() {
+          universidades.add(value);
+          nomesUniversidades.add(value.nome);
+        });
+      });
+    });
+
     return Scaffold(
       backgroundColor: kBlue,
       body: Column(
@@ -246,7 +272,7 @@ class UniversityScreen extends StatelessWidget {
                     mainAxisAlignment: MainAxisAlignment.end,
                     children: <Widget>[
                       DropdownButton<String>(
-                        value: 'Universidade Federal de Ouro Preto',
+                        value: selectedUniversidade,
                         iconEnabledColor: kWhite,
                         underline: Container(
                           height: 2,
@@ -254,11 +280,7 @@ class UniversityScreen extends StatelessWidget {
                           color: kWhite,
                         ),
                         style: kFormStyle.copyWith(fontSize: 15),
-                        items: <String>[
-                          'Universidade Federal de Ouro Preto',
-                          'Universidade Federal de Minas Gerais',
-                          'Universidade Federal do Rio Grande do Sul'
-                        ].map((String value) {
+                        items: nomesUniversidades.map((String value) {
                           return DropdownMenuItem<String>(
                             value: value,
                             child: Text(
@@ -266,7 +288,11 @@ class UniversityScreen extends StatelessWidget {
                             ),
                           );
                         }).toList(),
-                        onChanged: (_) {},
+                        onChanged: (String newSelected) {
+                          setState(() {
+                            selectedUniversidade = newSelected;
+                          });
+                        },
                       ),
                     ],
                   ),
