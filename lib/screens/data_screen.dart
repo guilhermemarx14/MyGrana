@@ -279,16 +279,13 @@ class _UniversityScreen extends State<UniversityScreen> {
     else
       universidade = selectedUniversidade;
     for (int i = 0; i < universidades.length; i++)
-      if (universidades[i].nome.startsWith(universidade)) {
-        print(universidades[i].id);
+      if (universidades[i].nome.startsWith(universidade))
         return universidades[i].id;
-      }
   }
 
   @override
   Widget build(BuildContext context) {
     estadoId = widget.estadoId;
-
     CidadeUniversidade.getUniversidadesList(estadoId).then((list) {
       nomesUniversidades = ['Universidade:'];
       universidades = [];
@@ -299,7 +296,6 @@ class _UniversityScreen extends State<UniversityScreen> {
         });
       });
     });
-
     return Scaffold(
       backgroundColor: kBlue,
       body: Column(
@@ -368,6 +364,7 @@ class _UniversityScreen extends State<UniversityScreen> {
                   else {
                     DBProvider2.db.updateUniversidade(
                         idSelectedUniversidade(selectedUniversidade));
+                    //todo:dropar primeiro bd
                     Navigator.pushAndRemoveUntil(
                         context,
                         MaterialPageRoute(builder: (context) => HomeScreen()),
