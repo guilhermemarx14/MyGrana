@@ -23,7 +23,7 @@ class DataScreen extends StatelessWidget {
               mainAxisAlignment: MainAxisAlignment.spaceEvenly,
               children: <Widget>[
                 Text(
-                  'Insira um nome não vazio',
+                  'Nome',
                   style: kFormStyle,
                 ),
                 Container(
@@ -58,7 +58,9 @@ class DataScreen extends StatelessWidget {
                   if (nome.length != 0) {
                     DBProvider2.db.createProfile(nome);
                     Navigator.of(context).pushNamed("/statescreen");
-                  }
+                  } else
+                    Toast.show('Você precisa digitar um nome!', context,
+                        duration: Toast.LENGTH_LONG, gravity: Toast.BOTTOM);
                 },
               ),
             ],
