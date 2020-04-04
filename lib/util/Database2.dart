@@ -3,7 +3,6 @@ import 'dart:io';
 import 'dart:math';
 
 import 'package:crypto/crypto.dart';
-import 'package:flutter_app/model/profile.dart';
 import 'package:flutter_app/util/bd2_scripts.dart';
 import 'package:path/path.dart';
 import 'package:path_provider/path_provider.dart';
@@ -55,12 +54,7 @@ class DBProvider2 {
     String hash = hmacSha256.convert(bytes).toString();
 
     //CRIA A ENTRADA NO BANCO DE DADOS
-    await db
-        .rawQuery(
-            "INSERT INTO `profile` (`id`,`key`,`nome`,`estado`,`cidade`,`universidade`,`hash`) VALUES (0,$number,'$nome',0,0,0,'$hash');")
-        .then((_) async {
-      List<Map> res = await db.rawQuery('SELECT * FROM profile WHERE id=0;');
-      print(Profile.fromMap(res.first).toString());
-    });
+    await db.rawQuery(
+        "INSERT INTO `profile` (`id`,`key`,`nome`,`estado`,`cidade`,`universidade`,`hash`) VALUES (0,$number,'$nome',0,0,0,'$hash');");
   }
 }

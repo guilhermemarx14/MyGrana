@@ -6,6 +6,7 @@ import 'package:flutter_app/model/estado.dart';
 import 'package:flutter_app/screens/home_screen.dart';
 import 'package:flutter_app/util/Database2.dart';
 import 'package:flutter_app/util/constants.dart';
+import 'package:toast/toast.dart';
 
 class DataScreen extends StatelessWidget {
   @override
@@ -215,13 +216,15 @@ class _StateScreen extends State<StateScreen> {
                 width: 150.0,
                 height: 50.0,
                 onPressed: () {
-                  Navigator.of(context).push(
+                  Toast.show("teste", context,
+                      duration: Toast.LENGTH_SHORT, gravity: Toast.BOTTOM);
+                  /*Navigator.of(context).push(
                     MaterialPageRoute(
                       builder: (BuildContext context) => UniversityScreen(
                         estadoId: idSelectedEstado(selectedEstado),
                       ),
                     ),
-                  );
+                  );*/
                 },
               ),
             ],
