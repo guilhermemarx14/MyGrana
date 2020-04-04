@@ -77,9 +77,9 @@ class StateScreen extends StatefulWidget {
 }
 
 class _StateScreen extends State<StateScreen> {
-  List<String> nomesEstados = ['Estado :'];
+  List<String> nomesEstados = ['Estado: '];
   List<Estado> estados = [];
-  String selectedEstado = 'Estado :';
+  String selectedEstado = 'Estado: ';
   List<String> nomesCidades = ['Cidade: '];
   List<CidadeUniversidade> cidades = [];
   String selectedCidade = 'Cidade: ';
@@ -92,7 +92,7 @@ class _StateScreen extends State<StateScreen> {
   @override
   Widget build(BuildContext context) {
     Estado.getEstadosList().then((list) {
-      nomesEstados = ['Estado :'];
+      nomesEstados = ['Estado: '];
       estados = [];
       list.forEach((value) {
         setState(() {
@@ -216,15 +216,19 @@ class _StateScreen extends State<StateScreen> {
                 width: 150.0,
                 height: 50.0,
                 onPressed: () {
-                  Toast.show("teste", context,
-                      duration: Toast.LENGTH_SHORT, gravity: Toast.BOTTOM);
-                  /*Navigator.of(context).push(
-                    MaterialPageRoute(
-                      builder: (BuildContext context) => UniversityScreen(
-                        estadoId: idSelectedEstado(selectedEstado),
+                  if (selectedEstado.compareTo('Estado: ') == 0 ||
+                      selectedCidade.compareTo('Cidade: ') == 0)
+                    Toast.show(
+                        "Você deve selecionar um estado e uma cidade!", context,
+                        duration: Toast.LENGTH_LONG, gravity: Toast.BOTTOM);
+                  else
+                    Navigator.of(context).push(
+                      MaterialPageRoute(
+                        builder: (BuildContext context) => UniversityScreen(
+                          estadoId: idSelectedEstado(selectedEstado),
+                        ),
                       ),
-                    ),
-                  );*/
+                    );
                 },
               ),
             ],
