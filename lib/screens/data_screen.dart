@@ -271,9 +271,24 @@ class _UniversityScreen extends State<UniversityScreen> {
         : name;
   }
 
+  int idSelectedUniversidade(String selectedUniversidade) {
+    String universidade;
+    if (selectedUniversidade.endsWith('...'))
+      universidade =
+          selectedUniversidade.substring(0, selectedUniversidade.length - 3);
+    else
+      universidade = selectedUniversidade;
+    for (int i = 0; i < universidades.length; i++)
+      if (universidades[i].nome.startsWith(universidade)) {
+        print(universidades[i].id);
+        return universidades[i].id;
+      }
+  }
+
   @override
   Widget build(BuildContext context) {
     estadoId = widget.estadoId;
+
     CidadeUniversidade.getUniversidadesList(estadoId).then((list) {
       nomesUniversidades = ['Universidade:'];
       universidades = [];
@@ -347,10 +362,17 @@ class _UniversityScreen extends State<UniversityScreen> {
                 width: 150.0,
                 height: 50.0,
                 onPressed: () {
-                  Navigator.pushAndRemoveUntil(
-                      context,
-                      MaterialPageRoute(builder: (context) => HomeScreen()),
-                      (r) => false);
+                  if (selectedUniversidade.compareTo('Universidade:') == 0)
+                    Toast.show('Você deve escolher uma universidade!', context,
+                        duration: Toast.LENGTH_LONG, gravity: Toast.BOTTOM);
+                  else {
+                    DBProvider2.db.updateUniversidade(
+                        idSelectedUniversidade(selectedUniversidade));
+                    Navigator.pushAndRemoveUntil(
+                        context,
+                        MaterialPageRoute(builder: (context) => HomeScreen()),
+                        (r) => false);
+                  }
                 },
               ),
             ],

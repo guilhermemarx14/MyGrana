@@ -70,5 +70,6 @@ class DBProvider2 {
 
     await db.rawUpdate(
         'UPDATE profile SET universidade = $idUniversidade WHERE id=0;');
+
   }
 }

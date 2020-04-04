@@ -1,15 +1,12 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_app/model/orcamento.dart';
-import 'package:flutter_app/util/Database1.dart';
-import 'package:flutter_app/util/constants.dart';
 import 'package:flutter_app/components/home_card.dart';
-import 'package:font_awesome_flutter/font_awesome_flutter.dart';
-import 'statements_screen.dart';
 import 'package:flutter_app/components/my_dialog.dart';
+import 'package:flutter_app/model/orcamento.dart';
 import 'package:flutter_app/screens/orcamentoScreen.dart';
-import 'package:flutter_app/model/estado.dart';
-import 'package:flutter_app/model/cidadeUniversidade.dart';
-import 'dart:io';
+import 'package:flutter_app/util/constants.dart';
+import 'package:font_awesome_flutter/font_awesome_flutter.dart';
+
+import 'statements_screen.dart';
 
 class HomeScreen extends StatelessWidget {
   Orcamento teste = Orcamento(
@@ -18,10 +15,6 @@ class HomeScreen extends StatelessWidget {
   );
   @override
   Widget build(BuildContext context) {
-    CidadeUniversidade.getUniversidadesList(17).then((value) {
-      print(value);
-    });
-
     return Scaffold(
         backgroundColor: kWhite,
         drawer: Drawer(
