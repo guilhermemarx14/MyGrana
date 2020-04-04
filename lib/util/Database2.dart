@@ -57,4 +57,18 @@ class DBProvider2 {
     await db.rawQuery(
         "INSERT INTO `profile` (`id`,`key`,`nome`,`estado`,`cidade`,`universidade`,`hash`) VALUES (0,$number,'$nome',0,0,0,'$hash');");
   }
+
+  updateCidadeEstado(int idEstado, int idCidade) async {
+    final db = await database;
+
+    await db.rawUpdate(
+        'UPDATE profile SET estado = $idEstado, cidade = $idCidade WHERE id=0;');
+  }
+
+  updateUniversidade(int idUniversidade) async {
+    final db = await database;
+
+    await db.rawUpdate(
+        'UPDATE profile SET universidade = $idUniversidade WHERE id=0;');
+  }
 }

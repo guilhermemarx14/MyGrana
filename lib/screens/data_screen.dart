@@ -88,7 +88,12 @@ class _StateScreen extends State<StateScreen> {
 
   int idSelectedEstado(String selected) {
     for (int i = 0; i < estados.length; i++)
-      if (estados[i].nome.compareTo(selectedEstado) == 0) return estados[i].id;
+      if (estados[i].nome.compareTo(selected) == 0) return estados[i].id;
+  }
+
+  int idSelectedCidade(String selected) {
+    for (int i = 0; i < cidades.length; i++)
+      if (cidades[i].nome.compareTo(selected) == 0) return cidades[i].id;
   }
 
   @override
@@ -223,7 +228,10 @@ class _StateScreen extends State<StateScreen> {
                     Toast.show(
                         "Você deve selecionar um estado e uma cidade!", context,
                         duration: Toast.LENGTH_LONG, gravity: Toast.BOTTOM);
-                  else
+                  else {
+                    DBProvider2.db.updateCidadeEstado(
+                        idSelectedEstado(selectedEstado),
+                        idSelectedCidade(selectedCidade));
                     Navigator.of(context).push(
                       MaterialPageRoute(
                         builder: (BuildContext context) => UniversityScreen(
@@ -231,6 +239,7 @@ class _StateScreen extends State<StateScreen> {
                         ),
                       ),
                     );
+                  }
                 },
               ),
             ],
