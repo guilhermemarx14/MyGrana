@@ -4,6 +4,7 @@ import 'package:flutter_app/components/continue_button.dart';
 import 'package:flutter_app/model/cidadeUniversidade.dart';
 import 'package:flutter_app/model/estado.dart';
 import 'package:flutter_app/screens/home_screen.dart';
+import 'package:flutter_app/util/Database2.dart';
 import 'package:flutter_app/util/constants.dart';
 
 class DataScreen extends StatelessWidget {
@@ -21,7 +22,7 @@ class DataScreen extends StatelessWidget {
               mainAxisAlignment: MainAxisAlignment.spaceEvenly,
               children: <Widget>[
                 Text(
-                  'Nome',
+                  'Insira um nome não vazio',
                   style: kFormStyle,
                 ),
                 Container(
@@ -36,7 +37,9 @@ class DataScreen extends StatelessWidget {
                     cursorWidth: 2.0,
                     cursorColor: kWhite,
                     maxLines: 1,
-                    decoration: InputDecoration(border: InputBorder.none),
+                    decoration: InputDecoration(
+                      border: InputBorder.none,
+                    ),
                     style: kFormStyle,
                   ),
                 ),
@@ -50,8 +53,11 @@ class DataScreen extends StatelessWidget {
                 width: 150.0,
                 height: 50.0,
                 onPressed: () {
-                  nome = myController.text; //todo: verificações do nome
-                  Navigator.of(context).pushNamed("/statescreen");
+                  nome = myController.text;
+                  if (nome.length != 0) {
+                    DBProvider2.db.createProfile(nome);
+                    Navigator.of(context).pushNamed("/statescreen");
+                  }
                 },
               ),
             ],
@@ -141,7 +147,7 @@ class _StateScreen extends State<StateScreen> {
                             selectedEstado = newValue;
                             nomesCidades = ['Cidade: '];
                             selectedCidade = 'Cidade: ';
-                            cidades = [];
+                            cidades = []; //todo: tratar overflow
                             int estadoId = idSelectedEstado(selectedEstado);
                             CidadeUniversidade.getCidadesList(estadoId)
                                 .then((list) {

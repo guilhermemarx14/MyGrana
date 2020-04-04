@@ -107,4 +107,14 @@ class DBProvider {
       universidades.add(CidadeUniversidade.fromMap(res[i]));
     return universidades;
   }
+
+  //DROP
+
+  drop() async {
+    final db = await database;
+
+    await db.rawQuery('DROP TABLE IF EXISTS universidade;');
+    await db.rawQuery('DROP TABLE IF EXISTS cidade;');
+    await db.rawQuery('DROP TABLE IF EXISTS estado;');
+  }
 }
