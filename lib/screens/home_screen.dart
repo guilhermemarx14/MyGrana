@@ -1,4 +1,3 @@
-import 'package:firebase_database/firebase_database.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_app/components/home_card.dart';
 import 'package:flutter_app/components/my_dialog.dart';
@@ -13,7 +12,7 @@ import 'statements_screen.dart';
 class HomeScreen extends StatelessWidget {
   var transaction = Transacao(category: "salario");
 
-  final FirebaseDatabase _database = FirebaseDatabase.instance;
+  HomeScreen();
 
   Orcamento teste = Orcamento(
     orcamentoAtual: null,
@@ -22,8 +21,6 @@ class HomeScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    _database.reference().child("Teste").set(transaction.toJson());
-
     return Scaffold(
         backgroundColor: kWhite,
         drawer: Drawer(

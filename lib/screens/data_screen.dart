@@ -3,12 +3,20 @@ import 'package:flutter_app/components/back_button.dart' as back;
 import 'package:flutter_app/components/continue_button.dart';
 import 'package:flutter_app/model/cidadeUniversidade.dart';
 import 'package:flutter_app/model/estado.dart';
+import 'package:flutter_app/model/profile.dart';
 import 'package:flutter_app/screens/home_screen.dart';
 import 'package:flutter_app/util/Database2.dart';
 import 'package:flutter_app/util/constants.dart';
 import 'package:toast/toast.dart';
 
+Profile profile;
+
 class DataScreen extends StatelessWidget {
+  //todo: símbolo de carregando
+  DataScreen() {
+    profile = Profile();
+  }
+
   @override
   Widget build(BuildContext context) {
     String nome;
@@ -56,7 +64,8 @@ class DataScreen extends StatelessWidget {
                 onPressed: () {
                   nome = myController.text;
                   if (nome.length != 0) {
-                    DBProvider2.db.createProfile(nome);
+                    profile.nome = nome;
+                    //DBProvider2.db.createProfile(nome);
                     Navigator.of(context).pushNamed("/statescreen");
                   } else
                     Toast.show('Você precisa digitar um nome!', context,
@@ -103,6 +112,7 @@ class _StateScreen extends State<StateScreen> {
       estados = [];
       list.forEach((value) {
         setState(() {
+          //todo:add se nao existir
           estados.add(value);
           nomesEstados.add(value.toString());
         });
@@ -153,11 +163,11 @@ class _StateScreen extends State<StateScreen> {
                         onChanged: (String newValue) {
                           setState(() {
                             selectedEstado = newValue;
+                            profile.estado = idSelectedEstado(selectedEstado);
                             nomesCidades = ['Cidade: '];
                             selectedCidade = 'Cidade: ';
                             cidades = []; //todo: tratar overflow
-                            int estadoId = idSelectedEstado(selectedEstado);
-                            CidadeUniversidade.getCidadesList(estadoId)
+                            CidadeUniversidade.getCidadesList(profile.estado)
                                 .then((list) {
                               list.forEach((value) {
                                 cidades.add(value);
@@ -199,6 +209,7 @@ class _StateScreen extends State<StateScreen> {
                         onChanged: (String newValue) {
                           setState(() {
                             selectedCidade = newValue;
+                            profile.cidade = idSelectedCidade(selectedCidade);
                           });
                         },
                       ),
@@ -229,14 +240,10 @@ class _StateScreen extends State<StateScreen> {
                         "Você deve selecionar um estado e uma cidade!", context,
                         duration: Toast.LENGTH_LONG, gravity: Toast.BOTTOM);
                   else {
-                    DBProvider2.db.updateCidadeEstado(
-                        idSelectedEstado(selectedEstado),
-                        idSelectedCidade(selectedCidade));
+                    profile.cidade = idSelectedCidade(selectedCidade);
                     Navigator.of(context).push(
                       MaterialPageRoute(
-                        builder: (BuildContext context) => UniversityScreen(
-                          estadoId: idSelectedEstado(selectedEstado),
-                        ),
+                        builder: (BuildContext context) => UniversityScreen(),
                       ),
                     );
                   }
@@ -251,8 +258,7 @@ class _StateScreen extends State<StateScreen> {
 }
 
 class UniversityScreen extends StatefulWidget {
-  final int estadoId;
-  const UniversityScreen({Key key, this.estadoId}) : super(key: key);
+  const UniversityScreen({Key key}) : super(key: key);
 
   @override
   _UniversityScreen createState() => _UniversityScreen();
@@ -285,8 +291,7 @@ class _UniversityScreen extends State<UniversityScreen> {
 
   @override
   Widget build(BuildContext context) {
-    estadoId = widget.estadoId;
-    CidadeUniversidade.getUniversidadesList(estadoId).then((list) {
+    CidadeUniversidade.getUniversidadesList(profile.estado).then((list) {
       nomesUniversidades = ['Universidade:'];
       universidades = [];
       list.forEach((value) {
@@ -296,6 +301,7 @@ class _UniversityScreen extends State<UniversityScreen> {
         });
       });
     });
+
     return Scaffold(
       backgroundColor: kBlue,
       body: Column(
@@ -334,6 +340,8 @@ class _UniversityScreen extends State<UniversityScreen> {
                         onChanged: (String newSelected) {
                           setState(() {
                             selectedUniversidade = newSelected;
+                            profile.universidade =
+                                idSelectedUniversidade(selectedUniversidade);
                           });
                         },
                       ),
@@ -362,13 +370,17 @@ class _UniversityScreen extends State<UniversityScreen> {
                     Toast.show('Você deve escolher uma universidade!', context,
                         duration: Toast.LENGTH_LONG, gravity: Toast.BOTTOM);
                   else {
-                    DBProvider2.db.updateUniversidade(
-                        idSelectedUniversidade(selectedUniversidade));
-                    //todo:dropar primeiro bd
+                    profile.hash = DBProvider2.db.generateHash(profile);
+                    DBProvider2.db
+                        .createProfile(profile)
+                        .then(DBProvider2.db.saveProfile(profile));
+
                     Navigator.pushAndRemoveUntil(
                         context,
                         MaterialPageRoute(builder: (context) => HomeScreen()),
                         (r) => false);
+                    //todo:dropar primeiro bd
+
                   }
                 },
               ),
