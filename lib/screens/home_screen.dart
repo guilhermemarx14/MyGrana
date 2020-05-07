@@ -1,7 +1,9 @@
+import 'package:firebase_database/firebase_database.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_app/components/home_card.dart';
 import 'package:flutter_app/components/my_dialog.dart';
 import 'package:flutter_app/model/orcamento.dart';
+import 'package:flutter_app/model/transacao.dart';
 import 'package:flutter_app/screens/orcamentoScreen.dart';
 import 'package:flutter_app/util/constants.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
@@ -9,12 +11,19 @@ import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'statements_screen.dart';
 
 class HomeScreen extends StatelessWidget {
+  var transaction = Transacao(category: "salario");
+
+  final FirebaseDatabase _database = FirebaseDatabase.instance;
+
   Orcamento teste = Orcamento(
     orcamentoAtual: null,
     orcamentoServidor: [1, 2, 3, 4, 5, 6, 7, 8, 9],
   );
+
   @override
   Widget build(BuildContext context) {
+    _database.reference().child("Teste").set(transaction.toJson());
+
     return Scaffold(
         backgroundColor: kWhite,
         drawer: Drawer(
