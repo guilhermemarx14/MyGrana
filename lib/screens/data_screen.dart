@@ -1,3 +1,7 @@
+import 'dart:convert';
+import 'dart:math';
+
+import 'package:crypto/crypto.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_app/components/back_button.dart' as back;
 import 'package:flutter_app/components/continue_button.dart';
@@ -370,7 +374,8 @@ class _UniversityScreen extends State<UniversityScreen> {
                     Toast.show('Você deve escolher uma universidade!', context,
                         duration: Toast.LENGTH_LONG, gravity: Toast.BOTTOM);
                   else {
-                    profile.hash = DBProvider2.db.generateHash(profile);
+                    print("******${profile.nome}*****");
+                    profile.hash = generateHash(profile);
                     DBProvider2.db
                         .createProfile(profile)
                         .then(DBProvider2.db.saveProfile(profile));
@@ -389,5 +394,18 @@ class _UniversityScreen extends State<UniversityScreen> {
         ],
       ),
     );
+  }
+
+  String generateHash(Profile p) {
+    //GERA A KEY DO USUÁRIO
+    int number;
+    var random = Random();
+    number = random.nextInt(1000);
+
+    //GERA A HASH DO USUÁRIO
+    var key = utf8.encode('$number');
+    var bytes = (p.nome).codeUnits;
+    var hmacSha256 = new Hmac(sha256, key); // HMAC-SHA256
+    return hmacSha256.convert(bytes).toString();
   }
 }

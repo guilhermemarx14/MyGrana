@@ -29,7 +29,7 @@ dependencies:
   toast: ^0.1.5
   firebase_core: 0.4.0+3
   firebase_database: ^3.0.7
-
+  shared_preferences: ^0.5.7+1
 dev_dependencies:
   flutter_test:
     sdk: flutter

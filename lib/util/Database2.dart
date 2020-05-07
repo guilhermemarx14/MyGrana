@@ -1,8 +1,5 @@
-import 'dart:convert';
 import 'dart:io';
-import 'dart:math';
 
-import 'package:crypto/crypto.dart';
 import 'package:firebase_database/firebase_database.dart';
 import 'package:flutter_app/model/profile.dart';
 import 'package:flutter_app/util/bd2_scripts.dart';
@@ -31,26 +28,11 @@ class DBProvider2 {
 
     String path = join(documentsDirectory.path, "MyGranaDB2.db");
 
-    return await openDatabase(path, version: 1, onOpen: (db) {},
-        onCreate: (Database db, int version) async {
-      //USO DO TRANSACTION PRA EVITAR DEADLOCK
-      await db.transaction((txn) async {
-        await db.execute(createTableProfile);
-      });
+    return await openDatabase(path, version: 1, onOpen: (db) {
+      db.execute(createTableProfile);
+    }, onCreate: (Database db, int version) async {
+      await db.execute(createTableProfile);
     });
-  }
-
-  String generateHash(Profile p) {
-    //GERA A KEY DO USUÁRIO
-    int number;
-    var random = Random();
-    number = random.nextInt(1000);
-
-    //GERA A HASH DO USUÁRIO
-    var key = utf8.encode('$number');
-    var bytes = utf8.encode(p.nome);
-    var hmacSha256 = new Hmac(sha256, key); // HMAC-SHA256
-    return hmacSha256.convert(bytes).toString();
   }
 
   //CONSULTAS DE ESTADOS
@@ -58,7 +40,7 @@ class DBProvider2 {
     final db = await database;
 
     //CRIA A ENTRADA NO BANCO DE DADOS
-    await db.rawQuery(
+    await db.execute(
         "INSERT INTO `profile` (`nome`,`estado`,`cidade`,`universidade`,`hash`) VALUES ('${p.nome}'"
         ",'${p.estado}','${p.cidade}','${p.universidade}','${p.hash}');");
   }
@@ -84,5 +66,13 @@ class DBProvider2 {
         .child("Profile")
         .child("Universidade")
         .set(p.universidade);
+  }
+
+  Future<List<Profile>> getProfilesList() async {
+    final db = await database;
+    List<Profile> estados = [];
+    List<Map> res = await db.rawQuery('Select * from profile');
+    for (int i = 0; i < res.length; i++) estados.add(Profile.fromMap(res[i]));
+    return estados;
   }
 }
