@@ -1,4 +1,4 @@
-import 'package:flutter_app/util/constants.dart';
+
 
 class Orcamento {
   static Orcamento _instance;
@@ -8,7 +8,7 @@ class Orcamento {
 
   factory Orcamento(
       {List<double> orcamentoAtual, List<double> orcamentoServidor}) {
-    //todo: receber orcamento atual e do servidor do bd
+    //todo: receber orcamento atual do bd
     orcamentoAtual ??= orcamentoServidor;
     _instance ??= Orcamento._constructor(orcamentoAtual, orcamentoServidor);
     return _instance;

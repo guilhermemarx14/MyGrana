@@ -104,9 +104,22 @@ class _StateScreen extends State<StateScreen> {
       if (estados[i].nome.compareTo(selected) == 0) return estados[i].id;
   }
 
-  int idSelectedCidade(String selected) {
+  String showCidade(String name) {
+    double sizeScreen = MediaQuery.of(context).size.width;
+    int stringSize = (sizeScreen / 12).toInt();
+    return name.length > stringSize - 1
+        ? name.substring(0, stringSize - 4) + "..."
+        : name;
+  }
+
+  int idSelectedCidade(String selectedCidade) {
+    String cidade;
+    if (selectedCidade.endsWith('...'))
+      cidade = selectedCidade.substring(0, selectedCidade.length - 3);
+    else
+      cidade = selectedCidade;
     for (int i = 0; i < cidades.length; i++)
-      if (cidades[i].nome.compareTo(selected) == 0) return cidades[i].id;
+      if (cidades[i].nome.startsWith(cidade)) return cidades[i].id;
   }
 
   @override
@@ -116,7 +129,6 @@ class _StateScreen extends State<StateScreen> {
       estados = [];
       list.forEach((value) {
         setState(() {
-          //todo:add se nao existir
           estados.add(value);
           nomesEstados.add(value.toString());
         });
@@ -175,7 +187,7 @@ class _StateScreen extends State<StateScreen> {
                                 .then((list) {
                               list.forEach((value) {
                                 cidades.add(value);
-                                nomesCidades.add(value.nome);
+                                nomesCidades.add(showCidade(value.nome));
                               });
                             });
                           });

@@ -75,4 +75,10 @@ class DBProvider2 {
     for (int i = 0; i < res.length; i++) estados.add(Profile.fromMap(res[i]));
     return estados;
   }
+
+  Future<int> getProfileCount() async {
+    final db = await database;
+    return Sqflite.firstIntValue(
+        await db.rawQuery('SELECT COUNT(nome) FROM profile'));
+  }
 }
