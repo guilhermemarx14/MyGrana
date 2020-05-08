@@ -116,5 +116,12 @@ class DBProvider {
     await db.rawQuery('DROP TABLE IF EXISTS universidade;');
     await db.rawQuery('DROP TABLE IF EXISTS cidade;');
     await db.rawQuery('DROP TABLE IF EXISTS estado;');
+    createTableEstado = null;
+    createTableCidade = null;
+    createTableUniversidade = null;
+    insertEstados = null;
+    insertUniversidades = null;
+    insertCidades = null;
+    print("dropped");
   }
 }

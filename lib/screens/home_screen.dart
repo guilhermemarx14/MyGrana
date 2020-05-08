@@ -4,7 +4,7 @@ import 'package:flutter_app/components/my_dialog.dart';
 import 'package:flutter_app/model/orcamento.dart';
 import 'package:flutter_app/model/transacao.dart';
 import 'package:flutter_app/screens/orcamentoScreen.dart';
-import 'package:flutter_app/util/Database2.dart';
+import 'package:flutter_app/util/Database1.dart';
 import 'package:flutter_app/util/constants.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 
@@ -22,7 +22,7 @@ class HomeScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    DBProvider2.db.getProfilesList().then((item) => print(item));
+    DBProvider.db.drop();
     return Scaffold(
         backgroundColor: kWhite,
         drawer: Drawer(

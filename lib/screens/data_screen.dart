@@ -400,8 +400,6 @@ class _UniversityScreen extends State<UniversityScreen> {
                         context,
                         MaterialPageRoute(builder: (context) => HomeScreen()),
                         (r) => false);
-                    //todo:dropar primeiro bd
-
                   }
                 },
               ),
