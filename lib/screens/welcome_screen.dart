@@ -7,7 +7,6 @@ import 'data_screen.dart';
 class WelcomeScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
-
     return Scaffold(
       backgroundColor: kBlue,
       body: Column(

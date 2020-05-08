@@ -11,6 +11,7 @@ import 'package:flutter_app/model/profile.dart';
 import 'package:flutter_app/screens/home_screen.dart';
 import 'package:flutter_app/util/Database2.dart';
 import 'package:flutter_app/util/constants.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 import 'package:toast/toast.dart';
 
 Profile profile;
@@ -182,7 +183,7 @@ class _StateScreen extends State<StateScreen> {
                             profile.estado = idSelectedEstado(selectedEstado);
                             nomesCidades = ['Cidade: '];
                             selectedCidade = 'Cidade: ';
-                            cidades = []; //todo: tratar overflow
+                            cidades = [];
                             CidadeUniversidade.getCidadesList(profile.estado)
                                 .then((list) {
                               list.forEach((value) {
@@ -381,7 +382,7 @@ class _UniversityScreen extends State<UniversityScreen> {
                 text: 'Continuar',
                 width: 150.0,
                 height: 50.0,
-                onPressed: () {
+                onPressed: () async {
                   if (selectedUniversidade.compareTo('Universidade:') == 0)
                     Toast.show('Você deve escolher uma universidade!', context,
                         duration: Toast.LENGTH_LONG, gravity: Toast.BOTTOM);
@@ -391,7 +392,9 @@ class _UniversityScreen extends State<UniversityScreen> {
                     DBProvider2.db
                         .createProfile(profile)
                         .then(DBProvider2.db.saveProfile(profile));
-
+                    SharedPreferences prefs =
+                        await SharedPreferences.getInstance();
+                    prefs.setBool('first_time', false); //cadastro concluído
                     Navigator.pushAndRemoveUntil(
                         context,
                         MaterialPageRoute(builder: (context) => HomeScreen()),
