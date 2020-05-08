@@ -1,5 +1,5 @@
 import 'dart:convert';
-import 'dart:io' show Platform;
+import 'dart:io';
 import 'dart:math';
 
 import 'package:crypto/crypto.dart';
@@ -72,7 +72,6 @@ class DataScreen extends StatelessWidget {
                   nome = myController.text;
                   if (nome.length != 0) {
                     profile.nome = nome;
-                    //DBProvider2.db.createProfile(nome);
                     Navigator.of(context).pushNamed("/statescreen");
                   } else
                     Toast.show('Você precisa digitar um nome!', context,
@@ -418,7 +417,7 @@ class _UniversityScreen extends State<UniversityScreen> {
 
     //GERA A HASH DO USUÁRIO
     var key = utf8.encode('$number');
-    var bytes = (p.nome).codeUnits;
+    var bytes = utf8.encode(p.nome);
     var hmacSha256 = new Hmac(sha256, key); // HMAC-SHA256
     return hmacSha256.convert(bytes).toString();
   }

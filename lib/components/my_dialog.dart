@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_app/util/constants.dart';
 
+import 'my_calendar.dart';
+
 class MyDialog extends StatelessWidget {
   MyDialog(
       {@required this.context,
@@ -12,7 +14,7 @@ class MyDialog extends StatelessWidget {
   final String category;
   final String value;
   final BuildContext context;
-
+  MyCalendar calendar;
   @override
   Widget build(BuildContext context) {
     return AlertDialog(
@@ -64,7 +66,7 @@ class MyDialog extends StatelessWidget {
             ],
           ),
           Row(
-            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+            mainAxisAlignment: MainAxisAlignment.spaceAround,
             children: <Widget>[
               Text(
                 'Data:',
@@ -74,11 +76,10 @@ class MyDialog extends StatelessWidget {
                   fontWeight: FontWeight.bold,
                 ),
               ),
+              MyCalendar(title: 'test'),
               GestureDetector(
                 child: Icon(Icons.calendar_today),
-                onTap: () {
-                  //todo: abrir calendário
-                },
+                onTap: () {},
               ),
             ],
           ),

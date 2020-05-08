@@ -122,6 +122,5 @@ class DBProvider {
     insertEstados = null;
     insertUniversidades = null;
     insertCidades = null;
-    print("dropped");
   }
 }
