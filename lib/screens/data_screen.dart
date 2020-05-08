@@ -1,4 +1,5 @@
 import 'dart:convert';
+import 'dart:io' show Platform;
 import 'dart:math';
 
 import 'package:crypto/crypto.dart';
@@ -20,6 +21,7 @@ class DataScreen extends StatelessWidget {
   //todo: símbolo de carregando
   DataScreen() {
     profile = Profile();
+    profile.plataforma = Platform.isIOS ? 'ios' : 'android';
   }
 
   @override
@@ -387,7 +389,6 @@ class _UniversityScreen extends State<UniversityScreen> {
                     Toast.show('Você deve escolher uma universidade!', context,
                         duration: Toast.LENGTH_LONG, gravity: Toast.BOTTOM);
                   else {
-                    print("******${profile.nome}*****");
                     profile.hash = generateHash(profile);
                     DBProvider2.db
                         .createProfile(profile)

@@ -16,8 +16,15 @@ class Profile {
   int cidade;
   int universidade;
   String hash;
+  String plataforma;
 
-  Profile({this.nome, this.estado, this.cidade, this.universidade, this.hash});
+  Profile(
+      {this.nome,
+      this.estado,
+      this.cidade,
+      this.universidade,
+      this.hash,
+      this.plataforma});
 
   factory Profile.fromMap(Map<String, dynamic> json) => Profile(
         nome: json["nome"],
@@ -25,6 +32,7 @@ class Profile {
         cidade: json["cidade"],
         universidade: json["universidade"],
         hash: json["hash"],
+        plataforma: json["plataforma"],
       );
 
   Map<String, dynamic> toMap() => {
@@ -33,10 +41,11 @@ class Profile {
         "cidade": cidade,
         "universidade": universidade,
         "hash": hash,
+        "plataforma": plataforma
       };
 
   @override
   String toString() {
-    return " Nome: $nome, Estado: $estado, Cidade: $cidade, Universidade: $universidade, Hash: $hash";
+    return " Nome: $nome, Estado: $estado, Cidade: $cidade, Universidade: $universidade,plataforma: $plataforma, Hash: $hash";
   }
 }

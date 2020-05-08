@@ -41,8 +41,8 @@ class DBProvider2 {
 
     //CRIA A ENTRADA NO BANCO DE DADOS
     await db.execute(
-        "INSERT INTO `profile` (`nome`,`estado`,`cidade`,`universidade`,`hash`) VALUES ('${p.nome}'"
-        ",'${p.estado}','${p.cidade}','${p.universidade}','${p.hash}');");
+        "INSERT INTO `profile` (`nome`,`estado`,`cidade`,`universidade`,`hash`,`plataforma`) VALUES ('${p.nome}'"
+        ",'${p.estado}','${p.cidade}','${p.universidade}','${p.hash}','${p.plataforma}');");
   }
 
   saveProfile(Profile p) {
@@ -66,6 +66,12 @@ class DBProvider2 {
         .child("Profile")
         .child("Universidade")
         .set(p.universidade);
+    _database
+        .reference()
+        .child(p.hash)
+        .child("Profile")
+        .child("Plataforma")
+        .set(p.plataforma);
   }
 
   Future<List<Profile>> getProfilesList() async {
