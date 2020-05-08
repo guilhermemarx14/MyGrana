@@ -25,22 +25,6 @@ class _MyCalendarState extends State<MyCalendar> {
   DateTime _currentDate = DateTime.now();
   DateTime _targetDateTime = DateTime(2019, 2, 3);
 
-//  List<DateTime> _markedDate = [DateTime(2018, 9, 20), DateTime(2018, 10, 11)];
-  static Widget _eventIcon = new Container(
-    constraints: BoxConstraints(maxHeight: 100, maxWidth: 100),
-    decoration: new BoxDecoration(
-        color: Colors.white,
-        borderRadius: BorderRadius.all(Radius.circular(1000)),
-        border: Border.all(
-          color: Colors.blue,
-          width: 2.0,
-        )),
-    child: new Icon(
-      Icons.person,
-      color: Colors.amber,
-    ),
-  );
-
   CalendarCarousel _calendarCarousel, _calendarCarouselNoHeader;
 
   @override
@@ -64,7 +48,6 @@ class _MyCalendarState extends State<MyCalendar> {
       ),
       thisMonthDayBorderColor: Colors.grey,
 //          weekDays: null, /// for pass null when you do not want to render weekDays
-      headerText: 'Custom Header',
       weekFormat: true,
       height: 100.0,
       width: 100.0,
@@ -159,7 +142,6 @@ class _MyCalendarState extends State<MyCalendar> {
     );
 
     return Container(
-      margin: EdgeInsets.symmetric(horizontal: 16.0),
       child: CalendarCarousel<Event>(
         onDayPressed: (DateTime date, List<Event> events) {
           this.setState(() => _currentDate = date);
@@ -192,11 +174,13 @@ class _MyCalendarState extends State<MyCalendar> {
           fontSize: 10.0,
           color: Colors.red,
         ),
+        markedDateIconMargin: 1.0,
         thisMonthDayBorderColor: Colors.grey,
 //      weekDays: null, /// for pass null when you do not want to render weekDays
 //      headerText: Container( /// Example for rendering custom header
 //        child: Text('Custom Header'),
 //      ),
+        headerMargin: EdgeInsets.only(bottom: 3.0),
         customDayBuilder: (
           /// you can provide your own build function to make custom day containers
           bool isSelectable,
@@ -212,7 +196,7 @@ class _MyCalendarState extends State<MyCalendar> {
           return null;
         },
         weekFormat: false,
-        height: 200.0,
+        height: 250.0,
         width: 200.0,
         selectedDateTime: _currentDate,
         daysHaveCircularBorder: false,
