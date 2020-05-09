@@ -23,8 +23,11 @@ class MyDialog extends StatefulWidget {
 class _MyDialogState extends State<MyDialog> {
   MyCalendar calendar;
   final descricaoController = TextEditingController();
-  final valorController = TextEditingController();
+  String valorString = '';
+  int valorInt;
+  final valorController = TextEditingController(text: 'R\$ 0,00');
   var checkedValue = false;
+
   @override
   Widget build(BuildContext context) {
     return AlertDialog(
@@ -145,9 +148,6 @@ class _MyDialogState extends State<MyDialog> {
                 ),
                 child: TextField(
                   controller: valorController,
-                  inputFormatters: [
-                    LengthLimitingTextInputFormatter(20),
-                  ],
                   cursorWidth: 2.0,
                   cursorColor: Colors.black,
                   textAlign: TextAlign.center,
@@ -158,6 +158,13 @@ class _MyDialogState extends State<MyDialog> {
                     fontSize: 20,
                     fontWeight: FontWeight.bold,
                   ),
+                  onChanged: (value) {
+                    setState(() {
+                      valorController.text = formatValor(value);
+
+                      print(valorInt);
+                    });
+                  },
                 ),
               ),
               Row(
@@ -212,5 +219,14 @@ class _MyDialogState extends State<MyDialog> {
         ),
       ),
     );
+  }
+
+  String formatValor(String value) {
+    valorString = value.split(' ')[1];
+    valorString = (valorString.contains('.'))
+        ? valorString.split('.')[0] + valorString.split('.')[1]
+        : valorString.split(',')[0] + valorString.split(',')[1];
+    valorInt = int.parse(valorString);
+    return ('R\$ ' + (valorInt / 100).toString()).replaceAll('.', ',');
   }
 }
