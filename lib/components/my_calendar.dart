@@ -117,6 +117,7 @@ class _MyCalendarState extends State<MyCalendar> {
       // markedDateMoreShowTotal:
       //     true,
       todayButtonColor: Colors.yellow,
+
       selectedDayTextStyle: TextStyle(
         fontSize: 10.0,
         color: Colors.yellow,
@@ -146,6 +147,8 @@ class _MyCalendarState extends State<MyCalendar> {
         onDayPressed: (DateTime date, List<Event> events) {
           this.setState(() => _currentDate = date);
         },
+
+        showWeekDays: false,
         prevDaysTextStyle: TextStyle(
           fontSize: 10.0,
           color: Colors.grey,
@@ -170,12 +173,19 @@ class _MyCalendarState extends State<MyCalendar> {
           fontSize: 10.0,
           color: Colors.black,
         ),
+        selectedDayButtonColor: Colors.blue,
+        selectedDayTextStyle: TextStyle(
+          fontSize: 12.0,
+          color: Colors.white,
+          fontWeight: FontWeight.bold,
+        ),
         weekendTextStyle: TextStyle(
           fontSize: 10.0,
           color: Colors.red,
         ),
         markedDateIconMargin: 1.0,
         thisMonthDayBorderColor: Colors.grey,
+        locale: "pt_Br",
 //      weekDays: null, /// for pass null when you do not want to render weekDays
 //      headerText: Container( /// Example for rendering custom header
 //        child: Text('Custom Header'),
@@ -197,7 +207,7 @@ class _MyCalendarState extends State<MyCalendar> {
         },
         weekFormat: false,
         height: 250.0,
-        width: 200.0,
+        width: 220.0,
         selectedDateTime: _currentDate,
         daysHaveCircularBorder: false,
 

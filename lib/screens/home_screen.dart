@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_app/components/home_card.dart';
-import 'package:flutter_app/components/my_calendar.dart';
 import 'package:flutter_app/components/my_dialog.dart';
 import 'package:flutter_app/screens/orcamentoScreen.dart';
 import 'package:flutter_app/util/Database1.dart';
@@ -149,9 +148,6 @@ class HomeScreen extends StatelessWidget {
         body: SingleChildScrollView(
           child: Column(
             children: <Widget>[
-              MyCalendar(
-                title: 'test',
-              ),
               HomeCard(
                 title: 'Total',
                 text: 'R\$700/1400',
