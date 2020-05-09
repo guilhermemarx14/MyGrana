@@ -223,10 +223,26 @@ class _MyDialogState extends State<MyDialog> {
 
   String formatValor(String value) {
     valorString = value.split(' ')[1];
-    valorString = (valorString.contains('.'))
-        ? valorString.split('.')[0] + valorString.split('.')[1]
-        : valorString.split(',')[0] + valorString.split(',')[1];
-    valorInt = int.parse(valorString);
-    return ('R\$ ' + (valorInt / 100).toString()).replaceAll('.', ',');
+    valorString = valorString.split(',')[0] + valorString.split(',')[1];
+    valorInt = int.parse(valorString.replaceAll('.', ''));
+    print(valorInt.toString());
+    int valorDecimal = (valorInt % 100);//TODO: bug diminuiçao de números
+    if (valorString.length < 6)
+      return ('R\$ ' +
+          (valorInt ~/ 100).toString() +
+          ',' +
+          valorDecimal.toString());
+
+    valorInt = valorInt ~/ 100;
+    String retorno = '';
+
+    do {
+      retorno = "." + (valorInt % (1000)).toString() + retorno;
+      valorInt = valorInt ~/ (1000);
+    } while (valorInt >= 1000);
+
+    retorno = valorInt.toString() + retorno + ',' + valorDecimal.toString();
+
+    return 'R\$ ' + retorno;
   }
 }
