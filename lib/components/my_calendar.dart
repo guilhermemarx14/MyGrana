@@ -148,7 +148,6 @@ class _MyCalendarState extends State<MyCalendar> {
           this.setState(() => _currentDate = date);
         },
 
-        showWeekDays: false,
         prevDaysTextStyle: TextStyle(
           fontSize: 10.0,
           color: Colors.grey,
@@ -206,7 +205,7 @@ class _MyCalendarState extends State<MyCalendar> {
           return null;
         },
         weekFormat: false,
-        height: 250.0,
+        height: 260.0,
         width: 220.0,
         selectedDateTime: _currentDate,
         daysHaveCircularBorder: false,

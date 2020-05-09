@@ -4,6 +4,7 @@ import 'dart:math';
 
 import 'package:crypto/crypto.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:flutter_app/components/back_button.dart' as back;
 import 'package:flutter_app/components/continue_button.dart';
 import 'package:flutter_app/model/cidadeUniversidade.dart';
@@ -50,6 +51,9 @@ class DataScreen extends StatelessWidget {
                   ),
                   child: TextField(
                     controller: myController,
+                    inputFormatters: [
+                      LengthLimitingTextInputFormatter(20),
+                    ],
                     cursorWidth: 2.0,
                     cursorColor: kWhite,
                     maxLines: 1,
