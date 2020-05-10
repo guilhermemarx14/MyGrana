@@ -1,7 +1,16 @@
-import 'package:firebase_database/firebase_database.dart';
+import 'dart:convert';
 
+Transacao TransacaoFromJson(String str) {
+  final jsonData = json.decode(str);
+  return Transacao.fromMap(jsonData);
+}
+
+String TransacaoToJson(Transacao data) {
+  final dyn = data.toMap();
+  return json.encode(dyn);
+}
 class Transacao {
-  String category;
+  int category;
   String date;
   String descricao;
   int id;
@@ -16,22 +25,22 @@ class Transacao {
       this.paid,
       this.value});
 
-  Transacao.fromSnapshot(DataSnapshot snapshot)
-      : category = snapshot.value["category"],
-        date = snapshot.value["date"],
-        descricao = snapshot.value["descricao"],
-        id = snapshot.value["id"],
-        paid = snapshot.value["paid"],
-        value = snapshot.value["value"];
+  factory Transacao.fromMap(Map<String, dynamic> json) => Transacao(
+    category: json["category"],
+    date: json["date"],
+    descricao: json["descricao"],
+    id: json["id"],
+    paid: json["paid"]==0?false:true,
+    value: json["value"],
+  );
 
-  toJson() {
-    return {
-      "category": category,
-      "date": date,
-      "descricao": descricao,
-      "id": id,
-      "paid": paid,
-      "value": value,
-    };
-  }
+  Map<String, dynamic> toMap() => {
+    "category": category,
+    "date": date,
+    "descricao": descricao,
+    "id": id,
+    "paid": paid?1:0,
+    "value": value
+  };
+
 }

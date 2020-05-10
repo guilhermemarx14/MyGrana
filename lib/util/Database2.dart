@@ -32,6 +32,7 @@ class DBProvider2 {
       db.execute(createTableProfile);
     }, onCreate: (Database db, int version) async {
       await db.execute(createTableProfile);
+      await db.execute(createTableTransaction);
     });
   }
 
