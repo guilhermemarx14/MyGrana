@@ -23,7 +23,8 @@ const int kVestimenta = 5;
 const int kSaude = 6;
 const int kTransporte = 7;
 const int kInvestimento = 8;
-const int kTotalCategorias = 9;
+const int kUniversidade = 9;
+const int kTotalCategorias = 10;
 const List<String> kListaCategorias = [
   'Salário',
   'Pensão',
@@ -33,5 +34,6 @@ const List<String> kListaCategorias = [
   'Vestimenta',
   'Saúde',
   'Transporte',
-  'Investimento'
+  'Investimento',
+  'kUniversidade',
 ];

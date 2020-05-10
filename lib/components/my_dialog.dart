@@ -14,8 +14,8 @@ class MyDialog extends StatefulWidget {
       @required this.value});
 
   final String title;
-  final String category;
   final String value;
+  final String category;
   final BuildContext context;
 
   @override
@@ -35,8 +35,10 @@ class _MyDialogState extends State<MyDialog> {
   var checkedValue = false;
   var currentDate;
   var selectedDate;
+  var valueCategoria;
   @override
   Widget build(BuildContext context) {
+    valueCategoria = valueCategoria == null ? widget.category : valueCategoria;
     return AlertDialog(
       backgroundColor: Colors.blue.shade100,
       title: Center(
@@ -50,7 +52,7 @@ class _MyDialogState extends State<MyDialog> {
         ),
       ),
       content: Container(
-        height: 300,
+        height: 400,
         child: SingleChildScrollView(
           child: Column(
             mainAxisSize: MainAxisSize.min,
@@ -70,7 +72,7 @@ class _MyDialogState extends State<MyDialog> {
                     ),
                   ),
                   DropdownButton<String>(
-                    value: widget.category,
+                    value: valueCategoria,
                     iconEnabledColor: kBlack,
                     underline: Container(
                       height: 2,
@@ -78,8 +80,7 @@ class _MyDialogState extends State<MyDialog> {
                       color: kBlack,
                     ),
                     style: kFormStyle.copyWith(fontSize: 18, color: kBlack),
-                    items: <String>['Salário', 'Moradia', 'Alimentação']
-                        .map((String value) {
+                    items: kListaCategorias.map((String value) {
                       return DropdownMenuItem<String>(
                         value: value,
                         child: Text(
@@ -87,7 +88,11 @@ class _MyDialogState extends State<MyDialog> {
                         ),
                       );
                     }).toList(),
-                    onChanged: (_) {},
+                    onChanged: (String newSelected) {
+                      setState(() {
+                        valueCategoria = newSelected;
+                      });
+                    },
                   ),
                 ],
               ),
@@ -228,7 +233,7 @@ class _MyDialogState extends State<MyDialog> {
     );
   }
 
-  DateTime onDayPressed(DateTime date, List<Event> events) {
+  void onDayPressed(DateTime date, List<Event> events) {
     this.setState(() {
       selectedDate = date;
       print(selectedDate.toString());
