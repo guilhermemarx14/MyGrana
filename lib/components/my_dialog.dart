@@ -36,6 +36,7 @@ class _MyDialogState extends State<MyDialog> {
   var currentDate;
   var selectedDate;
   var valueCategoria;
+  var descricao;
   @override
   Widget build(BuildContext context) {
     valueCategoria = valueCategoria == null ? widget.category : valueCategoria;
@@ -132,6 +133,11 @@ class _MyDialogState extends State<MyDialog> {
                   cursorColor: Colors.black,
                   textAlign: TextAlign.center,
                   maxLines: 1,
+                  onChanged: (value) {
+                    setState(() {
+                      descricao = value;
+                    });
+                  },
                   decoration: InputDecoration(border: InputBorder.none),
                   style: TextStyle(
                     color: kBlack,
@@ -173,8 +179,7 @@ class _MyDialogState extends State<MyDialog> {
                   onChanged: (value) {
                     setState(() {
                       valorController.updateValue(valorController.numberValue);
-
-                      print(selectedDate);
+                      valorInt = (valorController.numberValue * 100).toInt();
                     });
                   },
                 ),
