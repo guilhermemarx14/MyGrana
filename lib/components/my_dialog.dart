@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_app/util/constants.dart';
+import 'package:flutter_calendar_carousel/classes/event.dart';
+import 'package:flutter_masked_text/flutter_masked_text.dart';
 
 import 'my_calendar.dart';
 
@@ -25,9 +27,14 @@ class _MyDialogState extends State<MyDialog> {
   final descricaoController = TextEditingController();
   String valorString = '';
   int valorInt;
-  final valorController = TextEditingController(text: 'R\$ 0,00');
+  var valorController = new MoneyMaskedTextController(
+      decimalSeparator: ',',
+      thousandSeparator: '.',
+      initialValue: 0,
+      leftSymbol: 'R\$ ');
   var checkedValue = false;
-
+  var currentDate;
+  var selectedDate;
   @override
   Widget build(BuildContext context) {
     return AlertDialog(
@@ -92,7 +99,7 @@ class _MyDialogState extends State<MyDialog> {
                   fontWeight: FontWeight.bold,
                 ),
               ),
-              MyCalendar(),
+              MyCalendar(selectDate: onDayPressed),
               SizedBox(
                 height: 5,
               ),
@@ -160,9 +167,9 @@ class _MyDialogState extends State<MyDialog> {
                   ),
                   onChanged: (value) {
                     setState(() {
-                      valorController.text = formatValor(value);
+                      valorController.updateValue(valorController.numberValue);
 
-                      print(valorInt);
+                      print(selectedDate);
                     });
                   },
                 ),
@@ -221,12 +228,18 @@ class _MyDialogState extends State<MyDialog> {
     );
   }
 
-  String formatValor(String value) {
+  DateTime onDayPressed(DateTime date, List<Event> events) {
+    this.setState(() {
+      selectedDate = date;
+      print(selectedDate.toString());
+    });
+  }
+/*  String formatValor(String value) {
     valorString = value.split(' ')[1];
     valorString = valorString.split(',')[0] + valorString.split(',')[1];
     valorInt = int.parse(valorString.replaceAll('.', ''));
     print(valorInt.toString());
-    int valorDecimal = (valorInt % 100);//TODO: bug diminuiçao de números
+    int valorDecimal = (valorInt % 100);
     if (valorString.length < 6)
       return ('R\$ ' +
           (valorInt ~/ 100).toString() +
@@ -244,5 +257,5 @@ class _MyDialogState extends State<MyDialog> {
     retorno = valorInt.toString() + retorno + ',' + valorDecimal.toString();
 
     return 'R\$ ' + retorno;
-  }
+  }*/
 }

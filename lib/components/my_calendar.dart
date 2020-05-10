@@ -4,7 +4,7 @@ import 'package:flutter_calendar_carousel/flutter_calendar_carousel.dart'
     show CalendarCarousel;
 
 class MyCalendar extends StatefulWidget {
-  MyCalendar({Key key, this.title}) : super(key: key);
+  MyCalendar({Key key, this.title, this.selectDate}) : super(key: key);
 
   // This widget is the home page of your application. It is stateful, meaning
   // that it has a State object (defined below) that contains fields that affect
@@ -16,7 +16,7 @@ class MyCalendar extends StatefulWidget {
   // always marked "final".
 
   final String title;
-
+  var selectDate;
   @override
   _MyCalendarState createState() => new _MyCalendarState();
 }
@@ -145,7 +145,10 @@ class _MyCalendarState extends State<MyCalendar> {
     return Container(
       child: CalendarCarousel<Event>(
         onDayPressed: (DateTime date, List<Event> events) {
-          this.setState(() => _currentDate = date);
+          this.setState(() {
+            widget.selectDate(date, events);
+            _currentDate = date;
+          });
         },
 
         prevDaysTextStyle: TextStyle(
