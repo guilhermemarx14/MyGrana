@@ -7,6 +7,18 @@ import 'package:path/path.dart';
 import 'package:path_provider/path_provider.dart';
 import 'package:sqflite/sqflite.dart';
 
+/*
+BANCO DE DADOS LOCAL:
+ - tabela estados: relaciona o nome dos estados a um int
+ - tabela cidades: relaciona o nome de uma cidade a um id e a uma chave estrangeira pra um estado
+ - tabela universidade: relaciona o nome de uma universidade a um id e uma chave estrangeira pra um estado
+Por conta das tabelas de cidade e de universidade terem os mesmos atributos, elas foram tratadas como uma unica classe no programa
+
+No Profile do usuario so sao salvos esses valores inteiros, uma vez que essas tabelas estarao presentes no script de processamento dos dados
+
+Esse banco de dados e' criado na primeira execucao do programa, entretanto, para economizar espaco, uma vez terminado o cadastro do usuario ele e' dropado, pois tornou-se desnecessario
+ */
+
 class DBProvider {
   //SINGLETON DO BANCO DE DADOS
   DBProvider._();

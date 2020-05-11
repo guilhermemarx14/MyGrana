@@ -4,7 +4,6 @@ import 'package:flutter_app/components/my_dialog.dart';
 import 'package:flutter_app/model/profile.dart';
 import 'package:flutter_app/screens/orcamentoScreen.dart';
 import 'package:flutter_app/util/Database1.dart';
-import 'package:flutter_app/util/Database2.dart';
 import 'package:flutter_app/util/constants.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:shared_preferences/shared_preferences.dart';
@@ -26,7 +25,6 @@ class _HomeScreenState extends State<HomeScreen> {
 
   @override
   Widget build(BuildContext context) {
-    DBProvider2.db.printProfilesList();
     DBProvider.db.drop();
     changeSharedPreferences();
     return Scaffold(

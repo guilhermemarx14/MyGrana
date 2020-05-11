@@ -9,6 +9,23 @@ import 'package:path_provider/path_provider.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:sqflite/sqflite.dart';
 
+/*
+BANCO DE DADOS LOCAL: tabela 'profile' guarda as informacoes do usuario: Nome, Hash, Estado, Municipio e Universidade
+                      tabela 'transaction' guarda as informacoes de uma transacao: Categoria, Data, Descricao, Id, se foi paga e o valor (em int)
+                      Como só há um usuario no programa, nao e' necessaria a chave estrangeira pra linkar uma transacao a um profile
+
+REALTIME DATABASE: por ser um banco de dados NOSQL, sua organizacao e' bem diferente
+                   o primeiro child trata-se do estado (int)
+                   o segundo child trata-se da cidade (int)
+                   o terceiro child trata-se da universidade (int)
+                   o quarto child trata-se da plataforma (String) 'ios' ou 'android'
+                   o quinto child e' quem separa os usuarios, dessa determinada plataforma, universidade, cidade e estado, usando a hash do usuario'
+                   o ultimo child e' o id da transacao e, por fim, os dados da transacao
+                   dessa forma, os estados ja estao preparados pro processamento, assim como as cidades, assim como as universidades, todas separadas pra facilitar o processamento dos dados
+ */
+
+
+
 class DBProvider2 {
   //SINGLETON DO BANCO DE DADOS
   DBProvider2._();
@@ -38,7 +55,7 @@ class DBProvider2 {
     });
   }
 
-  //CONSULTAS DE ESTADOS
+  //CONSULTAS DE PROFILE
   createProfile(Profile p) async {
     final db = await database;
 
@@ -48,16 +65,21 @@ class DBProvider2 {
         ",'${p.estado}','${p.cidade}','${p.universidade}','${p.hash}','${p.plataforma}');");
   }
 
+  Future<List<Profile>> getProfilesList() async {
+    final db = await database;
+    List<Profile> profiles = [];
+    List<Map> res = await db.rawQuery('Select * from profile');
+    for (int i = 0; i < res.length; i++) profiles.add(Profile.fromMap(res[i]));
+    return profiles;
+  }
+
+  //CONSULTAS DE TRANSACAO
   getTransacaoId() async {
     SharedPreferences prefs = await SharedPreferences.getInstance();
     int id = prefs.getInt('id');
     id = id ?? 1;
     prefs.setInt('id', id + 1);
     return id;
-    /*final db = await database;
-
-    return Sqflite.firstIntValue(
-        await db.rawQuery('SELECT MAX(id) FROM `transaction`') ?? 0);*/
   }
 
   createTransacao(Transacao t) async {
@@ -121,29 +143,6 @@ class DBProvider2 {
         .child("${t.id}")
         .child("Categoria")
         .set(t.category);
-  }
-
-  Future<String> getProfileHash() async {
-    final db = await database;
-    List<Profile> estados = [];
-    List<Map> res = await db.rawQuery('Select * from profile');
-    for (int i = 0; i < res.length; i++) estados.add(Profile.fromMap(res[i]));
-
-    return estados.first.hash;
-  }
-
-  Future<List<Profile>> getProfilesList() async {
-    final db = await database;
-    List<Profile> estados = [];
-    List<Map> res = await db.rawQuery('Select * from profile');
-    for (int i = 0; i < res.length; i++) estados.add(Profile.fromMap(res[i]));
-    return estados;
-  }
-
-  printProfilesList() async {
-    final db = await database;
-    List<Map> res = await db.rawQuery('Select * from profile');
-    for (int i = 0; i < res.length; i++) print(Profile.fromMap(res[i]));
   }
 
   printTransacoesList() async {

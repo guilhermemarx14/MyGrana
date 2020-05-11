@@ -47,7 +47,6 @@ class _MyDialogState extends State<MyDialog> {
 
   _MyDialogState() {
     transacao = Transacao();
-    DBProvider2.db.getProfileHash().then((value) => userHash = value);
     DBProvider2.db.getTransacaoId().then((id) => transacao.id = id);
     transacao.date = DateTime.now().toString().split(' ')[0];
     transacao.paid = checkedValue;
@@ -243,10 +242,9 @@ class _MyDialogState extends State<MyDialog> {
                       style: TextStyle(color: Colors.blue),
                     ),
                     onPressed: () {
+                      //todo:check dados informados
                       DBProvider2.db.createTransacao(transacao);
                       DBProvider2.db.saveTransacao(transacao, widget.p);
-                      //todo:bug categoria e valor no android
-                      DBProvider2.db.printTransacoesList();
                       //Navigator.pop(context);
                     },
                   )
