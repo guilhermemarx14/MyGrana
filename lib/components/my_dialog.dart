@@ -49,12 +49,13 @@ class _MyDialogState extends State<MyDialog> {
     transacao = Transacao();
     DBProvider2.db.getProfileHash().then((value) => userHash = value);
     DBProvider2.db.getTransacaoId().then((id) => transacao.id = id);
+    transacao.date = DateTime.now().toString().split(' ')[0];
+    transacao.paid = checkedValue;
   }
   @override
   Widget build(BuildContext context) {
     valueCategoria = valueCategoria == null ? widget.category : valueCategoria;
     transacao.category = valueCategoria;
-    transacao.date = DateTime.now().toString().split(' ')[0];
 
     return AlertDialog(
       backgroundColor: Colors.blue.shade100,
@@ -244,6 +245,7 @@ class _MyDialogState extends State<MyDialog> {
                     onPressed: () {
                       DBProvider2.db.createTransacao(transacao);
                       DBProvider2.db.saveTransacao(transacao, widget.p);
+                      //todo:bug categoria e valor no android
                       DBProvider2.db.printTransacoesList();
                       //Navigator.pop(context);
                     },

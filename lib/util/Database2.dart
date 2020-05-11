@@ -111,6 +111,16 @@ class DBProvider2 {
         .child("${t.id}")
         .child("Valor")
         .set(t.value);
+    _database
+        .reference()
+        .child('${p.estado}')
+        .child('${p.cidade}')
+        .child('${p.universidade}')
+        .child('${p.plataforma}')
+        .child(p.hash)
+        .child("${t.id}")
+        .child("Categoria")
+        .set(t.category);
   }
 
   Future<String> getProfileHash() async {
