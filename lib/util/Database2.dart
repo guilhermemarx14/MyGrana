@@ -24,8 +24,6 @@ REALTIME DATABASE: por ser um banco de dados NOSQL, sua organizacao e' bem difer
                    dessa forma, os estados ja estao preparados pro processamento, assim como as cidades, assim como as universidades, todas separadas pra facilitar o processamento dos dados
  */
 
-
-
 class DBProvider2 {
   //SINGLETON DO BANCO DE DADOS
   DBProvider2._();
@@ -78,8 +76,14 @@ class DBProvider2 {
     SharedPreferences prefs = await SharedPreferences.getInstance();
     int id = prefs.getInt('id');
     id = id ?? 1;
-    prefs.setInt('id', id + 1);
     return id;
+  }
+
+  updateTransacaoId() async {
+    SharedPreferences prefs = await SharedPreferences.getInstance();
+    int id = prefs.getInt('id');
+    id = id ?? 1;
+    prefs.setInt('id', id + 1);
   }
 
   createTransacao(Transacao t) async {

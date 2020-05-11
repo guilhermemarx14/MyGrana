@@ -6,6 +6,7 @@ import 'package:flutter_app/util/Database2.dart';
 import 'package:flutter_app/util/constants.dart';
 import 'package:flutter_calendar_carousel/classes/event.dart';
 import 'package:flutter_masked_text/flutter_masked_text.dart';
+import 'package:toast/toast.dart';
 
 import 'my_calendar.dart';
 
@@ -50,6 +51,7 @@ class _MyDialogState extends State<MyDialog> {
     DBProvider2.db.getTransacaoId().then((id) => transacao.id = id);
     transacao.date = DateTime.now().toString().split(' ')[0];
     transacao.paid = checkedValue;
+    transacao.descricao = '';
   }
   @override
   Widget build(BuildContext context) {
@@ -242,10 +244,16 @@ class _MyDialogState extends State<MyDialog> {
                       style: TextStyle(color: Colors.blue),
                     ),
                     onPressed: () {
-                      //todo:check dados informados
-                      DBProvider2.db.createTransacao(transacao);
-                      DBProvider2.db.saveTransacao(transacao, widget.p);
-                      //Navigator.pop(context);
+                      transacao.value = transacao.value ?? 0;
+                      if (transacao.value != 0) {
+                        DBProvider2.db.updateTransacaoId();
+                        DBProvider2.db.createTransacao(transacao);
+                        DBProvider2.db.saveTransacao(transacao, widget.p);
+                        DBProvider2.db.printTransacoesList();
+                        Navigator.pop(context);
+                      } else
+                        Toast.show('Você precisa digitar um valor!', context,
+                            duration: Toast.LENGTH_LONG, gravity: Toast.BOTTOM);
                     },
                   )
                 ],

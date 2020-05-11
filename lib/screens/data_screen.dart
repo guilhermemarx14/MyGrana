@@ -20,7 +20,6 @@ Profile profile;
 
 class DataScreen extends StatelessWidget {
   //todo: símbolo de carregando
-  //todo: bug nome sumindo
   DataScreen() {
     profile = Profile();
     profile.plataforma = Platform.isIOS ? 'ios' : 'android';
