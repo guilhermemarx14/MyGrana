@@ -48,35 +48,6 @@ class DBProvider2 {
         ",'${p.estado}','${p.cidade}','${p.universidade}','${p.hash}','${p.plataforma}');");
   }
 
-  saveProfile(Profile p) {
-    final FirebaseDatabase _database = FirebaseDatabase.instance;
-
-    _database
-        .reference()
-        .child(p.hash)
-        .child("Profile")
-        .child("Estado")
-        .set(p.estado);
-    _database
-        .reference()
-        .child(p.hash)
-        .child("Profile")
-        .child("Cidade")
-        .set(p.cidade);
-    _database
-        .reference()
-        .child(p.hash)
-        .child("Profile")
-        .child("Universidade")
-        .set(p.universidade);
-    _database
-        .reference()
-        .child(p.hash)
-        .child("Profile")
-        .child("Plataforma")
-        .set(p.plataforma);
-  }
-
   getTransacaoId() async {
     SharedPreferences prefs = await SharedPreferences.getInstance();
     int id = prefs.getInt('id');
@@ -97,41 +68,46 @@ class DBProvider2 {
         ",'${t.date}','${t.descricao}','${t.paid ? 1 : 0}','${t.value}');");
   }
 
-  saveTransacao(Transacao t, String hash) {
+  saveTransacao(Transacao t, Profile p) {
     final FirebaseDatabase _database = FirebaseDatabase.instance;
 
     _database
         .reference()
-        .child(hash)
-        .child("Transaction")
-        .child("${t.id}")
-        .child("Categoria")
-        .set(t.category);
-    _database
-        .reference()
-        .child(hash)
-        .child("Transaction")
+        .child('${p.estado}')
+        .child('${p.cidade}')
+        .child('${p.universidade}')
+        .child('${p.plataforma}')
+        .child(p.hash)
         .child("${t.id}")
         .child("Data")
         .set(t.date);
     _database
         .reference()
-        .child(hash)
-        .child("Transaction")
+        .child('${p.estado}')
+        .child('${p.cidade}')
+        .child('${p.universidade}')
+        .child('${p.plataforma}')
+        .child(p.hash)
         .child("${t.id}")
         .child("Descricao")
         .set(t.descricao);
     _database
         .reference()
-        .child(hash)
-        .child("Transaction")
+        .child('${p.estado}')
+        .child('${p.cidade}')
+        .child('${p.universidade}')
+        .child('${p.plataforma}')
+        .child(p.hash)
         .child("${t.id}")
         .child("Pago")
         .set(t.paid ? 1 : 0);
     _database
         .reference()
-        .child(hash)
-        .child("Transaction")
+        .child('${p.estado}')
+        .child('${p.cidade}')
+        .child('${p.universidade}')
+        .child('${p.plataforma}')
+        .child(p.hash)
         .child("${t.id}")
         .child("Valor")
         .set(t.value);

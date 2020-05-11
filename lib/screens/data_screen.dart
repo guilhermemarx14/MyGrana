@@ -394,9 +394,7 @@ class _UniversityScreen extends State<UniversityScreen> {
                         duration: Toast.LENGTH_LONG, gravity: Toast.BOTTOM);
                   else {
                     profile.hash = generateHash(profile);
-                    DBProvider2.db
-                        .createProfile(profile)
-                        .then(DBProvider2.db.saveProfile(profile));
+                    DBProvider2.db.createProfile(profile);
                     SharedPreferences prefs =
                         await SharedPreferences.getInstance();
                     prefs.setBool('first_time', false); //cadastro concluído

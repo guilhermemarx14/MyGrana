@@ -243,7 +243,7 @@ class _MyDialogState extends State<MyDialog> {
                     ),
                     onPressed: () {
                       DBProvider2.db.createTransacao(transacao);
-                      DBProvider2.db.saveTransacao(transacao, widget.p.hash);
+                      DBProvider2.db.saveTransacao(transacao, widget.p);
                       DBProvider2.db.printTransacoesList();
                       //Navigator.pop(context);
                     },
