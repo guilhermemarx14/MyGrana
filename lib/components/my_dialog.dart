@@ -42,16 +42,16 @@ class _MyDialogState extends State<MyDialog> {
   var selectedDate;
   var valueCategoria;
   var descricao;
-  Transacao transacao = Transacao();
+  Transacao transacao;
   String userHash;
-  bool firstTime = true;
+
+  _MyDialogState() {
+    transacao = Transacao();
+    DBProvider2.db.getProfileHash().then((value) => userHash = value);
+    DBProvider2.db.getTransacaoId().then((id) => transacao.id = id);
+  }
   @override
   Widget build(BuildContext context) {
-    if (firstTime) {
-      DBProvider2.db.getProfileHash().then((value) => userHash = value);
-      DBProvider2.db.getTransacaoId().then((id) => transacao.id = id);
-      firstTime = false;
-    }
     valueCategoria = valueCategoria == null ? widget.category : valueCategoria;
     transacao.category = valueCategoria;
     transacao.date = DateTime.now().toString().split(' ')[0];

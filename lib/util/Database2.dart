@@ -78,7 +78,6 @@ class DBProvider2 {
   }
 
   getTransacaoId() async {
-    //todo:utilizar shared preferences pra guardar os ids
     SharedPreferences prefs = await SharedPreferences.getInstance();
     int id = prefs.getInt('id');
     id = id ?? 1;
