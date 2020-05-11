@@ -20,6 +20,7 @@ Profile profile;
 
 class DataScreen extends StatelessWidget {
   //todo: símbolo de carregando
+  //todo: bug nome sumindo
   DataScreen() {
     profile = Profile();
     profile.plataforma = Platform.isIOS ? 'ios' : 'android';
@@ -401,7 +402,8 @@ class _UniversityScreen extends State<UniversityScreen> {
                     prefs.setBool('first_time', false); //cadastro concluído
                     Navigator.pushAndRemoveUntil(
                         context,
-                        MaterialPageRoute(builder: (context) => HomeScreen()),
+                        MaterialPageRoute(
+                            builder: (context) => HomeScreen(p: profile)),
                         (r) => false);
                   }
                 },
@@ -421,7 +423,7 @@ class _UniversityScreen extends State<UniversityScreen> {
 
     //GERA A HASH DO USUÁRIO
     var key = utf8.encode('$number');
-    var bytes = utf8.encode(p.nome);
+    var bytes = utf8.encode(p.nome.toString());
     var hmacSha256 = new Hmac(sha256, key); // HMAC-SHA256
     return hmacSha256.convert(bytes).toString();
   }

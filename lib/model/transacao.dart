@@ -9,6 +9,7 @@ String TransacaoToJson(Transacao data) {
   final dyn = data.toMap();
   return json.encode(dyn);
 }
+
 class Transacao {
   int category;
   String date;
@@ -26,21 +27,25 @@ class Transacao {
       this.value});
 
   factory Transacao.fromMap(Map<String, dynamic> json) => Transacao(
-    category: json["category"],
-    date: json["date"],
-    descricao: json["descricao"],
-    id: json["id"],
-    paid: json["paid"]==0?false:true,
-    value: json["value"],
-  );
+        category: json["category"],
+        date: json["date"],
+        descricao: json["descricao"],
+        id: json["id"],
+        paid: json["paid"] == 0 ? false : true,
+        value: json["value"],
+      );
 
   Map<String, dynamic> toMap() => {
-    "category": category,
-    "date": date,
-    "descricao": descricao,
-    "id": id,
-    "paid": paid?1:0,
-    "value": value
-  };
+        "category": category,
+        "date": date,
+        "descricao": descricao,
+        "id": id,
+        "paid": paid ? 1 : 0,
+        "value": value
+      };
 
+  @override
+  String toString() {
+    return "Id: $id, Categoria: $category, Data: $date, Descricao: $descricao, Paid: $paid, Value: $value";
+  }
 }

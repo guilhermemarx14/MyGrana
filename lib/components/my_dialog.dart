@@ -1,5 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:flutter_app/model/profile.dart';
+import 'package:flutter_app/model/transacao.dart';
+import 'package:flutter_app/util/Database2.dart';
 import 'package:flutter_app/util/constants.dart';
 import 'package:flutter_calendar_carousel/classes/event.dart';
 import 'package:flutter_masked_text/flutter_masked_text.dart';
@@ -8,15 +11,17 @@ import 'my_calendar.dart';
 
 class MyDialog extends StatefulWidget {
   MyDialog(
-      {@required this.context,
+      {@required this.p,
+      @required this.context,
       @required this.title,
       @required this.category,
       @required this.value});
 
   final String title;
   final String value;
-  final String category;
+  final int category;
   final BuildContext context;
+  final Profile p;
 
   @override
   _MyDialogState createState() => _MyDialogState();
@@ -37,9 +42,20 @@ class _MyDialogState extends State<MyDialog> {
   var selectedDate;
   var valueCategoria;
   var descricao;
+  Transacao transacao = Transacao();
+  String userHash;
+  bool firstTime = true;
   @override
   Widget build(BuildContext context) {
+    if (firstTime) {
+      DBProvider2.db.getProfileHash().then((value) => userHash = value);
+      DBProvider2.db.getTransacaoId().then((id) => transacao.id = id);
+      firstTime = false;
+    }
     valueCategoria = valueCategoria == null ? widget.category : valueCategoria;
+    transacao.category = valueCategoria;
+    transacao.date = DateTime.now().toString().split(' ')[0];
+
     return AlertDialog(
       backgroundColor: Colors.blue.shade100,
       title: Center(
@@ -73,7 +89,7 @@ class _MyDialogState extends State<MyDialog> {
                     ),
                   ),
                   DropdownButton<String>(
-                    value: valueCategoria,
+                    value: kListaCategorias[valueCategoria],
                     iconEnabledColor: kBlack,
                     underline: Container(
                       height: 2,
@@ -92,6 +108,8 @@ class _MyDialogState extends State<MyDialog> {
                     onChanged: (String newSelected) {
                       setState(() {
                         valueCategoria = newSelected;
+                        transacao.category =
+                            kListaCategorias.indexOf(newSelected);
                       });
                     },
                   ),
@@ -136,6 +154,7 @@ class _MyDialogState extends State<MyDialog> {
                   onChanged: (value) {
                     setState(() {
                       descricao = value;
+                      transacao.descricao = value;
                     });
                   },
                   decoration: InputDecoration(border: InputBorder.none),
@@ -180,6 +199,7 @@ class _MyDialogState extends State<MyDialog> {
                     setState(() {
                       valorController.updateValue(valorController.numberValue);
                       valorInt = (valorController.numberValue * 100).toInt();
+                      transacao.value = valorInt;
                     });
                   },
                 ),
@@ -200,6 +220,7 @@ class _MyDialogState extends State<MyDialog> {
                     onChanged: (bool value) {
                       setState(() {
                         checkedValue = value;
+                        transacao.paid = value;
                       });
                     },
                   )
@@ -221,7 +242,10 @@ class _MyDialogState extends State<MyDialog> {
                       style: TextStyle(color: Colors.blue),
                     ),
                     onPressed: () {
-                      Navigator.pop(context);
+                      DBProvider2.db.createTransacao(transacao);
+                      DBProvider2.db.saveTransacao(transacao, widget.p.hash);
+                      DBProvider2.db.printTransacoesList();
+                      //Navigator.pop(context);
                     },
                   )
                 ],
@@ -241,7 +265,7 @@ class _MyDialogState extends State<MyDialog> {
   void onDayPressed(DateTime date, List<Event> events) {
     this.setState(() {
       selectedDate = date;
-      print(selectedDate.toString());
+      transacao.date = date.toString().split(" ")[0];
     });
   }
 /*  String formatValor(String value) {

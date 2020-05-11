@@ -4,6 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_app/screens/data_screen.dart';
 import 'package:flutter_app/screens/home_screen.dart';
 import 'package:flutter_app/screens/welcome_screen.dart';
+import 'package:flutter_app/util/Database2.dart';
 import 'package:flutter_app/util/constants.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
@@ -45,7 +46,7 @@ class _SplashScreenState extends State<SplashScreen> {
       return new Timer(_duration, navigationPageHome);
     } else {
       // First time
-      prefs.setBool('first_time', true);
+
       return new Timer(_duration, navigationPageWel);
     }
   }
@@ -57,8 +58,12 @@ class _SplashScreenState extends State<SplashScreen> {
   }
 
   void navigationPageHome() {
-    Navigator.pushAndRemoveUntil(context,
-        MaterialPageRoute(builder: (context) => HomeScreen()), (r) => false);
+    DBProvider2.db.getProfilesList().then((list) {
+      Navigator.pushAndRemoveUntil(
+          context,
+          MaterialPageRoute(builder: (context) => HomeScreen(p: list[0])),
+          (r) => false);
+    });
   }
 
   void navigationPageWel() {

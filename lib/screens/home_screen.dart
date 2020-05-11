@@ -1,22 +1,34 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_app/components/home_card.dart';
 import 'package:flutter_app/components/my_dialog.dart';
+import 'package:flutter_app/model/profile.dart';
 import 'package:flutter_app/screens/orcamentoScreen.dart';
 import 'package:flutter_app/util/Database1.dart';
+import 'package:flutter_app/util/Database2.dart';
 import 'package:flutter_app/util/constants.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
 import 'statements_screen.dart';
 
 class HomeScreen extends StatefulWidget {
+  HomeScreen({this.p});
+  Profile p;
   @override
   _HomeScreenState createState() => _HomeScreenState();
 }
 
 class _HomeScreenState extends State<HomeScreen> {
+  changeSharedPreferences() async {
+    SharedPreferences prefs = await SharedPreferences.getInstance();
+    prefs.setBool('first_time', false);
+  }
+
   @override
   Widget build(BuildContext context) {
+    DBProvider2.db.printProfilesList();
     DBProvider.db.drop();
+    changeSharedPreferences();
     return Scaffold(
         backgroundColor: kWhite,
         drawer: Drawer(
@@ -123,8 +135,9 @@ class _HomeScreenState extends State<HomeScreen> {
               builder: (BuildContext context) {
                 // return object of type Dialog
                 return MyDialog(
+                  p: widget.p,
                   context: context,
-                  category: 'Salário',
+                  category: kSalario,
                   value: '',
                   title: 'Nova Transação',
                 );

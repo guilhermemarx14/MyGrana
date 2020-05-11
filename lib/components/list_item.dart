@@ -1,12 +1,12 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_app/util/constants.dart';
 import 'package:flutter_app/components/my_dialog.dart';
+import 'package:flutter_app/util/constants.dart';
 
 class ListItem extends StatelessWidget {
   ListItem(
       {@required this.category, @required this.value, @required this.title});
 
-  final String category;
+  final int category;
   final String value;
   final String title;
   @override
@@ -35,7 +35,7 @@ class ListItem extends StatelessWidget {
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: <Widget>[
                 Text(
-                  category,
+                  kListaCategorias[category],
                   style: kStatementsStyle,
                 ),
                 Text(

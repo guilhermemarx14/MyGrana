@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_app/util/constants.dart';
 import 'package:flutter_app/components/continue_button.dart';
 import 'package:flutter_app/components/list_item.dart';
+import 'package:flutter_app/util/constants.dart';
 
 class StatementsScreen extends StatelessWidget {
   StatementsScreen({@required this.type});
@@ -172,7 +172,7 @@ class StatementsScreen extends StatelessWidget {
           itemCount: category.length,
           itemBuilder: (BuildContext context, int index) {
             return ListItem(
-              category: category[index],
+              category: kListaCategorias.indexOf(category[index]),
               value: values[index],
               title: 'Editar Transação',
             );
