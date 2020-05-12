@@ -1,4 +1,7 @@
+import 'dart:ui';
+
 import 'package:flutter/material.dart';
+import 'package:flutter_app/components/my_card.dart';
 import 'package:flutter_app/components/my_dialog.dart';
 import 'package:flutter_app/model/profile.dart';
 import 'package:flutter_app/util/Database1.dart';
@@ -23,13 +26,14 @@ class _HomeScreenState extends State<HomeScreen> {
   Widget build(BuildContext context) {
     DBProvider.db.drop();
     changeSharedPreferences();
-
+    double screenSize = MediaQuery.of(context).size.width;
     return Scaffold(
       backgroundColor: Colors.blue.shade100,
       floatingActionButton: FloatingActionButtonHome(widget: widget),
       body: Column(
         children: <Widget>[
           AppBarHome(),
+          TotalELancamentos(screenSize: screenSize),
         ],
       ),
     );
@@ -243,6 +247,76 @@ class _HomeScreenState extends State<HomeScreen> {
             ],
           ),
         ));*/
+  }
+}
+
+class TotalELancamentos extends StatelessWidget {
+  const TotalELancamentos({
+    Key key,
+    @required this.screenSize,
+  }) : super(key: key);
+
+  final double screenSize;
+
+  @override
+  Widget build(BuildContext context) {
+    return Row(
+      mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+      children: <Widget>[
+        MyCard(
+          width: screenSize / 2.5,
+          height: 60.0,
+          color: Colors.blue.shade200,
+          cardChild: Column(
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: <Widget>[
+              Text(
+                'R\$ 200',
+                style: TextStyle(
+                  fontSize: 20.0,
+                  color: Colors.green,
+                  fontWeight: FontWeight.bold,
+                ),
+              ),
+              Text(
+                'Total acumulado',
+                style: TextStyle(
+                  fontSize: 10.0,
+                  color: kBlack,
+                  fontWeight: FontWeight.bold,
+                ),
+              ),
+            ],
+          ),
+        ),
+        MyCard(
+          width: screenSize / 2.5,
+          height: 60.0,
+          color: Colors.blue.shade200,
+          cardChild: Column(
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: <Widget>[
+              Text(
+                '- R\$ 200',
+                style: TextStyle(
+                  fontSize: 20.0,
+                  color: Colors.red,
+                  fontWeight: FontWeight.bold,
+                ),
+              ),
+              Text(
+                'Lançamentos futuros',
+                style: TextStyle(
+                  fontSize: 10.0,
+                  color: kBlack,
+                  fontWeight: FontWeight.bold,
+                ),
+              ),
+            ],
+          ),
+        ),
+      ],
+    );
   }
 }
 
