@@ -1,4 +1,3 @@
-import 'dart:async';
 import 'dart:ui';
 
 import 'package:flutter/material.dart';
@@ -26,13 +25,22 @@ class _HomeScreenState extends State<HomeScreen> {
     prefs.setBool('first_time', false);
   }
 
+  initState() {
+    super.initState();
+  }
+
+  double screenSize = 0;
   @override
   Widget build(BuildContext context) {
-    DBProvider2.db.totalAcumulado().then((value) => total = value);
-    Future.delayed(Duration(milliseconds: 1000));
+    DBProvider2.db.totalAcumulado().then((value) {
+      if (value != total)
+        setState(() {
+          total = value;
+        });
+    });
     changeSharedPreferences();
     DBProvider.db.drop();
-    double screenSize = MediaQuery.of(context).size.width;
+    screenSize = MediaQuery.of(context).size.width;
     return Scaffold(
       backgroundColor: Colors.blue.shade100,
       floatingActionButton: FloatingActionButtonHome(widget: widget),
