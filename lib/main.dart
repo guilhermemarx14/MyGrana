@@ -42,7 +42,6 @@ class _SplashScreenState extends State<SplashScreen> {
     var _duration = new Duration(seconds: 3);
 
     if (firstTime != null && !firstTime) {
-      // Not first time
       return new Timer(_duration, navigationPageHome);
     } else {
       // First time
@@ -51,6 +50,7 @@ class _SplashScreenState extends State<SplashScreen> {
     }
   }
 
+  double total;
   @override
   void initState() {
     super.initState();

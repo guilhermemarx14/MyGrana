@@ -1,3 +1,4 @@
+import 'dart:async';
 import 'dart:io';
 
 import 'package:firebase_database/firebase_database.dart';
@@ -153,5 +154,13 @@ class DBProvider2 {
     final db = await database;
     List<Map> res = await db.rawQuery('Select * from `transaction`');
     for (int i = 0; i < res.length; i++) print(Transacao.fromMap(res[i]));
+  }
+
+  totalAcumulado() async {
+    final db = await database;
+    int total = 0;
+    total = Sqflite.firstIntValue(await db
+        .rawQuery("Select SUM(value) from `transaction` where paid = '1'"));
+    return total / 100;
   }
 }

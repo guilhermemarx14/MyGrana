@@ -41,7 +41,7 @@ class _MyDialogState extends State<MyDialog> {
   var checkedValue = false;
   var currentDate;
   var selectedDate;
-  var valueCategoria;
+  int valueCategoria;
   var descricao;
   Transacao transacao;
   String userHash;
@@ -109,9 +109,14 @@ class _MyDialogState extends State<MyDialog> {
                     }).toList(),
                     onChanged: (String newSelected) {
                       setState(() {
-                        valueCategoria = newSelected;
+                        valueCategoria = kListaCategorias.indexOf(newSelected);
                         transacao.category =
                             kListaCategorias.indexOf(newSelected);
+                        if (transacao.category == kSalario ||
+                            transacao.category == kPensao)
+                          transacao.value = transacao.value > 0
+                              ? transacao.value
+                              : -transacao.value;
                       });
                     },
                   ),
@@ -201,7 +206,11 @@ class _MyDialogState extends State<MyDialog> {
                     setState(() {
                       valorController.updateValue(valorController.numberValue);
                       valorInt = (valorController.numberValue * 100).toInt();
-                      transacao.value = valorInt;
+                      if (transacao.category == kSalario ||
+                          transacao.category == kPensao)
+                        transacao.value = valorInt;
+                      else
+                        transacao.value = -valorInt;
                     });
                   },
                 ),

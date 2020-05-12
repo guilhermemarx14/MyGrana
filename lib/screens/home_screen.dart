@@ -1,3 +1,4 @@
+import 'dart:async';
 import 'dart:ui';
 
 import 'package:flutter/material.dart';
@@ -5,9 +6,12 @@ import 'package:flutter_app/components/my_card.dart';
 import 'package:flutter_app/components/my_dialog.dart';
 import 'package:flutter_app/model/profile.dart';
 import 'package:flutter_app/util/Database1.dart';
+import 'package:flutter_app/util/Database2.dart';
 import 'package:flutter_app/util/constants.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:shared_preferences/shared_preferences.dart';
+
+double total = 0;
 
 class HomeScreen extends StatefulWidget {
   HomeScreen({this.p});
@@ -24,17 +28,21 @@ class _HomeScreenState extends State<HomeScreen> {
 
   @override
   Widget build(BuildContext context) {
-    DBProvider.db.drop();
+    DBProvider2.db.totalAcumulado().then((value) => total = value);
+    Future.delayed(Duration(milliseconds: 1000));
     changeSharedPreferences();
+    DBProvider.db.drop();
     double screenSize = MediaQuery.of(context).size.width;
     return Scaffold(
       backgroundColor: Colors.blue.shade100,
       floatingActionButton: FloatingActionButtonHome(widget: widget),
-      body: Column(
-        children: <Widget>[
-          AppBarHome(),
-          TotalELancamentos(screenSize: screenSize),
-        ],
+      body: SingleChildScrollView(
+        child: Column(
+          children: <Widget>[
+            AppBarHome(),
+            TotalELancamentos(screenSize: screenSize),
+          ],
+        ),
       ),
     );
     /*return Scaffold(
@@ -250,31 +258,34 @@ class _HomeScreenState extends State<HomeScreen> {
   }
 }
 
-class TotalELancamentos extends StatelessWidget {
-  const TotalELancamentos({
-    Key key,
-    @required this.screenSize,
-  }) : super(key: key);
+class TotalELancamentos extends StatefulWidget {
+  TotalELancamentos({Key key, this.screenSize}) : super(key: key);
+  double screenSize;
 
-  final double screenSize;
+  @override
+  _TotalELancamentosState createState() => _TotalELancamentosState();
+}
 
+class _TotalELancamentosState extends State<TotalELancamentos> {
   @override
   Widget build(BuildContext context) {
     return Row(
       mainAxisAlignment: MainAxisAlignment.spaceEvenly,
       children: <Widget>[
         MyCard(
-          width: screenSize / 2.5,
+          width: widget.screenSize / 2.5,
           height: 60.0,
           color: Colors.blue.shade200,
           cardChild: Column(
             mainAxisAlignment: MainAxisAlignment.center,
             children: <Widget>[
               Text(
-                'R\$ 200',
+                total >= 0
+                    ? 'R\$ ${total.toStringAsFixed(2)}'
+                    : '- R\$ ${(-total).toStringAsFixed(2)}',
                 style: TextStyle(
                   fontSize: 20.0,
-                  color: Colors.green,
+                  color: total >= 0 ? Colors.green : Colors.red,
                   fontWeight: FontWeight.bold,
                 ),
               ),
@@ -290,14 +301,14 @@ class TotalELancamentos extends StatelessWidget {
           ),
         ),
         MyCard(
-          width: screenSize / 2.5,
+          width: widget.screenSize / 2.5,
           height: 60.0,
           color: Colors.blue.shade200,
           cardChild: Column(
             mainAxisAlignment: MainAxisAlignment.center,
             children: <Widget>[
               Text(
-                '- R\$ 200',
+                '- R\$ 200,00',
                 style: TextStyle(
                   fontSize: 20.0,
                   color: Colors.red,
@@ -338,7 +349,7 @@ class AppBarHome extends StatelessWidget {
   }
 }
 
-class FloatingActionButtonHome extends StatelessWidget {
+class FloatingActionButtonHome extends StatefulWidget {
   const FloatingActionButtonHome({
     Key key,
     @required this.widget,
@@ -346,6 +357,12 @@ class FloatingActionButtonHome extends StatelessWidget {
 
   final HomeScreen widget;
 
+  @override
+  _FloatingActionButtonHomeState createState() =>
+      _FloatingActionButtonHomeState();
+}
+
+class _FloatingActionButtonHomeState extends State<FloatingActionButtonHome> {
   @override
   Widget build(BuildContext context) {
     return FloatingActionButton(
@@ -355,7 +372,7 @@ class FloatingActionButtonHome extends StatelessWidget {
           builder: (BuildContext context) {
             // return object of type Dialog
             return MyDialog(
-              p: widget.p,
+              p: widget.widget.p,
               context: context,
               category: kSalario,
               value: '',
@@ -363,6 +380,7 @@ class FloatingActionButtonHome extends StatelessWidget {
             );
           },
         );
+        ;
       },
       child: Icon(FontAwesomeIcons.plus),
       backgroundColor: Colors.red,
