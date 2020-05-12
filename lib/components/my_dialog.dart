@@ -249,7 +249,6 @@ class _MyDialogState extends State<MyDialog> {
                         DBProvider2.db.updateTransacaoId();
                         DBProvider2.db.createTransacao(transacao);
                         DBProvider2.db.saveTransacao(transacao, widget.p);
-                        DBProvider2.db.printTransacoesList();
                         Navigator.pop(context);
                       } else
                         Toast.show('Você precisa digitar um valor!', context,

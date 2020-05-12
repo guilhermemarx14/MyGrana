@@ -1,14 +1,10 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_app/components/home_card.dart';
 import 'package:flutter_app/components/my_dialog.dart';
 import 'package:flutter_app/model/profile.dart';
-import 'package:flutter_app/screens/orcamentoScreen.dart';
 import 'package:flutter_app/util/Database1.dart';
 import 'package:flutter_app/util/constants.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:shared_preferences/shared_preferences.dart';
-
-import 'statements_screen.dart';
 
 class HomeScreen extends StatefulWidget {
   HomeScreen({this.p});
@@ -27,7 +23,17 @@ class _HomeScreenState extends State<HomeScreen> {
   Widget build(BuildContext context) {
     DBProvider.db.drop();
     changeSharedPreferences();
+
     return Scaffold(
+      backgroundColor: Colors.blue.shade100,
+      floatingActionButton: FloatingActionButtonHome(widget: widget),
+      body: Column(
+        children: <Widget>[
+          AppBarHome(),
+        ],
+      ),
+    );
+    /*return Scaffold(
         backgroundColor: kWhite,
         drawer: Drawer(
           child: ListView(
@@ -236,6 +242,56 @@ class _HomeScreenState extends State<HomeScreen> {
               ),
             ],
           ),
-        ));
+        ));*/
+  }
+}
+
+class AppBarHome extends StatelessWidget {
+  const AppBarHome({
+    Key key,
+  }) : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+    return AppBar(
+      elevation: 20.0,
+      centerTitle: true,
+      title: Text(
+        'MyGrana',
+        style: TextStyle(fontWeight: FontWeight.bold, fontSize: 30.0),
+      ),
+    );
+  }
+}
+
+class FloatingActionButtonHome extends StatelessWidget {
+  const FloatingActionButtonHome({
+    Key key,
+    @required this.widget,
+  }) : super(key: key);
+
+  final HomeScreen widget;
+
+  @override
+  Widget build(BuildContext context) {
+    return FloatingActionButton(
+      onPressed: () {
+        showDialog(
+          context: context,
+          builder: (BuildContext context) {
+            // return object of type Dialog
+            return MyDialog(
+              p: widget.p,
+              context: context,
+              category: kSalario,
+              value: '',
+              title: 'Nova Transação',
+            );
+          },
+        );
+      },
+      child: Icon(FontAwesomeIcons.plus),
+      backgroundColor: Colors.red,
+    );
   }
 }
