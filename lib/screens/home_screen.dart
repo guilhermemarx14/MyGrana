@@ -11,6 +11,7 @@ import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 double total = 0;
+double totalNaoPago = 0;
 
 class HomeScreen extends StatefulWidget {
   HomeScreen({this.p});
@@ -36,6 +37,12 @@ class _HomeScreenState extends State<HomeScreen> {
       if (value != total)
         setState(() {
           total = value;
+        });
+    });
+    DBProvider2.db.totalNaoPago().then((value) {
+      if (value != totalNaoPago)
+        setState(() {
+          totalNaoPago = value;
         });
     });
     changeSharedPreferences();
@@ -298,7 +305,7 @@ class _TotalELancamentosState extends State<TotalELancamentos> {
                 ),
               ),
               Text(
-                'Total acumulado',
+                'Meu dinheiro',
                 style: TextStyle(
                   fontSize: 10.0,
                   color: kBlack,
@@ -316,15 +323,17 @@ class _TotalELancamentosState extends State<TotalELancamentos> {
             mainAxisAlignment: MainAxisAlignment.center,
             children: <Widget>[
               Text(
-                '- R\$ 200,00',
+                totalNaoPago >= 0
+                    ? 'R\$ ${totalNaoPago.toStringAsFixed(2).replaceFirst('\,', '.')}'
+                    : '- R\$ ${(-totalNaoPago).toStringAsFixed(2).replaceFirst('\,', '.')}',
                 style: TextStyle(
                   fontSize: 20.0,
-                  color: Colors.red,
+                  color: totalNaoPago >= 0 ? Colors.green : Colors.red,
                   fontWeight: FontWeight.bold,
                 ),
               ),
               Text(
-                'Lançamentos futuros',
+                'Lançamentos não-pagos',
                 style: TextStyle(
                   fontSize: 10.0,
                   color: kBlack,
