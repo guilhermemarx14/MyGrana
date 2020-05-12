@@ -60,14 +60,14 @@ class _MyDialogState extends State<MyDialog> {
     transacao.category = valueCategoria;
 
     return AlertDialog(
-      backgroundColor: Colors.blue.shade100,
+      backgroundColor: Colors.blue.shade200,
       title: Center(
         child: Text(
           widget.title,
           style: TextStyle(
             fontWeight: FontWeight.bold,
             fontSize: 25,
-            color: Colors.blue,
+            color: Colors.blue.shade700,
           ),
         ),
       ),
@@ -85,21 +85,21 @@ class _MyDialogState extends State<MyDialog> {
                     child: Text(
                       'Categoria:',
                       style: TextStyle(
-                        color: kBlack,
+                        color: Colors.blue.shade700,
                         fontSize: 20,
-                        fontWeight: FontWeight.bold,
                       ),
                     ),
                   ),
                   DropdownButton<String>(
                     value: kListaCategorias[valueCategoria],
-                    iconEnabledColor: kBlack,
+                    iconEnabledColor: Colors.blue.shade500,
                     underline: Container(
                       height: 2,
                       width: double.infinity,
-                      color: kBlack,
+                      color: Colors.blue.shade500,
                     ),
-                    style: kFormStyle.copyWith(fontSize: 18, color: kBlack),
+                    style: kFormStyle.copyWith(
+                        fontSize: 18, color: Colors.blue.shade500),
                     items: kListaCategorias.map((String value) {
                       return DropdownMenuItem<String>(
                         value: value,
@@ -123,31 +123,32 @@ class _MyDialogState extends State<MyDialog> {
                   ),
                 ],
               ),
+              SizedBox(
+                height: 20.0,
+              ),
               Text(
                 'Data:',
                 style: TextStyle(
-                  color: kBlack,
+                  color: Colors.blue.shade700,
                   fontSize: 20,
-                  fontWeight: FontWeight.bold,
                 ),
               ),
               MyCalendar(selectDate: onDayPressed),
               SizedBox(
-                height: 5,
+                height: 20.0,
               ),
               Text(
                 'Descrição:',
                 style: TextStyle(
-                  color: kBlack,
+                  color: Colors.blue.shade700,
                   fontSize: 20,
-                  fontWeight: FontWeight.bold,
                 ),
               ),
               Container(
                 margin: EdgeInsets.fromLTRB(25, 0, 25, 0),
                 decoration: BoxDecoration(
                   border: Border(
-                    bottom: BorderSide(width: 3.0, color: kBlack),
+                    bottom: BorderSide(width: 3.0, color: Colors.blue.shade500),
                   ),
                 ),
                 child: TextField(
@@ -156,7 +157,7 @@ class _MyDialogState extends State<MyDialog> {
                   inputFormatters: [
                     LengthLimitingTextInputFormatter(20),
                   ],
-                  cursorColor: Colors.black,
+                  cursorColor: Colors.blue.shade500,
                   textAlign: TextAlign.center,
                   maxLines: 1,
                   onChanged: (value) {
@@ -167,14 +168,13 @@ class _MyDialogState extends State<MyDialog> {
                   },
                   decoration: InputDecoration(border: InputBorder.none),
                   style: TextStyle(
-                    color: kBlack,
+                    color: Colors.blue.shade500,
                     fontSize: 20,
-                    fontWeight: FontWeight.bold,
                   ),
                 ),
               ),
               SizedBox(
-                height: 15,
+                height: 20.0,
               ),
               Text(
                 'Valor:',

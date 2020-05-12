@@ -358,6 +358,7 @@ class AppBarHome extends StatelessWidget {
     return AppBar(
       elevation: 20.0,
       centerTitle: true,
+      backgroundColor: Colors.blue.shade500,
       title: Text(
         'MyGrana',
         style: TextStyle(fontWeight: FontWeight.bold, fontSize: 30.0),
@@ -400,7 +401,7 @@ class _FloatingActionButtonHomeState extends State<FloatingActionButtonHome> {
         ;
       },
       child: Icon(FontAwesomeIcons.plus),
-      backgroundColor: Colors.red,
+      backgroundColor: Colors.blue.shade700,
     );
   }
 }

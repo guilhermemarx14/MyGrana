@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_app/util/constants.dart';
-import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 
 class BackButton extends StatelessWidget {
   BackButton(
@@ -33,11 +32,6 @@ class BackButton extends StatelessWidget {
                 child: Row(
                   mainAxisAlignment: MainAxisAlignment.start,
                   children: <Widget>[
-                    Icon(
-                      FontAwesomeIcons.arrowLeft,
-                      size: 20.0,
-                    ),
-                    SizedBox(width: 10.0),
                     Text(
                       text,
                       style: TextStyle(

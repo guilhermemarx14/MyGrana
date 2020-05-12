@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_app/util/constants.dart';
-import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 
 class ContinueButton extends StatelessWidget {
   ContinueButton(
@@ -40,11 +39,6 @@ class ContinueButton extends StatelessWidget {
                         fontSize: 20.0,
                         fontWeight: FontWeight.bold,
                       ),
-                    ),
-                    SizedBox(width: 1),
-                    Icon(
-                      FontAwesomeIcons.arrowRight,
-                      size: 120.0,
                     ),
                   ],
                 )),
