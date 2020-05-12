@@ -159,16 +159,18 @@ class DBProvider2 {
   totalAcumulado() async {
     final db = await database;
     int total = 0;
-    total = Sqflite.firstIntValue(await db
-        .rawQuery("Select SUM(value) from `transaction` where paid = '1'"));
+    total = Sqflite.firstIntValue(await db.rawQuery(
+            "Select SUM(value) from `transaction` where paid = '1'")) ??
+        0;
     return total / 100;
   }
 
   totalNaoPago() async {
     final db = await database;
     int total = 0;
-    total = Sqflite.firstIntValue(await db
-        .rawQuery("Select SUM(value) from `transaction` where paid = '0'"));
+    total = Sqflite.firstIntValue(await db.rawQuery(
+            "Select SUM(value) from `transaction` where paid = '0'")) ??
+        0;
     return total / 100;
   }
 }

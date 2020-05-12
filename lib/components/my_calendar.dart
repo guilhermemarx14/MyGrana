@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_app/util/constants.dart';
 import 'package:flutter_calendar_carousel/classes/event.dart';
 import 'package:flutter_calendar_carousel/flutter_calendar_carousel.dart'
     show CalendarCarousel;
@@ -44,9 +45,9 @@ class _MyCalendarState extends State<MyCalendar> {
       },
       weekendTextStyle: TextStyle(
         fontSize: 10.0,
-        color: Colors.red,
+        color: Colors.blue.shade700,
       ),
-      thisMonthDayBorderColor: Colors.grey,
+      thisMonthDayBorderColor: kBlack,
 //          weekDays: null, /// for pass null when you do not want to render weekDays
       weekFormat: true,
       height: 100.0,
@@ -63,15 +64,15 @@ class _MyCalendarState extends State<MyCalendar> {
       ),
       todayTextStyle: TextStyle(
         fontSize: 10.0,
-        color: Colors.blue,
+        color: Colors.blue.shade100,
       ),
       markedDateIconBuilder: (event) {
         return event.icon;
       },
       minSelectedDate: _currentDate.subtract(Duration(days: 360)),
       maxSelectedDate: _currentDate.add(Duration(days: 360)),
-      todayButtonColor: Colors.transparent,
-      todayBorderColor: Colors.green,
+      todayButtonColor: Colors.blue.shade700,
+      todayBorderColor: Colors.blue.shade700,
       markedDateMoreShowTotal:
           true, // null for not showing hidden events indicator
 //          markedDateIconMargin: 9,
