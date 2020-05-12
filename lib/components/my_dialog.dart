@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_app/model/profile.dart';
 import 'package:flutter_app/model/transacao.dart';
+import 'package:flutter_app/screens/home_screen.dart';
 import 'package:flutter_app/util/Database2.dart';
 import 'package:flutter_app/util/constants.dart';
 import 'package:flutter_calendar_carousel/classes/event.dart';
@@ -258,7 +259,11 @@ class _MyDialogState extends State<MyDialog> {
                         DBProvider2.db.updateTransacaoId();
                         DBProvider2.db.createTransacao(transacao);
                         DBProvider2.db.saveTransacao(transacao, widget.p);
-                        Navigator.pop(context);
+                        Navigator.pushAndRemoveUntil(
+                            context,
+                            MaterialPageRoute(
+                                builder: (context) => HomeScreen(p: widget.p)),
+                            (r) => false);
                       } else
                         Toast.show('Você precisa digitar um valor!', context,
                             duration: Toast.LENGTH_LONG, gravity: Toast.BOTTOM);
