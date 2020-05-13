@@ -60,10 +60,10 @@ class _SplashScreenState extends State<SplashScreen> {
   }
 
   void navigationPageHome() {
-    DBProvider2.db.getProfilesList().then((list) {
+    DBProvider2.db.getProfile().then((user) {
       Navigator.pushAndRemoveUntil(
           context,
-          MaterialPageRoute(builder: (context) => HomeScreen(p: list[0])),
+          MaterialPageRoute(builder: (context) => HomeScreen(p: user)),
           (r) => false);
     });
   }

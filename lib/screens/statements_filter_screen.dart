@@ -11,9 +11,9 @@ class StatementsFilterScreen extends StatefulWidget {
 }
 
 class _StatementsFilterScreenState extends State<StatementsFilterScreen> {
-  String selectedDropdownCategoria = ALIMENTACAO;
-  String selectedDropdownMes = 'Janeiro';
-  String selectedDropdownAno = '2020';
+  String selectedDropdownCategoria = TODOS;
+  String selectedDropdownMes = TODOS;
+  String selectedDropdownAno = TODOS;
   @override
   Widget build(BuildContext context) {
     return WillPopScope(

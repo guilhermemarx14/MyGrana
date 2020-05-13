@@ -1,14 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_app/components/my_dialog.dart';
+import 'package:flutter_app/model/transacao.dart';
 import 'package:flutter_app/util/constants.dart';
 
 class ListItem extends StatelessWidget {
-  ListItem(
-      {@required this.category, @required this.value, @required this.title});
+  ListItem({@required this.transacao});
 
-  final int category;
-  final String value;
-  final String title;
+  final Transacao transacao;
   @override
   Widget build(BuildContext context) {
     return GestureDetector(
@@ -17,11 +15,8 @@ class ListItem extends StatelessWidget {
           context: context,
           builder: (BuildContext context) {
             // return object of type Dialog
-            return MyDialog(
-              context: context,
-              category: category,
-              value: value == null ? '' : value,
-              title: title,
+            return MyEditDialog(
+              transacao: transacao,
             );
           },
         );
@@ -35,11 +30,11 @@ class ListItem extends StatelessWidget {
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: <Widget>[
                 Text(
-                  kListaCategorias[category],
+                  kListaCategorias[transacao.category],
                   style: kStatementsStyle,
                 ),
                 Text(
-                  value,
+                  '${transacao.value}',
                   style: kStatementsStyle,
                 )
               ],

@@ -65,12 +65,12 @@ class DBProvider2 {
         ",'${p.estado}','${p.cidade}','${p.universidade}','${p.hash}','${p.plataforma}');");
   }
 
-  Future<List<Profile>> getProfilesList() async {
+  Future<Profile> getProfile() async {
     final db = await database;
-    List<Profile> profiles = [];
+    Profile profile;
     List<Map> res = await db.rawQuery('Select * from profile');
-    for (int i = 0; i < res.length; i++) profiles.add(Profile.fromMap(res[i]));
-    return profiles;
+    profile = Profile.fromMap(res[0]);
+    return profile;
   }
 
   //CONSULTAS DE TRANSACAO
@@ -94,6 +94,13 @@ class DBProvider2 {
     await db.execute(
         "INSERT INTO `transaction` (`category`,`date`,`descricao`,`paid`,`value`) VALUES ('${t.category}'"
         ",'${t.date}','${t.descricao}','${t.paid ? 1 : 0}','${t.value}');");
+  }
+
+  updateTransacao(Transacao t) async {
+    final db = await database;
+    //ATUALIZA A ENTRADA NO BANCO DE DADOS
+    await db.execute(
+        "UPDATE `transaction` SET `category`='${t.category}',`date`='${t.date}',`descricao`='${t.descricao}',`paid`='${t.paid ? 1 : 0}',`value`='${t.value}' WHERE id= '${t.id}';");
   }
 
   saveTransacao(Transacao t, Profile p) {
