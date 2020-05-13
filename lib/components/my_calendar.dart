@@ -5,7 +5,8 @@ import 'package:flutter_calendar_carousel/flutter_calendar_carousel.dart'
     show CalendarCarousel;
 
 class MyCalendar extends StatefulWidget {
-  MyCalendar({Key key, this.title, this.selectDate}) : super(key: key);
+  MyCalendar({Key key, this.title, this.myDate, this.selectDate})
+      : super(key: key);
 
   // This widget is the home page of your application. It is stateful, meaning
   // that it has a State object (defined below) that contains fields that affect
@@ -15,7 +16,7 @@ class MyCalendar extends StatefulWidget {
   // case the title) provided by the parent (in this case the App widget) and
   // used by the build method of the State. Fields in a Widget subclass are
   // always marked "final".
-
+  final DateTime myDate;
   final String title;
   var selectDate;
   @override
@@ -38,6 +39,7 @@ class _MyCalendarState extends State<MyCalendar> {
   @override
   Widget build(BuildContext context) {
     /// Example with custom icon
+    _currentDate = widget.myDate ?? DateTime.now();
     _calendarCarousel = CalendarCarousel<Event>(
       onDayPressed: (DateTime date, List<Event> events) {
         this.setState(() => _currentDate = date);
@@ -97,7 +99,7 @@ class _MyCalendarState extends State<MyCalendar> {
 //      firstDayOfWeek: 4,
       height: 420.0,
       selectedDateTime: _currentDate,
-      targetDateTime: _targetDateTime,
+      targetDateTime: widget.myDate ?? _currentDate,
       customGridViewPhysics: NeverScrollableScrollPhysics(),
       markedDateCustomShapeBorder:
           CircleBorder(side: BorderSide(color: Colors.yellow)),

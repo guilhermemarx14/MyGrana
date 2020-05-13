@@ -35,6 +35,11 @@ class _HomeScreenState extends State<HomeScreen> {
   double screenSize = 0;
   @override
   Widget build(BuildContext context) {
+    DBProvider2.db.getProfile().then((profile) {
+      setState(() {
+        widget.p = profile;
+      });
+    });
     DBProvider2.db.totalAcumulado().then((value) {
       if (value != total)
         setState(() {
@@ -262,7 +267,6 @@ class _FloatingActionButtonHomeState extends State<FloatingActionButtonHome> {
           builder: (BuildContext context) {
             // return object of type Dialog
             return MyDialog(
-              p: widget.p,
               context: context,
               category: kSalario,
               value: '',

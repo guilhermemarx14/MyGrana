@@ -14,8 +14,7 @@ import 'my_calendar.dart';
 
 class MyDialog extends StatefulWidget {
   MyDialog(
-      {@required this.p,
-      @required this.context,
+      {@required this.context,
       @required this.title,
       @required this.category,
       @required this.value});
@@ -24,7 +23,6 @@ class MyDialog extends StatefulWidget {
   final String value;
   final int category;
   final BuildContext context;
-  final Profile p;
 
   @override
   _MyDialogState createState() => _MyDialogState();
@@ -48,10 +46,13 @@ class _MyDialogState extends State<MyDialog> {
   Transacao transacao;
   String userHash;
 
+  Profile p;
   _MyDialogState() {
+    DBProvider2.db.getProfile().then((user) => p = user);
     transacao = Transacao();
     DBProvider2.db.getTransacaoId().then((id) => transacao.id = id);
     transacao.date = DateTime.now().toString().split(' ')[0];
+
     transacao.paid = checkedValue;
     transacao.descricao = '';
   }
@@ -149,7 +150,7 @@ class _MyDialogState extends State<MyDialog> {
                 margin: EdgeInsets.fromLTRB(25, 0, 25, 0),
                 decoration: BoxDecoration(
                   border: Border(
-                    bottom: BorderSide(width: 3.0, color: Colors.blue.shade500),
+                    bottom: BorderSide(width: 2.0, color: Colors.blue.shade500),
                   ),
                 ),
                 child: TextField(
@@ -180,29 +181,27 @@ class _MyDialogState extends State<MyDialog> {
               Text(
                 'Valor:',
                 style: TextStyle(
-                  color: kBlack,
+                  color: Colors.blue.shade700,
                   fontSize: 20,
-                  fontWeight: FontWeight.bold,
                 ),
               ),
               Container(
                 margin: EdgeInsets.fromLTRB(25, 0, 25, 0),
                 decoration: BoxDecoration(
                   border: Border(
-                    bottom: BorderSide(width: 3.0, color: kBlack),
+                    bottom: BorderSide(width: 2.0, color: Colors.blue.shade500),
                   ),
                 ),
                 child: TextField(
                   controller: valorController,
                   cursorWidth: 2.0,
-                  cursorColor: Colors.black,
+                  cursorColor: Colors.blue.shade500,
                   textAlign: TextAlign.center,
                   maxLines: 1,
                   decoration: InputDecoration(border: InputBorder.none),
                   style: TextStyle(
-                    color: kBlack,
+                    color: Colors.blue.shade500,
                     fontSize: 20,
-                    fontWeight: FontWeight.bold,
                   ),
                   onChanged: (value) {
                     setState(() {
@@ -217,15 +216,17 @@ class _MyDialogState extends State<MyDialog> {
                   },
                 ),
               ),
+              SizedBox(
+                height: 20.0,
+              ),
               Row(
                 mainAxisAlignment: MainAxisAlignment.end,
                 children: <Widget>[
                   Text(
                     'Pago:',
                     style: TextStyle(
-                      color: kBlack,
+                      color: Colors.blue.shade700,
                       fontSize: 20,
-                      fontWeight: FontWeight.bold,
                     ),
                   ),
                   Checkbox(
@@ -259,11 +260,11 @@ class _MyDialogState extends State<MyDialog> {
                       if (transacao.value != 0) {
                         DBProvider2.db.updateTransacaoId();
                         DBProvider2.db.createTransacao(transacao);
-                        DBProvider2.db.saveTransacao(transacao, widget.p);
+                        DBProvider2.db.saveTransacao(transacao, p);
                         Navigator.pushAndRemoveUntil(
                             context,
                             MaterialPageRoute(
-                                builder: (context) => HomeScreen(p: widget.p)),
+                                builder: (context) => HomeScreen(p: p)),
                             (r) => false);
                       } else
                         Toast.show('Você precisa digitar um valor!', context,
@@ -328,6 +329,7 @@ class _MyEditDialogState extends State<MyEditDialog> {
     valorInt = widget.transacao.value;
     checkedValue = widget.transacao.paid;
     currentDate = DateTime.now();
+
     selectedDate = DateTime.parse(widget.transacao.date);
     valueCategoria = widget.transacao.category;
     descricao = widget.transacao.descricao;
@@ -407,7 +409,7 @@ class _MyEditDialogState extends State<MyEditDialog> {
                   fontSize: 20,
                 ),
               ),
-              MyCalendar(selectDate: onDayPressed),
+              MyCalendar(myDate: selectedDate, selectDate: onDayPressed),
               SizedBox(
                 height: 20.0,
               ),
@@ -422,7 +424,7 @@ class _MyEditDialogState extends State<MyEditDialog> {
                 margin: EdgeInsets.fromLTRB(25, 0, 25, 0),
                 decoration: BoxDecoration(
                   border: Border(
-                    bottom: BorderSide(width: 3.0, color: Colors.blue.shade500),
+                    bottom: BorderSide(width: 2.0, color: Colors.blue.shade500),
                   ),
                 ),
                 child: TextField(
@@ -453,29 +455,27 @@ class _MyEditDialogState extends State<MyEditDialog> {
               Text(
                 'Valor:',
                 style: TextStyle(
-                  color: kBlack,
+                  color: Colors.blue.shade700,
                   fontSize: 20,
-                  fontWeight: FontWeight.bold,
                 ),
               ),
               Container(
                 margin: EdgeInsets.fromLTRB(25, 0, 25, 0),
                 decoration: BoxDecoration(
                   border: Border(
-                    bottom: BorderSide(width: 3.0, color: kBlack),
+                    bottom: BorderSide(width: 2.0, color: Colors.blue.shade500),
                   ),
                 ),
                 child: TextField(
                   controller: valorController,
                   cursorWidth: 2.0,
-                  cursorColor: Colors.black,
+                  cursorColor: Colors.blue.shade500,
                   textAlign: TextAlign.center,
                   maxLines: 1,
                   decoration: InputDecoration(border: InputBorder.none),
                   style: TextStyle(
-                    color: kBlack,
+                    color: Colors.blue.shade500,
                     fontSize: 20,
-                    fontWeight: FontWeight.bold,
                   ),
                   onChanged: (value) {
                     setState(() {
@@ -496,9 +496,8 @@ class _MyEditDialogState extends State<MyEditDialog> {
                   Text(
                     'Pago:',
                     style: TextStyle(
-                      color: kBlack,
+                      color: Colors.blue.shade700,
                       fontSize: 20,
-                      fontWeight: FontWeight.bold,
                     ),
                   ),
                   Checkbox(

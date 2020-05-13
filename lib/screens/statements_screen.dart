@@ -26,14 +26,12 @@ class _StatementsScreenState extends State<StatementsScreen> {
           finishedConsulta = true;
         });
       });
-    print(transacoes);
     return Scaffold(
       backgroundColor: kBlue,
       body: ListView.separated(
         padding: const EdgeInsets.all(8),
         itemCount: transacoes.length,
         itemBuilder: (BuildContext context, int index) {
-          print('${transacoes[index]}');
           return ListItem(transacao: transacoes[index]);
         },
         separatorBuilder: (BuildContext context, int index) => const Divider(
