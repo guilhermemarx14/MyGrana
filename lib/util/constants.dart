@@ -23,17 +23,18 @@ const String SAUDE = 'Saude';
 const String TRANSPORTE = 'Transporte';
 const String INVESTIMENTO = 'Investimento';
 const String UNIVERSIDADE = 'Universidade';
+const String TODOS = 'Todos';
 
-const int kSalario = 5;
-const int kPensao = 4;
-const int kMoradia = 3;
 const int kAlimentacao = 0;
+const int kInvestimento = 1;
 const int kLazer = 2;
-const int kVestimenta = 9;
+const int kMoradia = 3;
+const int kPensao = 4;
+const int kSalario = 5;
 const int kSaude = 6;
 const int kTransporte = 7;
-const int kInvestimento = 1;
 const int kUniversidade = 8;
+const int kVestimenta = 9;
 const int kTotalCategorias = 10;
 const List<String> kListaCategorias = [
   'Alimentação',
@@ -70,3 +71,5 @@ const List<String> kAnos = [
   '2022',
   '2023',
 ];
+
+

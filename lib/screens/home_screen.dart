@@ -52,7 +52,7 @@ class _HomeScreenState extends State<HomeScreen> {
     screenSize = MediaQuery.of(context).size.width;
     return Scaffold(
       backgroundColor: Colors.blue.shade100,
-      floatingActionButton: FloatingActionButtonHome(widget: widget),
+      floatingActionButton: FloatingActionButtonHome(p: widget.p),
       body: Column(
         children: <Widget>[
           AppBarHome(),
@@ -452,10 +452,10 @@ class AppBarHome extends StatelessWidget {
 class FloatingActionButtonHome extends StatefulWidget {
   const FloatingActionButtonHome({
     Key key,
-    @required this.widget,
+    @required this.p,
   }) : super(key: key);
 
-  final HomeScreen widget;
+  final Profile p;
 
   @override
   _FloatingActionButtonHomeState createState() =>
@@ -472,7 +472,7 @@ class _FloatingActionButtonHomeState extends State<FloatingActionButtonHome> {
           builder: (BuildContext context) {
             // return object of type Dialog
             return MyDialog(
-              p: widget.widget.p,
+              p: widget.p,
               context: context,
               category: kSalario,
               value: '',

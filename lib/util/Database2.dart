@@ -5,6 +5,7 @@ import 'package:firebase_database/firebase_database.dart';
 import 'package:flutter_app/model/profile.dart';
 import 'package:flutter_app/model/transacao.dart';
 import 'package:flutter_app/util/bd2_scripts.dart';
+import 'package:flutter_app/util/constants.dart';
 import 'package:path/path.dart';
 import 'package:path_provider/path_provider.dart';
 import 'package:shared_preferences/shared_preferences.dart';
@@ -172,5 +173,50 @@ class DBProvider2 {
             "Select SUM(value) from `transaction` where paid = '0'")) ??
         0;
     return total / 100;
+  }
+
+  consultaTransacao(String categoria, String mes, String ano) async {
+    final db = await database;
+    var result = [];
+    var res;
+    bool flag = false;
+    String consulta = "Select * from `transaction`";
+    if (categoria == TODOS && mes == TODOS && ano == TODOS) {
+      consulta += ';';
+
+      res = await db.rawQuery(consulta);
+
+      for (int i = 0; i < res.length; i++)
+        result.add(Transacao.fromMap(res[i]));
+      //print(result);
+      return result;
+    }
+    consulta += " WHERE ";
+    int myMes = kMeses.indexOf(mes);
+    String mesConsulta = '$myMes';
+    if (mesConsulta.length == 1) mesConsulta = '0' + mesConsulta;
+
+    if (categoria != TODOS) {
+      consulta += "category = ${kListaCategorias.indexOf(categoria)}";
+      flag = true;
+    }
+
+    if (mes != TODOS) {
+      if (flag) consulta += " AND";
+      consulta += " date LIKE %-$mesConsulta-%";
+      flag = true;
+    }
+
+    if (mes != TODOS) {
+      if (flag) consulta += " AND";
+      consulta += " date LIKE %-$ano%";
+    }
+
+    await db.rawQuery(consulta).then((res) {
+      for (int i = 0; i < res.length; i++)
+        result.add(Transacao.fromMap(res[i]));
+      return result;
+    });
+    return [];
   }
 }

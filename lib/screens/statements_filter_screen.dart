@@ -49,8 +49,8 @@ class _StatementsFilterScreenState extends State<StatementsFilterScreen> {
                             fontSize: 25.0,
                             color: Colors.white,
                           ),
-                          items: (kListaCategorias + ['Todas'])
-                              .map((String value) {
+                          items:
+                              (kListaCategorias + [TODOS]).map((String value) {
                             return DropdownMenuItem<String>(
                               value: value,
                               child: Text(
@@ -77,7 +77,7 @@ class _StatementsFilterScreenState extends State<StatementsFilterScreen> {
                           style: kFormStyle2,
                         ),
                         DropdownButton<String>(
-                          value: 'Janeiro',
+                          value: selectedDropdownMes,
                           iconEnabledColor: kWhite,
                           underline: Container(
                             height: 1,
@@ -88,7 +88,7 @@ class _StatementsFilterScreenState extends State<StatementsFilterScreen> {
                             fontSize: 25.0,
                             color: Colors.white,
                           ),
-                          items: (kMeses.sublist(1, 13) + ['Todos'])
+                          items: (kMeses.sublist(1, 13) + [TODOS])
                               .map((String value) {
                             return DropdownMenuItem<String>(
                               value: value,
@@ -98,7 +98,9 @@ class _StatementsFilterScreenState extends State<StatementsFilterScreen> {
                             );
                           }).toList(),
                           onChanged: (newSelected) {
-                            selectedDropdownMes = newSelected;
+                            setState(() {
+                              selectedDropdownMes = newSelected;
+                            });
                           },
                         ),
                       ],
@@ -114,7 +116,7 @@ class _StatementsFilterScreenState extends State<StatementsFilterScreen> {
                           style: kFormStyle2,
                         ),
                         DropdownButton<String>(
-                          value: '2020',
+                          value: selectedDropdownAno,
                           iconEnabledColor: kWhite,
                           underline: Container(
                             height: 1,
@@ -125,7 +127,7 @@ class _StatementsFilterScreenState extends State<StatementsFilterScreen> {
                             fontSize: 25.0,
                             color: Colors.white,
                           ),
-                          items: (kAnos + ['Todos']).map((String value) {
+                          items: (kAnos + [TODOS]).map((String value) {
                             return DropdownMenuItem<String>(
                               value: value,
                               child: Text(
@@ -134,7 +136,9 @@ class _StatementsFilterScreenState extends State<StatementsFilterScreen> {
                             );
                           }).toList(),
                           onChanged: (newSelected) {
-                            selectedDropdownAno = newSelected;
+                            setState(() {
+                              selectedDropdownAno = newSelected;
+                            });
                           },
                         ),
                       ],
