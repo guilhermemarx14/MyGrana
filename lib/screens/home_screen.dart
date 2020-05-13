@@ -5,7 +5,7 @@ import 'package:flutter_app/components/home_item.dart';
 import 'package:flutter_app/components/my_card.dart';
 import 'package:flutter_app/components/my_dialog.dart';
 import 'package:flutter_app/model/profile.dart';
-import 'package:flutter_app/screens/statements_screen.dart';
+import 'package:flutter_app/screens/statements_filter_screen.dart';
 import 'package:flutter_app/util/Database1.dart';
 import 'package:flutter_app/util/Database2.dart';
 import 'package:flutter_app/util/constants.dart';
@@ -332,8 +332,7 @@ class _FirstLineOptionsState extends State<FirstLineOptions> {
           onPressed: () {
             Navigator.push(
               context,
-              MaterialPageRoute(
-                  builder: (context) => StatementsScreen(type: 1)),
+              MaterialPageRoute(builder: (context) => StatementsFilterScreen()),
             );
           },
         ),

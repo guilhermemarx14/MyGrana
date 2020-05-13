@@ -47,3 +47,26 @@ const List<String> kListaCategorias = [
   'Universidade',
   'Vestimenta',
 ];
+
+const List<String> kMeses = [
+  '',
+  'Janeiro',
+  'Fevereiro',
+  'Março',
+  'Abril',
+  'Maio',
+  'Junho',
+  'Julho',
+  'Agosto',
+  'Setembro',
+  'Outubro',
+  'Novembro',
+  'Dezembro',
+];
+
+const List<String> kAnos = [
+  '2020',
+  '2021',
+  '2022',
+  '2023',
+];
