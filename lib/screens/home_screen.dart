@@ -5,6 +5,7 @@ import 'package:flutter_app/components/home_item.dart';
 import 'package:flutter_app/components/my_card.dart';
 import 'package:flutter_app/components/my_dialog.dart';
 import 'package:flutter_app/model/profile.dart';
+import 'package:flutter_app/screens/statements_screen.dart';
 import 'package:flutter_app/util/Database1.dart';
 import 'package:flutter_app/util/Database2.dart';
 import 'package:flutter_app/util/constants.dart';
@@ -52,16 +53,14 @@ class _HomeScreenState extends State<HomeScreen> {
     return Scaffold(
       backgroundColor: Colors.blue.shade100,
       floatingActionButton: FloatingActionButtonHome(widget: widget),
-      body: SingleChildScrollView(
-        child: Column(
-          children: <Widget>[
-            AppBarHome(),
-            TotalELancamentos(screenSize: screenSize),
-            SizedBox(height: 100.0),
-            FirstLineOptions(screenSize: screenSize),
-            SecondLineOptions(screenSize: screenSize),
-          ],
-        ),
+      body: Column(
+        children: <Widget>[
+          AppBarHome(),
+          TotalELancamentos(screenSize: screenSize),
+          SizedBox(height: 100.0),
+          FirstLineOptions(screenSize: screenSize),
+          SecondLineOptions(screenSize: screenSize),
+        ],
       ),
     );
     /*return Scaffold(
@@ -277,7 +276,7 @@ class _HomeScreenState extends State<HomeScreen> {
   }
 }
 
-class SecondLineOptions extends StatelessWidget {
+class SecondLineOptions extends StatefulWidget {
   const SecondLineOptions({
     Key key,
     @required this.screenSize,
@@ -286,13 +285,18 @@ class SecondLineOptions extends StatelessWidget {
   final double screenSize;
 
   @override
+  _SecondLineOptionsState createState() => _SecondLineOptionsState();
+}
+
+class _SecondLineOptionsState extends State<SecondLineOptions> {
+  @override
   Widget build(BuildContext context) {
     return Row(
       mainAxisAlignment: MainAxisAlignment.spaceEvenly,
       children: <Widget>[
         HomeItem(
-          height: screenSize / 4,
-          width: screenSize / 4,
+          height: widget.screenSize / 4,
+          width: widget.screenSize / 4,
           icon: FontAwesomeIcons.infoCircle,
           title: 'Informações',
           onPressed: () {},
@@ -302,7 +306,7 @@ class SecondLineOptions extends StatelessWidget {
   }
 }
 
-class FirstLineOptions extends StatelessWidget {
+class FirstLineOptions extends StatefulWidget {
   const FirstLineOptions({
     Key key,
     @required this.screenSize,
@@ -311,27 +315,38 @@ class FirstLineOptions extends StatelessWidget {
   final double screenSize;
 
   @override
+  _FirstLineOptionsState createState() => _FirstLineOptionsState();
+}
+
+class _FirstLineOptionsState extends State<FirstLineOptions> {
+  @override
   Widget build(BuildContext context) {
     return Row(
       mainAxisAlignment: MainAxisAlignment.spaceEvenly,
       children: <Widget>[
         HomeItem(
-          height: screenSize / 4,
-          width: screenSize / 4,
+          height: widget.screenSize / 4,
+          width: widget.screenSize / 4,
           icon: FontAwesomeIcons.coins,
           title: 'Extratos',
-          onPressed: () {},
+          onPressed: () {
+            Navigator.push(
+              context,
+              MaterialPageRoute(
+                  builder: (context) => StatementsScreen(type: 1)),
+            );
+          },
         ),
         HomeItem(
-          height: screenSize / 4,
-          width: screenSize / 4,
+          height: widget.screenSize / 4,
+          width: widget.screenSize / 4,
           icon: FontAwesomeIcons.clipboardList,
           title: 'Orçamento',
           onPressed: () {},
         ),
         HomeItem(
-          height: screenSize / 4,
-          width: screenSize / 4,
+          height: widget.screenSize / 4,
+          width: widget.screenSize / 4,
           icon: FontAwesomeIcons.mapMarkedAlt,
           title: 'Localização',
           onPressed: () {},

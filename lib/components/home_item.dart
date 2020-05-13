@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 
-class HomeItem extends StatelessWidget {
+class HomeItem extends StatefulWidget {
   HomeItem({this.width, this.height, this.title, this.icon, this.onPressed});
 
   final double width;
@@ -8,23 +8,35 @@ class HomeItem extends StatelessWidget {
   final String title;
   final IconData icon;
   final Function onPressed;
+
+  @override
+  _HomeItemState createState() => _HomeItemState();
+}
+
+class _HomeItemState extends State<HomeItem> {
+  bool isTapped = false;
   @override
   Widget build(BuildContext context) {
     return GestureDetector(
-      onTap: onPressed,
+      onTap: () {
+        setState(() {
+          isTapped = !isTapped;
+        });
+        widget.onPressed();
+      },
       child: Container(
-        width: width,
-        height: height,
+        width: widget.width,
+        height: widget.height,
         child: Column(
           mainAxisAlignment: MainAxisAlignment.spaceEvenly,
           children: <Widget>[
             Icon(
-              icon,
+              widget.icon,
               color: Colors.white,
               size: 50.0,
             ),
             Text(
-              title,
+              widget.title,
               style: TextStyle(
                 fontWeight: FontWeight.bold,
                 color: Colors.white,
@@ -41,7 +53,7 @@ class HomeItem extends StatelessWidget {
               offset: Offset(2, 4),
             ),
           ],
-          color: Colors.blue.shade700,
+          color: !isTapped ? Colors.blue.shade700 : Colors.blue.shade900,
           borderRadius: BorderRadius.circular(10),
         ),
       ),
