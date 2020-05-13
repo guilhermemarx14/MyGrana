@@ -81,7 +81,7 @@ class _MyCalendarState extends State<MyCalendar> {
 
     /// Example Calendar Carousel without header and custom prev & next button
     _calendarCarouselNoHeader = CalendarCarousel<Event>(
-      todayBorderColor: Colors.green,
+      todayBorderColor: Colors.blue.shade700,
       onDayPressed: (DateTime date, List<Event> events) {
         this.setState(() => _currentDate = date);
         events.forEach((event) => print(event.title));
@@ -103,7 +103,7 @@ class _MyCalendarState extends State<MyCalendar> {
           CircleBorder(side: BorderSide(color: Colors.yellow)),
       markedDateCustomTextStyle: TextStyle(
         fontSize: 10.0,
-        color: Colors.blue,
+        color: Colors.green,
       ),
       showHeader: false,
       todayTextStyle: TextStyle(
@@ -162,26 +162,27 @@ class _MyCalendarState extends State<MyCalendar> {
         ),
         weekdayTextStyle: TextStyle(
           fontSize: 10.0,
-          color: Colors.deepOrange,
+          color: Colors.blue.shade700,
         ),
         todayTextStyle: TextStyle(
           fontSize: 12.0,
           color: Colors.white,
           fontWeight: FontWeight.bold,
         ),
-        todayButtonColor: Colors.green,
+        todayButtonColor: Colors.blue.shade700,
 
-        todayBorderColor: Colors.green,
+        todayBorderColor: Colors.blue.shade700,
         daysTextStyle: TextStyle(
           fontSize: 10.0,
-          color: Colors.black,
+          color: Colors.black.withOpacity(0.83),
         ),
-        selectedDayButtonColor: Colors.blue,
+        selectedDayButtonColor: Colors.green,
         selectedDayTextStyle: TextStyle(
           fontSize: 12.0,
           color: Colors.white,
           fontWeight: FontWeight.bold,
         ),
+        isScrollable: true,
         weekendTextStyle: TextStyle(
           fontSize: 10.0,
           color: Colors.red,

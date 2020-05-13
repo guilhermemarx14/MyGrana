@@ -1,6 +1,6 @@
 import 'dart:io';
 
-import 'package:flutter_app/model/cidadeUniversidade.dart';
+import 'package:flutter_app/model/cidade_universidade.dart';
 import 'package:flutter_app/model/estado.dart';
 import 'package:flutter_app/util/bd1_scripts.dart';
 import 'package:path/path.dart';

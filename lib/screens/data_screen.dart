@@ -7,7 +7,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_app/components/back_button.dart' as back;
 import 'package:flutter_app/components/continue_button.dart';
-import 'package:flutter_app/model/cidadeUniversidade.dart';
+import 'package:flutter_app/model/cidade_universidade.dart';
 import 'package:flutter_app/model/estado.dart';
 import 'package:flutter_app/model/profile.dart';
 import 'package:flutter_app/screens/home_screen.dart';

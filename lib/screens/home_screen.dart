@@ -1,6 +1,7 @@
 import 'dart:ui';
 
 import 'package:flutter/material.dart';
+import 'package:flutter_app/components/home_item.dart';
 import 'package:flutter_app/components/my_card.dart';
 import 'package:flutter_app/components/my_dialog.dart';
 import 'package:flutter_app/model/profile.dart';
@@ -56,6 +57,9 @@ class _HomeScreenState extends State<HomeScreen> {
           children: <Widget>[
             AppBarHome(),
             TotalELancamentos(screenSize: screenSize),
+            SizedBox(height: 100.0),
+            FirstLineOptions(screenSize: screenSize),
+            SecondLineOptions(screenSize: screenSize),
           ],
         ),
       ),
@@ -270,6 +274,70 @@ class _HomeScreenState extends State<HomeScreen> {
             ],
           ),
         ));*/
+  }
+}
+
+class SecondLineOptions extends StatelessWidget {
+  const SecondLineOptions({
+    Key key,
+    @required this.screenSize,
+  }) : super(key: key);
+
+  final double screenSize;
+
+  @override
+  Widget build(BuildContext context) {
+    return Row(
+      mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+      children: <Widget>[
+        HomeItem(
+          height: screenSize / 4,
+          width: screenSize / 4,
+          icon: FontAwesomeIcons.infoCircle,
+          title: 'Informações',
+          onPressed: () {},
+        ),
+      ],
+    );
+  }
+}
+
+class FirstLineOptions extends StatelessWidget {
+  const FirstLineOptions({
+    Key key,
+    @required this.screenSize,
+  }) : super(key: key);
+
+  final double screenSize;
+
+  @override
+  Widget build(BuildContext context) {
+    return Row(
+      mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+      children: <Widget>[
+        HomeItem(
+          height: screenSize / 4,
+          width: screenSize / 4,
+          icon: FontAwesomeIcons.coins,
+          title: 'Extratos',
+          onPressed: () {},
+        ),
+        HomeItem(
+          height: screenSize / 4,
+          width: screenSize / 4,
+          icon: FontAwesomeIcons.clipboardList,
+          title: 'Orçamento',
+          onPressed: () {},
+        ),
+        HomeItem(
+          height: screenSize / 4,
+          width: screenSize / 4,
+          icon: FontAwesomeIcons.mapMarkedAlt,
+          title: 'Localização',
+          onPressed: () {},
+        ),
+      ],
+    );
   }
 }
 
