@@ -197,26 +197,26 @@ class DBProvider2 {
     if (mesConsulta.length == 1) mesConsulta = '0' + mesConsulta;
 
     if (categoria != TODOS) {
-      consulta += "category = ${kListaCategorias.indexOf(categoria)}";
+      consulta += "category = '${kListaCategorias.indexOf(categoria)}'";
       flag = true;
     }
 
     if (mes != TODOS) {
-      if (flag) consulta += " AND";
-      consulta += " date LIKE %-$mesConsulta-%";
+      if (flag) consulta += "AND ";
+      consulta += "date LIKE '%-$mesConsulta-%'";
       flag = true;
     }
 
-    if (mes != TODOS) {
-      if (flag) consulta += " AND";
-      consulta += " date LIKE %-$ano%";
+    if (ano != TODOS) {
+      if (flag) consulta += "AND ";
+      consulta += "date LIKE '%$ano%'";
     }
+    consulta += ';';
+    print(consulta);
+    res = await db.rawQuery(consulta);
 
-    await db.rawQuery(consulta).then((res) {
-      for (int i = 0; i < res.length; i++)
-        result.add(Transacao.fromMap(res[i]));
-      return result;
-    });
-    return [];
+    for (int i = 0; i < res.length; i++) result.add(Transacao.fromMap(res[i]));
+    //print(result);
+    return result;
   }
 }

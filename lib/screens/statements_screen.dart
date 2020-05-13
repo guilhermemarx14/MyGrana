@@ -17,7 +17,7 @@ class _StatementsScreenState extends State<StatementsScreen> {
   var transacoes = [];
   @override
   Widget build(BuildContext context) {
-    //print('${widget.categoria}, ${widget.mes}, ${widget.ano}');
+    print('${widget.categoria}, ${widget.mes}, ${widget.ano}');
     if (!finishedConsulta)
       DBProvider2.db
           .consultaTransacao(widget.categoria, widget.mes, widget.ano)
