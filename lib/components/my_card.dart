@@ -16,6 +16,13 @@ class MyCard extends StatelessWidget {
       child: cardChild,
       margin: EdgeInsets.all(15),
       decoration: BoxDecoration(
+        boxShadow: [
+          BoxShadow(
+            color: Colors.black.withOpacity(0.4),
+            blurRadius: 5,
+            offset: Offset(2, 4),
+          ),
+        ],
         color: color,
         borderRadius: BorderRadius.circular(10),
       ),

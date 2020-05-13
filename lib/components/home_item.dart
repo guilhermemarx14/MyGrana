@@ -34,6 +34,13 @@ class HomeItem extends StatelessWidget {
         ),
         margin: EdgeInsets.all(15),
         decoration: BoxDecoration(
+          boxShadow: [
+            BoxShadow(
+              color: Colors.black.withOpacity(0.5),
+              blurRadius: 5,
+              offset: Offset(2, 4),
+            ),
+          ],
           color: Colors.blue.shade700,
           borderRadius: BorderRadius.circular(10),
         ),
