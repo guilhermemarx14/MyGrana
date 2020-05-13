@@ -188,7 +188,6 @@ class DBProvider2 {
 
       for (int i = 0; i < res.length; i++)
         result.add(Transacao.fromMap(res[i]));
-      //print(result);
       return result;
     }
     consulta += " WHERE ";
@@ -212,11 +211,9 @@ class DBProvider2 {
       consulta += "date LIKE '%$ano%'";
     }
     consulta += ';';
-    print(consulta);
     res = await db.rawQuery(consulta);
 
     for (int i = 0; i < res.length; i++) result.add(Transacao.fromMap(res[i]));
-    //print(result);
     return result;
   }
 }
