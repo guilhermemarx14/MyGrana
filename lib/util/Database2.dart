@@ -15,6 +15,7 @@ import 'package:sqflite/sqflite.dart';
 /*
 BANCO DE DADOS LOCAL: tabela 'profile' guarda as informacoes do usuario: Nome, Hash, Estado, Municipio e Universidade
                       tabela 'transaction' guarda as informacoes de uma transacao: Categoria, Data, Descricao, Id, se foi paga e o valor (em int)
+                      tabela 'budget' guarda as informacoes de um orcamento: cada coluna representa o id(1) ou uma categoria, o valor armazenado e' o planejado de gasto(em int)
                       Como só há um usuario no programa, nao e' necessaria a chave estrangeira pra linkar uma transacao a um profile
 
 REALTIME DATABASE: por ser um banco de dados NOSQL, sua organizacao e' bem diferente
@@ -221,7 +222,7 @@ class DBProvider2 {
       consulta += "date LIKE '%$ano%'";
     }
     consulta += ';';
-    print(consulta);
+    //print(consulta);
     res = await db.rawQuery(consulta);
 
     for (int i = 0; i < res.length; i++) result.add(Transacao.fromMap(res[i]));
@@ -234,6 +235,7 @@ class DBProvider2 {
     Orcamento orcamento;
     List<Map> res = await db.rawQuery('Select * from budget');
     orcamento = Orcamento.fromMap(res[0]);
+    print('consulta $orcamento');
     return orcamento;
   }
 

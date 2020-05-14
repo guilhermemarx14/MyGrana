@@ -72,4 +72,6 @@ const List<String> kAnos = [
   '2023',
 ];
 
-
+//CONSTANTES PARA TELA DE ORÇAMENTOS
+const int ORCAMENTO = 1;
+const int TRANSACOES = 2;
