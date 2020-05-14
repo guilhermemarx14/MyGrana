@@ -2,6 +2,7 @@ import 'dart:async';
 import 'dart:io';
 
 import 'package:firebase_database/firebase_database.dart';
+import 'package:flutter_app/model/orcamento.dart';
 import 'package:flutter_app/model/profile.dart';
 import 'package:flutter_app/model/transacao.dart';
 import 'package:flutter_app/util/bd2_scripts.dart';
@@ -52,6 +53,7 @@ class DBProvider2 {
     }, onCreate: (Database db, int version) async {
       await db.execute(createTableProfile);
       await db.execute(createTableTransaction);
+      await db.execute(createTableBudget);
     });
   }
 
@@ -222,5 +224,23 @@ class DBProvider2 {
 
     for (int i = 0; i < res.length; i++) result.add(Transacao.fromMap(res[i]));
     return result;
+  }
+
+  //CONSULTAS PARA BUDGET
+  Future<Orcamento> getOrcamento() async {
+    final db = await database;
+    Orcamento orcamento;
+    List<Map> res = await db.rawQuery('Select * from budget');
+    orcamento = Orcamento.fromMap(res[0]);
+    return orcamento;
+  }
+
+  createOrcamento(Orcamento p) async {
+    final db = await database;
+
+    //CRIA A ENTRADA NO BANCO DE DADOS
+    await db.execute(
+        "INSERT INTO `budget` (`id`,`$kAlimentacao`,`$kInvestimento`,`$kLazer`,`$kMoradia`,`$kPensao`,`$kSalario`,`$kSaude`,`$kTransporte`,`$kUniversidade`,`$kVestimenta`) VALUES ('1','${p.alimentacao}'"
+        ",'${p.investimento}','${p.lazer}','${p.moradia}','${p.pensao}','${p.salario}','${p.saude}','${p.transporte}','${p.universidade}','${p.vestimenta}');");
   }
 }

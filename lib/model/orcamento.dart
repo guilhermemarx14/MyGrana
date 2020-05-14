@@ -1,16 +1,78 @@
+import 'dart:convert';
+
+import 'package:flutter_app/util/constants.dart';
+
+Orcamento ProfileFromJson(String str) {
+  final jsonData = json.decode(str);
+  return Orcamento.fromMap(jsonData);
+}
+
+String OrcamentoToJson(Orcamento data) {
+  final dyn = data.toMap();
+  return json.encode(dyn);
+}
+
 class Orcamento {
-  static Orcamento _instance;
+  int alimentacao;
+  int investimento;
+  int lazer;
+  int moradia;
+  int pensao;
+  int salario;
+  int saude;
+  int transporte;
+  int universidade;
+  int vestimenta;
 
-  List<double> orcamentoAtual;
-  List<double> orcamentoServidor;
+  Orcamento(
+      {this.alimentacao,
+      this.investimento,
+      this.lazer,
+      this.moradia,
+      this.pensao,
+      this.salario,
+      this.saude,
+      this.transporte,
+      this.universidade,
+      this.vestimenta});
 
-  factory Orcamento(
-      {List<double> orcamentoAtual, List<double> orcamentoServidor}) {
-    //todo: receber orcamento atual do bd
-    orcamentoAtual ??= orcamentoServidor;
-    _instance ??= Orcamento._constructor(orcamentoAtual, orcamentoServidor);
-    return _instance;
+  factory Orcamento.fromMap(Map<String, dynamic> json) => Orcamento(
+        alimentacao: json["$kAlimentacao"],
+        investimento: json["$kInvestimento"],
+        lazer: json["$kLazer"],
+        moradia: json["$kMoradia"],
+        pensao: json["$kPensao"],
+        salario: json["$kSalario"],
+        saude: json["$kSaude"],
+        transporte: json["$kTransporte"],
+        universidade: json["$kUniversidade"],
+        vestimenta: json["$kVestimenta"],
+      );
+
+  Map<String, dynamic> toMap() => {
+        "$kAlimentacao": alimentacao,
+        "$kInvestimento": investimento,
+        "$kLazer": lazer,
+        "$kMoradia": moradia,
+        "$kPensao": pensao,
+        "$kSalario": salario,
+        "$kSaude": saude,
+        "$kTransporte": transporte,
+        "$kUniversidade": universidade,
+        "$kVestimenta": vestimenta,
+      };
+
+  @override
+  String toString() {
+    return "$kAlimentacao: $alimentacao "
+        "$kInvestimento: $investimento "
+        "$kLazer: $lazer "
+        "$kMoradia: $moradia "
+        "$kPensao: $pensao "
+        "$kSalario: $salario "
+        "$kSaude: $saude "
+        "$kTransporte: $transporte "
+        "$kVestimenta: $vestimenta "
+        "$kUniversidade: $universidade ";
   }
-
-  Orcamento._constructor(this.orcamentoAtual, this.orcamentoServidor);
 }

@@ -29,17 +29,12 @@ class _HomeScreenState extends State<HomeScreen> {
   }
 
   initState() {
-    super.initState();
-  }
-
-  double screenSize = 0;
-  @override
-  Widget build(BuildContext context) {
     DBProvider2.db.getProfile().then((profile) {
       setState(() {
         widget.p = profile;
       });
     });
+
     DBProvider2.db.totalAcumulado().then((value) {
       if (value != total)
         setState(() {
@@ -52,6 +47,12 @@ class _HomeScreenState extends State<HomeScreen> {
           totalNaoPago = value;
         });
     });
+    super.initState();
+  }
+
+  double screenSize = 0;
+  @override
+  Widget build(BuildContext context) {
     changeSharedPreferences();
     DBProvider.db.drop();
     screenSize = MediaQuery.of(context).size.width;
