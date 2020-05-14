@@ -26,8 +26,11 @@ class _StatementsScreenState extends State<StatementsScreen> {
           finishedConsulta = true;
         });
       });
+
+    var total = 0.0;
+    transacoes.forEach((value) => total += value.value);
     return Scaffold(
-      backgroundColor: kBlue,
+      backgroundColor: Colors.blue.shade700,
       body: ListView.separated(
         padding: const EdgeInsets.all(8),
         itemCount: transacoes.length,
@@ -40,8 +43,35 @@ class _StatementsScreenState extends State<StatementsScreen> {
       ),
       appBar: AppBar(
         title: Text(
-          'Extratos',
+          'Extrato',
           style: TextStyle(fontWeight: FontWeight.bold),
+        ),
+      ),
+      bottomNavigationBar: BottomAppBar(
+        child: Container(
+          height: 70.0,
+          color: Colors.blue.shade900,
+          child: Row(
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: <Widget>[
+              Text(
+                'Total: ',
+                style: TextStyle(
+                  fontWeight: FontWeight.bold,
+                  fontSize: 25.0,
+                  color: Colors.white,
+                ),
+              ),
+              Text(
+                'R\$ ${(total / 100).toStringAsFixed(2).replaceAll('.', '\,')}',
+                style: TextStyle(
+                  fontWeight: FontWeight.bold,
+                  fontSize: 25.0,
+                  color: total >= 0 ? Colors.green : Colors.red,
+                ),
+              )
+            ],
+          ),
         ),
       ),
     );
