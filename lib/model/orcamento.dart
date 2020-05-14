@@ -75,4 +75,20 @@ class Orcamento {
         "$kVestimenta: $vestimenta "
         "$kUniversidade: $universidade ";
   }
+
+  List<int> getBudget() {
+    List<int> budget = [];
+    budget.add(alimentacao);
+    budget.add(investimento);
+    budget.add(lazer);
+    budget.add(moradia);
+    budget.add(pensao);
+    budget.add(salario);
+    budget.add(saude);
+    budget.add(transporte);
+    budget.add(vestimenta);
+    budget.add(universidade);
+
+    return budget;
+  }
 }

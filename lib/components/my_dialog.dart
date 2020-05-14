@@ -13,6 +13,7 @@ import 'package:toast/toast.dart';
 import 'my_calendar.dart';
 
 class MyDialog extends StatefulWidget {
+  //todo: mudar cor do valor monetario pra verde ou vermelho dependendo da categoria escolhida
   MyDialog(
       {@required this.context,
       @required this.title,

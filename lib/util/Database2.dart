@@ -54,6 +54,7 @@ class DBProvider2 {
       await db.execute(createTableProfile);
       await db.execute(createTableTransaction);
       await db.execute(createTableBudget);
+      await db.execute(inicialBudget);
     });
   }
 
@@ -200,7 +201,7 @@ class DBProvider2 {
       return result;
     }
     consulta += " WHERE ";
-    int myMes = kMeses.indexOf(mes);
+    int myMes = int.parse(mes);
     String mesConsulta = '$myMes';
     if (mesConsulta.length == 1) mesConsulta = '0' + mesConsulta;
 
@@ -220,6 +221,7 @@ class DBProvider2 {
       consulta += "date LIKE '%$ano%'";
     }
     consulta += ';';
+    print(consulta);
     res = await db.rawQuery(consulta);
 
     for (int i = 0; i < res.length; i++) result.add(Transacao.fromMap(res[i]));

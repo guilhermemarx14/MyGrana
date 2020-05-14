@@ -5,6 +5,7 @@ import 'package:flutter_app/components/home_item.dart';
 import 'package:flutter_app/components/my_card.dart';
 import 'package:flutter_app/components/my_dialog.dart';
 import 'package:flutter_app/model/profile.dart';
+import 'package:flutter_app/screens/budget_screen.dart';
 import 'package:flutter_app/screens/statements_filter_screen.dart';
 import 'package:flutter_app/util/Database1.dart';
 import 'package:flutter_app/util/Database2.dart';
@@ -47,14 +48,14 @@ class _HomeScreenState extends State<HomeScreen> {
           totalNaoPago = value;
         });
     });
+    changeSharedPreferences();
+    DBProvider.db.drop();
     super.initState();
   }
 
   double screenSize = 0;
   @override
   Widget build(BuildContext context) {
-    changeSharedPreferences();
-    DBProvider.db.drop();
     screenSize = MediaQuery.of(context).size.width;
     return Scaffold(
       backgroundColor: Colors.blue.shade100,
@@ -72,81 +73,59 @@ class _HomeScreenState extends State<HomeScreen> {
   }
 }
 
-class SecondLineOptions extends StatefulWidget {
-  const SecondLineOptions({
+class FloatingActionButtonHome extends StatefulWidget {
+  const FloatingActionButtonHome({
     Key key,
-    @required this.screenSize,
+    @required this.p,
   }) : super(key: key);
 
-  final double screenSize;
+  final Profile p;
 
   @override
-  _SecondLineOptionsState createState() => _SecondLineOptionsState();
+  _FloatingActionButtonHomeState createState() =>
+      _FloatingActionButtonHomeState();
 }
 
-class _SecondLineOptionsState extends State<SecondLineOptions> {
+class _FloatingActionButtonHomeState extends State<FloatingActionButtonHome> {
   @override
   Widget build(BuildContext context) {
-    return Row(
-      mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-      children: <Widget>[
-        HomeItem(
-          height: widget.screenSize / 4,
-          width: widget.screenSize / 4,
-          icon: FontAwesomeIcons.infoCircle,
-          title: 'Informações',
-          onPressed: () {},
-        ),
-      ],
+    return FloatingActionButton(
+      onPressed: () {
+        showDialog(
+          context: context,
+          builder: (BuildContext context) {
+            // return object of type Dialog
+            return MyDialog(
+              context: context,
+              category: kSalario,
+              value: '',
+              title: 'Nova Transação',
+            );
+          },
+        );
+        ;
+      },
+      child: Icon(FontAwesomeIcons.plus),
+      backgroundColor: Colors.blue.shade700,
     );
   }
 }
 
-class FirstLineOptions extends StatefulWidget {
-  const FirstLineOptions({
+class AppBarHome extends StatelessWidget {
+  const AppBarHome({
     Key key,
-    @required this.screenSize,
   }) : super(key: key);
 
-  final double screenSize;
-
-  @override
-  _FirstLineOptionsState createState() => _FirstLineOptionsState();
-}
-
-class _FirstLineOptionsState extends State<FirstLineOptions> {
   @override
   Widget build(BuildContext context) {
-    return Row(
-      mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-      children: <Widget>[
-        HomeItem(
-          height: widget.screenSize / 4,
-          width: widget.screenSize / 4,
-          icon: FontAwesomeIcons.coins,
-          title: 'Extratos',
-          onPressed: () {
-            Navigator.push(
-              context,
-              MaterialPageRoute(builder: (context) => StatementsFilterScreen()),
-            );
-          },
-        ),
-        HomeItem(
-          height: widget.screenSize / 4,
-          width: widget.screenSize / 4,
-          icon: FontAwesomeIcons.clipboardList,
-          title: 'Orçamento',
-          onPressed: () {},
-        ),
-        HomeItem(
-          height: widget.screenSize / 4,
-          width: widget.screenSize / 4,
-          icon: FontAwesomeIcons.mapMarkedAlt,
-          title: 'Localização',
-          onPressed: () {},
-        ),
-      ],
+    return AppBar(
+      elevation: 20.0,
+      centerTitle: true,
+      backgroundColor: Colors.blue.shade500,
+      title: Text(
+        'MyGrana',
+        style: TextStyle(fontWeight: FontWeight.bold, fontSize: 30.0),
+      ),
     );
   }
 }
@@ -226,59 +205,86 @@ class _TotalELancamentosState extends State<TotalELancamentos> {
   }
 }
 
-class AppBarHome extends StatelessWidget {
-  const AppBarHome({
+class FirstLineOptions extends StatefulWidget {
+  const FirstLineOptions({
     Key key,
+    @required this.screenSize,
   }) : super(key: key);
 
+  final double screenSize;
+
+  @override
+  _FirstLineOptionsState createState() => _FirstLineOptionsState();
+}
+
+class _FirstLineOptionsState extends State<FirstLineOptions> {
   @override
   Widget build(BuildContext context) {
-    return AppBar(
-      elevation: 20.0,
-      centerTitle: true,
-      backgroundColor: Colors.blue.shade500,
-      title: Text(
-        'MyGrana',
-        style: TextStyle(fontWeight: FontWeight.bold, fontSize: 30.0),
-      ),
+    return Row(
+      mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+      children: <Widget>[
+        HomeItem(
+          height: widget.screenSize / 4,
+          width: widget.screenSize / 4,
+          icon: FontAwesomeIcons.coins,
+          title: 'Extratos',
+          onPressed: () {
+            Navigator.push(
+              context,
+              MaterialPageRoute(builder: (context) => StatementsFilterScreen()),
+            );
+          },
+        ),
+        HomeItem(
+          height: widget.screenSize / 4,
+          width: widget.screenSize / 4,
+          icon: FontAwesomeIcons.clipboardList,
+          title: 'Orçamento',
+          onPressed: () {
+            Navigator.push(
+              context,
+              MaterialPageRoute(builder: (context) => BudgetScreen()),
+            );
+          },
+        ),
+        HomeItem(
+          height: widget.screenSize / 4,
+          width: widget.screenSize / 4,
+          icon: FontAwesomeIcons.mapMarkedAlt,
+          title: 'Localização',
+          onPressed: () {},
+        ),
+      ],
     );
   }
 }
 
-class FloatingActionButtonHome extends StatefulWidget {
-  const FloatingActionButtonHome({
+class SecondLineOptions extends StatefulWidget {
+  const SecondLineOptions({
     Key key,
-    @required this.p,
+    @required this.screenSize,
   }) : super(key: key);
 
-  final Profile p;
+  final double screenSize;
 
   @override
-  _FloatingActionButtonHomeState createState() =>
-      _FloatingActionButtonHomeState();
+  _SecondLineOptionsState createState() => _SecondLineOptionsState();
 }
 
-class _FloatingActionButtonHomeState extends State<FloatingActionButtonHome> {
+class _SecondLineOptionsState extends State<SecondLineOptions> {
   @override
   Widget build(BuildContext context) {
-    return FloatingActionButton(
-      onPressed: () {
-        showDialog(
-          context: context,
-          builder: (BuildContext context) {
-            // return object of type Dialog
-            return MyDialog(
-              context: context,
-              category: kSalario,
-              value: '',
-              title: 'Nova Transação',
-            );
-          },
-        );
-        ;
-      },
-      child: Icon(FontAwesomeIcons.plus),
-      backgroundColor: Colors.blue.shade700,
+    return Row(
+      mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+      children: <Widget>[
+        HomeItem(
+          height: widget.screenSize / 4,
+          width: widget.screenSize / 4,
+          icon: FontAwesomeIcons.infoCircle,
+          title: 'Informações',
+          onPressed: () {},
+        ),
+      ],
     );
   }
 }
