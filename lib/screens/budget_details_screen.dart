@@ -1,10 +1,12 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_app/components/budget_button.dart';
 import 'package:flutter_app/components/my_card.dart';
 import 'package:flutter_app/model/transacao.dart';
 import 'package:flutter_app/util/Database2.dart';
 import 'package:flutter_app/util/constants.dart';
 
+import 'budget_edit_screen.dart';
 import 'home_screen.dart';
 
 class BudgetDetailsScreen extends StatefulWidget {
@@ -150,6 +152,16 @@ class BudgetCards extends StatelessWidget {
         ),
       );
     }
+
+    if (type == ORCAMENTO)
+      cards.add(
+        BudgetButton(
+          screenSize: screenSize,
+          text: 'Editar orçamento',
+          onTap: () => Navigator.push(context,
+              MaterialPageRoute(builder: (context) => BudgetEditScreen())),
+        ),
+      );
 
     return Column(
       children: cards,
