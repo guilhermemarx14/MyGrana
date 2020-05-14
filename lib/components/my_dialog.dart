@@ -55,6 +55,7 @@ class _MyDialogState extends State<MyDialog> {
 
     transacao.paid = checkedValue;
     transacao.descricao = '';
+    transacao.value = 0;
   }
   @override
   Widget build(BuildContext context) {
@@ -115,11 +116,17 @@ class _MyDialogState extends State<MyDialog> {
                         valueCategoria = kListaCategorias.indexOf(newSelected);
                         transacao.category =
                             kListaCategorias.indexOf(newSelected);
-                        if (transacao.category == kSalario ||
-                            transacao.category == kPensao)
-                          transacao.value = transacao.value > 0
-                              ? transacao.value
-                              : -transacao.value;
+                        if (transacao != Null) {
+                          if (transacao.category == kSalario ||
+                              transacao.category == kPensao)
+                            transacao.value = transacao.value > 0
+                                ? transacao.value
+                                : -transacao.value;
+                          else
+                            transacao.value = transacao.value < 0
+                                ? transacao.value
+                                : -transacao.value;
+                        }
                       });
                     },
                   ),
@@ -294,9 +301,7 @@ class _MyDialogState extends State<MyDialog> {
 }
 
 class MyEditDialog extends StatefulWidget {
-  MyEditDialog({
-    @required this.transacao,
-  });
+  MyEditDialog({@required this.transacao});
 
   Transacao transacao;
 
@@ -305,36 +310,38 @@ class MyEditDialog extends StatefulWidget {
 }
 
 class _MyEditDialogState extends State<MyEditDialog> {
-  MyCalendar calendar;
-
-  String valorString = '';
-  int valorInt;
-
-  var checkedValue = false;
-  var currentDate;
-  var selectedDate;
-  int valueCategoria;
-  var descricao;
-  Profile p;
-
+  int _valorInt;
+  var _checkedValue = false;
+  var _currentDate;
+  var _selectedDate;
+  int _valueCategoria;
+  var _descricao;
+  Profile _p;
+  var _descricaoController;
+  var _valorController;
   @override
-  Widget build(BuildContext context) {
-    var descricaoController =
+  void initState() {
+    super.initState();
+    _descricaoController =
         TextEditingController(text: widget.transacao.descricao);
-    var valorController = new MoneyMaskedTextController(
+    _valorController = new MoneyMaskedTextController(
         decimalSeparator: ',',
         thousandSeparator: '.',
         initialValue: widget.transacao.value / 100,
         leftSymbol: 'R\$ ');
-    valorInt = widget.transacao.value;
-    checkedValue = widget.transacao.paid;
-    currentDate = DateTime.now();
+    _valorInt = widget.transacao.value;
+    _checkedValue = widget.transacao.paid;
+    _currentDate = DateTime.now();
+    _selectedDate = DateTime.parse(
+        widget.transacao.date + ' ' + _currentDate.toString().split(' ')[1]);
+    _valueCategoria = widget.transacao.category;
+    _descricao = widget.transacao.descricao;
+    DBProvider2.db.getProfile().then((user) => _p = user);
+  }
+  //checar sinal do valor apos a edicao no firebase
 
-    selectedDate = DateTime.parse(widget.transacao.date);
-    valueCategoria = widget.transacao.category;
-    descricao = widget.transacao.descricao;
-    DBProvider2.db.getProfile().then((user) => p = user);
-
+  @override
+  Widget build(BuildContext context) {
     return AlertDialog(
       backgroundColor: Colors.blue.shade200,
       title: Center(
@@ -367,7 +374,7 @@ class _MyEditDialogState extends State<MyEditDialog> {
                     ),
                   ),
                   DropdownButton<String>(
-                    value: kListaCategorias[valueCategoria],
+                    value: kListaCategorias[_valueCategoria],
                     iconEnabledColor: Colors.blue.shade500,
                     underline: Container(
                       height: 2,
@@ -386,14 +393,21 @@ class _MyEditDialogState extends State<MyEditDialog> {
                     }).toList(),
                     onChanged: (String newSelected) {
                       setState(() {
-                        valueCategoria = kListaCategorias.indexOf(newSelected);
+                        _valueCategoria = kListaCategorias.indexOf(newSelected);
                         widget.transacao.category =
                             kListaCategorias.indexOf(newSelected);
-                        if (widget.transacao.category == kSalario ||
-                            widget.transacao.category == kPensao)
-                          widget.transacao.value = widget.transacao.value > 0
-                              ? widget.transacao.value
-                              : -widget.transacao.value;
+                        // ignore: unrelated_type_equality_checks
+                        if (widget.transacao != Null) {
+                          if (widget.transacao.category == kSalario ||
+                              widget.transacao.category == kPensao)
+                            widget.transacao.value = widget.transacao.value > 0
+                                ? widget.transacao.value
+                                : -widget.transacao.value;
+                          else
+                            widget.transacao.value = widget.transacao.value < 0
+                                ? widget.transacao.value
+                                : -widget.transacao.value;
+                        }
                       });
                     },
                   ),
@@ -409,7 +423,7 @@ class _MyEditDialogState extends State<MyEditDialog> {
                   fontSize: 20,
                 ),
               ),
-              MyCalendar(myDate: selectedDate, selectDate: onDayPressed),
+              MyCalendar(myDate: _selectedDate, selectDate: onDayPressed),
               SizedBox(
                 height: 20.0,
               ),
@@ -429,7 +443,7 @@ class _MyEditDialogState extends State<MyEditDialog> {
                 ),
                 child: TextField(
                   cursorWidth: 2.0,
-                  controller: descricaoController,
+                  controller: _descricaoController,
                   inputFormatters: [
                     LengthLimitingTextInputFormatter(20),
                   ],
@@ -438,7 +452,7 @@ class _MyEditDialogState extends State<MyEditDialog> {
                   maxLines: 1,
                   onChanged: (value) {
                     setState(() {
-                      descricao = value;
+                      _descricao = value;
                       widget.transacao.descricao = value;
                     });
                   },
@@ -467,7 +481,7 @@ class _MyEditDialogState extends State<MyEditDialog> {
                   ),
                 ),
                 child: TextField(
-                  controller: valorController,
+                  controller: _valorController,
                   cursorWidth: 2.0,
                   cursorColor: Colors.blue.shade500,
                   textAlign: TextAlign.center,
@@ -479,13 +493,14 @@ class _MyEditDialogState extends State<MyEditDialog> {
                   ),
                   onChanged: (value) {
                     setState(() {
-                      valorController.updateValue(valorController.numberValue);
-                      valorInt = (valorController.numberValue * 100).toInt();
+                      _valorController
+                          .updateValue(_valorController.numberValue);
+                      _valorInt = (_valorController.numberValue * 100).toInt();
                       if (widget.transacao.category == kSalario ||
                           widget.transacao.category == kPensao)
-                        widget.transacao.value = valorInt;
+                        widget.transacao.value = _valorInt;
                       else
-                        widget.transacao.value = -valorInt;
+                        widget.transacao.value = -_valorInt;
                     });
                   },
                 ),
@@ -501,10 +516,10 @@ class _MyEditDialogState extends State<MyEditDialog> {
                     ),
                   ),
                   Checkbox(
-                    value: checkedValue,
+                    value: _checkedValue,
                     onChanged: (bool value) {
                       setState(() {
-                        checkedValue = value;
+                        _checkedValue = value;
                         widget.transacao.paid = value;
                       });
                     },
@@ -530,7 +545,7 @@ class _MyEditDialogState extends State<MyEditDialog> {
                       widget.transacao.value = widget.transacao.value ?? 0;
                       if (widget.transacao.value != 0) {
                         DBProvider2.db.updateTransacao(widget.transacao);
-                        DBProvider2.db.saveTransacao(widget.transacao, p);
+                        DBProvider2.db.saveTransacao(widget.transacao, _p);
                         Navigator.push(
                             context,
                             MaterialPageRoute(
@@ -557,7 +572,7 @@ class _MyEditDialogState extends State<MyEditDialog> {
 
   void onDayPressed(DateTime date, List<Event> events) {
     this.setState(() {
-      selectedDate = date;
+      _selectedDate = date;
       widget.transacao.date = date.toString().split(" ")[0];
     });
   }

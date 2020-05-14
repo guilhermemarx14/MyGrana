@@ -24,26 +24,25 @@ class MyCalendar extends StatefulWidget {
 }
 
 class _MyCalendarState extends State<MyCalendar> {
-  DateTime _currentDate = DateTime.now();
-  DateTime _targetDateTime = DateTime(2019, 2, 3);
+  DateTime _currentDate;
+  DateTime _targetDateTime;
 
   CalendarCarousel _calendarCarousel, _calendarCarouselNoHeader;
 
   @override
   void initState() {
     /// Add more events to _markedDateMap EventList
-
     super.initState();
+    _currentDate = widget.myDate ?? DateTime.now();
+    _targetDateTime = widget.myDate ?? DateTime(2019, 2, 3);
   }
 
   @override
   Widget build(BuildContext context) {
     /// Example with custom icon
-    _currentDate = widget.myDate ?? DateTime.now();
     _calendarCarousel = CalendarCarousel<Event>(
       onDayPressed: (DateTime date, List<Event> events) {
         this.setState(() => _currentDate = date);
-        events.forEach((event) => print(event.title));
       },
       weekendTextStyle: TextStyle(
         fontSize: 10.0,
@@ -86,7 +85,6 @@ class _MyCalendarState extends State<MyCalendar> {
       todayBorderColor: Colors.blue.shade700,
       onDayPressed: (DateTime date, List<Event> events) {
         this.setState(() => _currentDate = date);
-        events.forEach((event) => print(event.title));
       },
       daysHaveCircularBorder: true,
       showOnlyCurrentMonthDate: false,
@@ -99,7 +97,7 @@ class _MyCalendarState extends State<MyCalendar> {
 //      firstDayOfWeek: 4,
       height: 420.0,
       selectedDateTime: _currentDate,
-      targetDateTime: widget.myDate ?? _currentDate,
+      targetDateTime: _targetDateTime,
       customGridViewPhysics: NeverScrollableScrollPhysics(),
       markedDateCustomShapeBorder:
           CircleBorder(side: BorderSide(color: Colors.yellow)),
@@ -139,9 +137,6 @@ class _MyCalendarState extends State<MyCalendar> {
         this.setState(() {
           _targetDateTime = date;
         });
-      },
-      onDayLongPressed: (DateTime date) {
-        print('long pressed date $date');
       },
     );
 
