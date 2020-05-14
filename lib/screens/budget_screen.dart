@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_app/components/my_card.dart';
 import 'package:flutter_app/util/Database2.dart';
 import 'package:flutter_app/util/constants.dart';
+import 'package:toast/toast.dart';
 
 class BudgetScreen extends StatefulWidget {
   const BudgetScreen({Key key}) : super(key: key);
@@ -49,28 +50,118 @@ class _BudgetScreenState extends State<BudgetScreen> {
   }
 
   Widget build(BuildContext context) {
+    double screenSize = MediaQuery.of(context).size.width;
     return Scaffold(
-        backgroundColor: Colors.blue.shade100,
-        appBar: AppBar(
-          title: Text(
-            'Orçamento ${kMeses[DateTime.now().month]}/${DateTime.now().year.toString()}',
-            style: TextStyle(fontWeight: FontWeight.bold),
-          ),
+      backgroundColor: Colors.blue.shade100,
+      appBar: AppBar(
+        title: Text(
+          'Orçamento ${kMeses[DateTime.now().month]}/${DateTime.now().year.toString()}',
+          style: TextStyle(fontWeight: FontWeight.bold),
         ),
-        body: Column(
+      ),
+      /*bottomNavigationBar: BottomAppBar(
+        color: Colors.transparent,
+        child: Column(
+          mainAxisAlignment: MainAxisAlignment.end,
           children: <Widget>[
-            PlanejadosEReais(
-              titulo: 'Planejado: ',
-              totalGanhos: totalGanhosPlanejados / 100,
-              totalGastos: totalGastosPlanejados / 100,
+            BudgetButton(
+              screenSize: screenSize,
+              text: 'Detalhes do orçamento planejado',
+              onTap: () => Toast.show(
+                'onTap',
+                context,
+              ),
             ),
-            PlanejadosEReais(
-              titulo: 'Reais: ',
-              totalGanhos: totalGanhosReais / 100,
-              totalGastos: totalGastosReais / 100,
+            BudgetButton(
+              screenSize: screenSize,
+              text: 'Detalhes do orçamento real',
+              onTap: () => Toast.show(
+                'onTap',
+                context,
+              ),
             ),
           ],
-        ));
+        ),
+      ),*/
+      body: Column(
+        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+        children: <Widget>[
+          Column(
+            children: <Widget>[
+              PlanejadosEReais(
+                screenSize: screenSize,
+                titulo: 'Planejado: ',
+                totalGanhos: totalGanhosPlanejados / 100,
+                totalGastos: totalGastosPlanejados / 100,
+              ),
+              PlanejadosEReais(
+                screenSize: screenSize,
+                titulo: 'Reais: ',
+                totalGanhos: totalGanhosReais / 100,
+                totalGastos: totalGastosReais / 100,
+              ),
+            ],
+          ),
+          Column(
+            children: <Widget>[
+              BudgetButton(
+                screenSize: screenSize,
+                text: 'Detalhes do orçamento planejado',
+                onTap: () => Toast.show(
+                  'onTap',
+                  context,
+                ),
+              ),
+              BudgetButton(
+                screenSize: screenSize,
+                text: 'Detalhes do orçamento real',
+                onTap: () => Toast.show(
+                  'onTap',
+                  context,
+                ),
+              ),
+            ],
+          ),
+        ],
+      ),
+    );
+  }
+}
+
+class BudgetButton extends StatelessWidget {
+  const BudgetButton({
+    Key key,
+    @required this.screenSize,
+    @required this.text,
+    @required this.onTap,
+  }) : super(key: key);
+
+  final double screenSize;
+  final String text;
+  final Function onTap;
+  @override
+  Widget build(BuildContext context) {
+    return GestureDetector(
+      onTap: onTap,
+      child: MyCard(
+        color: Colors.blue.shade700,
+        height: 70.0,
+        width: screenSize,
+        cardChild: Row(
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: <Widget>[
+            Text(
+              text,
+              style: TextStyle(
+                fontSize: 20.0,
+                color: Colors.white,
+                fontWeight: FontWeight.bold,
+              ),
+            ),
+          ],
+        ),
+      ),
+    );
   }
 }
 
@@ -78,11 +169,13 @@ class PlanejadosEReais extends StatelessWidget {
   const PlanejadosEReais({
     Key key,
     @required this.titulo,
+    @required this.screenSize,
     @required this.totalGanhos,
     @required this.totalGastos,
   }) : super(key: key);
 
   final String titulo;
+  final double screenSize;
   final double totalGanhos;
   final double totalGastos;
 
@@ -106,7 +199,7 @@ class PlanejadosEReais extends StatelessWidget {
             height: 15.0,
           ),
           Total(
-            screenSize: MediaQuery.of(context).size.width,
+            screenSize: screenSize,
             totalGanhos: totalGanhos,
             totalGastos: totalGastos,
           ),

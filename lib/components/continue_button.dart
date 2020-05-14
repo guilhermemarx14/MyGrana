@@ -14,7 +14,6 @@ class ContinueButton extends StatelessWidget {
   final Function onPressed;
   @override
   Widget build(BuildContext context) {
-    //todo: centralizar texto
     return Expanded(
       flex: 1,
       child: Align(
