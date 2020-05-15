@@ -2,10 +2,12 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_app/components/budget_button.dart';
 import 'package:flutter_app/components/my_edit_card.dart';
+import 'package:flutter_app/model/orcamento.dart';
 import 'package:flutter_app/util/Database2.dart';
 import 'package:flutter_app/util/constants.dart';
 import 'package:flutter_masked_text/flutter_masked_text.dart';
 
+import 'budget_screen.dart';
 import 'home_screen.dart';
 
 class BudgetEditScreen extends StatefulWidget {
@@ -23,10 +25,10 @@ class _BudgetEditScreenState extends State<BudgetEditScreen> {
 //todo:erro de index fantasma
     orcamento = [];
     DBProvider2.db.getOrcamento().then((result) {
-      print(result);
+      //print(result);
       setState(() {
         orcamento = result.getBudget();
-        print(orcamento);
+        //print(orcamento);
         totalGanhos = (orcamento[kSalario] + orcamento[kPensao]).toDouble();
         orcamento.forEach((element) {
           totalGastos -= element;
@@ -57,7 +59,11 @@ class _BudgetEditScreenState extends State<BudgetEditScreen> {
             child: BudgetEditCards(
               screenSize: screenSize,
               orcamento: orcamento,
-              buttonAction: () => print(orcamento),
+              buttonAction: () {
+                DBProvider2.db.updateOrcamento(fromBudget(orcamento));
+                Navigator.push(context,
+                    MaterialPageRoute(builder: (context) => BudgetScreen()));
+              },
             ),
           )),
     );
@@ -94,6 +100,7 @@ class _BudgetEditCardsState extends State<BudgetEditCards> {
           initialValue: (widget.orcamento[i] / 100).toDouble(),
           leftSymbol: 'R\$ '));
       cards.add(MyEditCard(
+        category: i,
         screenSize: widget.screenSize,
         text: kListaCategorias[i],
         valor: widget.orcamento[i] / 100,
