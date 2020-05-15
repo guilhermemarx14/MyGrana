@@ -202,7 +202,12 @@ class DBProvider2 {
       return result;
     }
     consulta += " WHERE ";
-    int myMes = int.parse(mes);
+    int myMes;
+    try {
+      myMes = int.parse(mes);
+    } catch (Exception) {
+      myMes = 0;
+    }
     String mesConsulta = '$myMes';
     if (mesConsulta.length == 1) mesConsulta = '0' + mesConsulta;
 

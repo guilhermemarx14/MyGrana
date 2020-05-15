@@ -26,7 +26,7 @@ class BackButton extends StatelessWidget {
             child: FlatButton(
                 onPressed: onPressed,
                 textColor: kWhite,
-                color: kYellow,
+                color: Colors.blue.shade900,
                 shape: RoundedRectangleBorder(
                     borderRadius: BorderRadius.circular(20.0)),
                 child: Row(

@@ -20,7 +20,6 @@ class BudgetDetailsScreen extends StatefulWidget {
 }
 
 class _BudgetDetailsScreenState extends State<BudgetDetailsScreen> {
-  //todo: colocar gastos e rendas totais
   List<int> orcamento;
   List<Transacao> transacoes;
   double totalGanhos = 0;
@@ -30,7 +29,6 @@ class _BudgetDetailsScreenState extends State<BudgetDetailsScreen> {
     totalGanhos = 0;
     orcamento = [];
     transacoes = [];
-//todo:erro de index fantasma
     if (widget.type == ORCAMENTO)
       DBProvider2.db.getOrcamento().then((result) {
         //print(result);
@@ -136,6 +134,14 @@ class BudgetCards extends StatelessWidget {
     }
     for (int i = 0; i < kTotalCategorias; i++) {
       //print('$i ${orcamento[i]}');
+      String valorCategoria;
+      try {
+        valorCategoria = 'R\$ ' +
+            (orcamento[i] / 100).toStringAsFixed(2).replaceAll('.', '\,');
+      } catch (Exception) {
+        valorCategoria =
+            'R\$ ' + (0.0).toStringAsFixed(2).replaceAll('.', '\,');
+      }
       cards.add(
         MyCard(
           onTap: type == ORCAMENTO
@@ -168,10 +174,7 @@ class BudgetCards extends StatelessWidget {
                   ),
                 ),
                 Text(
-                  'R\$ ' +
-                      (orcamento[i] / 100)
-                          .toStringAsFixed(2)
-                          .replaceAll('.', '\,'),
+                  valorCategoria,
                   style: TextStyle(
                       fontSize: 20.0,
                       fontWeight: FontWeight.bold,

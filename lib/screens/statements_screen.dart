@@ -22,10 +22,11 @@ class _StatementsScreenState extends State<StatementsScreen> {
     DBProvider2.db
         .consultaTransacao(widget.categoria, widget.mes, widget.ano)
         .then((list) {
-      setState(() {
-        transacoes = list;
-        transacoes.forEach((value) => total += value.value);
-      });
+      if (list.isNotEmpty)
+        setState(() {
+          transacoes = list;
+          transacoes.forEach((value) => total += value.value);
+        });
     });
 
     super.initState();

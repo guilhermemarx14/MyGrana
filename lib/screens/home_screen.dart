@@ -13,6 +13,8 @@ import 'package:flutter_app/util/constants.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
+import 'informations_screen.dart';
+
 double total = 0;
 double totalNaoPago = 0;
 
@@ -282,7 +284,12 @@ class _SecondLineOptionsState extends State<SecondLineOptions> {
           width: widget.screenSize / 4,
           icon: FontAwesomeIcons.infoCircle,
           title: 'Informações',
-          onPressed: () {},
+          onPressed: () {
+            Navigator.push(
+              context,
+              MaterialPageRoute(builder: (context) => InformationScreen()),
+            );
+          },
         ),
       ],
     );

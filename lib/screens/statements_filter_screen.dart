@@ -173,30 +173,6 @@ class _StatementsFilterScreenState extends State<StatementsFilterScreen> {
         ),
       ),
     );
-    /*else
-      return Scaffold(
-        backgroundColor: kBlue,
-        body: ListView.separated(
-          padding: const EdgeInsets.all(8),
-          itemCount: category.length,
-          itemBuilder: (BuildContext context, int index) {
-            return ListItem(
-              category: kListaCategorias.indexOf(category[index]),
-              value: values[index],
-              title: 'Editar Transação',
-            );
-          },
-          separatorBuilder: (BuildContext context, int index) => const Divider(
-            color: kWhite,
-          ),
-        ),
-        appBar: AppBar(
-          title: Text(
-            'Extrato',
-            style: TextStyle(fontWeight: FontWeight.bold),
-          ),
-        ),
-      );*/
   }
 }
 
