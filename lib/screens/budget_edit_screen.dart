@@ -90,7 +90,7 @@ class _BudgetEditScreenState extends State<BudgetEditScreen> {
     setState(() {
       totalGanhos = ganhos;
       totalGastos = gastos;
-      print(ganhos.toString() + ' ' + gastos.toString());
+      //print(ganhos.toString() + ' ' + gastos.toString());
     });
   }
 }
