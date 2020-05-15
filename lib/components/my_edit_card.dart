@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_app/util/constants.dart';
 import 'package:flutter_masked_text/flutter_masked_text.dart';
 
 import 'my_card.dart';
@@ -6,6 +7,7 @@ import 'my_card.dart';
 class MyEditCard extends StatefulWidget {
   const MyEditCard({
     Key key,
+    @required this.category,
     @required this.screenSize,
     @required this.text,
     @required this.valor,
@@ -18,7 +20,7 @@ class MyEditCard extends StatefulWidget {
   final double valor;
   final MoneyMaskedTextController controller;
   final Function onChange;
-
+  final int category;
   @override
   _MyEditCardState createState() => _MyEditCardState();
 }
@@ -47,18 +49,32 @@ class _MyEditCardState extends State<MyEditCard> {
               margin: EdgeInsets.fromLTRB(30, 0, 30, 0),
               decoration: BoxDecoration(
                 border: Border(
-                  bottom: BorderSide(width: 2.0, color: Colors.blue.shade500),
+                  bottom: BorderSide(
+                    width: 2.0,
+                    color: (widget.category == kSalario ||
+                            widget.category == kPensao)
+                        ? Colors.green
+                        : Colors.red,
+                  ),
                 ),
               ),
               child: TextField(
                 controller: widget.controller,
                 cursorWidth: 2.0,
-                cursorColor: Colors.blue.shade500,
+                cursorColor:
+                    (widget.category == kSalario || widget.category == kPensao)
+                        ? Colors.green
+                        : Colors.red,
                 textAlign: TextAlign.center,
                 maxLines: 1,
-                decoration: InputDecoration(border: InputBorder.none),
+                decoration: InputDecoration(
+                  border: InputBorder.none,
+                ),
                 style: TextStyle(
-                  color: Colors.blue.shade500,
+                  color: (widget.category == kSalario ||
+                          widget.category == kPensao)
+                      ? Colors.green
+                      : Colors.red,
                   fontSize: 20,
                 ),
                 onChanged: widget.onChange,

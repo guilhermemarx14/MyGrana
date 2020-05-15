@@ -7,6 +7,22 @@ Orcamento ProfileFromJson(String str) {
   return Orcamento.fromMap(jsonData);
 }
 
+Orcamento fromBudget(List<int> budget) {
+  var retorno = Orcamento();
+  retorno.alimentacao = budget[0];
+  retorno.investimento = budget[1];
+  retorno.lazer = budget[2];
+  retorno.moradia = budget[3];
+  retorno.pensao = budget[4];
+  retorno.salario = budget[5];
+  retorno.saude = budget[6];
+  retorno.transporte = budget[7];
+  retorno.universidade = budget[8];
+  retorno.vestimenta = budget[9];
+
+  return retorno;
+}
+
 String OrcamentoToJson(Orcamento data) {
   final dyn = data.toMap();
   return json.encode(dyn);

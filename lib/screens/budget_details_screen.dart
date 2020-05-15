@@ -3,10 +3,12 @@ import 'package:flutter/material.dart';
 import 'package:flutter_app/components/budget_button.dart';
 import 'package:flutter_app/components/my_card.dart';
 import 'package:flutter_app/model/transacao.dart';
+import 'package:flutter_app/screens/statements_screen.dart';
 import 'package:flutter_app/util/Database2.dart';
 import 'package:flutter_app/util/constants.dart';
 
 import 'budget_edit_screen.dart';
+import 'budget_screen.dart';
 import 'home_screen.dart';
 
 class BudgetDetailsScreen extends StatefulWidget {
@@ -18,20 +20,23 @@ class BudgetDetailsScreen extends StatefulWidget {
 }
 
 class _BudgetDetailsScreenState extends State<BudgetDetailsScreen> {
+  //todo: colocar gastos e rendas totais
   List<int> orcamento;
   List<Transacao> transacoes;
   double totalGanhos = 0;
   double totalGastos = 0;
   initState() {
+    totalGastos = 0;
+    totalGanhos = 0;
     orcamento = [];
     transacoes = [];
 //todo:erro de index fantasma
     if (widget.type == ORCAMENTO)
       DBProvider2.db.getOrcamento().then((result) {
-        print(result);
+        //print(result);
         setState(() {
           orcamento = result.getBudget();
-          print(orcamento);
+          //print(orcamento);
           totalGanhos = (orcamento[kSalario] + orcamento[kPensao]).toDouble();
           orcamento.forEach((element) {
             totalGastos -= element;
@@ -71,23 +76,36 @@ class _BudgetDetailsScreenState extends State<BudgetDetailsScreen> {
       onWillPop: () => Navigator.pushAndRemoveUntil(context,
           MaterialPageRoute(builder: (context) => HomeScreen()), (r) => false),
       child: Scaffold(
-          backgroundColor: Colors.blue.shade100,
-          appBar: AppBar(
-            title: Text(
-              titulo,
-              textAlign: TextAlign.center,
-              overflow: TextOverflow.ellipsis,
-              maxLines: 2,
-              style: TextStyle(fontWeight: FontWeight.bold),
-            ),
+        backgroundColor: Colors.blue.shade100,
+        appBar: AppBar(
+          title: Text(
+            titulo,
+            textAlign: TextAlign.center,
+            overflow: TextOverflow.ellipsis,
+            maxLines: 2,
+            style: TextStyle(fontWeight: FontWeight.bold),
           ),
-          body: SingleChildScrollView(
-            child: BudgetCards(
+        ),
+        body: SingleChildScrollView(
+          child: Column(
+            children: <Widget>[
+              PlanejadosEReais(
                 screenSize: screenSize,
-                type: widget.type,
-                orcamento: orcamento,
-                transacoes: transacoes),
-          )),
+                titulo: widget.type == ORCAMENTO
+                    ? 'Orçamento: '
+                    : 'Gastos e Rendas mensais:',
+                totalGanhos: totalGanhos / 100,
+                totalGastos: totalGastos / 100,
+              ),
+              BudgetCards(
+                  screenSize: screenSize,
+                  type: widget.type,
+                  orcamento: orcamento,
+                  transacoes: transacoes),
+            ],
+          ),
+        ),
+      ),
     );
   }
 }
@@ -99,17 +117,19 @@ class BudgetCards extends StatelessWidget {
     @required this.type,
     @required this.orcamento,
     @required this.transacoes,
+    this.onTap,
   }) : super(key: key);
   final int type;
   final double screenSize;
   final List<int> orcamento;
   final List<Transacao> transacoes;
+  final Function onTap;
 
   @override
   Widget build(BuildContext context) {
     List<Widget> cards = [];
     if (type == TRANSACOES) {
-      orcamento.removeLast();
+      if (orcamento.isNotEmpty) orcamento.removeLast();
       for (int i = 0; i < kTotalCategorias; i++) orcamento.add(0);
       for (int i = 0; i < transacoes.length; i++)
         orcamento[transacoes[i].category] += transacoes[i].value;
@@ -118,6 +138,19 @@ class BudgetCards extends StatelessWidget {
       //print('$i ${orcamento[i]}');
       cards.add(
         MyCard(
+          onTap: type == ORCAMENTO
+              ? () {}
+              : () {
+                  Navigator.push(
+                    context,
+                    MaterialPageRoute(
+                        builder: (context) => StatementsScreen(
+                              categoria: kListaCategorias[i],
+                              mes: DateTime.now().month.toString(),
+                              ano: DateTime.now().year.toString(),
+                            )),
+                  );
+                },
           width: screenSize,
           height: 70.0,
           color: Colors.blue.shade200,

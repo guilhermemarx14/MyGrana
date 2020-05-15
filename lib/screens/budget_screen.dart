@@ -179,6 +179,7 @@ class _TotalState extends State<Total> {
             mainAxisAlignment: MainAxisAlignment.center,
             children: <Widget>[
               Text(
+                'R\$ '
                 '${widget.totalGanhos.toStringAsFixed(2).replaceAll('.', '\,')}',
                 style: TextStyle(
                   fontSize: 20.0,
@@ -205,6 +206,7 @@ class _TotalState extends State<Total> {
             mainAxisAlignment: MainAxisAlignment.center,
             children: <Widget>[
               Text(
+                'R\$ '
                 '${(widget.totalGastos).toStringAsFixed(2).replaceAll('.', '\,')}',
                 style: TextStyle(
                   fontSize: 20.0,

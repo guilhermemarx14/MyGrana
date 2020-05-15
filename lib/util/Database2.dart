@@ -226,6 +226,7 @@ class DBProvider2 {
     res = await db.rawQuery(consulta);
 
     for (int i = 0; i < res.length; i++) result.add(Transacao.fromMap(res[i]));
+    //print(result);
     return result;
   }
 
@@ -235,7 +236,7 @@ class DBProvider2 {
     Orcamento orcamento;
     List<Map> res = await db.rawQuery('Select * from budget');
     orcamento = Orcamento.fromMap(res[0]);
-    print('consulta $orcamento');
+    //print('consulta $orcamento');
     return orcamento;
   }
 
@@ -246,5 +247,12 @@ class DBProvider2 {
     await db.execute(
         "INSERT INTO `budget` (`id`,`$kAlimentacao`,`$kInvestimento`,`$kLazer`,`$kMoradia`,`$kPensao`,`$kSalario`,`$kSaude`,`$kTransporte`,`$kUniversidade`,`$kVestimenta`) VALUES ('1','${p.alimentacao}'"
         ",'${p.investimento}','${p.lazer}','${p.moradia}','${p.pensao}','${p.salario}','${p.saude}','${p.transporte}','${p.universidade}','${p.vestimenta}');");
+  }
+
+  updateOrcamento(Orcamento o) async {
+    final db = await database;
+    //ATUALIZA A ENTRADA NO BANCO DE DADOS
+    await db.execute(
+        "UPDATE `budget` SET `$kAlimentacao`='${o.alimentacao}',`$kInvestimento`='${o.investimento}',`$kLazer`='${o.lazer}',`$kMoradia`='${o.moradia}',`$kPensao`='${o.pensao}',`$kSalario`='${o.salario}',`$kSaude`='${o.saude}',`$kTransporte`='${o.transporte}',`$kUniversidade`='${o.universidade}',`$kVestimenta`='${o.vestimenta}' WHERE id= '1';");
   }
 }

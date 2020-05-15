@@ -208,7 +208,10 @@ class _MyDialogState extends State<MyDialog> {
                   maxLines: 1,
                   decoration: InputDecoration(border: InputBorder.none),
                   style: TextStyle(
-                    color: Colors.blue.shade500,
+                    color: (transacao.category == kSalario ||
+                            transacao.category == kPensao)
+                        ? Colors.green
+                        : Colors.red,
                     fontSize: 20,
                   ),
                   onChanged: (value) {
