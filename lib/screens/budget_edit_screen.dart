@@ -10,6 +10,9 @@ import 'package:flutter_masked_text/flutter_masked_text.dart';
 import 'budget_screen.dart';
 import 'home_screen.dart';
 
+double totalGanhos = 0;
+double totalGastos = 0;
+
 class BudgetEditScreen extends StatefulWidget {
   const BudgetEditScreen({Key key}) : super(key: key);
 
@@ -19,11 +22,12 @@ class BudgetEditScreen extends StatefulWidget {
 
 class _BudgetEditScreenState extends State<BudgetEditScreen> {
   List<int> orcamento;
-  double totalGanhos = 0;
-  double totalGastos = 0;
+
   initState() {
 //todo:erro de index fantasma
     orcamento = [];
+    totalGanhos = 0;
+    totalGastos = 0;
     DBProvider2.db.getOrcamento().then((result) {
       //print(result);
       setState(() {
@@ -56,32 +60,54 @@ class _BudgetEditScreenState extends State<BudgetEditScreen> {
             ),
           ),
           body: SingleChildScrollView(
-            child: BudgetEditCards(
-              screenSize: screenSize,
-              orcamento: orcamento,
-              buttonAction: () {
-                DBProvider2.db.updateOrcamento(fromBudget(orcamento));
-                Navigator.push(context,
-                    MaterialPageRoute(builder: (context) => BudgetScreen()));
-              },
+            child: Column(
+              children: <Widget>[
+                PlanejadosEReais(
+                  screenSize: screenSize,
+                  titulo: 'Total',
+                  totalGanhos: totalGanhos / 100,
+                  totalGastos: totalGastos / 100,
+                ),
+                BudgetEditCards(
+                  screenSize: screenSize,
+                  orcamento: orcamento,
+                  buttonAction: () {
+                    DBProvider2.db.updateOrcamento(fromBudget(orcamento));
+                    Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                            builder: (context) => BudgetScreen()));
+                  },
+                  notifyParent: refresh,
+                ),
+              ],
             ),
           )),
     );
   }
+
+  refresh(double ganhos, double gastos) {
+    setState(() {
+      totalGanhos = ganhos;
+      totalGastos = gastos;
+      print(ganhos.toString() + ' ' + gastos.toString());
+    });
+  }
 }
 
 class BudgetEditCards extends StatefulWidget {
-  const BudgetEditCards({
-    Key key,
-    @required this.screenSize,
-    @required this.orcamento,
-    @required this.buttonAction,
-  }) : super(key: key);
+  const BudgetEditCards(
+      {Key key,
+      @required this.screenSize,
+      @required this.orcamento,
+      @required this.buttonAction,
+      @required this.notifyParent})
+      : super(key: key);
 
   final double screenSize;
   final List<int> orcamento;
   final Function buttonAction;
-
+  final Function notifyParent;
   @override
   _BudgetEditCardsState createState() => _BudgetEditCardsState();
 }
@@ -114,6 +140,16 @@ class _BudgetEditCardsState extends State<BudgetEditCards> {
               widget.orcamento[i] = valorInt;
             else
               widget.orcamento[i] = -valorInt;
+            totalGanhos = 0;
+            totalGastos = 0;
+            totalGanhos =
+                ((widget.orcamento[kSalario] + widget.orcamento[kPensao]))
+                    .toDouble();
+            widget.orcamento.forEach((element) {
+              totalGastos -= element;
+            });
+            totalGastos += totalGanhos;
+            widget.notifyParent(totalGanhos, totalGastos);
           });
         },
       ));
