@@ -6,7 +6,6 @@ import 'package:flutter_app/util/Database2.dart';
 import 'package:flutter_app/util/constants.dart';
 import 'package:flutter_masked_text/flutter_masked_text.dart';
 
-import 'budget_screen.dart';
 import 'home_screen.dart';
 
 class BudgetEditScreen extends StatefulWidget {
@@ -21,6 +20,7 @@ class _BudgetEditScreenState extends State<BudgetEditScreen> {
   double totalGanhos = 0;
   double totalGastos = 0;
   initState() {
+//todo:erro de index fantasma
     orcamento = [];
     DBProvider2.db.getOrcamento().then((result) {
       print(result);
@@ -57,6 +57,7 @@ class _BudgetEditScreenState extends State<BudgetEditScreen> {
             child: BudgetEditCards(
               screenSize: screenSize,
               orcamento: orcamento,
+              buttonAction: () => print(orcamento),
             ),
           )),
     );
@@ -68,10 +69,12 @@ class BudgetEditCards extends StatefulWidget {
     Key key,
     @required this.screenSize,
     @required this.orcamento,
+    @required this.buttonAction,
   }) : super(key: key);
 
   final double screenSize;
   final List<int> orcamento;
+  final Function buttonAction;
 
   @override
   _BudgetEditCardsState createState() => _BudgetEditCardsState();
@@ -88,15 +91,23 @@ class _BudgetEditCardsState extends State<BudgetEditCards> {
       valorController.add(MoneyMaskedTextController(
           decimalSeparator: ',',
           thousandSeparator: '.',
-          initialValue: widget.orcamento[i].toDouble(),
+          initialValue: (widget.orcamento[i] / 100).toDouble(),
           leftSymbol: 'R\$ '));
       cards.add(MyEditCard(
         screenSize: widget.screenSize,
         text: kListaCategorias[i],
         valor: widget.orcamento[i] / 100,
         controller: valorController[i],
-        onChange: (_) {
-          print('${valorController[i].text}');
+        onChange: (value) {
+          setState(() {
+            //print(valorController[i].numberValue);
+            valorController[i].updateValue(valorController[i].numberValue);
+            int valorInt = (valorController[i].numberValue * 100).toInt();
+            if (i == kSalario || i == kPensao)
+              widget.orcamento[i] = valorInt;
+            else
+              widget.orcamento[i] = -valorInt;
+          });
         },
       ));
     }
@@ -105,8 +116,9 @@ class _BudgetEditCardsState extends State<BudgetEditCards> {
       BudgetButton(
         screenSize: widget.screenSize,
         text: 'Salvar',
-        onTap: () => Navigator.push(
-            context, MaterialPageRoute(builder: (context) => BudgetScreen())),
+        /*onTap: () => Navigator.push(
+            context, MaterialPageRoute(builder: (context) => BudgetScreen())),*/
+        onTap: widget.buttonAction,
       ),
     );
 
