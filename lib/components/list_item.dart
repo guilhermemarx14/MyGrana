@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_app/components/my_dialog.dart';
 import 'package:flutter_app/model/transacao.dart';
 import 'package:flutter_app/util/constants.dart';
+import 'package:flutter_money_formatter/flutter_money_formatter.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 
 class ListItem extends StatelessWidget {
@@ -15,6 +16,12 @@ class ListItem extends StatelessWidget {
         ? kListaCategorias[transacao.category]
         : transacao.descricao + ' - ' + kListaCategorias[transacao.category];
     if (title.length > 20) title = title.substring(0, 19) + '...';
+
+    var maskedValue = FlutterMoneyFormatter(
+      amount: transacao.value / 100,
+      settings: MoneyFormatterSettings(
+          thousandSeparator: '.', decimalSeparator: ',', fractionDigits: 2),
+    );
     return GestureDetector(
       onTap: () {
         showDialog(
@@ -42,7 +49,7 @@ class ListItem extends StatelessWidget {
                 Row(
                   children: <Widget>[
                     Text(
-                      'R\$ ${(transacao.value / 100).toStringAsFixed(2).replaceAll('.', '\,')}',
+                      'R\$ ${maskedValue.output.nonSymbol}',
                       style: TextStyle(
                         fontSize: 20.0,
                         color: transacao.value > 0 ? Colors.green : Colors.red,

@@ -10,6 +10,7 @@ import 'package:flutter_app/screens/statements_filter_screen.dart';
 import 'package:flutter_app/util/Database1.dart';
 import 'package:flutter_app/util/Database2.dart';
 import 'package:flutter_app/util/constants.dart';
+import 'package:flutter_money_formatter/flutter_money_formatter.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
@@ -18,6 +19,7 @@ import 'informations_screen.dart';
 double total = 0;
 double totalNaoPago = 0;
 
+//todo mascara monetaria
 class HomeScreen extends StatefulWidget {
   HomeScreen({this.p});
   Profile p;
@@ -143,6 +145,18 @@ class TotalELancamentos extends StatefulWidget {
 class _TotalELancamentosState extends State<TotalELancamentos> {
   @override
   Widget build(BuildContext context) {
+    var maskedMeuDinheiro = FlutterMoneyFormatter(
+      amount: total,
+      settings: MoneyFormatterSettings(
+          thousandSeparator: '.', decimalSeparator: ',', fractionDigits: 2),
+    );
+
+    var maskedNaoPagos = FlutterMoneyFormatter(
+      amount: totalNaoPago,
+      settings: MoneyFormatterSettings(
+          thousandSeparator: '.', decimalSeparator: ',', fractionDigits: 2),
+    );
+
     return Row(
       mainAxisAlignment: MainAxisAlignment.spaceEvenly,
       children: <Widget>[
@@ -155,8 +169,8 @@ class _TotalELancamentosState extends State<TotalELancamentos> {
             children: <Widget>[
               Text(
                 total >= 0
-                    ? 'R\$ ${total.toStringAsFixed(2)}'
-                    : '- R\$ ${(-total).toStringAsFixed(2)}',
+                    ? 'R\$ ${maskedMeuDinheiro.output.nonSymbol}'
+                    : 'R\$ ${maskedMeuDinheiro.output.nonSymbol}',
                 style: TextStyle(
                   fontSize: 20.0,
                   color: total >= 0 ? Colors.green : Colors.red,
@@ -183,8 +197,8 @@ class _TotalELancamentosState extends State<TotalELancamentos> {
             children: <Widget>[
               Text(
                 totalNaoPago >= 0
-                    ? 'R\$ ${totalNaoPago.toStringAsFixed(2).replaceFirst('\,', '.')}'
-                    : '- R\$ ${(-totalNaoPago).toStringAsFixed(2).replaceFirst('\,', '.')}',
+                    ? 'R\$ ${maskedNaoPagos.output.nonSymbol}'
+                    : 'R\$ ${maskedNaoPagos.output.nonSymbol}',
                 style: TextStyle(
                   fontSize: 20.0,
                   color: totalNaoPago >= 0 ? Colors.green : Colors.red,

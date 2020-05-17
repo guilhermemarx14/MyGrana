@@ -3,6 +3,7 @@ import 'package:flutter_app/components/budget_button.dart';
 import 'package:flutter_app/components/my_card.dart';
 import 'package:flutter_app/util/Database2.dart';
 import 'package:flutter_app/util/constants.dart';
+import 'package:flutter_money_formatter/flutter_money_formatter.dart';
 
 import 'budget_details_screen.dart';
 import 'home_screen.dart';
@@ -168,6 +169,18 @@ class Total extends StatefulWidget {
 class _TotalState extends State<Total> {
   @override
   Widget build(BuildContext context) {
+    var maskedTotalGanhos = FlutterMoneyFormatter(
+      amount: widget.totalGanhos,
+      settings: MoneyFormatterSettings(
+          thousandSeparator: '.', decimalSeparator: ',', fractionDigits: 2),
+    );
+
+    var maskedTotalGastos = FlutterMoneyFormatter(
+      amount: widget.totalGastos,
+      settings: MoneyFormatterSettings(
+          thousandSeparator: '.', decimalSeparator: ',', fractionDigits: 2),
+    );
+
     return Row(
       mainAxisAlignment: MainAxisAlignment.spaceEvenly,
       children: <Widget>[
@@ -180,7 +193,7 @@ class _TotalState extends State<Total> {
             children: <Widget>[
               Text(
                 'R\$ '
-                '${widget.totalGanhos.toStringAsFixed(2).replaceAll('.', '\,')}',
+                '${maskedTotalGanhos.output.nonSymbol}',
                 style: TextStyle(
                   fontSize: 20.0,
                   color: Colors.green,
@@ -207,7 +220,7 @@ class _TotalState extends State<Total> {
             children: <Widget>[
               Text(
                 'R\$ '
-                '${(widget.totalGastos).toStringAsFixed(2).replaceAll('.', '\,')}',
+                '${maskedTotalGastos.output.nonSymbol}',
                 style: TextStyle(
                   fontSize: 20.0,
                   color: Colors.red,

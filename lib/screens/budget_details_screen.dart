@@ -6,6 +6,7 @@ import 'package:flutter_app/model/transacao.dart';
 import 'package:flutter_app/screens/statements_screen.dart';
 import 'package:flutter_app/util/Database2.dart';
 import 'package:flutter_app/util/constants.dart';
+import 'package:flutter_money_formatter/flutter_money_formatter.dart';
 
 import 'budget_edit_screen.dart';
 import 'budget_screen.dart';
@@ -20,7 +21,6 @@ class BudgetDetailsScreen extends StatefulWidget {
 }
 
 class _BudgetDetailsScreenState extends State<BudgetDetailsScreen> {
-  //todo mascara monetaria
   List<int> orcamento;
   List<Transacao> transacoes;
   double totalGanhos = 0;
@@ -65,6 +65,7 @@ class _BudgetDetailsScreenState extends State<BudgetDetailsScreen> {
   }
 
   Widget build(BuildContext context) {
+    if (orcamento.isEmpty) setState(() {});
     double screenSize = MediaQuery.of(context).size.width;
     String titulo = widget.type == ORCAMENTO
         ? 'Orçamento Planejado para\n'
@@ -126,6 +127,8 @@ class BudgetCards extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    var maskedText = [];
+
     List<Widget> cards = [];
     if (type == TRANSACOES) {
       if (orcamento.isNotEmpty) orcamento.removeLast();
@@ -134,11 +137,15 @@ class BudgetCards extends StatelessWidget {
         orcamento[transacoes[i].category] += transacoes[i].value;
     }
     for (int i = 0; i < kTotalCategorias; i++) {
-      //print('$i ${orcamento[i]}');
       String valorCategoria;
+      //print('$i ${orcamento[i]}');
       try {
-        valorCategoria = 'R\$ ' +
-            (orcamento[i] / 100).toStringAsFixed(2).replaceAll('.', '\,');
+        maskedText.add(FlutterMoneyFormatter(
+          amount: orcamento[i] / 100,
+          settings: MoneyFormatterSettings(
+              thousandSeparator: '.', decimalSeparator: ',', fractionDigits: 2),
+        ));
+        valorCategoria = 'R\$ ' + maskedText[i].output.nonSymbol;
       } catch (Exception) {
         valorCategoria =
             'R\$ ' + (0.0).toStringAsFixed(2).replaceAll('.', '\,');

@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_app/components/list_item.dart';
 import 'package:flutter_app/util/Database2.dart';
 import 'package:flutter_app/util/constants.dart';
+import 'package:flutter_money_formatter/flutter_money_formatter.dart';
 
 class StatementsScreen extends StatefulWidget {
   StatementsScreen({this.categoria, this.mes, this.ano, this.onTap, this.type});
@@ -67,7 +68,11 @@ class _StatementsScreenState extends State<StatementsScreen> {
           ),
         ),
       );
-
+    var maskedTotal = FlutterMoneyFormatter(
+      amount: total / 100,
+      settings: MoneyFormatterSettings(
+          thousandSeparator: '.', decimalSeparator: ',', fractionDigits: 2),
+    );
     return Scaffold(
       backgroundColor: Colors.blue.shade700,
       body: wid,
@@ -93,7 +98,7 @@ class _StatementsScreenState extends State<StatementsScreen> {
                 ),
               ),
               Text(
-                'R\$ ${(total / 100).toStringAsFixed(2).replaceAll('.', '\,')}',
+                'R\$ ${maskedTotal.output.nonSymbol}',
                 style: TextStyle(
                   fontWeight: FontWeight.bold,
                   fontSize: 25.0,
