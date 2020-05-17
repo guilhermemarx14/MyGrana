@@ -15,6 +15,7 @@ const TextStyle kStatementsStyle =
 const String SALARIO = 'Salário';
 const String PENSAO = 'Pensão';
 const String MORADIA = 'Moradia';
+const String HIGIENE = 'Higiene';
 const String ALIMENTACAO = 'Alimentação';
 const String LAZER = 'Lazer';
 const String VESTIMENTA = 'Vestimenta';
@@ -25,18 +26,21 @@ const String UNIVERSIDADE = 'Universidade';
 const String TODOS = 'Todos';
 
 const int kAlimentacao = 0;
-const int kInvestimento = 1;
-const int kLazer = 2;
-const int kMoradia = 3;
-const int kPensao = 4;
-const int kSalario = 5;
-const int kSaude = 6;
-const int kTransporte = 7;
-const int kUniversidade = 8;
-const int kVestimenta = 9;
-const int kTotalCategorias = 10;
+const int kHigiene = 1;
+const int kInvestimento = 2;
+const int kLazer = 3;
+const int kMoradia = 4;
+const int kPensao = 5;
+const int kSalario = 6;
+const int kSaude = 7;
+const int kTransporte = 8;
+const int kUniversidade = 9;
+const int kVestimenta = 10;
+const int kOutros = 11;
+const int kTotalCategorias = 12;
 const List<String> kListaCategorias = [
   'Alimentação',
+  'Higiene',
   'Investimento',
   'Lazer',
   'Moradia',
@@ -46,6 +50,7 @@ const List<String> kListaCategorias = [
   'Transporte',
   'Universidade',
   'Vestimenta',
+  'Outros',
 ];
 
 const List<String> kMeses = [

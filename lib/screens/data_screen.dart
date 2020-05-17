@@ -19,7 +19,6 @@ import 'package:toast/toast.dart';
 Profile profile;
 
 class DataScreen extends StatelessWidget {
-  //todo: símbolo de carregando
   DataScreen() {
     profile = Profile();
     profile.plataforma = Platform.isIOS ? 'ios' : 'android';

@@ -20,6 +20,7 @@ class BudgetDetailsScreen extends StatefulWidget {
 }
 
 class _BudgetDetailsScreenState extends State<BudgetDetailsScreen> {
+  //todo mascara monetaria
   List<int> orcamento;
   List<Transacao> transacoes;
   double totalGanhos = 0;

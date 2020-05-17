@@ -14,6 +14,7 @@ class StatementsScreen extends StatefulWidget {
   _StatementsScreenState createState() => _StatementsScreenState();
 }
 
+//todo: delete statement
 class _StatementsScreenState extends State<StatementsScreen> {
   var transacoes = [];
   var total = 0.0;

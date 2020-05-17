@@ -76,8 +76,10 @@ class _SplashScreenState extends State<SplashScreen> {
   @override
   Widget build(BuildContext context) {
     // TODO: tela de splash
-    return Text('ESTA É A TELA DE SPLASH',
-        style: TextStyle(fontWeight: FontWeight.bold, fontSize: 40));
+    return Center(
+      child: Text('SPLASH',
+          style: TextStyle(fontWeight: FontWeight.bold, fontSize: 40)),
+    );
     ;
   }
 }

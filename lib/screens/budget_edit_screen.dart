@@ -24,7 +24,6 @@ class _BudgetEditScreenState extends State<BudgetEditScreen> {
   List<int> orcamento;
 
   initState() {
-//todo:erro de index fantasma
     orcamento = [];
     totalGanhos = 0;
     totalGastos = 0;
@@ -117,43 +116,43 @@ class _BudgetEditCardsState extends State<BudgetEditCards> {
   Widget build(BuildContext context) {
     List<Widget> cards = [];
     var valorController = [];
-
-    for (int i = 0; i < kTotalCategorias; i++) {
-      //print('$i ${orcamento[i]}');
-      valorController.add(MoneyMaskedTextController(
-          decimalSeparator: ',',
-          thousandSeparator: '.',
-          initialValue: (widget.orcamento[i] / 100).toDouble(),
-          leftSymbol: 'R\$ '));
-      cards.add(MyEditCard(
-        category: i,
-        screenSize: widget.screenSize,
-        text: kListaCategorias[i],
-        valor: widget.orcamento[i] / 100,
-        controller: valorController[i],
-        onChange: (value) {
-          setState(() {
-            //print(valorController[i].numberValue);
-            valorController[i].updateValue(valorController[i].numberValue);
-            int valorInt = (valorController[i].numberValue * 100).toInt();
-            if (i == kSalario || i == kPensao)
-              widget.orcamento[i] = valorInt;
-            else
-              widget.orcamento[i] = -valorInt;
-            totalGanhos = 0;
-            totalGastos = 0;
-            totalGanhos =
-                ((widget.orcamento[kSalario] + widget.orcamento[kPensao]))
-                    .toDouble();
-            widget.orcamento.forEach((element) {
-              totalGastos -= element;
+    if (widget.orcamento.isNotEmpty)
+      for (int i = 0; i < kTotalCategorias; i++) {
+        //print('$i ${orcamento[i]}');
+        valorController.add(MoneyMaskedTextController(
+            decimalSeparator: ',',
+            thousandSeparator: '.',
+            initialValue: (widget.orcamento[i] / 100).toDouble(),
+            leftSymbol: 'R\$ '));
+        cards.add(MyEditCard(
+          category: i,
+          screenSize: widget.screenSize,
+          text: kListaCategorias[i],
+          valor: widget.orcamento[i] / 100,
+          controller: valorController[i],
+          onChange: (value) {
+            setState(() {
+              //print(valorController[i].numberValue);
+              valorController[i].updateValue(valorController[i].numberValue);
+              int valorInt = (valorController[i].numberValue * 100).toInt();
+              if (i == kSalario || i == kPensao)
+                widget.orcamento[i] = valorInt;
+              else
+                widget.orcamento[i] = -valorInt;
+              totalGanhos = 0;
+              totalGastos = 0;
+              totalGanhos =
+                  ((widget.orcamento[kSalario] + widget.orcamento[kPensao]))
+                      .toDouble();
+              widget.orcamento.forEach((element) {
+                totalGastos -= element;
+              });
+              totalGastos += totalGanhos;
+              widget.notifyParent(totalGanhos, totalGastos);
             });
-            totalGastos += totalGanhos;
-            widget.notifyParent(totalGanhos, totalGastos);
-          });
-        },
-      ));
-    }
+          },
+        ));
+      }
 
     cards.add(
       BudgetButton(

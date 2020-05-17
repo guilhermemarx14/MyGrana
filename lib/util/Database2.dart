@@ -250,14 +250,14 @@ class DBProvider2 {
 
     //CRIA A ENTRADA NO BANCO DE DADOS
     await db.execute(
-        "INSERT INTO `budget` (`id`,`$kAlimentacao`,`$kInvestimento`,`$kLazer`,`$kMoradia`,`$kPensao`,`$kSalario`,`$kSaude`,`$kTransporte`,`$kUniversidade`,`$kVestimenta`) VALUES ('1','${p.alimentacao}'"
-        ",'${p.investimento}','${p.lazer}','${p.moradia}','${p.pensao}','${p.salario}','${p.saude}','${p.transporte}','${p.universidade}','${p.vestimenta}');");
+        "INSERT INTO `budget` (`id`,`$kAlimentacao`,`$kHigiene`,`$kInvestimento`,`$kLazer`,`$kMoradia`,`$kPensao`,`$kSalario`,`$kSaude`,`$kTransporte`,`$kUniversidade`,`$kVestimenta``$kOutros`,) VALUES ('1','${p.alimentacao}'"
+        ",'${p.higiene}','${p.investimento}','${p.lazer}','${p.moradia}','${p.pensao}','${p.salario}','${p.saude}','${p.transporte}','${p.universidade}','${p.vestimenta}','${p.outros}');");
   }
 
   updateOrcamento(Orcamento o) async {
     final db = await database;
     //ATUALIZA A ENTRADA NO BANCO DE DADOS
     await db.execute(
-        "UPDATE `budget` SET `$kAlimentacao`='${o.alimentacao}',`$kInvestimento`='${o.investimento}',`$kLazer`='${o.lazer}',`$kMoradia`='${o.moradia}',`$kPensao`='${o.pensao}',`$kSalario`='${o.salario}',`$kSaude`='${o.saude}',`$kTransporte`='${o.transporte}',`$kUniversidade`='${o.universidade}',`$kVestimenta`='${o.vestimenta}' WHERE id= '1';");
+        "UPDATE `budget` SET `$kAlimentacao`='${o.alimentacao}',`$kHigiene`='${o.higiene}',`$kInvestimento`='${o.investimento}',`$kLazer`='${o.lazer}',`$kMoradia`='${o.moradia}',`$kPensao`='${o.pensao}',`$kSalario`='${o.salario}',`$kSaude`='${o.saude}',`$kTransporte`='${o.transporte}',`$kUniversidade`='${o.universidade}',`$kVestimenta`='${o.vestimenta}',`$kOutros`='${o.outros}' WHERE id = '1'");
   }
 }
