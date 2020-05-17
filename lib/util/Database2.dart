@@ -112,51 +112,51 @@ class DBProvider2 {
 
     _database
         .reference()
+        .child(p.nome)
+        .child('${p.plataforma}')
         .child('${p.estado}')
         .child('${p.cidade}')
         .child('${p.universidade}')
-        .child('${p.plataforma}')
-        .child(p.hash)
         .child("${t.id}")
         .child("Data")
         .set(t.date);
     _database
         .reference()
+        .child(p.nome)
+        .child('${p.plataforma}')
         .child('${p.estado}')
         .child('${p.cidade}')
         .child('${p.universidade}')
-        .child('${p.plataforma}')
-        .child(p.hash)
         .child("${t.id}")
         .child("Descricao")
         .set(t.descricao);
     _database
         .reference()
+        .child(p.nome)
+        .child('${p.plataforma}')
         .child('${p.estado}')
         .child('${p.cidade}')
         .child('${p.universidade}')
-        .child('${p.plataforma}')
-        .child(p.hash)
         .child("${t.id}")
         .child("Pago")
         .set(t.paid ? 1 : 0);
     _database
         .reference()
+        .child(p.nome)
+        .child('${p.plataforma}')
         .child('${p.estado}')
         .child('${p.cidade}')
         .child('${p.universidade}')
-        .child('${p.plataforma}')
-        .child(p.hash)
         .child("${t.id}")
         .child("Valor")
         .set(t.value);
     _database
         .reference()
+        .child(p.nome)
+        .child('${p.plataforma}')
         .child('${p.estado}')
         .child('${p.cidade}')
         .child('${p.universidade}')
-        .child('${p.plataforma}')
-        .child(p.hash)
         .child("${t.id}")
         .child("Categoria")
         .set(t.category);
