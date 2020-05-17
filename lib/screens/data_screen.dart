@@ -216,9 +216,9 @@ class _StateScreen extends State<StateScreen> {
                           color: kWhite,
                         ),
                         style: TextStyle(
-                            fontSize: 20.0,
-                            color: kWhite,
-                            fontWeight: FontWeight.bold),
+                          fontSize: 20.0,
+                          color: kWhite,
+                        ),
                         items: nomesCidades.map((String value) {
                           return DropdownMenuItem<String>(
                             value: value,
