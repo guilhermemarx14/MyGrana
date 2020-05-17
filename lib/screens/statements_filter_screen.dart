@@ -157,7 +157,11 @@ class _StatementsFilterScreenState extends State<StatementsFilterScreen> {
                   MaterialPageRoute(
                       builder: (context) => StatementsScreen(
                             categoria: selectedDropdownCategoria,
-                            mes: selectedDropdownMes,
+                            mes: kMeses.indexOf(selectedDropdownMes) == -1
+                                ? TODOS
+                                : kMeses
+                                    .indexOf(selectedDropdownMes)
+                                    .toString(),
                             ano: selectedDropdownAno,
                           )),
                 );
