@@ -170,9 +170,14 @@ class _StatementsFilterScreenState extends State<StatementsFilterScreen> {
           ],
         ),
         appBar: AppBar(
-          title: Text(
-            'Extratos',
-            style: TextStyle(fontWeight: FontWeight.bold),
+          title: Center(
+            child: Padding(
+              padding: const EdgeInsets.fromLTRB(0.0, 0.0, 35.0, 0.0),
+              child: Text(
+                'Extratos',
+                style: TextStyle(fontWeight: FontWeight.bold),
+              ),
+            ),
           ),
         ),
       ),

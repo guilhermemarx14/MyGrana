@@ -106,9 +106,14 @@ class _InformationScreenState extends State<InformationScreen> {
           ),
         ),
         appBar: AppBar(
-          title: Text(
-            'Sobre o app',
-            style: TextStyle(fontWeight: FontWeight.bold),
+          title: Center(
+            child: Padding(
+              padding: const EdgeInsets.fromLTRB(0.0, 0.0, 35.0, 0.0),
+              child: Text(
+                'Sobre o app',
+                style: TextStyle(fontWeight: FontWeight.bold),
+              ),
+            ),
           ),
         ),
       ),

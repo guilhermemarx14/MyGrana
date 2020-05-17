@@ -52,10 +52,15 @@ class _BudgetEditScreenState extends State<BudgetEditScreen> {
       child: Scaffold(
           backgroundColor: Colors.blue.shade100,
           appBar: AppBar(
-            title: Text(
-              titulo,
-              textAlign: TextAlign.center,
-              style: TextStyle(fontWeight: FontWeight.bold),
+            title: Center(
+              child: Padding(
+                padding: const EdgeInsets.fromLTRB(0.0, 0.0, 35.0, 0.0),
+                child: Text(
+                  titulo,
+                  textAlign: TextAlign.center,
+                  style: TextStyle(fontWeight: FontWeight.bold),
+                ),
+              ),
             ),
           ),
           body: SingleChildScrollView(

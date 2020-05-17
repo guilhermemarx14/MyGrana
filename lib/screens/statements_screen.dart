@@ -77,9 +77,14 @@ class _StatementsScreenState extends State<StatementsScreen> {
       backgroundColor: Colors.blue.shade700,
       body: wid,
       appBar: AppBar(
-        title: Text(
-          'Extrato',
-          style: TextStyle(fontWeight: FontWeight.bold),
+        title: Center(
+          child: Padding(
+            padding: const EdgeInsets.fromLTRB(0.0, 0.0, 35.0, 0.0),
+            child: Text(
+              'Extrato',
+              style: TextStyle(fontWeight: FontWeight.bold),
+            ),
+          ),
         ),
       ),
       bottomNavigationBar: BottomAppBar(

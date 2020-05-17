@@ -60,9 +60,14 @@ class _BudgetScreenState extends State<BudgetScreen> {
       child: Scaffold(
         backgroundColor: Colors.blue.shade100,
         appBar: AppBar(
-          title: Text(
-            'Orçamento ${kMeses[DateTime.now().month]}/${DateTime.now().year.toString()}',
-            style: TextStyle(fontWeight: FontWeight.bold),
+          title: Center(
+            child: Padding(
+              padding: const EdgeInsets.fromLTRB(0.0, 0.0, 35.0, 0.0),
+              child: Text(
+                'Orçamento ${kMeses[DateTime.now().month]}/${DateTime.now().year.toString()}',
+                style: TextStyle(fontWeight: FontWeight.bold),
+              ),
+            ),
           ),
         ),
         body: Column(
