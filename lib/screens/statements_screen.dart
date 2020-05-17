@@ -82,7 +82,7 @@ class _StatementsScreenState extends State<StatementsScreen> {
             padding: const EdgeInsets.fromLTRB(0.0, 0.0, 35.0, 0.0),
             child: Text(
               'Extrato',
-              style: TextStyle(fontWeight: FontWeight.bold),
+              style: TextStyle(fontWeight: FontWeight.bold, fontSize: 30.0),
             ),
           ),
         ),

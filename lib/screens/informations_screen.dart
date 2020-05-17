@@ -111,7 +111,7 @@ class _InformationScreenState extends State<InformationScreen> {
               padding: const EdgeInsets.fromLTRB(0.0, 0.0, 35.0, 0.0),
               child: Text(
                 'Sobre o app',
-                style: TextStyle(fontWeight: FontWeight.bold),
+                style: TextStyle(fontWeight: FontWeight.bold, fontSize: 30.0),
               ),
             ),
           ),
