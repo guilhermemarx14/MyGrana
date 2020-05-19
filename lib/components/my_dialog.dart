@@ -76,7 +76,7 @@ class _MyDialogState extends State<MyDialog> {
         ),
       ),
       content: Container(
-        height: 400,
+        height: MediaQuery.of(context).size.height / 1.5,
         child: SingleChildScrollView(
           child: Column(
             mainAxisSize: MainAxisSize.min,
@@ -379,7 +379,7 @@ class _MyEditDialogState extends State<MyEditDialog> {
         ),
       ),
       content: Container(
-        height: 400,
+        height: MediaQuery.of(context).size.height / 1.5,
         child: SingleChildScrollView(
           child: Column(
             mainAxisSize: MainAxisSize.min,
