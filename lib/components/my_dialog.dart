@@ -11,6 +11,7 @@ import 'package:flutter_masked_text/flutter_masked_text.dart';
 import 'package:toast/toast.dart';
 
 import 'my_calendar.dart';
+import 'my_card.dart';
 
 class MyDialog extends StatefulWidget {
   MyDialog(
@@ -38,7 +39,7 @@ class _MyDialogState extends State<MyDialog> {
       thousandSeparator: '.',
       initialValue: 0,
       leftSymbol: 'R\$ ');
-  var checkedValue = false;
+  var checkedValue = true;
   var currentDate;
   var selectedDate;
   int valueCategoria;
@@ -253,19 +254,39 @@ class _MyDialogState extends State<MyDialog> {
               Row(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: <Widget>[
-                  FlatButton(
-                    child:
-                        Text('Cancelar', style: TextStyle(color: Colors.blue)),
-                    onPressed: () {
+                  MyCard(
+                    color: Colors.blue.shade700,
+                    width: MediaQuery.of(context).size.width / 4,
+                    height: 50.0,
+                    cardChild: Center(
+                      child: Text(
+                        'Cancelar',
+                        style: TextStyle(
+                          color: Colors.white,
+                          fontWeight: FontWeight.bold,
+                          fontSize: 15.0,
+                        ),
+                      ),
+                    ),
+                    onTap: () {
                       Navigator.pop(context);
                     },
                   ),
-                  FlatButton(
-                    child: Text(
-                      'Confirmar',
-                      style: TextStyle(color: Colors.blue),
+                  MyCard(
+                    color: Colors.blue.shade700,
+                    width: MediaQuery.of(context).size.width / 4,
+                    height: 50.0,
+                    cardChild: Center(
+                      child: Text(
+                        'Confirmar',
+                        style: TextStyle(
+                          color: Colors.white,
+                          fontWeight: FontWeight.bold,
+                          fontSize: 15.0,
+                        ),
+                      ),
                     ),
-                    onPressed: () {
+                    onTap: () {
                       transacao.value = transacao.value ?? 0;
                       if (transacao.value != 0) {
                         DBProvider2.db.updateTransacaoId();
@@ -532,19 +553,39 @@ class _MyEditDialogState extends State<MyEditDialog> {
               Row(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: <Widget>[
-                  FlatButton(
-                    child:
-                        Text('Cancelar', style: TextStyle(color: Colors.blue)),
-                    onPressed: () {
+                  MyCard(
+                    color: Colors.blue.shade700,
+                    width: MediaQuery.of(context).size.width / 4,
+                    height: 50.0,
+                    cardChild: Center(
+                      child: Text(
+                        'Cancelar',
+                        style: TextStyle(
+                          color: Colors.white,
+                          fontWeight: FontWeight.bold,
+                          fontSize: 15.0,
+                        ),
+                      ),
+                    ),
+                    onTap: () {
                       Navigator.pop(context);
                     },
                   ),
-                  FlatButton(
-                    child: Text(
-                      'Confirmar',
-                      style: TextStyle(color: Colors.blue),
+                  MyCard(
+                    color: Colors.blue.shade700,
+                    width: MediaQuery.of(context).size.width / 4,
+                    height: 50.0,
+                    cardChild: Center(
+                      child: Text(
+                        'Confirmar',
+                        style: TextStyle(
+                          color: Colors.white,
+                          fontWeight: FontWeight.bold,
+                          fontSize: 15.0,
+                        ),
+                      ),
                     ),
-                    onPressed: () {
+                    onTap: () {
                       widget.transacao.value = widget.transacao.value ?? 0;
                       if (widget.transacao.value != 0) {
                         DBProvider2.db.updateTransacao(widget.transacao);
