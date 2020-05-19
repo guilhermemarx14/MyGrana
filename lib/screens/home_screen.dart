@@ -14,6 +14,7 @@ import 'package:flutter_money_formatter/flutter_money_formatter.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
+import 'budget_details_screen.dart';
 import 'informations_screen.dart';
 
 double total = 0;
@@ -241,27 +242,22 @@ class _FirstLineOptionsState extends State<FirstLineOptions> {
         HomeItem(
           height: widget.screenSize / 4,
           width: widget.screenSize / 4,
-          icon: FontAwesomeIcons.coins,
-          title: 'Extratos',
-          onPressed: () {
-            Navigator.push(
+          icon: FontAwesomeIcons.searchDollar,
+          title: 'Gastos e Rendas',
+          onPressed: () => Navigator.push(
               context,
-              MaterialPageRoute(builder: (context) => StatementsFilterScreen()),
-            );
-          },
+              MaterialPageRoute(
+                  builder: (context) => BudgetDetailsScreen(TRANSACOES))),
         ),
         HomeItem(
-          height: widget.screenSize / 4,
-          width: widget.screenSize / 4,
-          icon: FontAwesomeIcons.clipboardList,
-          title: 'Orçamento',
-          onPressed: () {
-            Navigator.push(
-              context,
-              MaterialPageRoute(builder: (context) => BudgetScreen()),
-            );
-          },
-        ),
+            height: widget.screenSize / 4,
+            width: widget.screenSize / 4,
+            icon: FontAwesomeIcons.clipboardList,
+            title: 'Planejamento',
+            onPressed: () => Navigator.push(
+                context,
+                MaterialPageRoute(
+                    builder: (context) => BudgetDetailsScreen(ORCAMENTO)))),
         HomeItem(
           height: widget.screenSize / 4,
           width: widget.screenSize / 4,
@@ -292,6 +288,30 @@ class _SecondLineOptionsState extends State<SecondLineOptions> {
     return Row(
       mainAxisAlignment: MainAxisAlignment.spaceEvenly,
       children: <Widget>[
+        HomeItem(
+          height: widget.screenSize / 4,
+          width: widget.screenSize / 4,
+          icon: FontAwesomeIcons.coins,
+          title: 'Extratos',
+          onPressed: () {
+            Navigator.push(
+              context,
+              MaterialPageRoute(builder: (context) => StatementsFilterScreen()),
+            );
+          },
+        ),
+        HomeItem(
+          height: widget.screenSize / 4,
+          width: widget.screenSize / 4,
+          icon: FontAwesomeIcons.tasks,
+          title: 'a definir',
+          onPressed: () {
+            Navigator.push(
+              context,
+              MaterialPageRoute(builder: (context) => BudgetScreen()),
+            );
+          },
+        ),
         HomeItem(
           height: widget.screenSize / 4,
           width: widget.screenSize / 4,
