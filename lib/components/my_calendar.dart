@@ -41,6 +41,7 @@ class _MyCalendarState extends State<MyCalendar> {
   Widget build(BuildContext context) {
     /// Example with custom icon
     _calendarCarousel = CalendarCarousel<Event>(
+      isScrollable: false,
       onDayPressed: (DateTime date, List<Event> events) {
         this.setState(() => _currentDate = date);
       },
@@ -82,6 +83,7 @@ class _MyCalendarState extends State<MyCalendar> {
 
     /// Example Calendar Carousel without header and custom prev & next button
     _calendarCarouselNoHeader = CalendarCarousel<Event>(
+      isScrollable: false,
       todayBorderColor: Colors.blue.shade700,
       onDayPressed: (DateTime date, List<Event> events) {
         this.setState(() => _currentDate = date);
@@ -148,7 +150,8 @@ class _MyCalendarState extends State<MyCalendar> {
             _currentDate = date;
           });
         },
-
+        pageScrollPhysics: NeverScrollableScrollPhysics(),
+        customGridViewPhysics: NeverScrollableScrollPhysics(),
         prevDaysTextStyle: TextStyle(
           fontSize: 10.0,
           color: Colors.grey,
