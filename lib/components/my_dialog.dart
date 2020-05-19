@@ -514,7 +514,10 @@ class _MyEditDialogState extends State<MyEditDialog> {
                   maxLines: 1,
                   decoration: InputDecoration(border: InputBorder.none),
                   style: TextStyle(
-                    color: Colors.blue.shade500,
+                    color: (widget.transacao.category == kSalario ||
+                            widget.transacao.category == kPensao)
+                        ? Colors.green
+                        : Colors.red,
                     fontSize: 20,
                   ),
                   onChanged: (value) {
