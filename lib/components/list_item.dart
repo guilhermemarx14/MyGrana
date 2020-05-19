@@ -5,6 +5,8 @@ import 'package:flutter_app/util/constants.dart';
 import 'package:flutter_money_formatter/flutter_money_formatter.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 
+import 'delete_dialog.dart';
+
 class ListItem extends StatelessWidget {
   ListItem({@required this.transacao});
 
@@ -33,6 +35,15 @@ class ListItem extends StatelessWidget {
             );
           },
         );
+      },
+      onLongPress: () {
+        showDialog(
+            context: context,
+            builder: (BuildContext context) {
+              return DeleteDialog(
+                transacao: transacao,
+              );
+            });
       },
       child: Container(
         height: 50,

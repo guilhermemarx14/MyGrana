@@ -235,6 +235,12 @@ class DBProvider2 {
     return result;
   }
 
+  deleteTransacao(int id) async {
+    final db = await database;
+
+    await db.rawQuery('Delete from `transaction` where id=$id;');
+  }
+
   //CONSULTAS PARA BUDGET
   Future<Orcamento> getOrcamento() async {
     final db = await database;

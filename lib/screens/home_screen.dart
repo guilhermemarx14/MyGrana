@@ -19,7 +19,6 @@ import 'informations_screen.dart';
 double total = 0;
 double totalNaoPago = 0;
 
-//todo mascara monetaria
 class HomeScreen extends StatefulWidget {
   HomeScreen({this.p});
   Profile p;
