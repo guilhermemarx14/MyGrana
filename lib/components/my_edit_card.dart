@@ -59,6 +59,7 @@ class _MyEditCardState extends State<MyEditCard> {
                 ),
               ),
               child: TextField(
+                keyboardType: TextInputType.number,
                 controller: widget.controller,
                 cursorWidth: 2.0,
                 cursorColor:

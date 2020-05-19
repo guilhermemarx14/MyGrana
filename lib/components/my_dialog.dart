@@ -201,6 +201,7 @@ class _MyDialogState extends State<MyDialog> {
                   ),
                 ),
                 child: TextField(
+                  keyboardType: TextInputType.number,
                   controller: valorController,
                   cursorWidth: 2.0,
                   cursorColor: Colors.blue.shade500,
@@ -505,6 +506,7 @@ class _MyEditDialogState extends State<MyEditDialog> {
                   ),
                 ),
                 child: TextField(
+                  keyboardType: TextInputType.number,
                   controller: _valorController,
                   cursorWidth: 2.0,
                   cursorColor: Colors.blue.shade500,
