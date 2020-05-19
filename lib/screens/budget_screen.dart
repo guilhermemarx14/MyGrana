@@ -1,9 +1,11 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_app/components/budget_button.dart';
 import 'package:flutter_app/components/my_card.dart';
 import 'package:flutter_app/util/Database2.dart';
 import 'package:flutter_app/util/constants.dart';
 import 'package:flutter_money_formatter/flutter_money_formatter.dart';
 
+import 'categories_screen.dart';
 import 'home_screen.dart';
 
 class BudgetScreen extends StatefulWidget {
@@ -86,6 +88,12 @@ class _BudgetScreenState extends State<BudgetScreen> {
                   totalGastos: totalGastosReais / 100,
                 ),
               ],
+            ),
+            BudgetButton(
+              screenSize: MediaQuery.of(context).size.width,
+              text: 'Ver por Categoria',
+              onTap: () => Navigator.push(context,
+                  MaterialPageRoute(builder: (context) => CategoriesScreen())),
             ),
           ],
         ),
