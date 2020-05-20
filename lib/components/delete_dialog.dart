@@ -53,7 +53,7 @@ class DeleteDialog extends StatelessWidget {
               width: MediaQuery.of(context).size.width / 3.7,
               color: Colors.blue.shade700,
               onTap: () {
-                print('${transacao.id}');
+                //print('${transacao.id}');
                 DBProvider2.db.deleteTransacao(transacao, p);
                 Navigator.push(
                   context,
