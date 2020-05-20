@@ -304,7 +304,7 @@ class _SecondLineOptionsState extends State<SecondLineOptions> {
           height: widget.screenSize / 4,
           width: widget.screenSize / 4,
           icon: FontAwesomeIcons.tasks,
-          title: 'Sua saúde financeira',
+          title: 'Orçamento',
           onPressed: () {
             Navigator.push(
               context,

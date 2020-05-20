@@ -38,9 +38,10 @@ class _CategoriesScreenState extends State<CategoriesScreen> {
   @override
   Widget build(BuildContext context) {
     List<int> planejado, real;
-    planejado = orcamento.getBudget();
+    if (orcamento != null) planejado = orcamento.getBudget();
     real = [];
-    for (int i = 0; i < planejado.length; i++) real.add(0);
+    if (planejado != null)
+      for (int i = 0; i < planejado.length; i++) real.add(0);
     transacoes.forEach((transacao) {
       if (transacao.category == kSalario || transacao.category == kPensao)
         real[transacao.category] += transacao.value;
@@ -81,7 +82,7 @@ class _CategoriesScreenState extends State<CategoriesScreen> {
                 Row(
                   children: <Widget>[
                     Text(
-                      'PLANEJADO',
+                      'REAL',
                       style: TextStyle(
                           color: Colors.white,
                           fontWeight: FontWeight.bold,
@@ -90,15 +91,15 @@ class _CategoriesScreenState extends State<CategoriesScreen> {
                     Padding(
                       padding: const EdgeInsets.all(8.0),
                       child: Icon(
-                        FontAwesomeIcons.arrowRight,
+                        FontAwesomeIcons.angleDoubleRight,
                         color: Colors.white,
                         size: 20.0,
                       ),
                     ),
                     Container(
-                      width: 90,
+                      width: 120,
                       child: Text(
-                        'REAL',
+                        'PLANEJADO',
                         style: TextStyle(
                             color: Colors.white,
                             fontWeight: FontWeight.bold,

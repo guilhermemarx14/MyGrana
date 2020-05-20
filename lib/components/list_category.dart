@@ -3,7 +3,6 @@ import 'package:flutter_app/util/constants.dart';
 import 'package:flutter_money_formatter/flutter_money_formatter.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 
-
 class ListCategory extends StatelessWidget {
   ListCategory(
       {@required this.category, @required this.planejado, @required this.real});
@@ -35,7 +34,7 @@ class ListCategory extends StatelessWidget {
         Row(
           children: <Widget>[
             Text(
-              'R\$ ${maskedPlanejado.output.nonSymbol}',
+              'R\$ ${maskedReal.output.nonSymbol}',
               style: TextStyle(
                   color: (category == kSalario || category == kPensao)
                       ? Colors.green
@@ -46,15 +45,15 @@ class ListCategory extends StatelessWidget {
             Padding(
               padding: const EdgeInsets.all(8.0),
               child: Icon(
-                FontAwesomeIcons.arrowRight,
+                FontAwesomeIcons.angleDoubleRight,
                 color: Colors.white,
                 size: 20.0,
               ),
             ),
             Container(
-              width: 90,
+              width: 120,
               child: Text(
-                'R\$ ${maskedReal.output.nonSymbol}',
+                'R\$ ${maskedPlanejado.output.nonSymbol}',
                 style: TextStyle(
                     color: (category == kSalario || category == kPensao)
                         ? Colors.green
