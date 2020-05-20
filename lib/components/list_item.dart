@@ -7,6 +7,7 @@ import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 
 import 'delete_dialog.dart';
 
+// ignore: must_be_immutable
 class ListItem extends StatelessWidget {
   ListItem({@required this.transacao});
 
@@ -40,6 +41,7 @@ class ListItem extends StatelessWidget {
         showDialog(
             context: context,
             builder: (BuildContext context) {
+              //print('call: ' + transacao.toString());
               return DeleteDialog(
                 transacao: transacao,
               );

@@ -235,10 +235,22 @@ class DBProvider2 {
     return result;
   }
 
-  deleteTransacao(int id) async {
+  deleteTransacao(Transacao t, Profile p) async {
     final db = await database;
 
-    await db.rawQuery('Delete from `transaction` where id=$id;');
+    await db.rawQuery('Delete from `transaction` where id=${t.id};');
+
+    final FirebaseDatabase _database = FirebaseDatabase.instance;
+
+    _database
+        .reference()
+        .child('${p.estado}')
+        .child('${p.cidade}')
+        .child('${p.universidade}')
+        .child(p.hash)
+        .child('${p.plataforma}')
+        .child("${t.id}")
+        .remove();
   }
 
   //CONSULTAS PARA BUDGET
