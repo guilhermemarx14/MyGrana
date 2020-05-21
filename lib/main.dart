@@ -76,11 +76,9 @@ class _SplashScreenState extends State<SplashScreen> {
 
   @override
   Widget build(BuildContext context) {
-    // TODO: tela de splash
-    return Center(
-      child: Text('SPLASH',
-          style: TextStyle(fontWeight: FontWeight.bold, fontSize: 40)),
+    return Image.asset(
+      'assets/Xopete.png',
+      fit: BoxFit.fill,
     );
-    ;
   }
 }
