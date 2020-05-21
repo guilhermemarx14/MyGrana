@@ -62,16 +62,26 @@ class _HomeScreenState extends State<HomeScreen> {
   Widget build(BuildContext context) {
     screenSize = MediaQuery.of(context).size.width;
     return Scaffold(
-      backgroundColor: Colors.blue.shade100,
-      floatingActionButton: FloatingActionButtonHome(p: widget.p),
-      body: Column(
-        children: <Widget>[
-          AppBarHome(),
-          TotalELancamentos(screenSize: screenSize),
-          SizedBox(height: 100.0),
-          FirstLineOptions(screenSize: screenSize),
-          SecondLineOptions(screenSize: screenSize),
-        ],
+      body: Container(
+        decoration: BoxDecoration(
+          image: DecorationImage(
+            image: AssetImage('assets/Xopete2.png'),
+            fit: BoxFit.fill,
+          ),
+        ),
+        child: Scaffold(
+          backgroundColor: Colors.transparent,
+          floatingActionButton: FloatingActionButtonHome(p: widget.p),
+          body: Column(
+            children: <Widget>[
+              AppBarHome(),
+              TotalELancamentos(screenSize: screenSize),
+              SizedBox(height: 100.0),
+              FirstLineOptions(screenSize: screenSize),
+              SecondLineOptions(screenSize: screenSize),
+            ],
+          ),
+        ),
       ),
     );
   }
@@ -123,9 +133,9 @@ class AppBarHome extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return AppBar(
-      elevation: 20.0,
+      elevation: 0,
       centerTitle: true,
-      backgroundColor: Colors.blue.shade500,
+      backgroundColor: Colors.transparent,
       title: Text(
         'MyGrana',
         style: TextStyle(fontWeight: FontWeight.bold, fontSize: 30.0),
