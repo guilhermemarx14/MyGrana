@@ -3,7 +3,7 @@ import 'package:flutter/material.dart';
 const Color kBlue = Colors.blue;
 const Color kWhite = Colors.white;
 const Color kBlack = Color(0xFF444444);
-
+const Color kBackground = Color(0xFF86b39e);
 const TextStyle kFormStyle = TextStyle(fontSize: 30.0, color: kWhite);
 const TextStyle kFormStyle2 =
     TextStyle(fontSize: 25.0, color: kWhite, fontWeight: FontWeight.bold);

@@ -120,7 +120,7 @@ class _FloatingActionButtonHomeState extends State<FloatingActionButtonHome> {
         ;
       },
       child: Icon(FontAwesomeIcons.plus),
-      backgroundColor: Colors.blue.shade700,
+      backgroundColor: Color(0xFFf0b239),
     );
   }
 }
@@ -173,7 +173,7 @@ class _TotalELancamentosState extends State<TotalELancamentos> {
         MyCard(
           width: widget.screenSize / 2.5,
           height: 60.0,
-          color: Colors.blue.shade200,
+          color: Colors.white,
           cardChild: Column(
             mainAxisAlignment: MainAxisAlignment.center,
             children: <Widget>[
@@ -201,7 +201,7 @@ class _TotalELancamentosState extends State<TotalELancamentos> {
         MyCard(
           width: widget.screenSize / 2.5,
           height: 60.0,
-          color: Colors.blue.shade200,
+          color: Colors.white,
           cardChild: Column(
             mainAxisAlignment: MainAxisAlignment.center,
             children: <Widget>[

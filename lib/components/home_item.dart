@@ -54,7 +54,7 @@ class _HomeItemState extends State<HomeItem> {
               offset: Offset(2, 4),
             ),
           ],
-          color: !isTapped ? Colors.blue.shade700 : Colors.blue.shade900,
+          color: Color.fromRGBO(56, 49, 38, 100),
           borderRadius: BorderRadius.circular(10),
         ),
       ),
