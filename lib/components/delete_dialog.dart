@@ -13,7 +13,7 @@ class DeleteDialog extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     DBProvider2.db.getProfile().then((profile) => p = profile);
-
+    //print(transacao);
     return AlertDialog(
       backgroundColor: Colors.blue.shade200,
       title: Center(

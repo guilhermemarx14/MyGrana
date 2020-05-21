@@ -82,21 +82,15 @@ class DBProvider2 {
     SharedPreferences prefs = await SharedPreferences.getInstance();
     int id = prefs.getInt('id');
     id = id ?? 1;
-    return id;
-  }
-
-  updateTransacaoId() async {
-    SharedPreferences prefs = await SharedPreferences.getInstance();
-    int id = prefs.getInt('id');
-    id = id ?? 1;
     prefs.setInt('id', id + 1);
+    return id;
   }
 
   createTransacao(Transacao t) async {
     final db = await database;
     //CRIA A ENTRADA NO BANCO DE DADOS
     await db.execute(
-        "INSERT INTO `transaction` (`category`,`date`,`descricao`,`paid`,`value`) VALUES ('${t.category}'"
+        "INSERT INTO `transaction` (`id`,`category`,`date`,`descricao`,`paid`,`value`) VALUES ('${t.id}','${t.category}'"
         ",'${t.date}','${t.descricao}','${t.paid ? 1 : 0}','${t.value}');");
   }
 

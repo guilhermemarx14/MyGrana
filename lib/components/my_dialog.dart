@@ -290,7 +290,6 @@ class _MyDialogState extends State<MyDialog> {
                     onTap: () {
                       transacao.value = transacao.value ?? 0;
                       if (transacao.value != 0) {
-                        DBProvider2.db.updateTransacaoId();
                         DBProvider2.db.createTransacao(transacao);
                         DBProvider2.db.saveTransacao(transacao, p);
                         Navigator.pushAndRemoveUntil(
