@@ -74,6 +74,9 @@ class CategoryItem extends StatelessWidget {
                     progressColor:
                         percent >= 1 && !isGanho ? Colors.red : Colors.green,
                   ),
+                  SizedBox(
+                    height: 10,
+                  ),
                 ],
               ),
             ],

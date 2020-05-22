@@ -10,7 +10,6 @@ class CategoriesScreen extends StatefulWidget {
   _CategoriesScreenState createState() => _CategoriesScreenState();
 }
 
-//todo refatorar a página
 class _CategoriesScreenState extends State<CategoriesScreen> {
   Orcamento orcamento;
   List<Transacao> transacoes = [];
@@ -63,7 +62,7 @@ class _CategoriesScreenState extends State<CategoriesScreen> {
           CategoryItem(
             category: kListaCategorias[i],
             real: real[i].toDouble(),
-            planejado: -planejado[i].toDouble(),
+            planejado: planejado[i].toDouble(),
           ),
         );
     }
