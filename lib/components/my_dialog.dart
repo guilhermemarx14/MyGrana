@@ -372,14 +372,14 @@ class _MyEditDialogState extends State<MyEditDialog> {
   @override
   Widget build(BuildContext context) {
     return AlertDialog(
-      backgroundColor: Colors.blue.shade200,
+      backgroundColor: kBackground,
       title: Center(
         child: Text(
           'Editar transação',
           style: TextStyle(
             fontWeight: FontWeight.bold,
             fontSize: 25,
-            color: Colors.blue.shade700,
+            color: Colors.white,
           ),
         ),
       ),
@@ -397,21 +397,21 @@ class _MyEditDialogState extends State<MyEditDialog> {
                     child: Text(
                       'Categoria:',
                       style: TextStyle(
-                        color: Colors.blue.shade700,
+                        color: Colors.white,
                         fontSize: 20,
                       ),
                     ),
                   ),
                   DropdownButton<String>(
                     value: kListaCategorias[_valueCategoria],
-                    iconEnabledColor: Colors.blue.shade500,
+                    iconEnabledColor: Colors.white,
                     underline: Container(
                       height: 2,
                       width: double.infinity,
-                      color: Colors.blue.shade500,
+                      color: Colors.white,
                     ),
-                    style: kFormStyle.copyWith(
-                        fontSize: 18, color: Colors.blue.shade500),
+                    style:
+                        kFormStyle.copyWith(fontSize: 18, color: Colors.white),
                     items: kListaCategorias.map((String value) {
                       return DropdownMenuItem<String>(
                         value: value,
@@ -448,7 +448,7 @@ class _MyEditDialogState extends State<MyEditDialog> {
               Text(
                 'Data:',
                 style: TextStyle(
-                  color: Colors.blue.shade700,
+                  color: Colors.white,
                   fontSize: 20,
                 ),
               ),
@@ -459,7 +459,7 @@ class _MyEditDialogState extends State<MyEditDialog> {
               Text(
                 'Descrição:',
                 style: TextStyle(
-                  color: Colors.blue.shade700,
+                  color: Colors.white,
                   fontSize: 20,
                 ),
               ),
@@ -467,7 +467,7 @@ class _MyEditDialogState extends State<MyEditDialog> {
                 margin: EdgeInsets.fromLTRB(25, 0, 25, 0),
                 decoration: BoxDecoration(
                   border: Border(
-                    bottom: BorderSide(width: 2.0, color: Colors.blue.shade500),
+                    bottom: BorderSide(width: 2.0, color: Colors.white),
                   ),
                 ),
                 child: TextField(
@@ -476,7 +476,7 @@ class _MyEditDialogState extends State<MyEditDialog> {
                   inputFormatters: [
                     LengthLimitingTextInputFormatter(20),
                   ],
-                  cursorColor: Colors.blue.shade500,
+                  cursorColor: Colors.white,
                   textAlign: TextAlign.center,
                   maxLines: 1,
                   onChanged: (value) {
@@ -487,7 +487,7 @@ class _MyEditDialogState extends State<MyEditDialog> {
                   },
                   decoration: InputDecoration(border: InputBorder.none),
                   style: TextStyle(
-                    color: Colors.blue.shade500,
+                    color: Colors.white,
                     fontSize: 20,
                   ),
                 ),
@@ -498,7 +498,7 @@ class _MyEditDialogState extends State<MyEditDialog> {
               Text(
                 'Valor:',
                 style: TextStyle(
-                  color: Colors.blue.shade700,
+                  color: Colors.white,
                   fontSize: 20,
                 ),
               ),
@@ -506,14 +506,14 @@ class _MyEditDialogState extends State<MyEditDialog> {
                 margin: EdgeInsets.fromLTRB(25, 0, 25, 0),
                 decoration: BoxDecoration(
                   border: Border(
-                    bottom: BorderSide(width: 2.0, color: Colors.blue.shade500),
+                    bottom: BorderSide(width: 2.0, color: Colors.white),
                   ),
                 ),
                 child: TextField(
                   keyboardType: TextInputType.number,
                   controller: _valorController,
                   cursorWidth: 2.0,
-                  cursorColor: Colors.blue.shade500,
+                  cursorColor: Colors.white,
                   textAlign: TextAlign.center,
                   maxLines: 1,
                   decoration: InputDecoration(border: InputBorder.none),
@@ -544,11 +544,13 @@ class _MyEditDialogState extends State<MyEditDialog> {
                   Text(
                     'Pago:',
                     style: TextStyle(
-                      color: Colors.blue.shade700,
+                      color: Colors.white,
                       fontSize: 20,
                     ),
                   ),
                   Checkbox(
+                    checkColor: Color.fromRGBO(56, 49, 38, 100),
+                    activeColor: Colors.white,
                     value: _checkedValue,
                     onChanged: (bool value) {
                       setState(() {
@@ -563,7 +565,7 @@ class _MyEditDialogState extends State<MyEditDialog> {
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: <Widget>[
                   MyCard(
-                    color: Colors.blue.shade700,
+                    color: kButton,
                     width: MediaQuery.of(context).size.width / 4,
                     height: 50.0,
                     cardChild: Center(
@@ -581,7 +583,7 @@ class _MyEditDialogState extends State<MyEditDialog> {
                     },
                   ),
                   MyCard(
-                    color: Colors.blue.shade700,
+                    color: kButton,
                     width: MediaQuery.of(context).size.width / 4,
                     height: 50.0,
                     cardChild: Center(
