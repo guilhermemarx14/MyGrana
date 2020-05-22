@@ -1,12 +1,9 @@
-import 'dart:ui';
-
 import 'package:flutter/material.dart';
-import 'package:flutter_app/components/list_category.dart';
+import 'package:flutter_app/components/category_item.dart';
 import 'package:flutter_app/model/orcamento.dart';
 import 'package:flutter_app/model/transacao.dart';
 import 'package:flutter_app/util/Database2.dart';
 import 'package:flutter_app/util/constants.dart';
-import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 
 class CategoriesScreen extends StatefulWidget {
   @override
@@ -15,10 +12,14 @@ class CategoriesScreen extends StatefulWidget {
 
 //todo refatorar a página
 class _CategoriesScreenState extends State<CategoriesScreen> {
+  bool _loading;
+  double _progressValue;
   Orcamento orcamento;
   List<Transacao> transacoes = [];
   @override
   void initState() {
+    _loading = false;
+    _progressValue = 0.0;
     DBProvider2.db.getOrcamento().then((item) {
       setState(() {
         orcamento = item;
@@ -49,7 +50,13 @@ class _CategoriesScreenState extends State<CategoriesScreen> {
       else
         real[transacao.category] -= transacao.value;
     });
+    double gasto = 100.0;
+    double ganho = 50.0;
+    double percent = gasto / ganho;
     return Scaffold(
+      body: CategoryItem(category: 'Alimentaçao', real: 3000, planejado: 5000),
+    );
+    /*return Scaffold(
       backgroundColor: Colors.blue.shade700,
       appBar: AppBar(
         title: Text(
@@ -119,6 +126,6 @@ class _CategoriesScreenState extends State<CategoriesScreen> {
               real: real[index - 1]);
         },
       ),
-    );
+    );*/
   }
 }
