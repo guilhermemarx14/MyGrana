@@ -20,6 +20,7 @@ Frameworks, bibiotecas e tecnologias utilizadas:
 - flutter_masked_text: ^0.8.0
 - flutter_money_formatter: ^0.8.3
 - percent_indicator: ^2.1.3
+- flutter_launcher_icons: ^0.7.5
 
 Bibliotecas podem ser encontradas no link [https://pub.dev](https://pub.dev "https://pub.dev").
 
