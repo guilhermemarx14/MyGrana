@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_app/components/container_for_numbers.dart';
 import 'package:flutter_app/components/my_dialog.dart';
 import 'package:flutter_app/model/transacao.dart';
 import 'package:flutter_app/util/constants.dart';
@@ -61,12 +62,17 @@ class ListItem extends StatelessWidget {
                 ),
                 Row(
                   children: <Widget>[
-                    Text(
-                      'R\$ ${maskedValue.output.nonSymbol}',
-                      style: TextStyle(
-                        fontSize: 20.0,
-                        color: transacao.value > 0 ? Colors.green : Colors.red,
-                        fontWeight: FontWeight.bold,
+                    ContainerForNumbers(
+                      width: 150,
+                      height: 40,
+                      child: Text(
+                        'R\$ ${maskedValue.output.nonSymbol}',
+                        style: TextStyle(
+                          fontSize: 20.0,
+                          color:
+                              transacao.value > 0 ? Colors.green : Colors.red,
+                          fontWeight: FontWeight.bold,
+                        ),
                       ),
                     ),
                     SizedBox(

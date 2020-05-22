@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_app/components/container_for_numbers.dart';
 import 'package:flutter_app/components/list_item.dart';
 import 'package:flutter_app/util/Database2.dart';
 import 'package:flutter_app/util/constants.dart';
@@ -15,7 +16,6 @@ class StatementsScreen extends StatefulWidget {
   _StatementsScreenState createState() => _StatementsScreenState();
 }
 
-//todo: delete statement
 class _StatementsScreenState extends State<StatementsScreen> {
   var transacoes = [];
   var total = 0.0;
@@ -74,9 +74,11 @@ class _StatementsScreenState extends State<StatementsScreen> {
           thousandSeparator: '.', decimalSeparator: ',', fractionDigits: 2),
     );
     return Scaffold(
-      backgroundColor: Colors.blue.shade700,
+      backgroundColor: kBackground,
       body: wid,
       appBar: AppBar(
+        backgroundColor: Colors.transparent,
+        elevation: 0,
         title: Center(
           child: Padding(
             padding: const EdgeInsets.fromLTRB(0.0, 0.0, 35.0, 0.0),
@@ -90,7 +92,7 @@ class _StatementsScreenState extends State<StatementsScreen> {
       bottomNavigationBar: BottomAppBar(
         child: Container(
           height: 70.0,
-          color: Colors.blue.shade900,
+          color: kButton,
           child: Row(
             mainAxisAlignment: MainAxisAlignment.center,
             children: <Widget>[
@@ -102,12 +104,16 @@ class _StatementsScreenState extends State<StatementsScreen> {
                   color: Colors.white,
                 ),
               ),
-              Text(
-                'R\$ ${maskedTotal.output.nonSymbol}',
-                style: TextStyle(
-                  fontWeight: FontWeight.bold,
-                  fontSize: 25.0,
-                  color: total >= 0 ? Colors.green : Colors.red,
+              ContainerForNumbers(
+                width: 200,
+                height: 40,
+                child: Text(
+                  'R\$ ${maskedTotal.output.nonSymbol}',
+                  style: TextStyle(
+                    fontWeight: FontWeight.bold,
+                    fontSize: 25.0,
+                    color: total >= 0 ? Colors.green : Colors.red,
+                  ),
                 ),
               )
             ],

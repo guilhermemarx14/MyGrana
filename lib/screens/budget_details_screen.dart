@@ -1,6 +1,7 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_app/components/budget_button.dart';
+import 'package:flutter_app/components/container_for_numbers.dart';
 import 'package:flutter_app/components/my_card.dart';
 import 'package:flutter_app/model/transacao.dart';
 import 'package:flutter_app/screens/statements_screen.dart';
@@ -188,14 +189,18 @@ class BudgetCards extends StatelessWidget {
                     color: Colors.white,
                   ),
                 ),
-                Text(
-                  valorCategoria,
-                  style: TextStyle(
-                      fontSize: 20.0,
-                      fontWeight: FontWeight.bold,
-                      color: (i == kSalario || i == kPensao)
-                          ? Colors.green
-                          : Colors.red),
+                ContainerForNumbers(
+                  width: 160,
+                  height: 40,
+                  child: Text(
+                    valorCategoria,
+                    style: TextStyle(
+                        fontSize: 20.0,
+                        fontWeight: FontWeight.bold,
+                        color: (i == kSalario || i == kPensao)
+                            ? Colors.green
+                            : Colors.red),
+                  ),
                 ),
               ],
             ),

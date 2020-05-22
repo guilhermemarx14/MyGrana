@@ -17,7 +17,6 @@ class ContainerForNumbers extends StatelessWidget {
       width: width,
       height: height,
       child: Center(child: child),
-      margin: EdgeInsets.fromLTRB(0, 10, 0, 0),
       decoration: BoxDecoration(
         borderRadius: BorderRadius.circular(30),
         color: Colors.white.withOpacity(0.2),

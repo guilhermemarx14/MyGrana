@@ -20,7 +20,7 @@ class _StatementsFilterScreenState extends State<StatementsFilterScreen> {
       onWillPop: () => Navigator.pushAndRemoveUntil(context,
           MaterialPageRoute(builder: (context) => HomeScreen()), (r) => false),
       child: Scaffold(
-        backgroundColor: kBlue,
+        backgroundColor: kBackground,
         body: Column(
           children: <Widget>[
             TitleWidget(),
@@ -170,6 +170,8 @@ class _StatementsFilterScreenState extends State<StatementsFilterScreen> {
           ],
         ),
         appBar: AppBar(
+          backgroundColor: Colors.transparent,
+          elevation: 0,
           title: Center(
             child: Padding(
               padding: const EdgeInsets.fromLTRB(0.0, 0.0, 35.0, 0.0),
