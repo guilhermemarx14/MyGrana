@@ -4,6 +4,8 @@ const Color kBlue = Colors.blue;
 const Color kWhite = Colors.white;
 const Color kBlack = Color(0xFF444444);
 const Color kBackground = Color(0xFF86b39e);
+const Color kButton = Color(0xFF564938);
+
 const TextStyle kFormStyle = TextStyle(fontSize: 30.0, color: kWhite);
 const TextStyle kFormStyle2 =
     TextStyle(fontSize: 25.0, color: kWhite, fontWeight: FontWeight.bold);

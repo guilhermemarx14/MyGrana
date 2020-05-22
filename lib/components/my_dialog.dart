@@ -64,14 +64,14 @@ class _MyDialogState extends State<MyDialog> {
     transacao.category = valueCategoria;
 
     return AlertDialog(
-      backgroundColor: Colors.blue.shade200,
+      backgroundColor: kBackground,
       title: Center(
         child: Text(
           widget.title,
           style: TextStyle(
             fontWeight: FontWeight.bold,
             fontSize: 25,
-            color: Colors.blue.shade700,
+            color: Colors.white,
           ),
         ),
       ),
@@ -89,21 +89,21 @@ class _MyDialogState extends State<MyDialog> {
                     child: Text(
                       'Categoria:',
                       style: TextStyle(
-                        color: Colors.blue.shade700,
+                        color: Colors.white,
                         fontSize: 20,
                       ),
                     ),
                   ),
                   DropdownButton<String>(
                     value: kListaCategorias[valueCategoria],
-                    iconEnabledColor: Colors.blue.shade500,
+                    iconEnabledColor: Colors.white,
                     underline: Container(
                       height: 2,
                       width: double.infinity,
-                      color: Colors.blue.shade500,
+                      color: Colors.white,
                     ),
-                    style: kFormStyle.copyWith(
-                        fontSize: 18, color: Colors.blue.shade500),
+                    style:
+                        kFormStyle.copyWith(fontSize: 18, color: Colors.white),
                     items: kListaCategorias.map((String value) {
                       return DropdownMenuItem<String>(
                         value: value,
@@ -139,7 +139,7 @@ class _MyDialogState extends State<MyDialog> {
               Text(
                 'Data:',
                 style: TextStyle(
-                  color: Colors.blue.shade700,
+                  color: Colors.white,
                   fontSize: 20,
                 ),
               ),
@@ -150,7 +150,7 @@ class _MyDialogState extends State<MyDialog> {
               Text(
                 'Descrição:',
                 style: TextStyle(
-                  color: Colors.blue.shade700,
+                  color: Colors.white,
                   fontSize: 20,
                 ),
               ),
@@ -158,7 +158,7 @@ class _MyDialogState extends State<MyDialog> {
                 margin: EdgeInsets.fromLTRB(25, 0, 25, 0),
                 decoration: BoxDecoration(
                   border: Border(
-                    bottom: BorderSide(width: 2.0, color: Colors.blue.shade500),
+                    bottom: BorderSide(width: 2.0, color: Colors.white),
                   ),
                 ),
                 child: TextField(
@@ -167,7 +167,7 @@ class _MyDialogState extends State<MyDialog> {
                   inputFormatters: [
                     LengthLimitingTextInputFormatter(20),
                   ],
-                  cursorColor: Colors.blue.shade500,
+                  cursorColor: Colors.white,
                   textAlign: TextAlign.center,
                   maxLines: 1,
                   onChanged: (value) {
@@ -178,7 +178,7 @@ class _MyDialogState extends State<MyDialog> {
                   },
                   decoration: InputDecoration(border: InputBorder.none),
                   style: TextStyle(
-                    color: Colors.blue.shade500,
+                    color: Colors.white,
                     fontSize: 20,
                   ),
                 ),
@@ -189,7 +189,7 @@ class _MyDialogState extends State<MyDialog> {
               Text(
                 'Valor:',
                 style: TextStyle(
-                  color: Colors.blue.shade700,
+                  color: Colors.white,
                   fontSize: 20,
                 ),
               ),
@@ -197,14 +197,16 @@ class _MyDialogState extends State<MyDialog> {
                 margin: EdgeInsets.fromLTRB(25, 0, 25, 0),
                 decoration: BoxDecoration(
                   border: Border(
-                    bottom: BorderSide(width: 2.0, color: Colors.blue.shade500),
+                    bottom: BorderSide(width: 2.0, color: Colors.white),
                   ),
+                  color: Colors.white.withOpacity(0.2),
+                  //todo:borda redonda
                 ),
                 child: TextField(
                   keyboardType: TextInputType.number,
                   controller: valorController,
                   cursorWidth: 2.0,
-                  cursorColor: Colors.blue.shade500,
+                  cursorColor: Colors.white,
                   textAlign: TextAlign.center,
                   maxLines: 1,
                   decoration: InputDecoration(border: InputBorder.none),
@@ -237,11 +239,13 @@ class _MyDialogState extends State<MyDialog> {
                   Text(
                     'Pago:',
                     style: TextStyle(
-                      color: Colors.blue.shade700,
+                      color: Colors.white,
                       fontSize: 20,
                     ),
                   ),
                   Checkbox(
+                    checkColor: Color.fromRGBO(56, 49, 38, 100),
+                    activeColor: Colors.white,
                     value: checkedValue,
                     onChanged: (bool value) {
                       setState(() {
@@ -256,7 +260,7 @@ class _MyDialogState extends State<MyDialog> {
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: <Widget>[
                   MyCard(
-                    color: Colors.blue.shade700,
+                    color: kButton,
                     width: MediaQuery.of(context).size.width / 4,
                     height: 50.0,
                     cardChild: Center(
@@ -274,7 +278,7 @@ class _MyDialogState extends State<MyDialog> {
                     },
                   ),
                   MyCard(
-                    color: Colors.blue.shade700,
+                    color: kButton,
                     width: MediaQuery.of(context).size.width / 4,
                     height: 50.0,
                     cardChild: Center(

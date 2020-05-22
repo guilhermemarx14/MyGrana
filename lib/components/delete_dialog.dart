@@ -4,6 +4,7 @@ import 'package:flutter_app/model/profile.dart';
 import 'package:flutter_app/model/transacao.dart';
 import 'package:flutter_app/screens/statements_filter_screen.dart';
 import 'package:flutter_app/util/Database2.dart';
+import 'package:flutter_app/util/constants.dart';
 
 class DeleteDialog extends StatelessWidget {
   DeleteDialog({this.transacao});
@@ -33,7 +34,7 @@ class DeleteDialog extends StatelessWidget {
             MyCard(
               height: 60.0,
               width: MediaQuery.of(context).size.width / 3.7,
-              color: Colors.blue.shade700,
+              color: kButton,
               onTap: () {
                 Navigator.pop(context);
               },
@@ -51,7 +52,7 @@ class DeleteDialog extends StatelessWidget {
             MyCard(
               height: 60.0,
               width: MediaQuery.of(context).size.width / 3.7,
-              color: Colors.blue.shade700,
+              color: kButton,
               onTap: () {
                 //print('${transacao.id}');
                 DBProvider2.db.deleteTransacao(transacao, p);
