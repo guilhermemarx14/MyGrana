@@ -129,7 +129,7 @@ class PlanejadosEReais extends StatelessWidget {
             style: TextStyle(
               fontSize: 20.0,
               fontWeight: FontWeight.bold,
-              color: Colors.blue.shade700,
+              color: Colors.white,
             ),
           ),
           SizedBox(
@@ -177,7 +177,7 @@ class _TotalState extends State<Total> {
         MyCard(
           width: widget.screenSize / 2.5,
           height: 60.0,
-          color: Colors.blue.shade200,
+          color: Colors.white,
           cardChild: Column(
             mainAxisAlignment: MainAxisAlignment.center,
             children: <Widget>[
@@ -204,7 +204,7 @@ class _TotalState extends State<Total> {
         MyCard(
           width: widget.screenSize / 2.5,
           height: 60.0,
-          color: Colors.blue.shade200,
+          color: Colors.white,
           cardChild: Column(
             mainAxisAlignment: MainAxisAlignment.center,
             children: <Widget>[

@@ -27,8 +27,8 @@ class MyCard extends StatelessWidget {
           boxShadow: [
             BoxShadow(
               color: Colors.black.withOpacity(0.4),
-              blurRadius: 5,
-              offset: Offset(2, 4),
+              blurRadius: 6,
+              offset: Offset(0, 0),
             ),
           ],
           color: color,
