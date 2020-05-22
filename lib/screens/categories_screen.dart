@@ -13,6 +13,7 @@ class CategoriesScreen extends StatefulWidget {
   _CategoriesScreenState createState() => _CategoriesScreenState();
 }
 
+//todo refatorar a página
 class _CategoriesScreenState extends State<CategoriesScreen> {
   Orcamento orcamento;
   List<Transacao> transacoes = [];

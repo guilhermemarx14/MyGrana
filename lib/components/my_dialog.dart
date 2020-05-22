@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:flutter_app/components/container_for_numbers.dart';
 import 'package:flutter_app/model/profile.dart';
 import 'package:flutter_app/model/transacao.dart';
 import 'package:flutter_app/screens/home_screen.dart';
@@ -193,15 +194,9 @@ class _MyDialogState extends State<MyDialog> {
                   fontSize: 20,
                 ),
               ),
-              Container(
-                margin: EdgeInsets.fromLTRB(25, 0, 25, 0),
-                decoration: BoxDecoration(
-                  border: Border(
-                    bottom: BorderSide(width: 2.0, color: Colors.white),
-                  ),
-                  color: Colors.white.withOpacity(0.2),
-                  //todo:borda redonda
-                ),
+              ContainerForNumbers(
+                height: 50.0,
+                width: MediaQuery.of(context).size.width / 1.5,
                 child: TextField(
                   keyboardType: TextInputType.number,
                   controller: valorController,
@@ -209,7 +204,13 @@ class _MyDialogState extends State<MyDialog> {
                   cursorColor: Colors.white,
                   textAlign: TextAlign.center,
                   maxLines: 1,
-                  decoration: InputDecoration(border: InputBorder.none),
+                  decoration: InputDecoration(
+                    border: InputBorder.none,
+                    focusedBorder: InputBorder.none,
+                    enabledBorder: InputBorder.none,
+                    errorBorder: InputBorder.none,
+                    disabledBorder: InputBorder.none,
+                  ),
                   style: TextStyle(
                     color: (transacao.category == kSalario ||
                             transacao.category == kPensao)
