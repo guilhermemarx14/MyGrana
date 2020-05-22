@@ -134,11 +134,11 @@ class AppBarHome extends StatelessWidget {
   Widget build(BuildContext context) {
     return AppBar(
       elevation: 0,
-      centerTitle: true,
       backgroundColor: Colors.transparent,
-      title: Text(
-        'MyGrana',
-        style: TextStyle(fontWeight: FontWeight.bold, fontSize: 30.0),
+      title: Image.asset(
+        'assets/XopeteNome.png',
+        fit: BoxFit.contain,
+        height: 70,
       ),
     );
   }
