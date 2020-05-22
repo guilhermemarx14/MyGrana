@@ -23,10 +23,14 @@ Frameworks, bibiotecas e tecnologias utilizadas:
 
 Bibliotecas podem ser encontradas no link [https://pub.dev](https://pub.dev "https://pub.dev").
 
-[![Tela Inicial](https://imgur.com/nO59eGg "Tela Inicial")](https://imgur.com/nO59eGg "Tela Inicial")
+### Alguns prints da execução
 
-[![Tela de comparação entre dados reais e planejados totais](https://imgur.com/cg0XgBc "Tela de comparação entre dados reais e planejados totais")](https://imgur.com/cg0XgBc "Tela de comparação entre dados reais e planejados totais")
+##### Tela principal
+![Tela Inicial](https://i.imgur.com/nO59eGg.png "Tela Inicial")
 
-[![Tela de comparação entre dados reais e planejados por categoria](https://imgur.com/PO6IP6V "Tela de comparação entre dados reais e planejados por categoria")](https://imgur.com/PO6IP6V "Tela de comparação entre dados reais e planejados por categoria")
+##### Tela de comparação entre orçamento real e planejado
+![Comparação orçamento planejado e real](https://i.imgur.com/cg0XgBc.png "Comparação orçamento planejado e real")
 
+##### Tela de comparaçao entra orçamento real e planejado por categorias
+![Comparação orçamento planejado e real por categoria](https://i.imgur.com/PO6IP6V.png "Comparação orçamento planejado e real por categoria")
 
