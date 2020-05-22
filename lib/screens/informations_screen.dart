@@ -33,7 +33,7 @@ class _InformationScreenState extends State<InformationScreen> {
       onWillPop: () => Navigator.pushAndRemoveUntil(context,
           MaterialPageRoute(builder: (context) => HomeScreen()), (r) => false),
       child: Scaffold(
-        backgroundColor: kBlue,
+        backgroundColor: kBackground,
         body: Padding(
           padding: const EdgeInsets.all(15.0),
           child: Column(
@@ -106,6 +106,8 @@ class _InformationScreenState extends State<InformationScreen> {
           ),
         ),
         appBar: AppBar(
+          backgroundColor: Colors.transparent,
+          elevation: 0,
           title: Center(
             child: Padding(
               padding: const EdgeInsets.fromLTRB(0.0, 0.0, 35.0, 0.0),
