@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_app/components/container_for_numbers.dart';
 import 'package:flutter_app/util/constants.dart';
 import 'package:flutter_money_formatter/flutter_money_formatter.dart';
 import 'package:percent_indicator/percent_indicator.dart';
@@ -17,7 +18,7 @@ class CategoryItem extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    double percent = planejado == 0 ? 0 : real / planejado;
+    double percent = planejado == 0 || real > planejado ? 1 : real / planejado;
 
     var maskedPlanejado = FlutterMoneyFormatter(
       amount: planejado / 100,
@@ -29,13 +30,22 @@ class CategoryItem extends StatelessWidget {
       settings: MoneyFormatterSettings(
           thousandSeparator: '.', decimalSeparator: ',', fractionDigits: 2),
     );
-
+    bool isGanho = false;
+    if (kListaCategorias.indexOf(category) == kSalario ||
+        kListaCategorias.indexOf(category) == kPensao) isGanho = true;
     return Container(
       margin: EdgeInsets.all(8),
       padding: EdgeInsets.all(8),
       decoration: BoxDecoration(
-        color: kButton.withOpacity(0.5),
+        color: kBackground,
         borderRadius: BorderRadius.circular(30),
+        boxShadow: [
+          BoxShadow(
+            color: Colors.black.withOpacity(0.4),
+            blurRadius: 6,
+            offset: Offset(0, 0),
+          ),
+        ],
       ),
       child: Column(
         mainAxisSize: MainAxisSize.min,
@@ -61,7 +71,8 @@ class CategoryItem extends StatelessWidget {
                     width: MediaQuery.of(context).size.width / 1.5,
                     lineHeight: 20.0,
                     percent: percent <= 1 ? percent : 1,
-                    progressColor: percent >= 1 ? Colors.red : Colors.green,
+                    progressColor:
+                        percent >= 1 && !isGanho ? Colors.red : Colors.green,
                   ),
                 ],
               ),
@@ -73,13 +84,29 @@ class CategoryItem extends StatelessWidget {
             child: Row(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: <Widget>[
-                Text(
-                  'R\$ ${maskedReal.output.nonSymbol}',
-                  style: TextStyle(fontSize: 20, color: Colors.white),
+                ContainerForNumbers(
+                  width: 150,
+                  height: 40,
+                  child: Text(
+                    'R\$ ${maskedReal.output.nonSymbol}',
+                    style: TextStyle(
+                        fontWeight: FontWeight.bold,
+                        fontSize: 20,
+                        color: real >= planejado && !isGanho
+                            ? Colors.red
+                            : Colors.green),
+                  ),
                 ),
-                Text(
-                  'R\$ ${maskedPlanejado.output.nonSymbol}',
-                  style: TextStyle(fontSize: 20, color: Colors.white),
+                Padding(
+                  padding: const EdgeInsets.fromLTRB(0, 8, 0, 0),
+                  child: Text(
+                    'R\$ ${maskedPlanejado.output.nonSymbol}',
+                    style: TextStyle(
+                      fontSize: 20,
+                      color: Colors.white,
+                      fontWeight: FontWeight.bold,
+                    ),
+                  ),
                 ),
               ],
             ),

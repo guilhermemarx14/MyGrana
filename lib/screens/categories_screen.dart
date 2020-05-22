@@ -12,14 +12,10 @@ class CategoriesScreen extends StatefulWidget {
 
 //todo refatorar a página
 class _CategoriesScreenState extends State<CategoriesScreen> {
-  bool _loading;
-  double _progressValue;
   Orcamento orcamento;
   List<Transacao> transacoes = [];
   @override
   void initState() {
-    _loading = false;
-    _progressValue = 0.0;
     DBProvider2.db.getOrcamento().then((item) {
       setState(() {
         orcamento = item;
@@ -50,11 +46,81 @@ class _CategoriesScreenState extends State<CategoriesScreen> {
       else
         real[transacao.category] -= transacao.value;
     });
-    double gasto = 100.0;
-    double ganho = 50.0;
-    double percent = gasto / ganho;
+
+    List<Widget> cardsGanhos = [];
+    List<Widget> cardsGastos = [];
+    for (int i = 0; i < real.length; i++) {
+      if (i == kSalario || i == kPensao)
+        cardsGanhos.add(
+          CategoryItem(
+            category: kListaCategorias[i],
+            real: real[i].toDouble(),
+            planejado: planejado[i].toDouble(),
+          ),
+        );
+      else
+        cardsGastos.add(
+          CategoryItem(
+            category: kListaCategorias[i],
+            real: real[i].toDouble(),
+            planejado: -planejado[i].toDouble(),
+          ),
+        );
+    }
+
     return Scaffold(
-      body: CategoryItem(category: 'Alimentaçao', real: 3000, planejado: 5000),
+      backgroundColor: kBackground,
+      appBar: AppBar(
+        elevation: 0,
+        backgroundColor: Colors.transparent,
+        title: Text(
+          'Categorias',
+          style: TextStyle(
+            fontWeight: FontWeight.bold,
+            fontSize: 30.0,
+          ),
+        ),
+      ),
+      body: SingleChildScrollView(
+        child: Column(
+          children: <Widget>[
+            SizedBox(
+              height: 20,
+            ),
+            Text(
+              'Ganhos',
+              style: TextStyle(
+                fontSize: 25.0,
+                fontWeight: FontWeight.bold,
+                color: Colors.white,
+              ),
+            ),
+            SizedBox(
+              height: 20,
+            ),
+            Column(
+              children: cardsGanhos,
+            ),
+            SizedBox(
+              height: 20,
+            ),
+            Text(
+              'Gastos',
+              style: TextStyle(
+                fontSize: 25.0,
+                fontWeight: FontWeight.bold,
+                color: Colors.white,
+              ),
+            ),
+            SizedBox(
+              height: 20,
+            ),
+            Column(
+              children: cardsGastos,
+            )
+          ],
+        ),
+      ),
     );
     /*return Scaffold(
       backgroundColor: Colors.blue.shade700,
