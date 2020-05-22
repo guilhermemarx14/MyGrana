@@ -28,62 +28,70 @@ class DataScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     String nome;
     final myController = TextEditingController();
-    return Scaffold(
-      backgroundColor: kBlue,
-      body: Column(
-        children: <Widget>[
-          Expanded(
-            flex: 2,
-            child: Column(
-              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-              children: <Widget>[
-                Text(
-                  'Nome',
-                  style: kFormStyle,
-                ),
-                Container(
-                  margin: EdgeInsets.fromLTRB(25.0, 0.0, 25.0, 0.0),
-                  decoration: BoxDecoration(
-                    border: Border(
-                      bottom: BorderSide(width: 3.0, color: kWhite),
-                    ),
-                  ),
-                  child: TextField(
-                    controller: myController,
-                    inputFormatters: [
-                      LengthLimitingTextInputFormatter(20),
-                    ],
-                    cursorWidth: 2.0,
-                    cursorColor: kWhite,
-                    maxLines: 1,
-                    decoration: InputDecoration(
-                      border: InputBorder.none,
-                    ),
+    return Container(
+      decoration: BoxDecoration(
+        image: DecorationImage(
+          image: AssetImage('assets/Xopete2.png'),
+          fit: BoxFit.fill,
+        ),
+      ),
+      child: Scaffold(
+        backgroundColor: Colors.transparent,
+        body: Column(
+          children: <Widget>[
+            Expanded(
+              flex: 2,
+              child: Column(
+                mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                children: <Widget>[
+                  Text(
+                    'Nome',
                     style: kFormStyle,
                   ),
+                  Container(
+                    margin: EdgeInsets.fromLTRB(25.0, 0.0, 25.0, 0.0),
+                    decoration: BoxDecoration(
+                      border: Border(
+                        bottom: BorderSide(width: 3.0, color: kWhite),
+                      ),
+                    ),
+                    child: TextField(
+                      controller: myController,
+                      inputFormatters: [
+                        LengthLimitingTextInputFormatter(20),
+                      ],
+                      cursorWidth: 2.0,
+                      cursorColor: kWhite,
+                      maxLines: 1,
+                      decoration: InputDecoration(
+                        border: InputBorder.none,
+                      ),
+                      style: kFormStyle,
+                    ),
+                  ),
+                ],
+              ),
+            ),
+            Row(
+              children: <Widget>[
+                ContinueButton(
+                  text: 'Continuar',
+                  width: 150.0,
+                  height: 50.0,
+                  onPressed: () {
+                    nome = myController.text;
+                    if (nome.length != 0) {
+                      profile.nome = nome;
+                      Navigator.of(context).pushNamed("/statescreen");
+                    } else
+                      Toast.show('Você precisa digitar um nome!', context,
+                          duration: Toast.LENGTH_LONG, gravity: Toast.BOTTOM);
+                  },
                 ),
               ],
             ),
-          ),
-          Row(
-            children: <Widget>[
-              ContinueButton(
-                text: 'Continuar',
-                width: 150.0,
-                height: 50.0,
-                onPressed: () {
-                  nome = myController.text;
-                  if (nome.length != 0) {
-                    profile.nome = nome;
-                    Navigator.of(context).pushNamed("/statescreen");
-                  } else
-                    Toast.show('Você precisa digitar um nome!', context,
-                        duration: Toast.LENGTH_LONG, gravity: Toast.BOTTOM);
-                },
-              ),
-            ],
-          ),
-        ],
+          ],
+        ),
       ),
     );
   }
@@ -140,139 +148,147 @@ class _StateScreen extends State<StateScreen> {
       });
     });
 
-    return Scaffold(
-      backgroundColor: kBlue,
-      body: Column(
-        children: <Widget>[
-          Expanded(
-            flex: 1,
-            child: Center(
-              child: Text(
-                'Estado e Cidade em que vai estudar',
-                style: kFormStyle,
-                textAlign: TextAlign.center,
+    return Container(
+      decoration: BoxDecoration(
+        image: DecorationImage(
+          image: AssetImage('assets/Xopete2.png'),
+          fit: BoxFit.fill,
+        ),
+      ),
+      child: Scaffold(
+        backgroundColor: Colors.transparent,
+        body: Column(
+          children: <Widget>[
+            Expanded(
+              flex: 1,
+              child: Center(
+                child: Text(
+                  'Estado e Cidade em que vai estudar',
+                  style: kFormStyle,
+                  textAlign: TextAlign.center,
+                ),
               ),
             ),
-          ),
-          Expanded(
-            flex: 1,
-            child: Column(
-              children: <Widget>[
-                Container(
-                  margin: EdgeInsets.fromLTRB(25, 0, 25, 0),
-                  child: Row(
-                    mainAxisAlignment: MainAxisAlignment.end,
-                    children: <Widget>[
-                      DropdownButton<String>(
-                        isExpanded: false,
-                        value: selectedEstado,
-                        iconEnabledColor: kWhite,
-                        underline: Container(
-                          height: 2,
-                          width: double.infinity,
-                          color: kWhite,
-                        ),
-                        style: kFormStyle,
-                        items: nomesEstados.map((String value) {
-                          return DropdownMenuItem<String>(
-                            value: value,
-                            child: Text(
-                              value,
-                            ),
-                          );
-                        }).toList(),
-                        onChanged: (String newValue) {
-                          setState(() {
-                            selectedEstado = newValue;
-                            profile.estado = idSelectedEstado(selectedEstado);
-                            nomesCidades = ['Cidade: '];
-                            selectedCidade = 'Cidade: ';
-                            cidades = [];
-                            CidadeUniversidade.getCidadesList(profile.estado)
-                                .then((list) {
-                              list.forEach((value) {
-                                cidades.add(value);
-                                nomesCidades.add(showCidade(value.nome));
+            Expanded(
+              flex: 1,
+              child: Column(
+                children: <Widget>[
+                  Container(
+                    margin: EdgeInsets.fromLTRB(25, 0, 25, 0),
+                    child: Row(
+                      mainAxisAlignment: MainAxisAlignment.end,
+                      children: <Widget>[
+                        DropdownButton<String>(
+                          isExpanded: false,
+                          value: selectedEstado,
+                          iconEnabledColor: kWhite,
+                          underline: Container(
+                            height: 2,
+                            width: double.infinity,
+                            color: kWhite,
+                          ),
+                          style: kFormStyle,
+                          items: nomesEstados.map((String value) {
+                            return DropdownMenuItem<String>(
+                              value: value,
+                              child: Text(
+                                value,
+                              ),
+                            );
+                          }).toList(),
+                          onChanged: (String newValue) {
+                            setState(() {
+                              selectedEstado = newValue;
+                              profile.estado = idSelectedEstado(selectedEstado);
+                              nomesCidades = ['Cidade: '];
+                              selectedCidade = 'Cidade: ';
+                              cidades = [];
+                              CidadeUniversidade.getCidadesList(profile.estado)
+                                  .then((list) {
+                                list.forEach((value) {
+                                  cidades.add(value);
+                                  nomesCidades.add(showCidade(value.nome));
+                                });
                               });
                             });
-                          });
-                        },
-                      ),
-                    ],
+                          },
+                        ),
+                      ],
+                    ),
                   ),
+                  Container(
+                    margin: EdgeInsets.fromLTRB(25, 0, 25, 0),
+                    child: Row(
+                      mainAxisAlignment: MainAxisAlignment.end,
+                      children: <Widget>[
+                        DropdownButton<String>(
+                          value: selectedCidade,
+                          isExpanded: false,
+                          iconEnabledColor: kWhite,
+                          underline: Container(
+                            height: 2,
+                            width: double.infinity,
+                            color: kWhite,
+                          ),
+                          style: TextStyle(
+                            fontSize: 20.0,
+                            color: kWhite,
+                          ),
+                          items: nomesCidades.map((String value) {
+                            return DropdownMenuItem<String>(
+                              value: value,
+                              child: Text(
+                                value,
+                              ),
+                            );
+                          }).toList(),
+                          onChanged: (String newValue) {
+                            setState(() {
+                              selectedCidade = newValue;
+                              profile.cidade = idSelectedCidade(selectedCidade);
+                            });
+                          },
+                        ),
+                      ],
+                    ),
+                  ),
+                ],
+              ),
+            ),
+            Row(
+              children: <Widget>[
+                back.BackButton(
+                  text: 'Voltar',
+                  width: 150.0,
+                  height: 50.0,
+                  onPressed: () {
+                    Navigator.pop(context);
+                  },
                 ),
-                Container(
-                  margin: EdgeInsets.fromLTRB(25, 0, 25, 0),
-                  child: Row(
-                    mainAxisAlignment: MainAxisAlignment.end,
-                    children: <Widget>[
-                      DropdownButton<String>(
-                        value: selectedCidade,
-                        isExpanded: false,
-                        iconEnabledColor: kWhite,
-                        underline: Container(
-                          height: 2,
-                          width: double.infinity,
-                          color: kWhite,
+                ContinueButton(
+                  text: 'Continuar',
+                  width: 150.0,
+                  height: 50.0,
+                  onPressed: () {
+                    if (selectedEstado.compareTo('Estado: ') == 0 ||
+                        selectedCidade.compareTo('Cidade: ') == 0)
+                      Toast.show("Você deve selecionar um estado e uma cidade!",
+                          context,
+                          duration: Toast.LENGTH_LONG, gravity: Toast.BOTTOM);
+                    else {
+                      profile.cidade = idSelectedCidade(selectedCidade);
+                      Navigator.of(context).push(
+                        MaterialPageRoute(
+                          builder: (BuildContext context) => UniversityScreen(),
                         ),
-                        style: TextStyle(
-                          fontSize: 20.0,
-                          color: kWhite,
-                        ),
-                        items: nomesCidades.map((String value) {
-                          return DropdownMenuItem<String>(
-                            value: value,
-                            child: Text(
-                              value,
-                            ),
-                          );
-                        }).toList(),
-                        onChanged: (String newValue) {
-                          setState(() {
-                            selectedCidade = newValue;
-                            profile.cidade = idSelectedCidade(selectedCidade);
-                          });
-                        },
-                      ),
-                    ],
-                  ),
+                      );
+                    }
+                  },
                 ),
               ],
             ),
-          ),
-          Row(
-            children: <Widget>[
-              back.BackButton(
-                text: 'Voltar',
-                width: 150.0,
-                height: 50.0,
-                onPressed: () {
-                  Navigator.pop(context);
-                },
-              ),
-              ContinueButton(
-                text: 'Continuar',
-                width: 150.0,
-                height: 50.0,
-                onPressed: () {
-                  if (selectedEstado.compareTo('Estado: ') == 0 ||
-                      selectedCidade.compareTo('Cidade: ') == 0)
-                    Toast.show(
-                        "Você deve selecionar um estado e uma cidade!", context,
-                        duration: Toast.LENGTH_LONG, gravity: Toast.BOTTOM);
-                  else {
-                    profile.cidade = idSelectedCidade(selectedCidade);
-                    Navigator.of(context).push(
-                      MaterialPageRoute(
-                        builder: (BuildContext context) => UniversityScreen(),
-                      ),
-                    );
-                  }
-                },
-              ),
-            ],
-          ),
-        ],
+          ],
+        ),
       ),
     );
   }
@@ -323,90 +339,99 @@ class _UniversityScreen extends State<UniversityScreen> {
       });
     });
 
-    return Scaffold(
-      backgroundColor: kBlue,
-      body: Column(
-        children: <Widget>[
-          Expanded(
-            flex: 2,
-            child: Column(
-              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-              children: <Widget>[
-                Text(
-                  'Selecione sua universidade',
-                  style: kFormStyle,
-                ),
-                Container(
-                  margin: EdgeInsets.all(25),
-                  child: Row(
-                    mainAxisAlignment: MainAxisAlignment.end,
-                    children: <Widget>[
-                      DropdownButton<String>(
-                        value: selectedUniversidade,
-                        iconEnabledColor: kWhite,
-                        underline: Container(
-                          height: 2,
-                          width: double.infinity,
-                          color: kWhite,
-                        ),
-                        style: kFormStyle.copyWith(fontSize: 15),
-                        items: nomesUniversidades.map((String value) {
-                          return DropdownMenuItem<String>(
-                            value: value,
-                            child: Text(
-                              value,
-                            ),
-                          );
-                        }).toList(),
-                        onChanged: (String newSelected) {
-                          setState(() {
-                            selectedUniversidade = newSelected;
-                            profile.universidade =
-                                idSelectedUniversidade(selectedUniversidade);
-                          });
-                        },
-                      ),
-                    ],
+    return Container(
+      decoration: BoxDecoration(
+        image: DecorationImage(
+          image: AssetImage('assets/Xopete2.png'),
+          fit: BoxFit.fill,
+        ),
+      ),
+      child: Scaffold(
+        backgroundColor: Colors.transparent,
+        body: Column(
+          children: <Widget>[
+            Expanded(
+              flex: 2,
+              child: Column(
+                mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                children: <Widget>[
+                  Text(
+                    'Selecione sua universidade',
+                    style: kFormStyle,
                   ),
+                  Container(
+                    margin: EdgeInsets.all(25),
+                    child: Row(
+                      mainAxisAlignment: MainAxisAlignment.end,
+                      children: <Widget>[
+                        DropdownButton<String>(
+                          value: selectedUniversidade,
+                          iconEnabledColor: kWhite,
+                          underline: Container(
+                            height: 2,
+                            width: double.infinity,
+                            color: kWhite,
+                          ),
+                          style: kFormStyle.copyWith(fontSize: 15),
+                          items: nomesUniversidades.map((String value) {
+                            return DropdownMenuItem<String>(
+                              value: value,
+                              child: Text(
+                                value,
+                              ),
+                            );
+                          }).toList(),
+                          onChanged: (String newSelected) {
+                            setState(() {
+                              selectedUniversidade = newSelected;
+                              profile.universidade =
+                                  idSelectedUniversidade(selectedUniversidade);
+                            });
+                          },
+                        ),
+                      ],
+                    ),
+                  ),
+                ],
+              ),
+            ),
+            Row(
+              children: <Widget>[
+                back.BackButton(
+                  text: 'Voltar',
+                  width: 150.0,
+                  height: 50.0,
+                  onPressed: () {
+                    Navigator.pop(context);
+                  },
+                ),
+                ContinueButton(
+                  text: 'Continuar',
+                  width: 150.0,
+                  height: 50.0,
+                  onPressed: () async {
+                    if (selectedUniversidade.compareTo('Universidade:') == 0)
+                      Toast.show(
+                          'Você deve escolher uma universidade!', context,
+                          duration: Toast.LENGTH_LONG, gravity: Toast.BOTTOM);
+                    else {
+                      profile.hash = generateHash(profile);
+                      DBProvider2.db.createProfile(profile);
+                      SharedPreferences prefs =
+                          await SharedPreferences.getInstance();
+                      prefs.setBool('first_time', false); //cadastro concluído
+                      Navigator.pushAndRemoveUntil(
+                          context,
+                          MaterialPageRoute(
+                              builder: (context) => HomeScreen(p: profile)),
+                          (r) => false);
+                    }
+                  },
                 ),
               ],
             ),
-          ),
-          Row(
-            children: <Widget>[
-              back.BackButton(
-                text: 'Voltar',
-                width: 150.0,
-                height: 50.0,
-                onPressed: () {
-                  Navigator.pop(context);
-                },
-              ),
-              ContinueButton(
-                text: 'Continuar',
-                width: 150.0,
-                height: 50.0,
-                onPressed: () async {
-                  if (selectedUniversidade.compareTo('Universidade:') == 0)
-                    Toast.show('Você deve escolher uma universidade!', context,
-                        duration: Toast.LENGTH_LONG, gravity: Toast.BOTTOM);
-                  else {
-                    profile.hash = generateHash(profile);
-                    DBProvider2.db.createProfile(profile);
-                    SharedPreferences prefs =
-                        await SharedPreferences.getInstance();
-                    prefs.setBool('first_time', false); //cadastro concluído
-                    Navigator.pushAndRemoveUntil(
-                        context,
-                        MaterialPageRoute(
-                            builder: (context) => HomeScreen(p: profile)),
-                        (r) => false);
-                  }
-                },
-              ),
-            ],
-          ),
-        ],
+          ],
+        ),
       ),
     );
   }
