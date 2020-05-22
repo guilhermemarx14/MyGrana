@@ -509,33 +509,38 @@ class _MyEditDialogState extends State<MyEditDialog> {
                     bottom: BorderSide(width: 2.0, color: Colors.white),
                   ),
                 ),
-                child: TextField(
-                  keyboardType: TextInputType.number,
-                  controller: _valorController,
-                  cursorWidth: 2.0,
-                  cursorColor: Colors.white,
-                  textAlign: TextAlign.center,
-                  maxLines: 1,
-                  decoration: InputDecoration(border: InputBorder.none),
-                  style: TextStyle(
-                    color: (widget.transacao.category == kSalario ||
+                child: ContainerForNumbers(
+                  height: 50.0,
+                  width: MediaQuery.of(context).size.width / 1.5,
+                  child: TextField(
+                    keyboardType: TextInputType.number,
+                    controller: _valorController,
+                    cursorWidth: 2.0,
+                    cursorColor: Colors.white,
+                    textAlign: TextAlign.center,
+                    maxLines: 1,
+                    decoration: InputDecoration(border: InputBorder.none),
+                    style: TextStyle(
+                      color: (widget.transacao.category == kSalario ||
+                              widget.transacao.category == kPensao)
+                          ? Colors.green
+                          : Colors.red,
+                      fontSize: 20,
+                    ),
+                    onChanged: (value) {
+                      setState(() {
+                        _valorController
+                            .updateValue(_valorController.numberValue);
+                        _valorInt =
+                            (_valorController.numberValue * 100).toInt();
+                        if (widget.transacao.category == kSalario ||
                             widget.transacao.category == kPensao)
-                        ? Colors.green
-                        : Colors.red,
-                    fontSize: 20,
+                          widget.transacao.value = _valorInt;
+                        else
+                          widget.transacao.value = -_valorInt;
+                      });
+                    },
                   ),
-                  onChanged: (value) {
-                    setState(() {
-                      _valorController
-                          .updateValue(_valorController.numberValue);
-                      _valorInt = (_valorController.numberValue * 100).toInt();
-                      if (widget.transacao.category == kSalario ||
-                          widget.transacao.category == kPensao)
-                        widget.transacao.value = _valorInt;
-                      else
-                        widget.transacao.value = -_valorInt;
-                    });
-                  },
                 ),
               ),
               Row(

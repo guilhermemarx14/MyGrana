@@ -58,8 +58,10 @@ class _BudgetScreenState extends State<BudgetScreen> {
       onWillPop: () => Navigator.pushAndRemoveUntil(context,
           MaterialPageRoute(builder: (context) => HomeScreen()), (r) => false),
       child: Scaffold(
-        backgroundColor: Colors.blue.shade100,
+        backgroundColor: kBackground,
         appBar: AppBar(
+          backgroundColor: Colors.transparent,
+          elevation: 0,
           title: Center(
             child: Padding(
               padding: const EdgeInsets.fromLTRB(0.0, 0.0, 35.0, 0.0),
