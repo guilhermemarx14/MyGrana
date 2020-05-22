@@ -90,6 +90,7 @@ class _BudgetScreenState extends State<BudgetScreen> {
               ],
             ),
             BudgetButton(
+              color: kButton,
               screenSize: MediaQuery.of(context).size.width,
               text: 'Ver por Categoria',
               onTap: () => Navigator.push(context,
@@ -127,7 +128,7 @@ class PlanejadosEReais extends StatelessWidget {
           Text(
             titulo,
             style: TextStyle(
-              fontSize: 20.0,
+              fontSize: 25.0,
               fontWeight: FontWeight.bold,
               color: Colors.white,
             ),

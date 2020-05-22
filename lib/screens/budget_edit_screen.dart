@@ -50,15 +50,17 @@ class _BudgetEditScreenState extends State<BudgetEditScreen> {
       onWillPop: () => Navigator.pushAndRemoveUntil(context,
           MaterialPageRoute(builder: (context) => HomeScreen()), (r) => false),
       child: Scaffold(
-          backgroundColor: Colors.blue.shade100,
+          backgroundColor: kBackground,
           appBar: AppBar(
+            backgroundColor: Colors.transparent,
+            elevation: 0,
             title: Center(
               child: Padding(
                 padding: const EdgeInsets.fromLTRB(0.0, 0.0, 35.0, 0.0),
                 child: Text(
                   titulo,
                   textAlign: TextAlign.center,
-                  style: TextStyle(fontWeight: FontWeight.bold),
+                  style: TextStyle(fontWeight: FontWeight.bold, fontSize: 25),
                 ),
               ),
             ),
@@ -161,6 +163,7 @@ class _BudgetEditCardsState extends State<BudgetEditCards> {
 
     cards.add(
       BudgetButton(
+        color: kButton,
         screenSize: widget.screenSize,
         text: 'Salvar',
         /*onTap: () => Navigator.push(

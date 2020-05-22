@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_app/components/container_for_numbers.dart';
 import 'package:flutter_app/util/constants.dart';
 import 'package:flutter_masked_text/flutter_masked_text.dart';
 
@@ -29,7 +30,7 @@ class _MyEditCardState extends State<MyEditCard> {
   @override
   Widget build(BuildContext context) {
     return MyCard(
-      color: Colors.blue.shade200,
+      color: kBackground,
       height: 100.0,
       width: widget.screenSize,
       cardChild: Padding(
@@ -58,27 +59,32 @@ class _MyEditCardState extends State<MyEditCard> {
                   ),
                 ),
               ),
-              child: TextField(
-                keyboardType: TextInputType.number,
-                controller: widget.controller,
-                cursorWidth: 2.0,
-                cursorColor:
-                    (widget.category == kSalario || widget.category == kPensao)
-                        ? Colors.green
-                        : Colors.red,
-                textAlign: TextAlign.center,
-                maxLines: 1,
-                decoration: InputDecoration(
-                  border: InputBorder.none,
-                ),
-                style: TextStyle(
-                  color: (widget.category == kSalario ||
+              child: ContainerForNumbers(
+                width: 150,
+                height: 40,
+                margin: EdgeInsets.fromLTRB(0, 0, 0, 8),
+                child: TextField(
+                  keyboardType: TextInputType.number,
+                  controller: widget.controller,
+                  cursorWidth: 2.0,
+                  cursorColor: (widget.category == kSalario ||
                           widget.category == kPensao)
                       ? Colors.green
                       : Colors.red,
-                  fontSize: 20,
+                  textAlign: TextAlign.center,
+                  maxLines: 1,
+                  decoration: InputDecoration(
+                    border: InputBorder.none,
+                  ),
+                  style: TextStyle(
+                    color: (widget.category == kSalario ||
+                            widget.category == kPensao)
+                        ? Colors.green
+                        : Colors.red,
+                    fontSize: 20,
+                  ),
+                  onChanged: widget.onChange,
                 ),
-                onChanged: widget.onChange,
               ),
             ),
           ],

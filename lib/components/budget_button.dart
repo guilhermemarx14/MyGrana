@@ -5,11 +5,13 @@ import 'my_card.dart';
 class BudgetButton extends StatelessWidget {
   const BudgetButton({
     Key key,
+    this.color,
     @required this.screenSize,
     @required this.text,
     @required this.onTap,
   }) : super(key: key);
 
+  final Color color;
   final double screenSize;
   final String text;
   final Function onTap;
@@ -18,7 +20,7 @@ class BudgetButton extends StatelessWidget {
     return GestureDetector(
       onTap: onTap,
       child: MyCard(
-        color: Colors.blue.shade700,
+        color: color,
         height: 70.0,
         width: screenSize,
         cardChild: Row(

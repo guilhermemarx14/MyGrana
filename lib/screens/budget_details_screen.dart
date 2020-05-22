@@ -212,6 +212,7 @@ class BudgetCards extends StatelessWidget {
     if (type == ORCAMENTO)
       cards.add(
         BudgetButton(
+          color: kButton,
           screenSize: screenSize,
           text: 'Editar orçamento',
           onTap: () => Navigator.push(context,
