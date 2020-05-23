@@ -3,6 +3,7 @@ import 'package:flutter_app/util/constants.dart';
 import 'package:flutter_calendar_carousel/classes/event.dart';
 import 'package:flutter_calendar_carousel/flutter_calendar_carousel.dart'
     show CalendarCarousel;
+import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 
 class MyCalendar extends StatefulWidget {
   MyCalendar({Key key, this.title, this.myDate, this.selectDate})
@@ -161,22 +162,23 @@ class _MyCalendarState extends State<MyCalendar> {
           color: Colors.grey,
         ),
         weekdayTextStyle: TextStyle(
-          fontSize: 10.0,
-          color: Colors.blue.shade700,
+          fontSize: 12.0,
+          color: Colors.white,
         ),
         todayTextStyle: TextStyle(
           fontSize: 12.0,
-          color: Colors.white,
+          color: Colors.black.withOpacity(0.83),
           fontWeight: FontWeight.bold,
         ),
-        todayButtonColor: Colors.blue.shade700,
+        todayButtonColor: Colors.transparent,
 
-        todayBorderColor: Colors.blue.shade700,
+        todayBorderColor: Colors.black.withOpacity(0.83),
         daysTextStyle: TextStyle(
           fontSize: 10.0,
           color: Colors.black.withOpacity(0.83),
+          fontWeight: FontWeight.bold,
         ),
-        selectedDayButtonColor: Colors.green,
+        selectedDayButtonColor: kButton,
         selectedDayTextStyle: TextStyle(
           fontSize: 12.0,
           color: Colors.white,
@@ -188,12 +190,19 @@ class _MyCalendarState extends State<MyCalendar> {
           color: Colors.red,
         ),
         markedDateIconMargin: 1.0,
-        thisMonthDayBorderColor: Colors.grey,
+        thisMonthDayBorderColor: Colors.black.withOpacity(0.3),
         locale: "pt_Br",
 //      weekDays: null, /// for pass null when you do not want to render weekDays
-//      headerText: Container( /// Example for rendering custom header
-//        child: Text('Custom Header'),
-//      ),
+//      headerText: "teste";
+        headerTextStyle: TextStyle(color: Colors.white, fontSize: 20.0),
+        leftButtonIcon: Icon(
+          FontAwesomeIcons.chevronLeft,
+          color: Colors.white,
+        ),
+        rightButtonIcon: Icon(
+          FontAwesomeIcons.chevronRight,
+          color: Colors.white,
+        ),
         headerMargin: EdgeInsets.only(bottom: 3.0),
         customDayBuilder: (
           /// you can provide your own build function to make custom day containers
