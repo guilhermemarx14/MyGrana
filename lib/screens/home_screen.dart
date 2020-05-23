@@ -21,25 +21,22 @@ double total = 0;
 double totalNaoPago = 0;
 
 class HomeScreen extends StatefulWidget {
-  HomeScreen({this.p});
-  Profile p;
+  const HomeScreen({
+    Key key,
+  }) : super(key: key);
   @override
   _HomeScreenState createState() => _HomeScreenState();
 }
 
 class _HomeScreenState extends State<HomeScreen> {
+  Profile p;
   changeSharedPreferences() async {
     SharedPreferences prefs = await SharedPreferences.getInstance();
     prefs.setBool('first_time', false);
   }
 
   initState() {
-    DBProvider2.db.getProfile().then((profile) {
-      setState(() {
-        widget.p = profile;
-      });
-    });
-
+    DBProvider2.db.getProfile().then((Profile value) => p = value);
     DBProvider2.db.totalAcumulado().then((value) {
       if (value != total)
         setState(() {
@@ -54,6 +51,7 @@ class _HomeScreenState extends State<HomeScreen> {
     });
     changeSharedPreferences();
     DBProvider.db.drop();
+
     super.initState();
   }
 
@@ -61,6 +59,7 @@ class _HomeScreenState extends State<HomeScreen> {
   @override
   Widget build(BuildContext context) {
     screenSize = MediaQuery.of(context).size.width;
+
     return Scaffold(
       body: Container(
         decoration: BoxDecoration(
@@ -71,7 +70,7 @@ class _HomeScreenState extends State<HomeScreen> {
         ),
         child: Scaffold(
           backgroundColor: Colors.transparent,
-          floatingActionButton: FloatingActionButtonHome(p: widget.p),
+          floatingActionButton: FloatingActionButtonHome(),
           body: Column(
             children: <Widget>[
               AppBarHome(),
@@ -268,13 +267,18 @@ class _FirstLineOptionsState extends State<FirstLineOptions> {
                 context,
                 MaterialPageRoute(
                     builder: (context) => BudgetDetailsScreen(ORCAMENTO)))),
-        /*HomeItem(
+        HomeItem(
           height: widget.screenSize / 4,
           width: widget.screenSize / 4,
           icon: FontAwesomeIcons.mapMarkedAlt,
           title: 'Localização',
-          onPressed: () {},
-        ),*/
+          onPressed: () {
+            () => Navigator.push(
+                context,
+                MaterialPageRoute(
+                    builder: (context) => BudgetDetailsScreen(ORCAMENTO)));
+          },
+        ),
       ],
     );
   }

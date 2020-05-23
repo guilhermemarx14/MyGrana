@@ -46,6 +46,6 @@ class Transacao {
 
   @override
   String toString() {
-    return "Id: $id, Categoria: $category, Data: $date, Descricao: $descricao, Paid: $paid, Value: $value";
+    return "Id: $id, Categoria: $category, Data: $date, Descricao: $descricao, Paid: $paid, Value: $value\n";
   }
 }

@@ -422,8 +422,7 @@ class _UniversityScreen extends State<UniversityScreen> {
                       prefs.setBool('first_time', false); //cadastro concluído
                       Navigator.pushAndRemoveUntil(
                           context,
-                          MaterialPageRoute(
-                              builder: (context) => HomeScreen(p: profile)),
+                          MaterialPageRoute(builder: (context) => HomeScreen()),
                           (r) => false);
                     }
                   },

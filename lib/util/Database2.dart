@@ -1,4 +1,5 @@
 import 'dart:async';
+import 'dart:core';
 import 'dart:io';
 
 import 'package:firebase_database/firebase_database.dart';
@@ -31,6 +32,7 @@ REALTIME DATABASE: por ser um banco de dados NOSQL, sua organizacao e' bem difer
 class DBProvider2 {
   //SINGLETON DO BANCO DE DADOS
   DBProvider2._();
+
   static final DBProvider2 db = DBProvider2._();
 
   static Database _database;
@@ -272,4 +274,25 @@ class DBProvider2 {
     await db.execute(
         "UPDATE `budget` SET `$kAlimentacao`='${o.alimentacao}',`$kHigiene`='${o.higiene}',`$kInvestimento`='${o.investimento}',`$kLazer`='${o.lazer}',`$kMoradia`='${o.moradia}',`$kPensao`='${o.pensao}',`$kSalario`='${o.salario}',`$kSaude`='${o.saude}',`$kTransporte`='${o.transporte}',`$kUniversidade`='${o.universidade}',`$kVestimenta`='${o.vestimenta}',`$kOutros`='${o.outros}' WHERE id = '1'");
   }
+
+  /*localizacao(Profile p) async {
+    List<Transacao> transacoes = [];
+    //print(p);
+    final dbRef = await FirebaseDatabase.instance
+        .reference()
+        .child('${p.estado}') //estado
+        .child('${p.cidade}') //cidade
+        .child('${p.universidade}') //universidade
+        .child(p.hash) //hash
+        .child(p.plataforma) //plataforma
+        .once();
+
+    dbRef.value.forEach((key, value) {
+      var transacao = Transacao();
+      transacao.category = value["Categoria"];
+      transacao.value = value["Valor"];
+      transacao.date = value["Data"];
+      transacoes.add(transacao);
+    });
+  }*/
 }

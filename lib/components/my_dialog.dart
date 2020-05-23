@@ -300,7 +300,7 @@ class _MyDialogState extends State<MyDialog> {
                         Navigator.pushAndRemoveUntil(
                             context,
                             MaterialPageRoute(
-                                builder: (context) => HomeScreen(p: p)),
+                                builder: (context) => HomeScreen()),
                             (r) => false);
                       } else
                         Toast.show('Você precisa digitar um valor!', context,

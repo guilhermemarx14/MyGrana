@@ -28,7 +28,7 @@ dependencies:
   path_provider: any
   toast: ^0.1.5
   firebase_core: 0.4.0+3
-  firebase_database: ^3.0.7
+  firebase_database: ^3.1.5
   shared_preferences: ^0.5.7+1
   flutter_calendar_carousel: ^1.4.12
   flutter_masked_text: ^0.8.0
