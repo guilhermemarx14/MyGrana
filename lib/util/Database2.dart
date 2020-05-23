@@ -275,13 +275,33 @@ class DBProvider2 {
         "UPDATE `budget` SET `$kAlimentacao`='${o.alimentacao}',`$kHigiene`='${o.higiene}',`$kInvestimento`='${o.investimento}',`$kLazer`='${o.lazer}',`$kMoradia`='${o.moradia}',`$kPensao`='${o.pensao}',`$kSalario`='${o.salario}',`$kSaude`='${o.saude}',`$kTransporte`='${o.transporte}',`$kUniversidade`='${o.universidade}',`$kVestimenta`='${o.vestimenta}',`$kOutros`='${o.outros}' WHERE id = '1'");
   }
 
-  localizacao(int estado, int cidade, int universidade) {
-    var _database =
-        FirebaseDatabase.instance.reference().child('$estado').child('$cidade');
+  localizacao(int estado, int cidade, int universidade) async {
+    var _database = await FirebaseDatabase.instance
+        .reference()
+        .child('$estado')
+        .child('$cidade');
     var hashes = [];
-    _database.child('$universidade').once().then((value) {
+    await _database.child('$universidade').once().then((value) {
+      //encontra as hashes dos usuários
       hashes = findHashes(value.value.toString());
     });
+
+    await _database
+        .child('$universidade') //remove a plataforma dos usuários
+        .child(hashes[0])
+        .once()
+        .then((value) {
+      removePlatform(value.value.toString());
+    });
+  }
+
+  removePlatform(String data) {
+    if (data.contains('ios'))
+      data = data.substring(6, data.length - 1);
+    else
+      data = data.substring(10, data.length - 1);
+
+    return data;
   }
 
   findHashes(String data) {
