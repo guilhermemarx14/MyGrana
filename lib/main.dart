@@ -19,7 +19,7 @@ class MyApp extends StatelessWidget {
       theme: ThemeData(
         primaryColor: kBlue,
         secondaryHeaderColor: Colors.blue.shade900,
-        canvasColor: Colors.blue.shade200,
+        canvasColor: kBackground,
       ),
       home: SplashScreen(),
       routes: <String, WidgetBuilder>{
