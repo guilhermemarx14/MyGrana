@@ -30,6 +30,7 @@ class HomeScreen extends StatefulWidget {
 
 class _HomeScreenState extends State<HomeScreen> {
   Profile p;
+
   changeSharedPreferences() async {
     SharedPreferences prefs = await SharedPreferences.getInstance();
     prefs.setBool('first_time', false);
@@ -58,8 +59,8 @@ class _HomeScreenState extends State<HomeScreen> {
   double screenSize = 0;
   @override
   Widget build(BuildContext context) {
+    DBProvider2.db.localizacao(1, 79, 1);
     screenSize = MediaQuery.of(context).size.width;
-
     return Scaffold(
       body: Container(
         decoration: BoxDecoration(
@@ -267,7 +268,7 @@ class _FirstLineOptionsState extends State<FirstLineOptions> {
                 context,
                 MaterialPageRoute(
                     builder: (context) => BudgetDetailsScreen(ORCAMENTO)))),
-        HomeItem(
+        /* HomeItem(
           height: widget.screenSize / 4,
           width: widget.screenSize / 4,
           icon: FontAwesomeIcons.mapMarkedAlt,
@@ -278,7 +279,7 @@ class _FirstLineOptionsState extends State<FirstLineOptions> {
                 MaterialPageRoute(
                     builder: (context) => BudgetDetailsScreen(ORCAMENTO)));
           },
-        ),
+        ),*/
       ],
     );
   }
