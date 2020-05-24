@@ -57,9 +57,9 @@ class _HomeScreenState extends State<HomeScreen> {
   }
 
   double screenSize = 0;
+
   @override
   Widget build(BuildContext context) {
-    DBProvider2.db.localizacao(1, 79, 1);
     screenSize = MediaQuery.of(context).size.width;
     return Scaffold(
       body: Container(

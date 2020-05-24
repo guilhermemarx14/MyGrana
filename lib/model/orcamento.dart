@@ -2,7 +2,7 @@ import 'dart:convert';
 
 import 'package:flutter_app/util/constants.dart';
 
-Orcamento ProfileFromJson(String str) {
+Orcamento OrcamentoFromJson(String str) {
   final jsonData = json.decode(str);
   return Orcamento.fromMap(jsonData);
 }

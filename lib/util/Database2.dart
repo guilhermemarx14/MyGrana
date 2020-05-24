@@ -104,58 +104,23 @@ class DBProvider2 {
   }
 
   saveTransacao(Transacao t, Profile p) {
-    final FirebaseDatabase _database = FirebaseDatabase.instance;
+    var _database =
+        FirebaseDatabase.instance.reference().child(p.hash).child('Profile');
+    //profile do usuário
+    _database.child("Estado").set('${p.estado}');
+    _database.child("Cidade").set('${p.cidade}');
+    _database.child("Universidade").set('${p.universidade}');
+    _database.child("Plataforma").set('${p.plataforma}');
 
-    _database
+    _database = FirebaseDatabase.instance
         .reference()
-        .child('${p.estado}')
-        .child('${p.cidade}')
-        .child('${p.universidade}')
         .child(p.hash)
-        .child('${p.plataforma}')
-        .child("${t.id}")
-        .child("Data")
-        .set(t.date);
-    _database
-        .reference()
-        .child('${p.estado}')
-        .child('${p.cidade}')
-        .child('${p.universidade}')
-        .child(p.hash)
-        .child('${p.plataforma}')
-        .child("${t.id}")
-        .child("Descricao")
-        .set(t.descricao);
-    _database
-        .reference()
-        .child('${p.estado}')
-        .child('${p.cidade}')
-        .child('${p.universidade}')
-        .child(p.hash)
-        .child('${p.plataforma}')
-        .child("${t.id}")
-        .child("Pago")
-        .set(t.paid ? 1 : 0);
-    _database
-        .reference()
-        .child('${p.estado}')
-        .child('${p.cidade}')
-        .child('${p.universidade}')
-        .child(p.hash)
-        .child('${p.plataforma}')
-        .child("${t.id}")
-        .child("Valor")
-        .set(t.value);
-    _database
-        .reference()
-        .child('${p.estado}')
-        .child('${p.cidade}')
-        .child('${p.universidade}')
-        .child(p.hash)
-        .child('${p.plataforma}')
-        .child("${t.id}")
-        .child("Categoria")
-        .set(t.category);
+        .child('Transactions')
+        .child('${t.id}');
+    _database.child("Id").set(t.id);
+    _database.child("Data").set(t.date);
+    _database.child("Valor").set(t.value);
+    _database.child("Categoria").set(t.category);
   }
 
   printTransacoesList() async {
@@ -237,15 +202,11 @@ class DBProvider2 {
     await db.rawQuery('Delete from `transaction` where id=${t.id};');
 
     final FirebaseDatabase _database = FirebaseDatabase.instance;
-
     _database
         .reference()
-        .child('${p.estado}')
-        .child('${p.cidade}')
-        .child('${p.universidade}')
         .child(p.hash)
-        .child('${p.plataforma}')
-        .child("${t.id}")
+        .child('Transactions')
+        .child('${t.id}')
         .remove();
   }
 
@@ -273,44 +234,5 @@ class DBProvider2 {
     //ATUALIZA A ENTRADA NO BANCO DE DADOS
     await db.execute(
         "UPDATE `budget` SET `$kAlimentacao`='${o.alimentacao}',`$kHigiene`='${o.higiene}',`$kInvestimento`='${o.investimento}',`$kLazer`='${o.lazer}',`$kMoradia`='${o.moradia}',`$kPensao`='${o.pensao}',`$kSalario`='${o.salario}',`$kSaude`='${o.saude}',`$kTransporte`='${o.transporte}',`$kUniversidade`='${o.universidade}',`$kVestimenta`='${o.vestimenta}',`$kOutros`='${o.outros}' WHERE id = '1'");
-  }
-
-  localizacao(int estado, int cidade, int universidade) async {
-    var _database = await FirebaseDatabase.instance
-        .reference()
-        .child('$estado')
-        .child('$cidade');
-    var hashes = [];
-    await _database.child('$universidade').once().then((value) {
-      //encontra as hashes dos usuários
-      hashes = findHashes(value.value.toString());
-    });
-
-    await _database
-        .child('$universidade') //remove a plataforma dos usuários
-        .child(hashes[0])
-        .once()
-        .then((value) {
-      removePlatform(value.value.toString());
-    });
-  }
-
-  removePlatform(String data) {
-    if (data.contains('ios'))
-      data = data.substring(6, data.length - 1);
-    else
-      data = data.substring(10, data.length - 1);
-
-    return data;
-  }
-
-  findHashes(String data) {
-    List<String> hashes = [];
-    List<String> auxiliar =
-        data.replaceAll('\{', '').replaceAll(":", '').split(' ');
-
-    for (int i = 0; i < auxiliar.length; i++)
-      if (auxiliar[i].length > 30) hashes.add(auxiliar[i]);
-    return hashes;
   }
 }
