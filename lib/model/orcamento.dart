@@ -10,17 +10,18 @@ Orcamento OrcamentoFromJson(String str) {
 Orcamento fromBudget(List<int> budget) {
   var retorno = Orcamento();
   retorno.alimentacao = budget[0];
-  retorno.higiene = budget[1];
-  retorno.investimento = budget[2];
-  retorno.lazer = budget[3];
-  retorno.moradia = budget[4];
-  retorno.pensao = budget[5];
-  retorno.salario = budget[6];
-  retorno.saude = budget[7];
-  retorno.transporte = budget[8];
-  retorno.universidade = budget[9];
-  retorno.vestimenta = budget[10];
-  retorno.outros = budget[11];
+  retorno.bolsaAuxilio = budget[1];
+  retorno.higiene = budget[2];
+  retorno.investimento = budget[3];
+  retorno.lazer = budget[4];
+  retorno.moradia = budget[5];
+  retorno.pensao = budget[6];
+  retorno.salario = budget[7];
+  retorno.saude = budget[8];
+  retorno.transporte = budget[9];
+  retorno.universidade = budget[10];
+  retorno.vestimenta = budget[11];
+  retorno.outros = budget[12];
   return retorno;
 }
 
@@ -31,6 +32,7 @@ String OrcamentoToJson(Orcamento data) {
 
 class Orcamento {
   int alimentacao;
+  int bolsaAuxilio;
   int higiene;
   int investimento;
   int lazer;
@@ -45,6 +47,7 @@ class Orcamento {
 
   Orcamento({
     this.alimentacao,
+    this.bolsaAuxilio,
     this.higiene,
     this.investimento,
     this.lazer,
@@ -60,6 +63,7 @@ class Orcamento {
 
   factory Orcamento.fromMap(Map<String, dynamic> json) => Orcamento(
         alimentacao: json["$kAlimentacao"],
+        bolsaAuxilio: json["$kBolsaAuxilio"],
         higiene: json["$kHigiene"],
         investimento: json["$kInvestimento"],
         lazer: json["$kLazer"],
@@ -75,6 +79,7 @@ class Orcamento {
 
   Map<String, dynamic> toMap() => {
         "$kAlimentacao": alimentacao,
+        "$kBolsaAuxilio": bolsaAuxilio,
         "$kHigiene": higiene,
         "$kInvestimento": investimento,
         "$kLazer": lazer,
@@ -91,6 +96,7 @@ class Orcamento {
   @override
   String toString() {
     return "$kAlimentacao: $alimentacao "
+        "$kBolsaAuxilio: $bolsaAuxilio "
         "$kHigiene: $higiene "
         "$kInvestimento: $investimento "
         "$kLazer: $lazer "
@@ -107,6 +113,7 @@ class Orcamento {
   List<int> getBudget() {
     List<int> budget = [];
     budget.add(alimentacao);
+    budget.add(bolsaAuxilio);
     budget.add(higiene);
     budget.add(investimento);
     budget.add(lazer);

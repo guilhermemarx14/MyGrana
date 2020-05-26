@@ -82,11 +82,11 @@ class _MyDialogState extends State<MyDialog> {
           child: Column(
             mainAxisSize: MainAxisSize.min,
             children: <Widget>[
-              Row(
+              Column(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: <Widget>[
                   Padding(
-                    padding: EdgeInsets.all(16.0),
+                    padding: EdgeInsets.all(8.0),
                     child: Text(
                       'Categoria:',
                       style: TextStyle(
@@ -120,7 +120,8 @@ class _MyDialogState extends State<MyDialog> {
                             kListaCategorias.indexOf(newSelected);
                         if (transacao != Null) {
                           if (transacao.category == kSalario ||
-                              transacao.category == kPensao)
+                              transacao.category == kPensao ||
+                              transacao.category == kBolsaAuxilio)
                             transacao.value = transacao.value > 0
                                 ? transacao.value
                                 : -transacao.value;
@@ -213,7 +214,8 @@ class _MyDialogState extends State<MyDialog> {
                   ),
                   style: TextStyle(
                     color: (transacao.category == kSalario ||
-                            transacao.category == kPensao)
+                            transacao.category == kPensao ||
+                            transacao.category == kBolsaAuxilio)
                         ? Colors.green
                         : Colors.red,
                     fontSize: 20,
@@ -223,7 +225,8 @@ class _MyDialogState extends State<MyDialog> {
                       valorController.updateValue(valorController.numberValue);
                       valorInt = (valorController.numberValue * 100).toInt();
                       if (transacao.category == kSalario ||
-                          transacao.category == kPensao)
+                          transacao.category == kPensao ||
+                          transacao.category == kBolsaAuxilio)
                         transacao.value = valorInt;
                       else
                         transacao.value = -valorInt;
@@ -389,7 +392,7 @@ class _MyEditDialogState extends State<MyEditDialog> {
           child: Column(
             mainAxisSize: MainAxisSize.min,
             children: <Widget>[
-              Row(
+              Column(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: <Widget>[
                   Padding(
@@ -428,7 +431,8 @@ class _MyEditDialogState extends State<MyEditDialog> {
                         // ignore: unrelated_type_equality_checks
                         if (widget.transacao != Null) {
                           if (widget.transacao.category == kSalario ||
-                              widget.transacao.category == kPensao)
+                              widget.transacao.category == kPensao ||
+                              widget.transacao.category == kBolsaAuxilio)
                             widget.transacao.value = widget.transacao.value > 0
                                 ? widget.transacao.value
                                 : -widget.transacao.value;
@@ -522,7 +526,8 @@ class _MyEditDialogState extends State<MyEditDialog> {
                     decoration: InputDecoration(border: InputBorder.none),
                     style: TextStyle(
                       color: (widget.transacao.category == kSalario ||
-                              widget.transacao.category == kPensao)
+                              widget.transacao.category == kPensao ||
+                              widget.transacao.category == kBolsaAuxilio)
                           ? Colors.green
                           : Colors.red,
                       fontSize: 20,
@@ -534,7 +539,8 @@ class _MyEditDialogState extends State<MyEditDialog> {
                         _valorInt =
                             (_valorController.numberValue * 100).toInt();
                         if (widget.transacao.category == kSalario ||
-                            widget.transacao.category == kPensao)
+                            widget.transacao.category == kPensao ||
+                            widget.transacao.category == kBolsaAuxilio)
                           widget.transacao.value = _valorInt;
                         else
                           widget.transacao.value = -_valorInt;

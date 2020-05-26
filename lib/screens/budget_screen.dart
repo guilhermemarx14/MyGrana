@@ -27,7 +27,9 @@ class _BudgetScreenState extends State<BudgetScreen> {
       //print(orcamento);
       setState(() {
         List<int> budget = orcamento.getBudget();
-        totalGanhosPlanejados = (budget[kSalario] + budget[kPensao]).toDouble();
+        totalGanhosPlanejados =
+            (budget[kSalario] + budget[kPensao] + budget[kBolsaAuxilio])
+                .toDouble();
         budget.forEach((element) {
           totalGastosPlanejados -= element;
         });
@@ -43,7 +45,9 @@ class _BudgetScreenState extends State<BudgetScreen> {
       setState(() {
         list.forEach((element) {
           //print(element);
-          if (element.category == kSalario || element.category == kPensao)
+          if (element.category == kSalario ||
+              element.category == kPensao ||
+              element.category == kBolsaAuxilio)
             totalGanhosReais += element.value;
           else
             totalGastosReais -= element.value;

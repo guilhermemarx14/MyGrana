@@ -25,23 +25,26 @@ const String SAUDE = 'Saude';
 const String TRANSPORTE = 'Transporte';
 const String INVESTIMENTO = 'Investimento';
 const String UNIVERSIDADE = 'Universidade';
+const String BOLSAAUXILIO = 'Bolsa Auxílio';
 const String TODOS = 'Todos';
 
 const int kAlimentacao = 0;
-const int kHigiene = 1;
-const int kInvestimento = 2;
-const int kLazer = 3;
-const int kMoradia = 4;
-const int kPensao = 5;
-const int kSalario = 6;
-const int kSaude = 7;
-const int kTransporte = 8;
-const int kUniversidade = 9;
-const int kVestimenta = 10;
-const int kOutros = 11;
-const int kTotalCategorias = 12;
+const int kBolsaAuxilio = 1;
+const int kHigiene = 2;
+const int kInvestimento = 3;
+const int kLazer = 4;
+const int kMoradia = 5;
+const int kPensao = 6;
+const int kSalario = 7;
+const int kSaude = 8;
+const int kTransporte = 9;
+const int kUniversidade = 10;
+const int kVestimenta = 11;
+const int kOutros = 12;
+const int kTotalCategorias = 13;
 const List<String> kListaCategorias = [
   'Alimentação',
+  'Bolsa Auxílio',
   'Higiene',
   'Investimento',
   'Lazer',

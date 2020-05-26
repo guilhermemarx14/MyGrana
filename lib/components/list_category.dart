@@ -36,7 +36,9 @@ class ListCategory extends StatelessWidget {
             Text(
               'R\$ ${maskedReal.output.nonSymbol}',
               style: TextStyle(
-                  color: (category == kSalario || category == kPensao)
+                  color: (category == kSalario ||
+                          category == kPensao ||
+                          category == kBolsaAuxilio)
                       ? Colors.green
                       : Colors.red,
                   fontWeight: FontWeight.bold,
@@ -55,7 +57,9 @@ class ListCategory extends StatelessWidget {
               child: Text(
                 'R\$ ${maskedPlanejado.output.nonSymbol}',
                 style: TextStyle(
-                    color: (category == kSalario || category == kPensao)
+                    color: (category == kSalario ||
+                            category == kPensao ||
+                            category == kBolsaAuxilio)
                         ? Colors.green
                         : Colors.red,
                     fontWeight: FontWeight.bold,

@@ -40,7 +40,9 @@ class _CategoriesScreenState extends State<CategoriesScreen> {
     if (planejado != null)
       for (int i = 0; i < planejado.length; i++) real.add(0);
     transacoes.forEach((transacao) {
-      if (transacao.category == kSalario || transacao.category == kPensao)
+      if (transacao.category == kSalario ||
+          transacao.category == kPensao ||
+          transacao.category == kBolsaAuxilio)
         real[transacao.category] += transacao.value;
       else
         real[transacao.category] -= transacao.value;
@@ -49,7 +51,7 @@ class _CategoriesScreenState extends State<CategoriesScreen> {
     List<Widget> cardsGanhos = [];
     List<Widget> cardsGastos = [];
     for (int i = 0; i < real.length; i++) {
-      if (i == kSalario || i == kPensao)
+      if (i == kSalario || i == kPensao || i == kBolsaAuxilio)
         cardsGanhos.add(
           CategoryItem(
             category: kListaCategorias[i],

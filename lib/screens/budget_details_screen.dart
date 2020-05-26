@@ -37,7 +37,10 @@ class _BudgetDetailsScreenState extends State<BudgetDetailsScreen> {
         setState(() {
           orcamento = result.getBudget();
           //print(orcamento);
-          totalGanhos = (orcamento[kSalario] + orcamento[kPensao]).toDouble();
+          totalGanhos = (orcamento[kSalario] +
+                  orcamento[kPensao] +
+                  orcamento[kBolsaAuxilio])
+              .toDouble();
           orcamento.forEach((element) {
             totalGastos -= element;
           });
@@ -54,7 +57,9 @@ class _BudgetDetailsScreenState extends State<BudgetDetailsScreen> {
         setState(() {
           transacoes.forEach((element) {
             //print(element);
-            if (element.category == kSalario || element.category == kPensao)
+            if (element.category == kSalario ||
+                element.category == kPensao ||
+                element.category == kBolsaAuxilio)
               totalGanhos += element.value;
             else
               totalGastos -= element.value;
@@ -197,7 +202,9 @@ class BudgetCards extends StatelessWidget {
                     style: TextStyle(
                         fontSize: 20.0,
                         fontWeight: FontWeight.bold,
-                        color: (i == kSalario || i == kPensao)
+                        color: (i == kSalario ||
+                                i == kPensao ||
+                                i == kBolsaAuxilio)
                             ? Colors.green
                             : Colors.red),
                   ),

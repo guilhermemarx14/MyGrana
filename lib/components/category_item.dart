@@ -1,3 +1,5 @@
+import 'dart:ui';
+
 import 'package:flutter/material.dart';
 import 'package:flutter_app/components/container_for_numbers.dart';
 import 'package:flutter_app/util/constants.dart';
@@ -32,7 +34,8 @@ class CategoryItem extends StatelessWidget {
     );
     bool isGanho = false;
     if (kListaCategorias.indexOf(category) == kSalario ||
-        kListaCategorias.indexOf(category) == kPensao) isGanho = true;
+        kListaCategorias.indexOf(category) == kPensao ||
+        kListaCategorias.indexOf(category) == kBolsaAuxilio) isGanho = true;
     return Container(
       margin: EdgeInsets.all(8),
       padding: EdgeInsets.all(8),

@@ -32,7 +32,10 @@ class _BudgetEditScreenState extends State<BudgetEditScreen> {
       setState(() {
         orcamento = result.getBudget();
         //print(orcamento);
-        totalGanhos = (orcamento[kSalario] + orcamento[kPensao]).toDouble();
+        totalGanhos = (orcamento[kSalario] +
+                orcamento[kPensao] +
+                orcamento[kBolsaAuxilio])
+            .toDouble();
         orcamento.forEach((element) {
           totalGastos -= element;
         });
@@ -142,15 +145,16 @@ class _BudgetEditCardsState extends State<BudgetEditCards> {
               //print(valorController[i].numberValue);
               valorController[i].updateValue(valorController[i].numberValue);
               int valorInt = (valorController[i].numberValue * 100).toInt();
-              if (i == kSalario || i == kPensao)
+              if (i == kSalario || i == kPensao || i == kBolsaAuxilio)
                 widget.orcamento[i] = valorInt;
               else
                 widget.orcamento[i] = -valorInt;
               totalGanhos = 0;
               totalGastos = 0;
-              totalGanhos =
-                  ((widget.orcamento[kSalario] + widget.orcamento[kPensao]))
-                      .toDouble();
+              totalGanhos = ((widget.orcamento[kSalario] +
+                      widget.orcamento[kPensao] +
+                      widget.orcamento[kBolsaAuxilio]))
+                  .toDouble();
               widget.orcamento.forEach((element) {
                 totalGastos -= element;
               });

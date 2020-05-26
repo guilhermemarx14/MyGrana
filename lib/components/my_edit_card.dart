@@ -53,7 +53,8 @@ class _MyEditCardState extends State<MyEditCard> {
                   bottom: BorderSide(
                     width: 2.0,
                     color: (widget.category == kSalario ||
-                            widget.category == kPensao)
+                            widget.category == kPensao ||
+                            widget.category == kBolsaAuxilio)
                         ? Colors.green
                         : Colors.red,
                   ),
@@ -68,7 +69,8 @@ class _MyEditCardState extends State<MyEditCard> {
                   controller: widget.controller,
                   cursorWidth: 2.0,
                   cursorColor: (widget.category == kSalario ||
-                          widget.category == kPensao)
+                          widget.category == kPensao ||
+                          widget.category == kBolsaAuxilio)
                       ? Colors.green
                       : Colors.red,
                   textAlign: TextAlign.center,
@@ -78,7 +80,8 @@ class _MyEditCardState extends State<MyEditCard> {
                   ),
                   style: TextStyle(
                     color: (widget.category == kSalario ||
-                            widget.category == kPensao)
+                            widget.category == kPensao ||
+                            widget.category == kBolsaAuxilio)
                         ? Colors.green
                         : Colors.red,
                     fontSize: 20,
