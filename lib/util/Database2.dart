@@ -125,7 +125,8 @@ class DBProvider2 {
 
   printTransacoesList() async {
     final db = await database;
-    List<Map> res = await db.rawQuery('Select * from `transaction`');
+    List<Map> res =
+        await db.rawQuery('Select * from `transaction` order by date asc');
     for (int i = 0; i < res.length; i++) print(Transacao.fromMap(res[i]));
   }
 
@@ -154,7 +155,7 @@ class DBProvider2 {
     bool flag = false;
     String consulta = "Select * from `transaction`";
     if (categoria == TODOS && mes == TODOS && ano == TODOS) {
-      consulta += ';';
+      consulta += 'order by date;';
 
       res = await db.rawQuery(consulta);
 
@@ -187,11 +188,12 @@ class DBProvider2 {
       if (flag) consulta += "AND ";
       consulta += "date LIKE '%$ano%'";
     }
-    consulta += ';';
+    consulta += 'order by date;';
     //print(consulta);
     res = await db.rawQuery(consulta);
 
     for (int i = 0; i < res.length; i++) result.add(Transacao.fromMap(res[i]));
+    //print(result);
     //print(result);
     return result;
   }

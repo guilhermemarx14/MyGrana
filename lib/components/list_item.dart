@@ -4,7 +4,6 @@ import 'package:flutter_app/components/my_dialog.dart';
 import 'package:flutter_app/model/transacao.dart';
 import 'package:flutter_app/util/constants.dart';
 import 'package:flutter_money_formatter/flutter_money_formatter.dart';
-import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 
 import 'delete_dialog.dart';
 
@@ -27,71 +26,79 @@ class ListItem extends StatelessWidget {
           thousandSeparator: '.', decimalSeparator: ',', fractionDigits: 2),
     );
     return GestureDetector(
-      onTap: () {
-        showDialog(
-          context: context,
-          builder: (BuildContext context) {
-            // return object of type Dialog
-            return MyEditDialog(
-              transacao: transacao,
-            );
-          },
-        );
-      },
-      onLongPress: () {
-        showDialog(
+        behavior: HitTestBehavior.opaque,
+        onTap: () {
+          showDialog(
             context: context,
             builder: (BuildContext context) {
-              //print('call: ' + transacao.toString());
-              return DeleteDialog(
+              // return object of type Dialog
+              return MyEditDialog(
                 transacao: transacao,
               );
-            });
-      },
-      child: Container(
-        height: 50,
-        child: Center(
-          child: Padding(
-            padding: const EdgeInsets.all(8.0),
-            child: Row(
+            },
+          );
+        },
+        onLongPress: () {
+          showDialog(
+              context: context,
+              builder: (BuildContext context) {
+                //print('call: ' + transacao.toString());
+                return DeleteDialog(
+                  transacao: transacao,
+                );
+              });
+        },
+        child: Column(
+          children: <Widget>[
+            Text(
+              kListaCategorias[transacao.category],
+              style: kStatementsStyle,
+            ),
+            Row(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: <Widget>[
-                Text(
-                  title,
-                  style: kStatementsStyle,
-                ),
-                Row(
+                Column(
                   children: <Widget>[
-                    ContainerForNumbers(
-                      width: 150,
-                      height: 40,
-                      child: Text(
-                        'R\$ ${maskedValue.output.nonSymbol}',
-                        style: TextStyle(
-                          fontSize: 20.0,
-                          color:
-                              transacao.value > 0 ? Colors.green : Colors.red,
-                          fontWeight: FontWeight.bold,
-                        ),
-                      ),
+                    Text(
+                      transacao.descricao,
+                      style: kStatementsStyle.copyWith(fontSize: 15),
                     ),
-                    SizedBox(
-                      width: 5.0,
-                    ),
-                    Icon(
-                      transacao.paid
-                          ? FontAwesomeIcons.checkSquare
-                          : FontAwesomeIcons.times,
-                      size: 20.0,
-                      color: Colors.white,
+                    Text(
+                      formatDate(transacao.date),
+                      style: kStatementsStyle.copyWith(fontSize: 15),
                     ),
                   ],
+                ),
+                Container(
+                  width: MediaQuery.of(context).size.width / 2.7,
+                  height: 60,
+                ),
+                ContainerForNumbers(
+                  height: 60,
+                  width: 120,
+                  child: Text(
+                    'R\$ ${maskedValue.output.nonSymbol}',
+                    style: TextStyle(
+                      fontWeight: FontWeight.bold,
+                      color: (transacao.category == kSalario ||
+                              transacao.category == kPensao ||
+                              transacao.category == kBolsaAuxilio)
+                          ? Colors.green
+                          : Colors.red,
+                    ),
+                  ),
                 )
               ],
-            ),
-          ),
-        ),
-      ),
-    );
+            )
+          ],
+        ));
+  }
+
+  formatDate(String date) {
+    var ano = date.split('-')[0];
+    var mes = date.split('-')[1];
+    var dia = date.split('-')[2];
+    if (dia.length > 2) dia += '0';
+    return ('$dia/$mes/${ano.substring(2, 4)}');
   }
 }
