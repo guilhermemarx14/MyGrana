@@ -213,13 +213,13 @@ class DBProvider2 {
   }
 
   //CONSULTAS PARA BUDGET
-  Future<Orcamento> getOrcamento() async {
+  getOrcamento() async {
     final db = await database;
     Orcamento orcamento;
-    List<Map> res = await db.rawQuery('Select * from budget');
-    orcamento = Orcamento.fromMap(res[0]);
+    List<Map> res = await db.rawQuery('Select * from budget where id=1');
+
     //print('consulta $orcamento');
-    return orcamento;
+    return Orcamento.fromMap(res.first);
   }
 
   createOrcamento(Orcamento p) async {
@@ -235,6 +235,7 @@ class DBProvider2 {
     final db = await database;
     //ATUALIZA A ENTRADA NO BANCO DE DADOS
     await db.execute(
-        "UPDATE `budget` SET `$kAlimentacao`='${o.alimentacao}',$kBolsaAuxilio`='${o.bolsaAuxilio}',`$kHigiene`='${o.higiene}',`$kInvestimento`='${o.investimento}',`$kLazer`='${o.lazer}',`$kMoradia`='${o.moradia}',`$kPensao`='${o.pensao}',`$kSalario`='${o.salario}',`$kSaude`='${o.saude}',`$kTransporte`='${o.transporte}',`$kUniversidade`='${o.universidade}',`$kVestimenta`='${o.vestimenta}',`$kOutros`='${o.outros}' WHERE id = '1'");
+        "UPDATE `budget` SET `$kAlimentacao`='${o.alimentacao}',`$kBolsaAuxilio`='${o.bolsaAuxilio}',`$kHigiene`='${o.higiene}',`$kInvestimento`='${o.investimento}',`$kLazer`='${o.lazer}',`$kMoradia`='${o.moradia}',`$kPensao`='${o.pensao}',`$kSalario`='${o.salario}',`$kSaude`='${o.saude}',`$kTransporte`='${o.transporte}',`$kUniversidade`='${o.universidade}',`$kVestimenta`='${o.vestimenta}',`$kOutros`='${o.outros}' WHERE id = '1'");
+    print(o);
   }
 }
