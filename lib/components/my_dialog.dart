@@ -110,6 +110,12 @@ class _MyDialogState extends State<MyDialog> {
                         value: value,
                         child: Text(
                           value,
+                          style: TextStyle(
+                              color: (SALARIO == value ||
+                                      PENSAO == value ||
+                                      BOLSAAUXILIO == value)
+                                  ? Colors.green.shade900
+                                  : Colors.red),
                         ),
                       );
                     }).toList(),
@@ -420,6 +426,12 @@ class _MyEditDialogState extends State<MyEditDialog> {
                         value: value,
                         child: Text(
                           value,
+                          style: TextStyle(
+                              color: (SALARIO == value ||
+                                      PENSAO == value ||
+                                      BOLSAAUXILIO == value)
+                                  ? Colors.green.shade900
+                                  : Colors.red),
                         ),
                       );
                     }).toList(),
