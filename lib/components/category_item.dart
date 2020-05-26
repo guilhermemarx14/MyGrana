@@ -74,8 +74,7 @@ class CategoryItem extends StatelessWidget {
                     width: MediaQuery.of(context).size.width / 1.5,
                     lineHeight: 20.0,
                     percent: percent <= 1 ? percent : 1,
-                    progressColor:
-                        percent >= 1 && !isGanho ? Colors.red : Colors.green,
+                    progressColor: !isGanho ? Colors.red : Colors.green,
                   ),
                   SizedBox(
                     height: 10,
@@ -98,9 +97,7 @@ class CategoryItem extends StatelessWidget {
                     style: TextStyle(
                         fontWeight: FontWeight.bold,
                         fontSize: 20,
-                        color: real >= planejado && !isGanho
-                            ? Colors.red
-                            : Colors.green),
+                        color: !isGanho ? Colors.red : Colors.green),
                   ),
                 ),
                 Padding(

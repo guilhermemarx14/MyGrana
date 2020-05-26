@@ -236,6 +236,6 @@ class DBProvider2 {
     //ATUALIZA A ENTRADA NO BANCO DE DADOS
     await db.execute(
         "UPDATE `budget` SET `$kAlimentacao`='${o.alimentacao}',`$kBolsaAuxilio`='${o.bolsaAuxilio}',`$kHigiene`='${o.higiene}',`$kInvestimento`='${o.investimento}',`$kLazer`='${o.lazer}',`$kMoradia`='${o.moradia}',`$kPensao`='${o.pensao}',`$kSalario`='${o.salario}',`$kSaude`='${o.saude}',`$kTransporte`='${o.transporte}',`$kUniversidade`='${o.universidade}',`$kVestimenta`='${o.vestimenta}',`$kOutros`='${o.outros}' WHERE id = '1'");
-    print(o);
+    //print(o);
   }
 }

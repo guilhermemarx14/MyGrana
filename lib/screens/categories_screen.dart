@@ -64,7 +64,7 @@ class _CategoriesScreenState extends State<CategoriesScreen> {
           CategoryItem(
             category: kListaCategorias[i],
             real: real[i].toDouble(),
-            planejado: planejado[i].toDouble(),
+            planejado: (planejado[i] != 0) ? -planejado[i].toDouble() : 0.0,
           ),
         );
     }
