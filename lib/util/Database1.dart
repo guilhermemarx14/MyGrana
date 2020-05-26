@@ -64,7 +64,8 @@ class DBProvider {
     final db = await database;
     List<Estado> estados = [];
     try {
-      List<Map> res = await db.rawQuery('Select id,nome from estado');
+      List<Map> res =
+          await db.rawQuery('Select id,nome from estado order by nome asc');
       for (int i = 0; i < res.length; i++) estados.add(Estado.fromMap(res[i]));
     } catch (Exception) {}
     return estados;
@@ -108,8 +109,8 @@ class DBProvider {
     final db = await database;
     List<CidadeUniversidade> cidades = [];
     try {
-      List<Map> res =
-          await db.rawQuery('SELECT * FROM cidade WHERE estado=$estadoId');
+      List<Map> res = await db.rawQuery(
+          'SELECT * FROM cidade WHERE estado=$estadoId order by nome');
       for (int i = 0; i < res.length; i++)
         cidades.add(CidadeUniversidade.fromMap(res[i]));
     } catch (Exception) {}
@@ -133,8 +134,8 @@ class DBProvider {
     final db = await database;
     List<CidadeUniversidade> universidades = [];
     try {
-      List<Map> res = await db
-          .rawQuery('SELECT * FROM universidade WHERE estado=$estadoId');
+      List<Map> res = await db.rawQuery(
+          'SELECT * FROM universidade WHERE estado=$estadoId order by nome asc');
       for (int i = 0; i < res.length; i++)
         universidades.add(CidadeUniversidade.fromMap(res[i]));
     } catch (Exception) {}
