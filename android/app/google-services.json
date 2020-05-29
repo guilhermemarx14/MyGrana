@@ -1,0 +1,40 @@
+{
+  "project_info": {
+    "project_number": "15156816922",
+    "firebase_url": "https://mygrana-flutter.firebaseio.com",
+    "project_id": "mygrana-flutter",
+    "storage_bucket": "mygrana-flutter.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:15156816922:android:4b1d272745a4525e8075a3",
+        "android_client_info": {
+          "package_name": "com.guilhermemarx.flutter_app"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "15156816922-f0qhp0atuhv0mng500bueq250q4i3d5r.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDzqgW50XH0DsBcxMu3ezfve9FU1appNUk"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "15156816922-f0qhp0atuhv0mng500bueq250q4i3d5r.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
