@@ -90,10 +90,7 @@ class _HomeScreenState extends State<HomeScreen> {
 class FloatingActionButtonHome extends StatefulWidget {
   const FloatingActionButtonHome({
     Key key,
-    @required this.p,
   }) : super(key: key);
-
-  final Profile p;
 
   @override
   _FloatingActionButtonHomeState createState() =>

@@ -13,7 +13,7 @@ void main() => runApp(MyApp());
 
 class MyApp extends StatelessWidget {
   @override
-  Widget build(BuildContext context) {
+  Widget build(BuildContext context) {//todo transicoes
     return MaterialApp(
       theme: ThemeData(
         primaryColor: kBlue,

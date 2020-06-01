@@ -16,7 +16,7 @@ class DeleteDialog extends StatelessWidget {
     DBProvider2.db.getProfile().then((profile) => p = profile);
     //print(transacao);
     return AlertDialog(
-      backgroundColor: Colors.blue.shade200,
+      backgroundColor: kBackground,
       title: Center(
         child: Text(
           'Deseja deletar essa transação?',
@@ -24,7 +24,7 @@ class DeleteDialog extends StatelessWidget {
           style: TextStyle(
             fontWeight: FontWeight.bold,
             fontSize: 25,
-            color: Colors.blue.shade700,
+            color: Colors.white,
           ),
         ),
       ),
