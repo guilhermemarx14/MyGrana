@@ -67,8 +67,8 @@ class DBProvider2 {
 
     //CRIA A ENTRADA NO BANCO DE DADOS
     await db.execute(
-        "INSERT INTO `profile` (`nome`,`estado`,`cidade`,`universidade`,`hash`,`plataforma`) VALUES ('${p.nome}'"
-        ",'${p.estado}','${p.cidade}','${p.universidade}','${p.hash}','${p.plataforma}');");
+        "INSERT INTO `profile` (`nome`,`cidadeOrigem`,`estadoOrigem`,`estado`,`cidade`,`universidade`,`hash`,`plataforma`) VALUES ('${p.nome}'"
+        ",'${p.originCidade}','${p.originEstado}','${p.estado}','${p.cidade}','${p.universidade}','${p.hash}','${p.plataforma}');");
   }
 
   Future<Profile> getProfile() async {
@@ -107,6 +107,8 @@ class DBProvider2 {
     var _database =
         FirebaseDatabase.instance.reference().child(p.hash).child('Profile');
     //profile do usuário
+    _database.child("EstadoOrigem").set('${p.originEstado}');
+    _database.child("CidadeOrigem").set('${p.originCidade}');
     _database.child("Estado").set('${p.estado}');
     _database.child("Cidade").set('${p.cidade}');
     _database.child("Universidade").set('${p.universidade}');

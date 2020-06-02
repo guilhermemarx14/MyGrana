@@ -4,6 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_app/components/continue_button.dart';
 import 'package:flutter_app/model/profile.dart';
+import 'package:flutter_app/screens/origin_screen.dart';
 import 'package:flutter_app/util/constants.dart';
 import 'package:toast/toast.dart';
 import 'state_screen.dart';
@@ -78,7 +79,7 @@ final Profile _profile = Profile();
                       _profile.nome = nome;
                       Navigator.push(
                   context,
-                  MaterialPageRoute(builder: (context) => StateScreen(profile: _profile)),
+                  MaterialPageRoute(builder: (context) => OriginScreen(profile: _profile)),
                 );
                     } else
                       Toast.show('Você precisa digitar um nome!', context,

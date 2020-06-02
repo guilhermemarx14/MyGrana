@@ -12,6 +12,8 @@ String ProfileToJson(Profile data) {
 
 class Profile {
   String nome;
+  int originEstado;
+  int originCidade;
   int estado;
   int cidade;
   int universidade;
@@ -21,6 +23,8 @@ class Profile {
   Profile(
       {this.nome,
       this.estado,
+      this.originCidade,
+      this.originEstado,
       this.cidade,
       this.universidade,
       this.hash,
@@ -30,6 +34,8 @@ class Profile {
         nome: json["nome"],
         estado: json["estado"],
         cidade: json["cidade"],
+        originCidade: json["originCidade"],
+        originEstado: json["originEstado"],
         universidade: json["universidade"],
         hash: json["hash"],
         plataforma: json["plataforma"],
@@ -40,12 +46,14 @@ class Profile {
         "estado": estado,
         "cidade": cidade,
         "universidade": universidade,
+        "originCidade": originCidade,
+        "originEstado": originEstado,
         "hash": hash,
         "plataforma": plataforma
       };
 
   @override
   String toString() {
-    return " Nome: $nome, Estado: $estado, Cidade: $cidade, Universidade: $universidade,plataforma: $plataforma, Hash: $hash";
+    return " Nome: $nome, OrigemEstado: $originEstado, OrigemCidade: $originCidade, Estado: $estado, Cidade: $cidade, Universidade: $universidade,plataforma: $plataforma, Hash: $hash";
   }
 }
