@@ -124,7 +124,7 @@ class _MyDialogState extends State<MyDialog> {
                         valueCategoria = kListaCategorias.indexOf(newSelected);
                         transacao.category =
                             kListaCategorias.indexOf(newSelected);
-                        if (transacao != Null) {
+                        if (transacao != null) {
                           if (transacao.category == kSalario ||
                               transacao.category == kPensao ||
                               transacao.category == kBolsaAuxilio)
@@ -341,7 +341,7 @@ class _MyDialogState extends State<MyDialog> {
 class MyEditDialog extends StatefulWidget {
   MyEditDialog({@required this.transacao});
 
-  Transacao transacao;
+  final Transacao transacao;
 
   @override
   _MyEditDialogState createState() => _MyEditDialogState();
@@ -353,7 +353,6 @@ class _MyEditDialogState extends State<MyEditDialog> {
   var _currentDate;
   var _selectedDate;
   int _valueCategoria;
-  var _descricao;
   Profile _p;
   var _descricaoController;
   var _valorController;
@@ -373,7 +372,6 @@ class _MyEditDialogState extends State<MyEditDialog> {
     _selectedDate = DateTime.parse(
         widget.transacao.date + ' ' + _currentDate.toString().split(' ')[1]);
     _valueCategoria = widget.transacao.category;
-    _descricao = widget.transacao.descricao;
     DBProvider2.db.getProfile().then((user) => _p = user);
   }
   //checar sinal do valor apos a edicao no firebase
@@ -440,8 +438,7 @@ class _MyEditDialogState extends State<MyEditDialog> {
                         _valueCategoria = kListaCategorias.indexOf(newSelected);
                         widget.transacao.category =
                             kListaCategorias.indexOf(newSelected);
-                        // ignore: unrelated_type_equality_checks
-                        if (widget.transacao != Null) {
+                        if (widget.transacao != null) {
                           if (widget.transacao.category == kSalario ||
                               widget.transacao.category == kPensao ||
                               widget.transacao.category == kBolsaAuxilio)
@@ -497,7 +494,6 @@ class _MyEditDialogState extends State<MyEditDialog> {
                   maxLines: 1,
                   onChanged: (value) {
                     setState(() {
-                      _descricao = value;
                       widget.transacao.descricao = value;
                     });
                   },

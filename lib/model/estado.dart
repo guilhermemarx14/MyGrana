@@ -2,12 +2,12 @@ import 'dart:convert';
 
 import 'package:flutter_app/util/Database1.dart';
 
-Estado EstadoFromJson(String str) {
+Estado estadoFromJson(String str) {
   final jsonData = json.decode(str);
   return Estado.fromMap(jsonData);
 }
 
-String EstadoToJson(Estado data) {
+String estadoToJson(Estado data) {
   final dyn = data.toMap();
   return json.encode(dyn);
 }
