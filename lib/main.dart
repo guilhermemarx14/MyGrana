@@ -21,11 +21,7 @@ class MyApp extends StatelessWidget {
         canvasColor: kBackground,
       ),
       home: SplashScreen(),
-      routes: <String, WidgetBuilder>{
-        "/statescreen": (BuildContext context) => StateScreen(),
-        "/universityscreen": (BuildContext context) => UniversityScreen(),
-        //add more routes here
-      },
+      
     );
   }
 }
