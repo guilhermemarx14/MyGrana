@@ -217,7 +217,6 @@ class DBProvider2 {
   //CONSULTAS PARA BUDGET
   getOrcamento() async {
     final db = await database;
-    Orcamento orcamento;
     List<Map> res = await db.rawQuery('Select * from budget where id=1');
 
     //print('consulta $orcamento');

@@ -44,6 +44,8 @@ class _UniversityScreen extends State<UniversityScreen> {
     for (int i = 0; i < _universidades.length; i++)
       if (_universidades[i].nome.startsWith(universidade))
         return _universidades[i].id;
+
+    return -1;
   }
 
   @override

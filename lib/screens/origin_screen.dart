@@ -8,8 +8,6 @@ import 'package:flutter_app/screens/state_screen.dart';
 import 'package:flutter_app/util/constants.dart';
 import 'package:toast/toast.dart';
 
-import 'university_screen.dart';
-
 class OriginScreen extends StatefulWidget {
   const OriginScreen({Key key, this.profile}) : super(key: key);
 

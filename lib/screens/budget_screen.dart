@@ -156,9 +156,9 @@ class PlanejadosEReais extends StatelessWidget {
 class Total extends StatefulWidget {
   Total({Key key, this.screenSize, this.totalGanhos, this.totalGastos})
       : super(key: key);
-  double screenSize;
-  double totalGastos;
-  double totalGanhos;
+  final double screenSize;
+  final double totalGastos;
+  final double totalGanhos;
   @override
   _TotalState createState() => _TotalState();
 }

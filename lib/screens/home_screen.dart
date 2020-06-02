@@ -114,7 +114,6 @@ class _FloatingActionButtonHomeState extends State<FloatingActionButtonHome> {
             );
           },
         );
-        ;
       },
       child: Icon(FontAwesomeIcons.plus),
       backgroundColor: Color(0xFFf0b239),
@@ -143,7 +142,7 @@ class AppBarHome extends StatelessWidget {
 
 class TotalELancamentos extends StatefulWidget {
   TotalELancamentos({Key key, this.screenSize}) : super(key: key);
-  double screenSize;
+  final double screenSize;
 
   @override
   _TotalELancamentosState createState() => _TotalELancamentosState();
