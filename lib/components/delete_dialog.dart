@@ -10,9 +10,10 @@ class DeleteDialog extends StatelessWidget {
   DeleteDialog({this.transacao});
 
   final Transacao transacao;
-  Profile p;
+  
   @override
   Widget build(BuildContext context) {
+    Profile p;
     DBProvider2.db.getProfile().then((profile) => p = profile);
     //print(transacao);
     return AlertDialog(

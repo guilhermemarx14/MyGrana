@@ -19,129 +19,24 @@ class MyCalendar extends StatefulWidget {
   // always marked "final".
   final DateTime myDate;
   final String title;
-  var selectDate;
+  final Function selectDate;
   @override
   _MyCalendarState createState() => new _MyCalendarState();
 }
 
 class _MyCalendarState extends State<MyCalendar> {
   DateTime _currentDate;
-  DateTime _targetDateTime;
-
-  CalendarCarousel _calendarCarousel, _calendarCarouselNoHeader;
 
   @override
   void initState() {
     /// Add more events to _markedDateMap EventList
     super.initState();
     _currentDate = widget.myDate ?? DateTime.now();
-    _targetDateTime = widget.myDate ?? DateTime(2019, 2, 3);
   }
 
   @override
   Widget build(BuildContext context) {
-    /// Example with custom icon
-    _calendarCarousel = CalendarCarousel<Event>(
-      isScrollable: false,
-      onDayPressed: (DateTime date, List<Event> events) {
-        this.setState(() => _currentDate = date);
-      },
-      weekendTextStyle: TextStyle(
-        fontSize: 10.0,
-        color: Colors.blue.shade700,
-      ),
-      thisMonthDayBorderColor: kBlack,
-//          weekDays: null, /// for pass null when you do not want to render weekDays
-      weekFormat: true,
-      height: 100.0,
-      width: 100.0,
-      selectedDateTime: _currentDate,
-      showIconBehindDayText: true,
-//          daysHaveCircularBorder: false, /// null for not rendering any border, true for circular border, false for rectangular border
-      customGridViewPhysics: NeverScrollableScrollPhysics(),
-      markedDateShowIcon: true,
-      markedDateIconMaxShown: 2,
-      selectedDayTextStyle: TextStyle(
-        fontSize: 10.0,
-        color: Colors.yellow,
-      ),
-      todayTextStyle: TextStyle(
-        fontSize: 10.0,
-        color: Colors.blue.shade100,
-      ),
-      markedDateIconBuilder: (event) {
-        return event.icon;
-      },
-      minSelectedDate: _currentDate.subtract(Duration(days: 360)),
-      maxSelectedDate: _currentDate.add(Duration(days: 360)),
-      todayButtonColor: Colors.blue.shade700,
-      todayBorderColor: Colors.blue.shade700,
-      markedDateMoreShowTotal:
-          true, // null for not showing hidden events indicator
-//          markedDateIconMargin: 9,
-//          markedDateIconOffset: 3,
-    );
 
-    /// Example Calendar Carousel without header and custom prev & next button
-    _calendarCarouselNoHeader = CalendarCarousel<Event>(
-      isScrollable: false,
-      todayBorderColor: Colors.blue.shade700,
-      onDayPressed: (DateTime date, List<Event> events) {
-        this.setState(() => _currentDate = date);
-      },
-      daysHaveCircularBorder: true,
-      showOnlyCurrentMonthDate: false,
-      weekendTextStyle: TextStyle(
-        fontSize: 10.0,
-        color: Colors.red,
-      ),
-      thisMonthDayBorderColor: Colors.grey,
-      weekFormat: false,
-//      firstDayOfWeek: 4,
-      height: 420.0,
-      selectedDateTime: _currentDate,
-      targetDateTime: _targetDateTime,
-      customGridViewPhysics: NeverScrollableScrollPhysics(),
-      markedDateCustomShapeBorder:
-          CircleBorder(side: BorderSide(color: Colors.yellow)),
-      markedDateCustomTextStyle: TextStyle(
-        fontSize: 10.0,
-        color: Colors.green,
-      ),
-      showHeader: false,
-      todayTextStyle: TextStyle(
-        fontSize: 10.0,
-        color: Colors.blue,
-      ),
-      // markedDateShowIcon: true,
-      // markedDateIconMaxShown: 2,
-      // markedDateIconBuilder: (event) {
-      //   return event.icon;
-      // },
-      // markedDateMoreShowTotal:
-      //     true,
-      todayButtonColor: Colors.yellow,
-
-      selectedDayTextStyle: TextStyle(
-        fontSize: 10.0,
-        color: Colors.yellow,
-      ),
-      minSelectedDate: _currentDate.subtract(Duration(days: 360)),
-      maxSelectedDate: _currentDate.add(Duration(days: 360)),
-      prevDaysTextStyle: TextStyle(
-        fontSize: 10.0,
-        color: Colors.pinkAccent,
-      ),
-      inactiveDaysTextStyle: TextStyle(
-        color: Colors.tealAccent,
-        fontSize: 10.0,
-      ),
-      onCalendarChanged: (DateTime date) {
-        this.setState(() {
-          _targetDateTime = date;
-        });
-      },
-    );
 
     return Container(
       child: CalendarCarousel<Event>(
