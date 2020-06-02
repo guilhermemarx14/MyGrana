@@ -1,11 +1,11 @@
 import 'dart:convert';
 
-Transacao TransacaoFromJson(String str) {
+Transacao transacaoFromJson(String str) {
   final jsonData = json.decode(str);
   return Transacao.fromMap(jsonData);
 }
 
-String TransacaoToJson(Transacao data) {
+String transacaoToJson(Transacao data) {
   final dyn = data.toMap();
   return json.encode(dyn);
 }

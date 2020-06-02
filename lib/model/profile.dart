@@ -1,11 +1,11 @@
 import 'dart:convert';
 
-Profile ProfileFromJson(String str) {
+Profile profileFromJson(String str) {
   final jsonData = json.decode(str);
   return Profile.fromMap(jsonData);
 }
 
-String ProfileToJson(Profile data) {
+String profileToJson(Profile data) {
   final dyn = data.toMap();
   return json.encode(dyn);
 }

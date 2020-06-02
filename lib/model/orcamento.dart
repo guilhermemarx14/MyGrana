@@ -2,9 +2,14 @@ import 'dart:convert';
 
 import 'package:flutter_app/util/constants.dart';
 
-Orcamento OrcamentoFromJson(String str) {
+Orcamento orcamentoFromJson(String str) {
   final jsonData = json.decode(str);
   return Orcamento.fromMap(jsonData);
+}
+
+String orcamentoToJson(Orcamento data) {
+  final dyn = data.toMap();
+  return json.encode(dyn);
 }
 
 Orcamento fromBudget(List<int> budget) {
@@ -25,10 +30,6 @@ Orcamento fromBudget(List<int> budget) {
   return retorno;
 }
 
-String OrcamentoToJson(Orcamento data) {
-  final dyn = data.toMap();
-  return json.encode(dyn);
-}
 
 class Orcamento {
   int alimentacao;

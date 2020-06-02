@@ -13,10 +13,8 @@ import 'package:flutter_app/util/constants.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:toast/toast.dart';
 
-
-
 class UniversityScreen extends StatefulWidget {
-  const UniversityScreen({Key key,this.profile}) : super(key: key);
+  const UniversityScreen({Key key, this.profile}) : super(key: key);
 
   final Profile profile;
   @override
@@ -27,7 +25,6 @@ class _UniversityScreen extends State<UniversityScreen> {
   List<String> _nomesUniversidades = ['Universidade:'];
   List<CidadeUniversidade> _universidades = [];
   String _selectedUniversidade = 'Universidade:';
-
 
   String showUniversity(String name) {
     double sizeScreen = MediaQuery.of(context).size.width;
@@ -143,7 +140,6 @@ class _UniversityScreen extends State<UniversityScreen> {
                       SharedPreferences prefs =
                           await SharedPreferences.getInstance();
                       prefs.setBool('first_time', false); //cadastro concluído
-                      print(widget.profile.toString());
                       Navigator.pushAndRemoveUntil(
                           context,
                           MaterialPageRoute(builder: (context) => HomeScreen()),
