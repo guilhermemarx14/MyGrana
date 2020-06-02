@@ -264,18 +264,18 @@ class _FirstLineOptionsState extends State<FirstLineOptions> {
                 context,
                 MaterialPageRoute(
                     builder: (context) => BudgetDetailsScreen(ORCAMENTO)))),
-        /* HomeItem(
+         HomeItem(
           height: widget.screenSize / 4,
           width: widget.screenSize / 4,
           icon: FontAwesomeIcons.mapMarkedAlt,
           title: 'Localização',
           onPressed: () {
-            () => Navigator.push(
+            Navigator.push(
                 context,
                 MaterialPageRoute(
                     builder: (context) => BudgetDetailsScreen(ORCAMENTO)));
           },
-        ),*/
+        ),
       ],
     );
   }
