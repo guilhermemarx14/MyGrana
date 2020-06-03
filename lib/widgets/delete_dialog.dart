@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_app/widgets/my_card.dart';
 import 'package:flutter_app/model/profile.dart';
 import 'package:flutter_app/model/transacao.dart';
-import 'package:flutter_app/screens/statements_filter_screen.dart';
+import 'package:flutter_app/views/statements_filter_screen.dart';
 import 'package:flutter_app/database/Database2.dart';
 import 'package:flutter_app/util/constants.dart';
 

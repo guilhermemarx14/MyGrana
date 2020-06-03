@@ -2,7 +2,7 @@ import 'dart:ui';
 
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
-import 'package:flutter_app/screens/home_screen.dart';
+import 'package:flutter_app/view/home_screen.dart';
 import 'package:flutter_app/util/constants.dart';
 
 class InformationScreen extends StatefulWidget {

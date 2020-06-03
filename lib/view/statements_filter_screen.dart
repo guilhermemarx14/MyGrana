@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_app/widgets/continue_button.dart';
-import 'package:flutter_app/screens/home_screen.dart';
-import 'package:flutter_app/screens/statements_screen.dart';
+import 'package:flutter_app/view/home_screen.dart';
+import 'package:flutter_app/view/statements_screen.dart';
 import 'package:flutter_app/util/constants.dart';
 
 class StatementsFilterScreen extends StatefulWidget {

@@ -1,8 +1,8 @@
 import 'dart:async';
 
 import 'package:flutter/material.dart';
-import 'package:flutter_app/screens/home_screen.dart';
-import 'package:flutter_app/screens/welcome_screen.dart';
+import 'package:flutter_app/view/home_screen.dart';
+import 'package:flutter_app/view/welcome_screen.dart';
 import 'package:flutter_app/database/Database1.dart';
 import 'package:flutter_app/database/Database2.dart';
 import 'package:shared_preferences/shared_preferences.dart';
