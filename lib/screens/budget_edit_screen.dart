@@ -1,7 +1,7 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_app/components/budget_button.dart';
-import 'package:flutter_app/components/my_edit_card.dart';
+import 'package:flutter_app/widgets/budget_button.dart';
+import 'package:flutter_app/widgets/my_edit_card.dart';
 import 'package:flutter_app/model/orcamento.dart';
 import 'package:flutter_app/util/Database2.dart';
 import 'package:flutter_app/util/constants.dart';

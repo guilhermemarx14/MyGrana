@@ -1,7 +1,7 @@
 import 'dart:ui';
 
 import 'package:flutter/material.dart';
-import 'package:flutter_app/components/container_for_numbers.dart';
+import 'package:flutter_app/widgets/container_for_numbers.dart';
 import 'package:flutter_app/util/constants.dart';
 import 'package:flutter_money_formatter/flutter_money_formatter.dart';
 import 'package:percent_indicator/percent_indicator.dart';

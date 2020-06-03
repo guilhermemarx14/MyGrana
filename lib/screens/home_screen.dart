@@ -1,9 +1,9 @@
 import 'dart:ui';
 
 import 'package:flutter/material.dart';
-import 'package:flutter_app/components/home_item.dart';
-import 'package:flutter_app/components/my_card.dart';
-import 'package:flutter_app/components/my_dialog.dart';
+import 'package:flutter_app/widgets/home_item.dart';
+import 'package:flutter_app/widgets/my_card.dart';
+import 'package:flutter_app/widgets/my_dialog.dart';
 import 'package:flutter_app/model/profile.dart';
 import 'package:flutter_app/screens/budget_screen.dart';
 import 'package:flutter_app/screens/statements_filter_screen.dart';

@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_app/components/continue_button.dart';
+import 'package:flutter_app/widgets/continue_button.dart';
 import 'package:flutter_app/util/constants.dart';
 
 import 'data_screen.dart';

@@ -1,8 +1,8 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_app/components/budget_button.dart';
-import 'package:flutter_app/components/container_for_numbers.dart';
-import 'package:flutter_app/components/my_card.dart';
+import 'package:flutter_app/widgets/budget_button.dart';
+import 'package:flutter_app/widgets/container_for_numbers.dart';
+import 'package:flutter_app/widgets/my_card.dart';
 import 'package:flutter_app/model/transacao.dart';
 import 'package:flutter_app/screens/statements_screen.dart';
 import 'package:flutter_app/util/Database2.dart';

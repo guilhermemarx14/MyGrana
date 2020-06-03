@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_app/components/container_for_numbers.dart';
+import 'package:flutter_app/widgets/container_for_numbers.dart';
 import 'package:flutter_app/util/constants.dart';
 import 'package:flutter_masked_text/flutter_masked_text.dart';
 

@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
-import 'package:flutter_app/components/container_for_numbers.dart';
+import 'package:flutter_app/widgets/container_for_numbers.dart';
 import 'package:flutter_app/model/profile.dart';
 import 'package:flutter_app/model/transacao.dart';
 import 'package:flutter_app/screens/home_screen.dart';

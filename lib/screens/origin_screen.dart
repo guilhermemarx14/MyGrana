@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_app/components/back_button.dart' as back;
-import 'package:flutter_app/components/continue_button.dart';
+import 'package:flutter_app/widgets/back_button.dart' as back;
+import 'package:flutter_app/widgets/continue_button.dart';
 import 'package:flutter_app/model/cidade_universidade.dart';
 import 'package:flutter_app/model/estado.dart';
 import 'package:flutter_app/model/profile.dart';
