@@ -1,6 +1,6 @@
 import 'dart:convert';
 
-import 'package:flutter_app/util/Database1.dart';
+import 'package:flutter_app/database/Database1.dart';
 
 CidadeUniversidade cidadeUniversidadeFromJson(String str) {
   final jsonData = json.decode(str);

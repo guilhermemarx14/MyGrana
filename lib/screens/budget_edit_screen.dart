@@ -3,7 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_app/widgets/budget_button.dart';
 import 'package:flutter_app/widgets/my_edit_card.dart';
 import 'package:flutter_app/model/orcamento.dart';
-import 'package:flutter_app/util/Database2.dart';
+import 'package:flutter_app/database/Database2.dart';
 import 'package:flutter_app/util/constants.dart';
 import 'package:flutter_masked_text/flutter_masked_text.dart';
 

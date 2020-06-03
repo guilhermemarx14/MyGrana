@@ -10,7 +10,7 @@ import 'package:sqflite/sqflite.dart';
 /*
 BANCO DE DADOS LOCAL:
  - tabela estados: relaciona o nome dos estados a um int
- - tabela cidades: relaciona o nome de uma cidade a um id e a uma chave estrangeira pra um estado
+ - tabela cidades: relaciona o nome de uma cidade a um 
  - tabela universidade: relaciona o nome de uma universidade a um id e uma chave estrangeira pra um estado
 Por conta das tabelas de cidade e de universidade terem os mesmos atributos, elas foram tratadas como uma unica classe no programa
 

@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_app/widgets/category_item.dart';
 import 'package:flutter_app/model/orcamento.dart';
 import 'package:flutter_app/model/transacao.dart';
-import 'package:flutter_app/util/Database2.dart';
+import 'package:flutter_app/database/Database2.dart';
 import 'package:flutter_app/util/constants.dart';
 
 class CategoriesScreen extends StatefulWidget {

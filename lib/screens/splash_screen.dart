@@ -3,8 +3,8 @@ import 'dart:async';
 import 'package:flutter/material.dart';
 import 'package:flutter_app/screens/home_screen.dart';
 import 'package:flutter_app/screens/welcome_screen.dart';
-import 'package:flutter_app/util/Database1.dart';
-import 'package:flutter_app/util/Database2.dart';
+import 'package:flutter_app/database/Database1.dart';
+import 'package:flutter_app/database/Database2.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 class SplashScreen extends StatefulWidget {
   @override

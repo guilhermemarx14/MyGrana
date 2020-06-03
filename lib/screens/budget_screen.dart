@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_app/widgets/budget_button.dart';
 import 'package:flutter_app/widgets/my_card.dart';
-import 'package:flutter_app/util/Database2.dart';
+import 'package:flutter_app/database/Database2.dart';
 import 'package:flutter_app/util/constants.dart';
 import 'package:flutter_money_formatter/flutter_money_formatter.dart';
 
