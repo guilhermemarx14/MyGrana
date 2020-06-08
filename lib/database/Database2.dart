@@ -67,7 +67,7 @@ class DBProvider2 {
 
     //CRIA A ENTRADA NO BANCO DE DADOS
     await db.execute(
-        "INSERT INTO `profile` (`nome`,`cidadeOrigem`,`estadoOrigem`,`estado`,`cidade`,`universidade`,`hash`,`plataforma`) VALUES ('${p.nome}'"
+        "INSERT INTO `profile` (`nome`,`origin_city`,`origin_state`,`university_state`,`university_city`,`university`,`hash`,`platform`) VALUES ('${p.nome}'"
         ",'${p.originCidade}','${p.originEstado}','${p.estado}','${p.cidade}','${p.universidade}','${p.hash}','${p.plataforma}');");
   }
 
@@ -92,7 +92,7 @@ class DBProvider2 {
     final db = await database;
     //CRIA A ENTRADA NO BANCO DE DADOS
     await db.execute(
-        "INSERT INTO `transaction` (`id`,`category`,`date`,`descricao`,`paid`,`value`) VALUES ('${t.id}','${t.category}'"
+        "INSERT INTO `transaction` (`id`,`category`,`date`,`description`,`paid`,`value`) VALUES ('${t.id}','${t.category}'"
         ",'${t.date}','${t.descricao}','${t.paid ? 1 : 0}','${t.value}');");
   }
 
@@ -100,19 +100,19 @@ class DBProvider2 {
     final db = await database;
     //ATUALIZA A ENTRADA NO BANCO DE DADOS
     await db.execute(
-        "UPDATE `transaction` SET `category`='${t.category}',`date`='${t.date}',`descricao`='${t.descricao}',`paid`='${t.paid ? 1 : 0}',`value`='${t.value}' WHERE id= '${t.id}';");
+        "UPDATE `transaction` SET `category`='${t.category}',`date`='${t.date}',`description`='${t.descricao}',`paid`='${t.paid ? 1 : 0}',`value`='${t.value}' WHERE id= '${t.id}';");
   }
 
   saveTransacao(Transacao t, Profile p) {
     var _database =
         FirebaseDatabase.instance.reference().child(p.hash).child('Profile');
     //profile do usuário
-    _database.child("EstadoOrigem").set('${p.originEstado}');
-    _database.child("CidadeOrigem").set('${p.originCidade}');
-    _database.child("Estado").set('${p.estado}');
-    _database.child("Cidade").set('${p.cidade}');
-    _database.child("Universidade").set('${p.universidade}');
-    _database.child("Plataforma").set('${p.plataforma}');
+    _database.child("origin_state").set('${p.originEstado}');
+    _database.child("origin_city").set('${p.originCidade}');
+    _database.child("university_state").set('${p.estado}');
+    _database.child("university_city").set('${p.cidade}');
+    _database.child("university").set('${p.universidade}');
+    _database.child("platform").set('${p.plataforma}');
 
     _database = FirebaseDatabase.instance
         .reference()
