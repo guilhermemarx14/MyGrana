@@ -67,7 +67,7 @@ class DBProvider2 {
 
     //CRIA A ENTRADA NO BANCO DE DADOS
     await db.execute(
-        "INSERT INTO `profile` (`nome`,`origin_city`,`origin_state`,`university_state`,`university_city`,`university`,`hash`,`platform`) VALUES ('${p.nome}'"
+        "INSERT INTO `profile` (`name`,`origin_city`,`origin_state`,`university_state`,`university_city`,`university`,`hash`,`platform`) VALUES ('${p.nome}'"
         ",'${p.originCidade}','${p.originEstado}','${p.estado}','${p.cidade}','${p.universidade}','${p.hash}','${p.plataforma}');");
   }
 
