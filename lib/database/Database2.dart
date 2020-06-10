@@ -93,14 +93,14 @@ class DBProvider2 {
     //CRIA A ENTRADA NO BANCO DE DADOS
     await db.execute(
         "INSERT INTO `transaction` (`id`,`category`,`date`,`description`,`paid`,`value`) VALUES ('${t.id}','${t.category}'"
-        ",'${t.date}','${t.descricao}','${t.paid ? 1 : 0}','${t.value}');");
+        ",'${t.date}','${t.description}','${t.paid ? 1 : 0}','${t.value}');");
   }
 
   updateTransacao(Transacao t) async {
     final db = await database;
     //ATUALIZA A ENTRADA NO BANCO DE DADOS
     await db.execute(
-        "UPDATE `transaction` SET `category`='${t.category}',`date`='${t.date}',`description`='${t.descricao}',`paid`='${t.paid ? 1 : 0}',`value`='${t.value}' WHERE id= '${t.id}';");
+        "UPDATE `transaction` SET `category`='${t.category}',`date`='${t.date}',`description`='${t.description}',`paid`='${t.paid ? 1 : 0}',`value`='${t.value}' WHERE id= '${t.id}';");
   }
 
   saveTransacao(Transacao t, Profile p) {

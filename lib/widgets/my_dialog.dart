@@ -56,7 +56,7 @@ class _MyDialogState extends State<MyDialog> {
     transacao.date = DateTime.now().toString().split(' ')[0];
 
     transacao.paid = checkedValue;
-    transacao.descricao = '';
+    transacao.description = '';
     transacao.value = 0;
   }
   @override
@@ -181,7 +181,7 @@ class _MyDialogState extends State<MyDialog> {
                   onChanged: (value) {
                     setState(() {
                       descricao = value;
-                      transacao.descricao = value;
+                      transacao.description = value;
                     });
                   },
                   decoration: InputDecoration(border: InputBorder.none),
@@ -360,7 +360,7 @@ class _MyEditDialogState extends State<MyEditDialog> {
   void initState() {
     super.initState();
     _descricaoController =
-        TextEditingController(text: widget.transacao.descricao);
+        TextEditingController(text: widget.transacao.description);
     _valorController = new MoneyMaskedTextController(
         decimalSeparator: ',',
         thousandSeparator: '.',
@@ -494,7 +494,7 @@ class _MyEditDialogState extends State<MyEditDialog> {
                   maxLines: 1,
                   onChanged: (value) {
                     setState(() {
-                      widget.transacao.descricao = value;
+                      widget.transacao.description = value;
                     });
                   },
                   decoration: InputDecoration(border: InputBorder.none),

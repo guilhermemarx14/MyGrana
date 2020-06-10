@@ -15,9 +15,9 @@ class ListItem extends StatelessWidget {
   String title;
   @override
   Widget build(BuildContext context) {
-    title = transacao.descricao.trim().length == 0
+    title = transacao.description.trim().length == 0
         ? kListaCategorias[transacao.category]
-        : transacao.descricao + ' - ' + kListaCategorias[transacao.category];
+        : transacao.description + ' - ' + kListaCategorias[transacao.category];
     if (title.length > 20) title = title.substring(0, 19) + '...';
 
     var maskedValue = FlutterMoneyFormatter(
@@ -60,7 +60,7 @@ class ListItem extends StatelessWidget {
                 Column(
                   children: <Widget>[
                     Text(
-                      transacao.descricao,
+                      transacao.description,
                       style: kStatementsStyle.copyWith(fontSize: 15),
                     ),
                     Text(

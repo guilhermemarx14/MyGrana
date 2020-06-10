@@ -13,7 +13,7 @@ String transacaoToJson(Transacao data) {
 class Transacao {
   int category;
   String date;
-  String descricao;
+  String description;
   int id;
   bool paid;
   int value;
@@ -21,7 +21,7 @@ class Transacao {
   Transacao(
       {this.category,
       this.date,
-      this.descricao,
+      this.description,
       this.id,
       this.paid,
       this.value});
@@ -29,7 +29,7 @@ class Transacao {
   factory Transacao.fromMap(Map<String, dynamic> json) => Transacao(
         category: json["category"],
         date: json["date"],
-        descricao: json["descricao"],
+        description: json["description"],
         id: json["id"],
         paid: json["paid"] == 0 ? false : true,
         value: json["value"],
@@ -38,7 +38,7 @@ class Transacao {
   Map<String, dynamic> toMap() => {
         "category": category,
         "date": date,
-        "descricao": descricao,
+        "description": description,
         "id": id,
         "paid": paid ? 1 : 0,
         "value": value
@@ -46,6 +46,6 @@ class Transacao {
 
   @override
   String toString() {
-    return "Id: $id, Categoria: $category, Data: $date, Descricao: $descricao, Paid: $paid, Value: $value\n";
+    return "Id: $id, Categoria: $category, Data: $date, Descricao: $description, Paid: $paid, Value: $value\n";
   }
 }
