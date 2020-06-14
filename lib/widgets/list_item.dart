@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_app/widgets/container_for_numbers.dart';
 import 'package:flutter_app/widgets/my_dialog.dart';
-import 'package:flutter_app/model/transacao.dart';
+import 'package:flutter_app/model/transaction.dart';
 import 'package:flutter_app/util/constants.dart';
 import 'package:flutter_money_formatter/flutter_money_formatter.dart';
 
@@ -11,7 +11,7 @@ import 'delete_dialog.dart';
 class ListItem extends StatelessWidget {
   ListItem({@required this.transacao});
 
-  final Transacao transacao;
+  final Transaction transacao;
   String title;
   @override
   Widget build(BuildContext context) {

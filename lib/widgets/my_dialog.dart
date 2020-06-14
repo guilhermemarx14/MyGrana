@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_app/widgets/container_for_numbers.dart';
 import 'package:flutter_app/model/profile.dart';
-import 'package:flutter_app/model/transacao.dart';
+import 'package:flutter_app/model/transaction.dart';
 import 'package:flutter_app/view/home_screen.dart';
 import 'package:flutter_app/view/statements_filter_screen.dart';
 import 'package:flutter_app/database/Database2.dart';
@@ -45,14 +45,14 @@ class _MyDialogState extends State<MyDialog> {
   var selectedDate;
   int valueCategoria;
   var descricao;
-  Transacao transacao;
+  Transaction transacao;
   String userHash;
 
   Profile p;
   _MyDialogState() {
     Profile.getProfile().then((user) => p = user);
-    transacao = Transacao();
-    DBProvider2.db.getTransacaoId().then((id) => transacao.id = id);
+    transacao = Transaction();
+    Transaction.getTransactionId().then((id) => transacao.id = id);
     transacao.date = DateTime.now().toString().split(' ')[0];
 
     transacao.paid = checkedValue;
@@ -304,8 +304,8 @@ class _MyDialogState extends State<MyDialog> {
                     onTap: () {
                       transacao.value = transacao.value ?? 0;
                       if (transacao.value != 0) {
-                        DBProvider2.db.createTransacao(transacao);
-                        DBProvider2.db.saveTransacao(transacao, p);
+                        Transaction.createTransaction(transacao);
+                        Transaction.saveTransaction(transacao, p);
                         Navigator.pushAndRemoveUntil(
                             context,
                             MaterialPageRoute(
@@ -341,7 +341,7 @@ class _MyDialogState extends State<MyDialog> {
 class MyEditDialog extends StatefulWidget {
   MyEditDialog({@required this.transacao});
 
-  final Transacao transacao;
+  final Transaction transacao;
 
   @override
   _MyEditDialogState createState() => _MyEditDialogState();
@@ -618,8 +618,8 @@ class _MyEditDialogState extends State<MyEditDialog> {
                     onTap: () {
                       widget.transacao.value = widget.transacao.value ?? 0;
                       if (widget.transacao.value != 0) {
-                        DBProvider2.db.updateTransacao(widget.transacao);
-                        DBProvider2.db.saveTransacao(widget.transacao, _p);
+                        Transaction.updateTransaction(widget.transacao);
+                        Transaction.saveTransaction(widget.transacao, _p);
                         Navigator.push(
                             context,
                             MaterialPageRoute(

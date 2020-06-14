@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_app/widgets/my_card.dart';
 import 'package:flutter_app/model/profile.dart';
-import 'package:flutter_app/model/transacao.dart';
+import 'package:flutter_app/model/transaction.dart';
 import 'package:flutter_app/view/statements_filter_screen.dart';
 import 'package:flutter_app/database/Database2.dart';
 import 'package:flutter_app/util/constants.dart';
@@ -9,7 +9,7 @@ import 'package:flutter_app/util/constants.dart';
 class DeleteDialog extends StatelessWidget {
   DeleteDialog({this.transacao});
 
-  final Transacao transacao;
+  final Transaction transacao;
 
   @override
   Widget build(BuildContext context) {
@@ -56,7 +56,7 @@ class DeleteDialog extends StatelessWidget {
               color: kButton,
               onTap: () {
                 //print('${transacao.id}');
-                DBProvider2.db.deleteTransacao(transacao, p);
+                Transaction.deleteTransaction(transacao, p);
                 Navigator.push(
                   context,
                   MaterialPageRoute(

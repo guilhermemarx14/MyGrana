@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_app/widgets/category_item.dart';
 import 'package:flutter_app/model/orcamento.dart';
-import 'package:flutter_app/model/transacao.dart';
+import 'package:flutter_app/model/transaction.dart';
 import 'package:flutter_app/database/Database2.dart';
 import 'package:flutter_app/util/constants.dart';
 
@@ -12,7 +12,7 @@ class CategoriesScreen extends StatefulWidget {
 
 class _CategoriesScreenState extends State<CategoriesScreen> {
   Orcamento orcamento;
-  List<Transacao> transacoes = [];
+  List<Transaction> transacoes = [];
   @override
   void initState() {
     DBProvider2.db.getOrcamento().then((item) {
@@ -21,8 +21,7 @@ class _CategoriesScreenState extends State<CategoriesScreen> {
       });
     });
 
-    DBProvider2.db
-        .consultaTransacao(TODOS, DateTime.now().month.toString(),
+    Transaction.queryTransaction(TODOS, DateTime.now().month.toString(),
             DateTime.now().year.toString())
         .then((list) {
       setState(() {

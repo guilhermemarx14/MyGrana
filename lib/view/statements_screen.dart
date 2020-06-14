@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_app/model/transaction.dart';
 import 'package:flutter_app/widgets/container_for_numbers.dart';
 import 'package:flutter_app/widgets/list_item.dart';
 import 'package:flutter_app/database/Database2.dart';
@@ -21,8 +22,7 @@ class _StatementsScreenState extends State<StatementsScreen> {
   var total = 0.0;
   @override
   void initState() {
-    DBProvider2.db
-        .consultaTransacao(widget.categoria, widget.mes, widget.ano)
+    Transaction.queryTransaction(widget.categoria, widget.mes, widget.ano)
         .then((list) {
       if (list.isNotEmpty)
         setState(() {

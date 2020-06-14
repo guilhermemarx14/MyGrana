@@ -3,7 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_app/widgets/budget_button.dart';
 import 'package:flutter_app/widgets/container_for_numbers.dart';
 import 'package:flutter_app/widgets/my_card.dart';
-import 'package:flutter_app/model/transacao.dart';
+import 'package:flutter_app/model/transaction.dart';
 import 'package:flutter_app/view/statements_screen.dart';
 import 'package:flutter_app/database/Database2.dart';
 import 'package:flutter_app/util/constants.dart';
@@ -23,7 +23,7 @@ class BudgetDetailsScreen extends StatefulWidget {
 
 class _BudgetDetailsScreenState extends State<BudgetDetailsScreen> {
   List<int> orcamento;
-  List<Transacao> transacoes;
+  List<Transaction> transacoes;
   double totalGanhos = 0;
   double totalGastos = 0;
   initState() {
@@ -48,8 +48,7 @@ class _BudgetDetailsScreenState extends State<BudgetDetailsScreen> {
         });
       });
     else
-      DBProvider2.db
-          .consultaTransacao(TODOS, DateTime.now().month.toString(),
+      Transaction.queryTransaction(TODOS, DateTime.now().month.toString(),
               DateTime.now().year.toString())
           .then((result) {
         result.forEach((transacao) => transacoes.add(transacao));
@@ -135,7 +134,7 @@ class BudgetCards extends StatelessWidget {
   final int type;
   final double screenSize;
   final List<int> orcamento;
-  final List<Transacao> transacoes;
+  final List<Transaction> transacoes;
   final Function onTap;
 
   @override

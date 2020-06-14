@@ -5,7 +5,7 @@ import 'dart:io';
 import 'package:firebase_database/firebase_database.dart';
 import 'package:flutter_app/model/orcamento.dart';
 import 'package:flutter_app/model/profile.dart';
-import 'package:flutter_app/model/transacao.dart';
+import 'package:flutter_app/model/transaction.dart' as T;
 import 'package:flutter_app/util/bd2_scripts.dart';
 import 'package:flutter_app/util/constants.dart';
 import 'package:path/path.dart';
@@ -79,7 +79,7 @@ class DBProvider2 {
     return id;
   }
 
-  createTransacao(Transacao t) async {
+  createTransacao(T.Transaction t) async {
     final db = await database;
     //CRIA A ENTRADA NO BANCO DE DADOS
     await db.execute(
@@ -87,14 +87,14 @@ class DBProvider2 {
         ",'${t.date}','${t.description}','${t.paid ? 1 : 0}','${t.value}');");
   }
 
-  updateTransacao(Transacao t) async {
+  updateTransacao(T.Transaction t) async {
     final db = await database;
     //ATUALIZA A ENTRADA NO BANCO DE DADOS
     await db.execute(
         "UPDATE `transaction` SET `category`='${t.category}',`date`='${t.date}',`description`='${t.description}',`paid`='${t.paid ? 1 : 0}',`value`='${t.value}' WHERE id= '${t.id}';");
   }
 
-  saveTransacao(Transacao t, Profile p) {
+  saveTransacao(T.Transaction t, Profile p) {
     var _database =
         FirebaseDatabase.instance.reference().child(p.hash).child('Profile');
     //profile do usuário
@@ -120,7 +120,7 @@ class DBProvider2 {
     final db = await database;
     List<Map> res =
         await db.rawQuery('Select * from `transaction` order by date asc');
-    for (int i = 0; i < res.length; i++) print(Transacao.fromMap(res[i]));
+    for (int i = 0; i < res.length; i++) print(T.Transaction.fromMap(res[i]));
   }
 
   totalAcumulado() async {
@@ -153,7 +153,7 @@ class DBProvider2 {
       res = await db.rawQuery(consulta);
 
       for (int i = 0; i < res.length; i++)
-        result.add(Transacao.fromMap(res[i]));
+        result.add(T.Transaction.fromMap(res[i]));
       return result;
     }
     consulta += " WHERE ";
@@ -185,13 +185,14 @@ class DBProvider2 {
     //print(consulta);
     res = await db.rawQuery(consulta);
 
-    for (int i = 0; i < res.length; i++) result.add(Transacao.fromMap(res[i]));
+    for (int i = 0; i < res.length; i++)
+      result.add(T.Transaction.fromMap(res[i]));
     //print(result);
     //print(result);
     return result;
   }
 
-  deleteTransacao(Transacao t, Profile p) async {
+  deleteTransacao(T.Transaction t, Profile p) async {
     final db = await database;
 
     await db.rawQuery('Delete from `transaction` where id=${t.id};');

@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_app/model/transaction.dart';
 import 'package:flutter_app/widgets/budget_button.dart';
 import 'package:flutter_app/widgets/my_card.dart';
 import 'package:flutter_app/database/Database2.dart';
@@ -37,8 +38,7 @@ class _BudgetScreenState extends State<BudgetScreen> {
       });
     });
 
-    DBProvider2.db
-        .consultaTransacao(TODOS, DateTime.now().month.toString(),
+    Transaction.queryTransaction(TODOS, DateTime.now().month.toString(),
             DateTime.now().year.toString())
         .then((list) {
       //print(list);

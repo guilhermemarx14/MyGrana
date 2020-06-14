@@ -1,6 +1,7 @@
 import 'dart:ui';
 
 import 'package:flutter/material.dart';
+import 'package:flutter_app/model/transaction.dart';
 import 'package:flutter_app/widgets/home_item.dart';
 import 'package:flutter_app/widgets/my_card.dart';
 import 'package:flutter_app/widgets/my_dialog.dart';
@@ -38,13 +39,13 @@ class _HomeScreenState extends State<HomeScreen> {
 
   initState() {
     Profile.getProfile().then((Profile value) => p = value);
-    DBProvider2.db.totalAcumulado().then((value) {
+    Transaction.paidTotal().then((value) {
       if (value != total)
         setState(() {
           total = value;
         });
     });
-    DBProvider2.db.totalNaoPago().then((value) {
+    Transaction.unpaidTotal().then((value) {
       if (value != totalNaoPago)
         setState(() {
           totalNaoPago = value;
