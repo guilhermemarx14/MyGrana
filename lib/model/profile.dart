@@ -1,5 +1,7 @@
 import 'dart:convert';
 
+import 'package:flutter_app/database/Database2.dart';
+
 Profile profileFromJson(String str) {
   final jsonData = json.decode(str);
   return Profile.fromMap(jsonData);
@@ -29,6 +31,14 @@ class Profile {
       this.university,
       this.hash,
       this.platform});
+
+  static createProfile(Profile p) async {
+    await DBProvider2.db.createProfile(p);
+  }
+
+  static getProfile() {
+    return DBProvider2.db.getProfile();
+  }
 
   factory Profile.fromMap(Map<String, dynamic> json) => Profile(
         name: json["name"],

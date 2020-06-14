@@ -37,7 +37,7 @@ class _HomeScreenState extends State<HomeScreen> {
   }
 
   initState() {
-    DBProvider2.db.getProfile().then((Profile value) => p = value);
+    Profile.getProfile().then((Profile value) => p = value);
     DBProvider2.db.totalAcumulado().then((value) {
       if (value != total)
         setState(() {

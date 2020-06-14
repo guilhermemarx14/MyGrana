@@ -1,11 +1,13 @@
 import 'dart:async';
 
 import 'package:flutter/material.dart';
+import 'package:flutter_app/model/profile.dart';
 import 'package:flutter_app/view/home_screen.dart';
 import 'package:flutter_app/view/welcome_screen.dart';
 import 'package:flutter_app/database/Database1.dart';
 import 'package:flutter_app/database/Database2.dart';
 import 'package:shared_preferences/shared_preferences.dart';
+
 class SplashScreen extends StatefulWidget {
   @override
   _SplashScreenState createState() => new _SplashScreenState();
@@ -36,7 +38,7 @@ class _SplashScreenState extends State<SplashScreen> {
   }
 
   void navigationPageHome() {
-    DBProvider2.db.getProfile().then((user) {
+    Profile.getProfile().then((user) {
       Navigator.pushAndRemoveUntil(context,
           MaterialPageRoute(builder: (context) => HomeScreen()), (r) => false);
     });

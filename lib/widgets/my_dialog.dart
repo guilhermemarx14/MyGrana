@@ -50,7 +50,7 @@ class _MyDialogState extends State<MyDialog> {
 
   Profile p;
   _MyDialogState() {
-    DBProvider2.db.getProfile().then((user) => p = user);
+    Profile.getProfile().then((user) => p = user);
     transacao = Transacao();
     DBProvider2.db.getTransacaoId().then((id) => transacao.id = id);
     transacao.date = DateTime.now().toString().split(' ')[0];
@@ -372,7 +372,7 @@ class _MyEditDialogState extends State<MyEditDialog> {
     _selectedDate = DateTime.parse(
         widget.transacao.date + ' ' + _currentDate.toString().split(' ')[1]);
     _valueCategoria = widget.transacao.category;
-    DBProvider2.db.getProfile().then((user) => _p = user);
+    Profile.getProfile().then((user) => _p = user);
   }
   //checar sinal do valor apos a edicao no firebase
 
