@@ -50,13 +50,14 @@ class _UniversityScreen extends State<UniversityScreen> {
 
   @override
   Widget build(BuildContext context) {
-    CidadeUniversidade.getUniversidadesList(widget.profile.estado).then((list) {
+    CidadeUniversidade.getUniversidadesList(widget.profile.universityState)
+        .then((list) {
       _nomesUniversidades = ['Universidade:'];
       _universidades = [];
       list.forEach((value) {
         setState(() {
           _universidades.add(value);
-          _nomesUniversidades.add(showUniversity(value.nome));
+          _nomesUniversidades.add(showUniversity(value.name));
         });
       });
     });
@@ -106,7 +107,7 @@ class _UniversityScreen extends State<UniversityScreen> {
                           onChanged: (String newSelected) {
                             setState(() {
                               _selectedUniversidade = newSelected;
-                              widget.profile.universidade =
+                              widget.profile.university =
                                   idSelectedUniversidade(_selectedUniversidade);
                             });
                           },
@@ -165,7 +166,7 @@ class _UniversityScreen extends State<UniversityScreen> {
 
     //GERA A HASH DO USUÁRIO
     var key = utf8.encode('$number');
-    var bytes = utf8.encode(p.nome.toString());
+    var bytes = utf8.encode(p.name.toString());
     var hmacSha256 = new Hmac(sha256, key); // HMAC-SHA256
     return hmacSha256.convert(bytes).toString();
   }

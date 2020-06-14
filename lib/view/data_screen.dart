@@ -8,13 +8,11 @@ import 'package:flutter_app/view/origin_screen.dart';
 import 'package:flutter_app/util/constants.dart';
 import 'package:toast/toast.dart';
 
-
 class DataScreen extends StatelessWidget {
-
-final Profile _profile = Profile();
+  final Profile _profile = Profile();
 
   DataScreen() {
-    _profile.plataforma = Platform.isIOS ? 'ios' : 'android';
+    _profile.platform = Platform.isIOS ? 'ios' : 'android';
   }
 
   @override
@@ -74,11 +72,13 @@ final Profile _profile = Profile();
                   onPressed: () {
                     nome = myController.text;
                     if (nome.length != 0) {
-                      _profile.nome = nome;
+                      _profile.name = nome;
                       Navigator.push(
-                  context,
-                  MaterialPageRoute(builder: (context) => OriginScreen(profile: _profile)),
-                );
+                        context,
+                        MaterialPageRoute(
+                            builder: (context) =>
+                                OriginScreen(profile: _profile)),
+                      );
                     } else
                       Toast.show('Você precisa digitar um nome!', context,
                           duration: Toast.LENGTH_LONG, gravity: Toast.BOTTOM);
@@ -92,6 +92,3 @@ final Profile _profile = Profile();
     );
   }
 }
-
-
-

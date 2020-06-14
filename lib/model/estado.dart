@@ -45,6 +45,6 @@ class Estado implements Comparable {
 
   @override
   int compareTo(other) {
-    return this.nome.compareTo(other.nome);
+    return this.nome.compareTo(other.name);
   }
 }

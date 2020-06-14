@@ -115,17 +115,17 @@ class _StateScreen extends State<StateScreen> {
                           onChanged: (String newValue) {
                             setState(() {
                               selectedEstado = newValue;
-                              widget.profile.estado =
+                              widget.profile.universityState =
                                   idSelectedEstado(selectedEstado);
                               nomesCidades = ['Cidade: '];
                               selectedCidade = 'Cidade: ';
                               cidades = [];
                               CidadeUniversidade.getCidadesList(
-                                      widget.profile.estado)
+                                      widget.profile.universityState)
                                   .then((list) {
                                 list.forEach((value) {
                                   cidades.add(value);
-                                  nomesCidades.add(showCidade(value.nome));
+                                  nomesCidades.add(showCidade(value.name));
                                 });
                               });
                             });
@@ -163,7 +163,7 @@ class _StateScreen extends State<StateScreen> {
                           onChanged: (String newValue) {
                             setState(() {
                               selectedCidade = newValue;
-                              widget.profile.cidade =
+                              widget.profile.universityCity =
                                   idSelectedCidade(selectedCidade);
                             });
                           },
@@ -195,7 +195,8 @@ class _StateScreen extends State<StateScreen> {
                           context,
                           duration: Toast.LENGTH_LONG, gravity: Toast.BOTTOM);
                     else {
-                      widget.profile.cidade = idSelectedCidade(selectedCidade);
+                      widget.profile.universityCity =
+                          idSelectedCidade(selectedCidade);
                       Navigator.of(context).push(
                         MaterialPageRoute(
                           builder: (BuildContext context) => UniversityScreen(

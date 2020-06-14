@@ -11,49 +11,49 @@ String profileToJson(Profile data) {
 }
 
 class Profile {
-  String nome;
-  int originEstado;
-  int originCidade;
-  int estado;
-  int cidade;
-  int universidade;
+  String name;
+  int originState;
+  int originCity;
+  int universityState;
+  int universityCity;
+  int university;
   String hash;
-  String plataforma;
+  String platform;
 
   Profile(
-      {this.nome,
-      this.estado,
-      this.originCidade,
-      this.originEstado,
-      this.cidade,
-      this.universidade,
+      {this.name,
+      this.universityState,
+      this.originCity,
+      this.originState,
+      this.universityCity,
+      this.university,
       this.hash,
-      this.plataforma});
+      this.platform});
 
   factory Profile.fromMap(Map<String, dynamic> json) => Profile(
-        nome: json["nome"],
-        estado: json["estado"],
-        cidade: json["cidade"],
-        originCidade: json["originCidade"],
-        originEstado: json["originEstado"],
-        universidade: json["universidade"],
+        name: json["name"],
+        universityState: json["university_state"],
+        universityCity: json["university_city"],
+        originCity: json["origin_city"],
+        originState: json["origin_state"],
+        university: json["university"],
         hash: json["hash"],
-        plataforma: json["plataforma"],
+        platform: json["platform"],
       );
 
   Map<String, dynamic> toMap() => {
-        "nome": nome,
-        "estado": estado,
-        "cidade": cidade,
-        "universidade": universidade,
-        "originCidade": originCidade,
-        "originEstado": originEstado,
+        "name": name,
+        "university_state": universityState,
+        "university_city": universityCity,
+        "university": university,
+        "origin_city": originCity,
+        "origin_state": originState,
         "hash": hash,
-        "plataforma": plataforma
+        "platform": platform
       };
 
   @override
   String toString() {
-    return " Nome: $nome, OrigemEstado: $originEstado, OrigemCidade: $originCidade, Estado: $estado, Cidade: $cidade, Universidade: $universidade,plataforma: $plataforma, Hash: $hash";
+    return " Nome: $name, OrigemEstado: $originState, OrigemCidade: $originCity, Estado: $universityState, Cidade: $universityCity, Universidade: $university,plataforma: $platform, Hash: $hash";
   }
 }

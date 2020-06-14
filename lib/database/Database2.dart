@@ -18,16 +18,7 @@ BANCO DE DADOS LOCAL: tabela 'profile' guarda as informacoes do usuario: Nome, H
                       tabela 'transaction' guarda as informacoes de uma transacao: Categoria, Data, Descricao, Id, se foi paga e o valor (em int)
                       tabela 'budget' guarda as informacoes de um orcamento: cada coluna representa o id(1) ou uma categoria, o valor armazenado e' o planejado de gasto(em int)
                       Como só há um usuario no programa, nao e' necessaria a chave estrangeira pra linkar uma transacao a um profile
-
-REALTIME DATABASE: por ser um banco de dados NOSQL, sua organizacao e' bem diferente
-                   o primeiro child trata-se do estado (int)
-                   o segundo child trata-se da cidade (int)
-                   o terceiro child trata-se da universidade (int)
-                   o quarto child trata-se da plataforma (String) 'ios' ou 'android'
-                   o quinto child e' quem separa os usuarios, dessa determinada plataforma, universidade, cidade e estado, usando a hash do usuario'
-                   o ultimo child e' o id da transacao e, por fim, os dados da transacao
-                   dessa forma, os estados ja estao preparados pro processamento, assim como as cidades, assim como as universidades, todas separadas pra facilitar o processamento dos dados
- */
+*/
 
 class DBProvider2 {
   //SINGLETON DO BANCO DE DADOS
@@ -67,8 +58,8 @@ class DBProvider2 {
 
     //CRIA A ENTRADA NO BANCO DE DADOS
     await db.execute(
-        "INSERT INTO `profile` (`name`,`origin_city`,`origin_state`,`university_state`,`university_city`,`university`,`hash`,`platform`) VALUES ('${p.nome}'"
-        ",'${p.originCidade}','${p.originEstado}','${p.estado}','${p.cidade}','${p.universidade}','${p.hash}','${p.plataforma}');");
+        "INSERT INTO `profile` (`name`,`origin_city`,`origin_state`,`university_state`,`university_city`,`university`,`hash`,`platform`) VALUES ('${p.name}'"
+        ",'${p.originCity}','${p.originState}','${p.universityState}','${p.universityCity}','${p.university}','${p.hash}','${p.platform}');");
   }
 
   Future<Profile> getProfile() async {
@@ -107,12 +98,12 @@ class DBProvider2 {
     var _database =
         FirebaseDatabase.instance.reference().child(p.hash).child('Profile');
     //profile do usuário
-    _database.child("origin_state").set('${p.originEstado}');
-    _database.child("origin_city").set('${p.originCidade}');
-    _database.child("university_state").set('${p.estado}');
-    _database.child("university_city").set('${p.cidade}');
-    _database.child("university").set('${p.universidade}');
-    _database.child("platform").set('${p.plataforma}');
+    _database.child("origin_state").set('${p.originState}');
+    _database.child("origin_city").set('${p.originCity}');
+    _database.child("university_state").set('${p.universityState}');
+    _database.child("university_city").set('${p.universityCity}');
+    _database.child("university").set('${p.university}');
+    _database.child("platform").set('${p.platform}');
 
     _database = FirebaseDatabase.instance
         .reference()
