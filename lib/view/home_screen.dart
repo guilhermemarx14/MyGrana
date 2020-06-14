@@ -247,7 +247,7 @@ class _FirstLineOptionsState extends State<FirstLineOptions> {
       children: <Widget>[
         HomeItem(
           height: widget.screenSize / 4,
-          width: widget.screenSize / 4,
+          width: widget.screenSize / 2.5,
           icon: FontAwesomeIcons.searchDollar,
           title: 'Gastos e Rendas',
           onPressed: () => Navigator.push(
@@ -257,14 +257,14 @@ class _FirstLineOptionsState extends State<FirstLineOptions> {
         ),
         HomeItem(
             height: widget.screenSize / 4,
-            width: widget.screenSize / 4,
+            width: widget.screenSize / 2.5,
             icon: FontAwesomeIcons.clipboardList,
             title: 'Planejamento',
             onPressed: () => Navigator.push(
                 context,
                 MaterialPageRoute(
                     builder: (context) => BudgetDetailsScreen(ORCAMENTO)))),
-         HomeItem(
+        /*HomeItem(
           height: widget.screenSize / 4,
           width: widget.screenSize / 4,
           icon: FontAwesomeIcons.mapMarkedAlt,
@@ -275,7 +275,7 @@ class _FirstLineOptionsState extends State<FirstLineOptions> {
                 MaterialPageRoute(
                     builder: (context) => BudgetDetailsScreen(ORCAMENTO)));
           },
-        ),
+        ),*/
       ],
     );
   }
