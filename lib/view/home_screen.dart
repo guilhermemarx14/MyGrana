@@ -76,7 +76,7 @@ class _HomeScreenState extends State<HomeScreen> {
             children: <Widget>[
               AppBarHome(),
               TotalELancamentos(screenSize: screenSize),
-              SizedBox(height: 100.0),
+              SizedBox(height: MediaQuery.of(context).size.height / 10),
               FirstLineOptions(screenSize: screenSize),
               SecondLineOptions(screenSize: screenSize),
             ],
