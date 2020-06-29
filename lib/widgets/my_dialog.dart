@@ -5,7 +5,6 @@ import 'package:flutter_app/model/profile.dart';
 import 'package:flutter_app/model/transaction.dart';
 import 'package:flutter_app/view/home_screen.dart';
 import 'package:flutter_app/view/statements_filter_screen.dart';
-import 'package:flutter_app/database/Database2.dart';
 import 'package:flutter_app/util/constants.dart';
 import 'package:flutter_calendar_carousel/classes/event.dart';
 import 'package:flutter_masked_text/flutter_masked_text.dart';

@@ -3,7 +3,6 @@ import 'package:flutter_app/widgets/my_card.dart';
 import 'package:flutter_app/model/profile.dart';
 import 'package:flutter_app/model/transaction.dart';
 import 'package:flutter_app/view/statements_filter_screen.dart';
-import 'package:flutter_app/database/Database2.dart';
 import 'package:flutter_app/util/constants.dart';
 
 class DeleteDialog extends StatelessWidget {

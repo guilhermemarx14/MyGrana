@@ -5,7 +5,6 @@ import 'package:flutter_app/model/profile.dart';
 import 'package:flutter_app/view/home_screen.dart';
 import 'package:flutter_app/view/welcome_screen.dart';
 import 'package:flutter_app/database/Database1.dart';
-import 'package:flutter_app/database/Database2.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 class SplashScreen extends StatefulWidget {

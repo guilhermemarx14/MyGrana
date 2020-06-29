@@ -9,7 +9,6 @@ import 'package:flutter_app/model/profile.dart';
 import 'package:flutter_app/view/budget_screen.dart';
 import 'package:flutter_app/view/statements_filter_screen.dart';
 import 'package:flutter_app/database/Database1.dart';
-import 'package:flutter_app/database/Database2.dart';
 import 'package:flutter_app/util/constants.dart';
 import 'package:flutter_money_formatter/flutter_money_formatter.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
