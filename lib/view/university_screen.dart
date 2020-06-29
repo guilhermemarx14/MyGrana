@@ -57,7 +57,7 @@ class _UniversityScreen extends State<UniversityScreen> {
       list.forEach((value) {
         setState(() {
           _universidades.add(value);
-          _nomesUniversidades.add(showUniversity(value.name));
+          _nomesUniversidades.add(showUniversity(value.nome));
         });
       });
     });

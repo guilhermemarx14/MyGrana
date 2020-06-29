@@ -38,7 +38,7 @@ class _HomeScreenState extends State<HomeScreen> {
   }
 
   initState() {
-    Profile.getProfile().then((Profile value) => p = value);
+    Profile.getProfile().then((value) => p = value);
     Transaction.paidTotal().then((value) {
       if (value != total)
         setState(() {

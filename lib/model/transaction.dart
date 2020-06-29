@@ -38,16 +38,16 @@ class Transaction {
         value: json["value"],
       );
 
-  static getTransactionId() {
-    return DBProvider2.db.getTransacaoId();
+  static getTransactionId() async {
+    return await DBProvider2.db.getTransacaoId();
   }
 
-  static paidTotal() {
-    return DBProvider2.db.totalAcumulado();
+  static paidTotal() async {
+    return await DBProvider2.db.totalAcumulado();
   }
 
-  static unpaidTotal() {
-    return DBProvider2.db.totalNaoPago();
+  static unpaidTotal() async {
+    return await DBProvider2.db.totalNaoPago();
   }
 
   static updateTransaction(Transaction t) async {
@@ -62,8 +62,8 @@ class Transaction {
     await DBProvider2.db.createTransacao(t);
   }
 
-  static queryTransaction(String category, String mes, String ano) {
-    return DBProvider2.db.consultaTransacao(category, mes, ano);
+  static queryTransaction(String category, String mes, String ano) async {
+    return await DBProvider2.db.consultaTransacao(category, mes, ano);
   }
 
   static deleteTransaction(Transaction t, Profile p) async {

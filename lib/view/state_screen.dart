@@ -125,7 +125,7 @@ class _StateScreen extends State<StateScreen> {
                                   .then((list) {
                                 list.forEach((value) {
                                   cidades.add(value);
-                                  nomesCidades.add(showCidade(value.name));
+                                  nomesCidades.add(showCidade(value.nome));
                                 });
                               });
                             });

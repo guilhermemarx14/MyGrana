@@ -95,25 +95,33 @@ class DBProvider2 {
   }
 
   saveTransacao(T.Transaction t, Profile p) {
-    var _database =
-        FirebaseDatabase.instance.reference().child(p.hash).child('Profile');
+    var _database = FirebaseDatabase.instance
+        .reference()
+        .child("university_state")
+        .child('${p.universityState}')
+        .child("university_city")
+        .child('${p.universityCity}')
+        .child(p.hash)
+        .child('profile');
     //profile do usuário
     _database.child("origin_state").set('${p.originState}');
     _database.child("origin_city").set('${p.originCity}');
-    _database.child("university_state").set('${p.universityState}');
-    _database.child("university_city").set('${p.universityCity}');
     _database.child("university").set('${p.university}');
     _database.child("platform").set('${p.platform}');
 
     _database = FirebaseDatabase.instance
         .reference()
+        .child("university_state")
+        .child('${p.universityState}')
+        .child("university_city")
+        .child('${p.universityCity}')
         .child(p.hash)
-        .child('Transactions')
-        .child('${t.id}');
-    _database.child("Id").set(t.id);
-    _database.child("Data").set(t.date);
-    _database.child("Valor").set(t.value);
-    _database.child("Categoria").set(t.category);
+        .child('transactions')
+        .child('year_month')
+        .child('${t.date.split('-')[0] + '-' + t.date.split('-')[1]}')
+        .child("${t.id}");
+    _database.child("value").set('${t.value}');
+    _database.child("category").set('${t.category}');
   }
 
   printTransacoesList() async {

@@ -25,12 +25,12 @@ class Estado implements Comparable {
         nome: json["nome"],
       );
 
-  static getEstadosList() {
-    return DBProvider.db.getEstadosList();
+  static getEstadosList() async {
+    return await DBProvider.db.getEstadosList();
   }
 
-  static getEstadoById(int estadoId) {
-    return DBProvider.db.getEstado(estadoId);
+  static getEstadoById(int estadoId) async {
+    return await DBProvider.db.getEstado(estadoId);
   }
 
   Map<String, dynamic> toMap() => {

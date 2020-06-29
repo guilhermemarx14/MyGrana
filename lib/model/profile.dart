@@ -36,8 +36,8 @@ class Profile {
     await DBProvider2.db.createProfile(p);
   }
 
-  static getProfile() {
-    return DBProvider2.db.getProfile();
+  static getProfile() async {
+    return await DBProvider2.db.getProfile();
   }
 
   factory Profile.fromMap(Map<String, dynamic> json) => Profile(

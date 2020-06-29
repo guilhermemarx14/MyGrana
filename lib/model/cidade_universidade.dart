@@ -28,20 +28,20 @@ class CidadeUniversidade implements Comparable {
         nome: json["nome"],
       );
 
-  static getCidadesList(int idEstado) {
-    return DBProvider.db.getCidadesList(idEstado);
+  static Future<List> getCidadesList(int idEstado) async {
+    return await DBProvider.db.getCidadesList(idEstado);
   }
 
-  static getUniversidadesList(int idEstado) {
-    return DBProvider.db.getUniversidadesList(idEstado);
+  static getUniversidadesList(int idEstado) async {
+    return await DBProvider.db.getUniversidadesList(idEstado);
   }
 
-  static getCidadeById(int id) {
-    return DBProvider.db.getCidade(id);
+  static getCidadeById(int id) async {
+    return await DBProvider.db.getCidade(id);
   }
 
-  static getUniversidadeById(int id) {
-    return DBProvider.db.getUniversidade(id);
+  static getUniversidadeById(int id) async {
+    return await DBProvider.db.getUniversidade(id);
   }
 
   static getCidadeCount() {
