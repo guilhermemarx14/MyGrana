@@ -13,13 +13,6 @@ import 'package:path_provider/path_provider.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:sqflite/sqflite.dart';
 
-/*
-BANCO DE DADOS LOCAL: tabela 'profile' guarda as informacoes do usuario: Nome, Hash, Estado, Municipio e Universidade
-                      tabela 'transaction' guarda as informacoes de uma transacao: Categoria, Data, Descricao, Id, se foi paga e o valor (em int)
-                      tabela 'budget' guarda as informacoes de um orcamento: cada coluna representa o id(1) ou uma categoria, o valor armazenado e' o planejado de gasto(em int)
-                      Como só há um usuario no programa, nao e' necessaria a chave estrangeira pra linkar uma transacao a um profile
-*/
-
 class DBProvider2 {
   //SINGLETON DO BANCO DE DADOS
   DBProvider2._();
@@ -97,9 +90,7 @@ class DBProvider2 {
   saveTransacao(T.Transaction t, Profile p) {
     var _database = FirebaseDatabase.instance
         .reference()
-        .child("university_state")
         .child('${p.universityState}')
-        .child("university_city")
         .child('${p.universityCity}')
         .child(p.hash)
         .child('profile');
