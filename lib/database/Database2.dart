@@ -92,23 +92,21 @@ class DBProvider2 {
         .reference()
         .child('${p.universityState}')
         .child('${p.universityCity}')
+        .child('${p.university}')
         .child(p.hash)
         .child('profile');
     //profile do usuário
     _database.child("origin_state").set('${p.originState}');
     _database.child("origin_city").set('${p.originCity}');
-    _database.child("university").set('${p.university}');
     _database.child("platform").set('${p.platform}');
 
     _database = FirebaseDatabase.instance
         .reference()
-        .child("university_state")
         .child('${p.universityState}')
-        .child("university_city")
         .child('${p.universityCity}')
+        .child('${p.university}')
         .child(p.hash)
         .child('transactions')
-        .child('year_month')
         .child('${t.date.split('-')[0] + '-' + t.date.split('-')[1]}')
         .child("${t.id}");
     _database.child("value").set('${t.value}');
