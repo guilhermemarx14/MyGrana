@@ -90,6 +90,7 @@ class DBProvider2 {
   saveTransacao(T.Transaction t, Profile p) {
     var _database = FirebaseDatabase.instance
         .reference()
+        .child('TCC')
         .child('${p.universityState}')
         .child('${p.universityCity}')
         .child('${p.university}')
@@ -102,6 +103,7 @@ class DBProvider2 {
 
     _database = FirebaseDatabase.instance
         .reference()
+        .child('TCC')
         .child('${p.universityState}')
         .child('${p.universityCity}')
         .child('${p.university}')
@@ -197,9 +199,14 @@ class DBProvider2 {
     final FirebaseDatabase _database = FirebaseDatabase.instance;
     _database
         .reference()
+        .child('TCC')
+        .child('${p.universityState}')
+        .child('${p.universityCity}')
+        .child('${p.university}')
         .child(p.hash)
-        .child('Transactions')
-        .child('${t.id}')
+        .child('transactions')
+        .child('${t.date.split('-')[0] + '-' + t.date.split('-')[1]}')
+        .child("${t.id}")
         .remove();
   }
 
