@@ -2,7 +2,6 @@ gradle-wrapper.jar
 /.gradle
 /captures/
 /gradlew
-app/google-services.json
 /gradlew.bat
 /local.properties
 GeneratedPluginRegistrant.java
